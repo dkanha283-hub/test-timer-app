@@ -3,15 +3,13 @@ import streamlit as st
 import pdfplumber
 import time
 import json
-from datetime import datetime
-from openai import OpenAI
+import google.generativeai as genai
 
-# ---------- CONFIG ----------
-OPENAI_API_KEY = "YOUR_API_KEY_HERE"
+# ---------- GEMINI SETUP ----------
+genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
+model = genai.GenerativeModel("gemini-1.5-flash")
 
-client = OpenAI(api_key=OPENAI_API_KEY)
-
-# ---------- INIT STATE ----------
+# ---------- SESSION STATE ----------
 if "questions" not in st.session_state:
     st.session_state.questions = []
 if "current_q" not in st.session_state:
@@ -27,19 +25,21 @@ if "finished" not in st.session_state:
 
 
 # ---------- FUNCTIONS ----------
-def extract_text_from_pdf(file):
+def extract_text(file):
     text = ""
     with pdfplumber.open(file) as pdf:
         for page in pdf.pages:
-            text += page.extract_text() + "\n"
+            t = page.extract_text()
+            if t:
+                text += t + "\n"
     return text
 
 
-def parse_questions_with_llm(text):
+def parse(text):
     prompt = f"""
-    Extract MCQs from the text below.
+    Extract all MCQ questions.
 
-    Return STRICT JSON format:
+    Return ONLY JSON like this:
     [
       {{
         "question": "...",
@@ -47,30 +47,34 @@ def parse_questions_with_llm(text):
         "B": "...",
         "C": "...",
         "D": "...",
-        "answer": "A/B/C/D"
+        "answer": "A"
       }}
     ]
+
+    RULES:
+    - No explanation
+    - No markdown
+    - Only JSON
 
     TEXT:
     {text}
     """
 
-    response = client.chat.completions.create(
-        model="gpt-4o-mini",
-        messages=[{"role": "user", "content": prompt}],
-        temperature=0
-    )
+    response = model.generate_content(prompt)
+    content = response.text.strip()
 
-    content = response.choices[0].message.content
+    # clean markdown if exists
+    if "```" in content:
+        content = content.split("```")[1]
 
     try:
         return json.loads(content)
     except:
-        st.error("Failed to parse questions. Check PDF format.")
+        st.error("❌ Failed to read questions. Try another PDF.")
         return []
 
 
-def next_question():
+def next_q():
     st.session_state.current_q += 1
     st.session_state.timer_start = None
 
@@ -81,26 +85,73 @@ def next_question():
 # ---------- UI ----------
 st.title("🧪 Test Timer App")
 
-# Sidebar settings
 st.sidebar.header("⚙️ Settings")
 st.session_state.time_per_q = st.sidebar.number_input(
-    "Time per Question (seconds)", min_value=5, max_value=300, value=30
+    "Time per Question (seconds)", 5, 300, 30
 )
 
-# ---------- PDF Upload ----------
-uploaded_file = st.file_uploader("Upload your MCQ PDF", type=["pdf"])
+file = st.file_uploader("Upload your MCQ PDF", type=["pdf"])
 
-if uploaded_file and not st.session_state.questions:
-    with st.spinner("Extracting and analyzing PDF..."):
-        text = extract_text_from_pdf(uploaded_file)
-        questions = parse_questions_with_llm(text)
 
-        st.session_state.questions = questions
-        st.session_state.answers = [None] * len(questions)
-        st.session_state.current_q = 0
+# ---------- LOAD QUESTIONS ----------
+if file and not st.session_state.questions:
+    with st.spinner("Reading PDF..."):
+        text = extract_text(file)
+        qs = parse(text)
+
+        if qs:
+            st.session_state.questions = qs
+            st.session_state.answers = [None] * len(qs)
+            st.session_state.current_q = 0
+
 
 # ---------- QUIZ ----------
 if st.session_state.questions and not st.session_state.finished:
+
+    i = st.session_state.current_q
+    q = st.session_state.questions[i]
+
+    if st.session_state.timer_start is None:
+        st.session_state.timer_start = time.time()
+
+    remaining = int(
+        st.session_state.time_per_q
+        - (time.time() - st.session_state.timer_start)
+    )
+
+    st.sidebar.markdown(f"# ⏳ {max(0, remaining)} sec")
+
+    if remaining <= 0:
+        st.session_state.answers[i] = "No Answer"
+        next_q()
+        st.rerun()
+
+    st.subheader(f"Question {i+1}")
+    st.write(q["question"])
+
+    for op in ["A", "B", "C", "D"]:
+        if st.button(f"{op}. {q[op]}", key=f"{i}_{op}"):
+            st.session_state.answers[i] = op
+            next_q()
+            st.rerun()
+
+
+# ---------- RESULTS ----------
+if st.session_state.finished:
+    st.title("📊 Results")
+
+    score = 0
+
+    for i, q in enumerate(st.session_state.questions):
+        user = st.session_state.answers[i]
+        correct = q["answer"]
+
+        if user == correct:
+            score += 1
+
+        st.write(f"Q{i+1}: Your = {user} | Correct = {correct}")
+
+    st.success(f"Score: {score}/{len(st.session_state.questions)}")if st.session_state.questions and not st.session_state.finished:
 
     q_idx = st.session_state.current_q
     question = st.session_state.questions[q_idx]
