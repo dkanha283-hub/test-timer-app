@@ -52,9 +52,9 @@ def parse(text):
     ]
 
     RULES:
+    - Only JSON
     - No explanation
     - No markdown
-    - Only JSON
 
     TEXT:
     {text}
@@ -63,14 +63,13 @@ def parse(text):
     response = model.generate_content(prompt)
     content = response.text.strip()
 
-    # clean markdown if exists
     if "```" in content:
         content = content.split("```")[1]
 
     try:
         return json.loads(content)
     except:
-        st.error("❌ Failed to read questions. Try another PDF.")
+        st.error("❌ Failed to parse PDF. Try another file.")
         return []
 
 
@@ -151,50 +150,4 @@ if st.session_state.finished:
 
         st.write(f"Q{i+1}: Your = {user} | Correct = {correct}")
 
-    st.success(f"Score: {score}/{len(st.session_state.questions)}")if st.session_state.questions and not st.session_state.finished:
-
-    q_idx = st.session_state.current_q
-    question = st.session_state.questions[q_idx]
-
-    # Timer setup
-    if st.session_state.timer_start is None:
-        st.session_state.timer_start = time.time()
-
-    elapsed = time.time() - st.session_state.timer_start
-    remaining = int(st.session_state.time_per_q - elapsed)
-
-    # Sidebar Timer
-    st.sidebar.markdown(f"# ⏳ {max(0, remaining)} sec")
-
-    if remaining <= 0:
-        st.session_state.answers[q_idx] = "No Answer"
-        next_question()
-        st.rerun()
-
-    # Display Question
-    st.subheader(f"Question {q_idx + 1}")
-    st.write(question["question"])
-
-    # Options
-    for option in ["A", "B", "C", "D"]:
-        if st.button(f"{option}. {question[option]}", key=f"{q_idx}_{option}"):
-            st.session_state.answers[q_idx] = option
-            next_question()
-            st.rerun()
-
-# ---------- RESULTS ----------
-if st.session_state.finished:
-    st.title("📊 Results")
-
-    score = 0
-
-    for i, q in enumerate(st.session_state.questions):
-        user_ans = st.session_state.answers[i]
-        correct = q["answer"]
-
-        if user_ans == correct:
-            score += 1
-
-        st.write(f"Q{i+1}: Your Answer = {user_ans} | Correct = {correct}")
-
-    st.success(f"Final Score: {score}/{len(st.session_state.questions)}")
+    st.success(f"Score: {score}/{len(st.session_state.questions)}")
