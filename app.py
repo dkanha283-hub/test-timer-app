@@ -5,198 +5,193 @@ import re
 import time
 
 # ---------- SESSION ----------
-for key, default in {
+defaults = {
     "questions": [],
     "current_q": 0,
     "answers": [],
-    "timer_start": None,
+    "start_time": None,
     "time_per_q": 30,
     "finished": False,
     "lang": "EN",
     "selected": None
-}.items():
-    if key not in st.session_state:
-        st.session_state[key] = default
+}
+for k, v in defaults.items():
+    if k not in st.session_state:
+        st.session_state[k] = v
+
+
+# ---------- SOUND + VIBRATION ----------
+def alert():
+    st.markdown("""
+    <script>
+    var audio = new Audio("https://www.soundjay.com/button/beep-07.wav");
+    audio.play();
+    if (navigator.vibrate) {
+        navigator.vibrate(500);
+    }
+    </script>
+    """, unsafe_allow_html=True)
 
 
 # ---------- EXTRACT ----------
 def extract_text(file):
     text = ""
     with pdfplumber.open(file) as pdf:
-        for page in pdf.pages:
-            t = page.extract_text()
+        for p in pdf.pages:
+            t = p.extract_text()
             if t:
                 text += t + "\n"
     return text
 
 
 def extract_answers(text):
-    answers = {}
-    matches = re.findall(r"(\d+)\.\s*\((\w)\)", text)
-    for num, ans in matches:
-        answers[int(num)] = ans.upper()
-    return answers
+    ans = {}
+    for num, a in re.findall(r"(\d+)\.\s*\((\w)\)", text):
+        ans[int(num)] = a.upper()
+    return ans
 
 
 def parse_mcqs(text):
-    questions = []
+    qs = []
     blocks = re.split(r"\n\d+\.\s", text)
-    answer_map = extract_answers(text)
-    q_number = 1
+    ans_map = extract_answers(text)
+    qn = 1
 
-    for block in blocks:
-        block = block.strip()
-        if not block:
+    for b in blocks:
+        b = b.strip()
+        if not b:
             continue
 
-        options = re.findall(r"\[([A-D])\]\s*(.*?)\s*(?=\[|$)", block)
-        if len(options) < 4:
+        opts = re.findall(r"\[([A-D])\]\s*(.*?)\s*(?=\[|$)", b)
+        if len(opts) < 4:
             continue
 
-        q_part = block.split("[A]")[0].strip()
-        parts = q_part.split("\n")
+        q_text = b.split("[A]")[0].strip().split("\n")
+        en = q_text[0]
+        hi = q_text[1] if len(q_text) > 1 else ""
 
-        en = parts[0]
-        hi = parts[1] if len(parts) > 1 else ""
+        opt_dict = {k: v.strip() for k, v in opts}
 
-        opt_dict = {k: v.strip() for k, v in options}
-
-        questions.append({
+        qs.append({
             "question_en": en,
             "question_hi": hi,
-            "A": opt_dict.get("A", ""),
-            "B": opt_dict.get("B", ""),
-            "C": opt_dict.get("C", ""),
-            "D": opt_dict.get("D", ""),
-            "answer": answer_map.get(q_number, "No Answer")
+            "A": opt_dict["A"],
+            "B": opt_dict["B"],
+            "C": opt_dict["C"],
+            "D": opt_dict["D"],
+            "answer": ans_map.get(qn, "No Answer")
         })
+        qn += 1
 
-        q_number += 1
-
-    return questions
-
-
-# ---------- NEXT ----------
-def next_q():
-    st.session_state.current_q += 1
-    st.session_state.timer_start = None
-    st.session_state.selected = None
-
-    if st.session_state.current_q >= len(st.session_state.questions):
-        st.session_state.finished = True
-
-
-# ---------- UI ----------
-st.title("🧪 Test Timer Pro (CBT Mode)")
-
-# TOP BAR (LIKE CBT)
-col1, col2 = st.columns(2)
-
-with col1:
-    st.session_state.lang = st.radio(
-        "Language",
-        ["EN", "HI"],
-        horizontal=True
-    )
-
-with col2:
-    if st.session_state.timer_start:
-        remaining = int(
-            st.session_state.time_per_q
-            - (time.time() - st.session_state.timer_start)
-        )
-        st.markdown(f"### ⏳ {max(0, remaining)} sec")
-
-file = st.file_uploader("Upload PDF", type=["pdf"])
+    return qs
 
 
 # ---------- LOAD ----------
+st.title("🧪 RRB CBT Test App")
+
+file = st.file_uploader("Upload PDF", type=["pdf"])
+
 if file and not st.session_state.questions:
-    with st.spinner("Processing PDF..."):
-        text = extract_text(file)
-        qs = parse_mcqs(text)
-
-        if qs:
-            st.session_state.questions = qs
-            st.session_state.answers = [None] * len(qs)
-        else:
-            st.error("❌ PDF not supported")
+    text = extract_text(file)
+    st.session_state.questions = parse_mcqs(text)
+    st.session_state.answers = [None]*len(st.session_state.questions)
 
 
-# ---------- QUIZ ----------
+# ---------- MAIN ----------
 if st.session_state.questions and not st.session_state.finished:
 
+    total = len(st.session_state.questions)
     i = st.session_state.current_q
     q = st.session_state.questions[i]
 
-    if st.session_state.timer_start is None:
-        st.session_state.timer_start = time.time()
+    if st.session_state.start_time is None:
+        st.session_state.start_time = time.time()
 
-    remaining = int(
-        st.session_state.time_per_q
-        - (time.time() - st.session_state.timer_start)
-    )
+    elapsed = time.time() - st.session_state.start_time
+    remaining = int(st.session_state.time_per_q - elapsed)
 
+    # TIME UP
     if remaining <= 0:
+        alert()
         st.session_state.answers[i] = "No Answer"
-        next_q()
+        st.session_state.current_q += 1
+        st.session_state.start_time = None
         st.rerun()
 
+    # ---------- SIDEBAR (RRB STYLE) ----------
+    st.sidebar.title("📊 Question Panel")
+
+    st.sidebar.markdown(f"### ⏳ {remaining} sec")
+
+    # LEGEND
+    st.sidebar.markdown("""
+    🟦 Current  
+    🟩 Answered  
+    ⬜ Not Answered  
+    """)
+
+    cols = st.sidebar.columns(5)
+
+    for idx in range(total):
+        color = "⬜"
+        if st.session_state.answers[idx]:
+            color = "🟩"
+        if idx == i:
+            color = "🟦"
+
+        with cols[idx % 5]:
+            if st.button(f"{color}{idx+1}", key=f"side_{idx}"):
+                st.session_state.current_q = idx
+                st.session_state.start_time = None
+                st.session_state.selected = None
+                st.rerun()
+
+    # ---------- TOP ----------
+    col1, col2 = st.columns([2,1])
+
+    with col1:
+        st.session_state.lang = st.radio("Language", ["EN","HI"], horizontal=True)
+
+    with col2:
+        st.markdown(f"### ⏳ {remaining}")
+
+    # ---------- QUESTION ----------
     st.subheader(f"Question {i+1}")
+    st.write(q["question_en"] if st.session_state.lang=="EN" else q["question_hi"])
 
-    if st.session_state.lang == "EN":
-        st.write(q["question_en"])
-    else:
-        st.write(q["question_hi"])
-
-    # OPTION BUTTONS WITH COLOR
-    for op in ["A", "B", "C", "D"]:
+    # ---------- OPTIONS ----------
+    for op in ["A","B","C","D"]:
 
         label = f"{op}. {q[op]}"
-
-        # default
-        btn_type = "secondary"
+        color = ""
 
         if st.session_state.selected:
             if op == q["answer"]:
-                btn_type = "primary"  # correct = green
+                color = "🟢"
             elif op == st.session_state.selected:
-                btn_type = "secondary"  # wrong selected
-            else:
-                btn_type = "secondary"
+                color = "🔴"
 
-        if st.button(label, key=f"{i}_{op}", type=btn_type):
+        if st.button(f"{color} {label}", key=f"{i}_{op}"):
 
             if not st.session_state.selected:
                 st.session_state.selected = op
                 st.session_state.answers[i] = op
 
-                # show result then auto move
-                time.sleep(1.5)
-                next_q()
+                time.sleep(1)
+
+                st.session_state.current_q += 1
+                st.session_state.start_time = None
+                st.session_state.selected = None
                 st.rerun()
 
 
 # ---------- RESULTS ----------
 if st.session_state.finished:
-    st.title("📊 Results")
+    st.title("📊 Result")
 
-    score = 0
-    wrong = []
+    score = sum(
+        1 for i,q in enumerate(st.session_state.questions)
+        if st.session_state.answers[i] == q["answer"]
+    )
 
-    for i, q in enumerate(st.session_state.questions):
-        user = st.session_state.answers[i]
-        correct = q["answer"]
-
-        if user == correct:
-            score += 1
-        else:
-            wrong.append((i, q, user, correct))
-
-    st.success(f"Score: {score}/{len(st.session_state.questions)}")
-
-    if st.checkbox("❌ Review Wrong Only"):
-        for i, q, user, correct in wrong:
-            st.write(f"Q{i+1}")
-            st.write(q["question_en"])
-            st.write(f"Your: {user} | Correct: {correct}")
+    st.success(f"Score {score}/{len(st.session_state.questions)}")
