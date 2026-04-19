@@ -7,7 +7,7 @@ import google.generativeai as genai
 
 # ---------- GEMINI SETUP ----------
 genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
-model = genai.GenerativeModel("gemini-1.5-flash")
+model = genai.GenerativeModel("gemini-1.0-pro")  # stable model
 
 # ---------- SESSION STATE ----------
 if "questions" not in st.session_state:
