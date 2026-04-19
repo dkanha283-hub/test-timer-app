@@ -3,6 +3,8 @@ import streamlit as st
 import pdfplumber
 import re
 import time
+from PIL import Image
+import pytesseract
 
 # ---------- SESSION ----------
 defaults = {
@@ -20,7 +22,124 @@ for k, v in defaults.items():
         st.session_state[k] = v
 
 
-# ---------- SOUND + VIBRATION ----------
+# ---------- OCR ----------
+def extract_text_ocr(file):
+    images = []
+    text = ""
+
+    pdf = pdfplumber.open(file)
+    for page in pdf.pages:
+        im = page.to_image(resolution=300)
+        img = im.original
+        text += pytesseract.image_to_string(img)
+
+    return text
+
+
+# ---------- NORMAL TEXT ----------
+def extract_text(file):
+    text = ""
+    with pdfplumber.open(file) as pdf:
+        for p in pdf.pages:
+            t = p.extract_text()
+            if t:
+                text += t + "\n"
+
+    # fallback OCR if text too small
+    if len(text.strip()) < 100:
+        text = extract_text_ocr(file)
+
+    return text
+
+
+# ---------- AI ANSWER DETECTION (RULE BASED) ----------
+def guess_answer(question, options):
+    # simple math detection
+    for k, v in options.items():
+        if "=" in question:
+            try:
+                expr = question.split("=")[0]
+                result = eval(expr)
+                if str(int(result)) in v:
+                    return k
+            except:
+                pass
+
+    return "No Answer"
+
+
+# ---------- SMART PARSER ----------
+def parse_mcqs(text):
+    questions = []
+
+    text = text.replace("\r", "")
+    text = re.sub(r"\n+", "\n", text)
+
+    # answer key
+    answer_map = {}
+    for num, ans in re.findall(r"(\d+)\.\s*\((\w)\)", text):
+        answer_map[int(num)] = ans.upper()
+
+    blocks = re.split(r"\n(?=\d+\.\s)", text)
+
+    qn = 1
+
+    for block in blocks:
+        block = block.strip()
+
+        if not block.startswith(str(qn)):
+            continue
+
+        # fix broken options
+        block = block.replace("\n[A]", " [A]")
+        block = block.replace("\n[B]", " [B]")
+        block = block.replace("\n[C]", " [C]")
+        block = block.replace("\n[D]", " [D]")
+
+        options = re.findall(r"\[([A-D])\]\s*([^\[]+)", block)
+
+        opt_dict = {}
+        for k, v in options:
+            opt_dict[k] = " ".join(v.split())
+
+        # auto fix missing
+        for op in ["A","B","C","D"]:
+            if op not in opt_dict:
+                opt_dict[op] = "Option missing"
+
+        try:
+            q_text = block.split("[A]")[0].strip()
+        except:
+            continue
+
+        lines = q_text.split("\n")
+        en = lines[0]
+        hi = lines[1] if len(lines) > 1 else ""
+
+        if len(en) < 5:
+            continue
+
+        # answer logic
+        answer = answer_map.get(qn)
+        if not answer:
+            answer = guess_answer(en, opt_dict)
+
+        questions.append({
+            "question_en": en,
+            "question_hi": hi,
+            "A": opt_dict["A"],
+            "B": opt_dict["B"],
+            "C": opt_dict["C"],
+            "D": opt_dict["D"],
+            "answer": answer
+        })
+
+        qn += 1
+
+    return questions
+
+
+# ---------- ALERT ----------
 def alert():
     st.markdown("""
     <script>
@@ -33,61 +152,8 @@ def alert():
     """, unsafe_allow_html=True)
 
 
-# ---------- EXTRACT ----------
-def extract_text(file):
-    text = ""
-    with pdfplumber.open(file) as pdf:
-        for p in pdf.pages:
-            t = p.extract_text()
-            if t:
-                text += t + "\n"
-    return text
-
-
-def extract_answers(text):
-    ans = {}
-    for num, a in re.findall(r"(\d+)\.\s*\((\w)\)", text):
-        ans[int(num)] = a.upper()
-    return ans
-
-
-def parse_mcqs(text):
-    qs = []
-    blocks = re.split(r"\n\d+\.\s", text)
-    ans_map = extract_answers(text)
-    qn = 1
-
-    for b in blocks:
-        b = b.strip()
-        if not b:
-            continue
-
-        opts = re.findall(r"\[([A-D])\]\s*(.*?)\s*(?=\[|$)", b)
-        if len(opts) < 4:
-            continue
-
-        q_text = b.split("[A]")[0].strip().split("\n")
-        en = q_text[0]
-        hi = q_text[1] if len(q_text) > 1 else ""
-
-        opt_dict = {k: v.strip() for k, v in opts}
-
-        qs.append({
-            "question_en": en,
-            "question_hi": hi,
-            "A": opt_dict["A"],
-            "B": opt_dict["B"],
-            "C": opt_dict["C"],
-            "D": opt_dict["D"],
-            "answer": ans_map.get(qn, "No Answer")
-        })
-        qn += 1
-
-    return qs
-
-
-# ---------- LOAD ----------
-st.title("🧪 RRB CBT Test App")
+# ---------- UI ----------
+st.title("🧪 Ultimate CBT Test App")
 
 file = st.file_uploader("Upload PDF", type=["pdf"])
 
@@ -107,10 +173,8 @@ if st.session_state.questions and not st.session_state.finished:
     if st.session_state.start_time is None:
         st.session_state.start_time = time.time()
 
-    elapsed = time.time() - st.session_state.start_time
-    remaining = int(st.session_state.time_per_q - elapsed)
+    remaining = int(st.session_state.time_per_q - (time.time() - st.session_state.start_time))
 
-    # TIME UP
     if remaining <= 0:
         alert()
         st.session_state.answers[i] = "No Answer"
@@ -118,12 +182,10 @@ if st.session_state.questions and not st.session_state.finished:
         st.session_state.start_time = None
         st.rerun()
 
-    # ---------- SIDEBAR (RRB STYLE) ----------
-    st.sidebar.title("📊 Question Panel")
+    # ---------- SIDEBAR ----------
+    st.sidebar.title("📊 Palette")
+    st.sidebar.markdown(f"⏳ {remaining}s")
 
-    st.sidebar.markdown(f"### ⏳ {remaining} sec")
-
-    # LEGEND
     st.sidebar.markdown("""
     🟦 Current  
     🟩 Answered  
@@ -140,38 +202,34 @@ if st.session_state.questions and not st.session_state.finished:
             color = "🟦"
 
         with cols[idx % 5]:
-            if st.button(f"{color}{idx+1}", key=f"side_{idx}"):
+            if st.button(f"{color}{idx+1}", key=f"nav_{idx}"):
                 st.session_state.current_q = idx
                 st.session_state.start_time = None
                 st.session_state.selected = None
                 st.rerun()
 
     # ---------- TOP ----------
-    col1, col2 = st.columns([2,1])
-
-    with col1:
-        st.session_state.lang = st.radio("Language", ["EN","HI"], horizontal=True)
-
-    with col2:
+    c1, c2 = st.columns([2,1])
+    with c1:
+        st.session_state.lang = st.radio("Lang", ["EN","HI"], horizontal=True)
+    with c2:
         st.markdown(f"### ⏳ {remaining}")
 
     # ---------- QUESTION ----------
-    st.subheader(f"Question {i+1}")
+    st.subheader(f"Q {i+1}")
     st.write(q["question_en"] if st.session_state.lang=="EN" else q["question_hi"])
 
     # ---------- OPTIONS ----------
     for op in ["A","B","C","D"]:
 
-        label = f"{op}. {q[op]}"
         color = ""
-
         if st.session_state.selected:
             if op == q["answer"]:
                 color = "🟢"
             elif op == st.session_state.selected:
                 color = "🔴"
 
-        if st.button(f"{color} {label}", key=f"{i}_{op}"):
+        if st.button(f"{color} {op}. {q[op]}", key=f"{i}_{op}"):
 
             if not st.session_state.selected:
                 st.session_state.selected = op
@@ -185,9 +243,9 @@ if st.session_state.questions and not st.session_state.finished:
                 st.rerun()
 
 
-# ---------- RESULTS ----------
+# ---------- RESULT ----------
 if st.session_state.finished:
-    st.title("📊 Result")
+    st.title("Result")
 
     score = sum(
         1 for i,q in enumerate(st.session_state.questions)
