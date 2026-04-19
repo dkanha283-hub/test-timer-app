@@ -12,7 +12,8 @@ for key, default in {
     "timer_start": None,
     "time_per_q": 30,
     "finished": False,
-    "lang": "EN"
+    "lang": "EN",
+    "selected": None
 }.items():
     if key not in st.session_state:
         st.session_state[key] = default
@@ -29,7 +30,6 @@ def extract_text(file):
     return text
 
 
-# ---------- ANSWERS ----------
 def extract_answers(text):
     answers = {}
     matches = re.findall(r"(\d+)\.\s*\((\w)\)", text)
@@ -38,7 +38,6 @@ def extract_answers(text):
     return answers
 
 
-# ---------- PARSER ----------
 def parse_mcqs(text):
     questions = []
     blocks = re.split(r"\n\d+\.\s", text)
@@ -55,9 +54,8 @@ def parse_mcqs(text):
             continue
 
         q_part = block.split("[A]")[0].strip()
-
-        # split English + Hindi
         parts = q_part.split("\n")
+
         en = parts[0]
         hi = parts[1] if len(parts) > 1 else ""
 
@@ -82,32 +80,32 @@ def parse_mcqs(text):
 def next_q():
     st.session_state.current_q += 1
     st.session_state.timer_start = None
+    st.session_state.selected = None
+
     if st.session_state.current_q >= len(st.session_state.questions):
         st.session_state.finished = True
 
 
 # ---------- UI ----------
-st.title("🧪 Test Timer Pro")
+st.title("🧪 Test Timer Pro (CBT Mode)")
 
-# Sidebar
-st.sidebar.header("⚙️ Settings")
+# TOP BAR (LIKE CBT)
+col1, col2 = st.columns(2)
 
-st.session_state.time_per_q = st.sidebar.number_input(
-    "Time per Question", 5, 300, 30
-)
-
-st.session_state.lang = st.sidebar.radio(
-    "Language",
-    ["EN", "HI"]
-)
-
-# Timer display (BIG)
-if st.session_state.timer_start:
-    remaining = int(
-        st.session_state.time_per_q
-        - (time.time() - st.session_state.timer_start)
+with col1:
+    st.session_state.lang = st.radio(
+        "Language",
+        ["EN", "HI"],
+        horizontal=True
     )
-    st.sidebar.markdown(f"# ⏳ {max(0, remaining)} sec")
+
+with col2:
+    if st.session_state.timer_start:
+        remaining = int(
+            st.session_state.time_per_q
+            - (time.time() - st.session_state.timer_start)
+        )
+        st.markdown(f"### ⏳ {max(0, remaining)} sec")
 
 file = st.file_uploader("Upload PDF", type=["pdf"])
 
@@ -122,7 +120,7 @@ if file and not st.session_state.questions:
             st.session_state.questions = qs
             st.session_state.answers = [None] * len(qs)
         else:
-            st.error("❌ Format not supported")
+            st.error("❌ PDF not supported")
 
 
 # ---------- QUIZ ----------
@@ -139,8 +137,6 @@ if st.session_state.questions and not st.session_state.finished:
         - (time.time() - st.session_state.timer_start)
     )
 
-    st.sidebar.markdown(f"# ⏳ {max(0, remaining)} sec")
-
     if remaining <= 0:
         st.session_state.answers[i] = "No Answer"
         next_q()
@@ -148,26 +144,45 @@ if st.session_state.questions and not st.session_state.finished:
 
     st.subheader(f"Question {i+1}")
 
-    # Language toggle
     if st.session_state.lang == "EN":
         st.write(q["question_en"])
     else:
         st.write(q["question_hi"])
 
+    # OPTION BUTTONS WITH COLOR
     for op in ["A", "B", "C", "D"]:
-        if st.button(f"{op}. {q[op]}", key=f"{i}_{op}"):
-            st.session_state.answers[i] = op
-            next_q()
-            st.rerun()
+
+        label = f"{op}. {q[op]}"
+
+        # default
+        btn_type = "secondary"
+
+        if st.session_state.selected:
+            if op == q["answer"]:
+                btn_type = "primary"  # correct = green
+            elif op == st.session_state.selected:
+                btn_type = "secondary"  # wrong selected
+            else:
+                btn_type = "secondary"
+
+        if st.button(label, key=f"{i}_{op}", type=btn_type):
+
+            if not st.session_state.selected:
+                st.session_state.selected = op
+                st.session_state.answers[i] = op
+
+                # show result then auto move
+                time.sleep(1.5)
+                next_q()
+                st.rerun()
 
 
 # ---------- RESULTS ----------
 if st.session_state.finished:
-
     st.title("📊 Results")
 
     score = 0
-    wrong_questions = []
+    wrong = []
 
     for i, q in enumerate(st.session_state.questions):
         user = st.session_state.answers[i]
@@ -176,18 +191,12 @@ if st.session_state.finished:
         if user == correct:
             score += 1
         else:
-            wrong_questions.append((i, q, user, correct))
+            wrong.append((i, q, user, correct))
 
     st.success(f"Score: {score}/{len(st.session_state.questions)}")
 
-    # Review wrong only
-    if st.checkbox("❌ Review Wrong Answers Only"):
-
-        for i, q, user, correct in wrong_questions:
+    if st.checkbox("❌ Review Wrong Only"):
+        for i, q, user, correct in wrong:
             st.write(f"Q{i+1}")
             st.write(q["question_en"])
             st.write(f"Your: {user} | Correct: {correct}")
-
-    else:
-        for i, q in enumerate(st.session_state.questions):
-            st.write(f"Q{i+1}: {st.session_state.answers[i]} | {q['answer']}")
