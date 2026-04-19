@@ -1,78 +1,89 @@
 # app.py
 import streamlit as st
 import pdfplumber
+import re
 import time
-import json
-import google.generativeai as genai
 
-# ---------- GEMINI SETUP ----------
-genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
-model = genai.GenerativeModel("gemini-1.0-pro")  # stable model
-
-# ---------- SESSION STATE ----------
-if "questions" not in st.session_state:
-    st.session_state.questions = []
-if "current_q" not in st.session_state:
-    st.session_state.current_q = 0
-if "answers" not in st.session_state:
-    st.session_state.answers = []
-if "timer_start" not in st.session_state:
-    st.session_state.timer_start = None
-if "time_per_q" not in st.session_state:
-    st.session_state.time_per_q = 30
-if "finished" not in st.session_state:
-    st.session_state.finished = False
+# ---------- SESSION ----------
+for key, default in {
+    "questions": [],
+    "current_q": 0,
+    "answers": [],
+    "timer_start": None,
+    "time_per_q": 30,
+    "finished": False
+}.items():
+    if key not in st.session_state:
+        st.session_state[key] = default
 
 
-# ---------- FUNCTIONS ----------
+# ---------- EXTRACT TEXT ----------
 def extract_text(file):
-    text = ""
+    full_text = ""
     with pdfplumber.open(file) as pdf:
         for page in pdf.pages:
             t = page.extract_text()
             if t:
-                text += t + "\n"
-    return text
+                full_text += t + "\n"
+    return full_text
 
 
-def parse(text):
-    prompt = f"""
-    Extract all MCQ questions.
+# ---------- EXTRACT ANSWER KEY ----------
+def extract_answers(text):
+    answers = {}
 
-    Return ONLY JSON like this:
-    [
-      {{
-        "question": "...",
-        "A": "...",
-        "B": "...",
-        "C": "...",
-        "D": "...",
-        "answer": "A"
-      }}
-    ]
+    matches = re.findall(r"(\d+)\.\s*\((\w)\)", text)
 
-    RULES:
-    - Only JSON
-    - No explanation
-    - No markdown
+    for num, ans in matches:
+        answers[int(num)] = ans.upper()
 
-    TEXT:
-    {text}
-    """
-
-    response = model.generate_content(prompt)
-    content = response.text.strip()
-
-    if "```" in content:
-        content = content.split("```")[1]
-
-    try:
-        return json.loads(content)
-    except:
-        st.error("❌ Failed to parse PDF. Try another file.")
-        return []
+    return answers
 
 
+# ---------- PARSE QUESTIONS ----------
+def parse_mcqs(text):
+    questions = []
+
+    # split questions
+    blocks = re.split(r"\n\d+\.\s", text)
+
+    answer_map = extract_answers(text)
+
+    q_number = 1
+
+    for block in blocks:
+        block = block.strip()
+
+        if not block:
+            continue
+
+        # find options
+        options = re.findall(r"\[([A-D])\]\s*(.*?)\s*(?=\[|$)", block)
+
+        if len(options) < 4:
+            continue
+
+        q_text = block.split("[A]")[0].strip()
+
+        opt_dict = {k: v.strip() for k, v in options}
+
+        answer = answer_map.get(q_number, "No Answer")
+
+        questions.append({
+            "question": q_text,
+            "A": opt_dict.get("A", ""),
+            "B": opt_dict.get("B", ""),
+            "C": opt_dict.get("C", ""),
+            "D": opt_dict.get("D", ""),
+            "answer": answer
+        })
+
+        q_number += 1
+
+    return questions
+
+
+# ---------- NEXT ----------
 def next_q():
     st.session_state.current_q += 1
     st.session_state.timer_start = None
@@ -82,26 +93,27 @@ def next_q():
 
 
 # ---------- UI ----------
-st.title("🧪 Test Timer App")
+st.title("🧪 Test Timer (Smart PDF Mode)")
 
 st.sidebar.header("⚙️ Settings")
 st.session_state.time_per_q = st.sidebar.number_input(
-    "Time per Question (seconds)", 5, 300, 30
+    "Time per Question", 5, 300, 30
 )
 
 file = st.file_uploader("Upload your MCQ PDF", type=["pdf"])
 
 
-# ---------- LOAD QUESTIONS ----------
+# ---------- LOAD ----------
 if file and not st.session_state.questions:
-    with st.spinner("Reading PDF..."):
+    with st.spinner("Analyzing PDF..."):
         text = extract_text(file)
-        qs = parse(text)
+        qs = parse_mcqs(text)
 
         if qs:
             st.session_state.questions = qs
             st.session_state.answers = [None] * len(qs)
-            st.session_state.current_q = 0
+        else:
+            st.error("❌ Could not read this PDF format")
 
 
 # ---------- QUIZ ----------
