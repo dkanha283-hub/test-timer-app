@@ -1,7 +1,5 @@
 import streamlit as st
 import pdfplumber
-import pytesseract
-from PIL import Image
 import re
 import time
 
@@ -11,23 +9,8 @@ st.set_page_config(page_title="Pro CBT Simulator", layout="wide", initial_sideba
 def inject_custom_css():
     st.markdown("""
         <style>
-        /* Clean CBT Interface Styles */
         .stApp { background-color: #f4f6f9; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         .question-box { background-color: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 20px; font-size: 18px; }
-        .option-label { cursor: pointer; transition: 0.3s; padding: 10px; border-radius: 5px; }
-        .option-label:hover { background-color: #e2e8f0; }
-        
-        /* Haptic Shake Animation for Wrong Answers */
-        @keyframes shake {
-            0% { transform: translateX(0); }
-            25% { transform: translateX(-5px); }
-            50% { transform: translateX(5px); }
-            75% { transform: translateX(-5px); }
-            100% { transform: translateX(0); }
-        }
-        .shake { animation: shake 0.4s; }
-        
-        /* Top Bar mimicking RRB/OJEE */
         .top-bar { background-color: #1e3a8a; color: white; padding: 15px; border-radius: 5px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;}
         </style>
     """, unsafe_allow_html=True)
@@ -43,68 +26,93 @@ def initialize_state():
     if 'quiz_active' not in st.session_state:
         st.session_state.quiz_active = False
     if 'time_per_question' not in st.session_state:
-        st.session_state.time_per_question = 60 # Default 60 seconds
+        st.session_state.time_per_question = 60 
 
-# --- 3. ADVANCED PDF PARSING LOGIC ---
+# --- 3. CUSTOM PDF PARSER FOR YOUR SPECIFIC FORMAT ---
 def parse_pdf_to_quiz(file):
     """
-    Advanced extraction engine to handle bilingual (Hindi/English) PDFs
-    and accurately separate questions from options.
+    Tailored extraction engine designed specifically for the provided PDF format.
+    It reads options like [A], [B] and automatically extracts the Answer Key.
     """
     extracted_text = ""
     try:
-        # Step A: Extract text from all pages
+        # Step A: Extract all text
         with pdfplumber.open(file) as pdf:
             for page in pdf.pages:
                 text = page.extract_text()
                 if text:
                     extracted_text += text + "\n"
         
-        # Step B: FILTER OUT HINDI (Devanagari characters)
-        # This removes the Unicode range for Hindi, keeping only English/Numbers
-        extracted_text = re.sub(r'[\u0900-\u097F]+', '', extracted_text)
+        # Step B: Clean up repetitive page headers/footers
+        clean_text = re.sub(r'INDIAN\s*RAILWAY FOUNDATION BATCH\s*PERCENTAGE SHEET -1', '', extracted_text, flags=re.IGNORECASE)
+        clean_text = re.sub(r'Maths by Gagan Pratap Sir', '', clean_text, flags=re.IGNORECASE)
+        clean_text = re.sub(r'Bagan Pratap Sir', '', clean_text, flags=re.IGNORECASE)
+        clean_text = re.sub(r'Maths\n', '', clean_text, flags=re.IGNORECASE)
         
-        # Step C: SPLIT INTO QUESTIONS
-        # Strictly looks for a newline, followed by a number and a dot/bracket
-        raw_splits = re.split(r'\n\s*(?:Q\.|Q)?\s*(\d+)[\.\)]\s+', "\n" + extracted_text)
+        # Step C: Separate the main questions from the Answer Key
+        # This splits the document into two parts at the word "Answer key"
+        parts = re.split(r'Answer\s+key', clean_text, flags=re.IGNORECASE)
+        main_questions_text = parts[0]
+        answer_key_text = parts[1] if len(parts) > 1 else ""
+        
+        # Step D: Parse the Answer Key to automatically know the right answers!
+        correct_answers_dict = {}
+        if answer_key_text:
+            # Looks for "1. (b)", "2. (c)", etc.
+            ans_matches = re.findall(r'(\d+)\.\s*\(([a-d])\)', answer_key_text, re.IGNORECASE)
+            for qnum, ans in ans_matches:
+                correct_answers_dict[int(qnum)] = ans.upper() # Store as 'A', 'B', 'C', 'D'
+        
+        # Step E: Split main text into individual questions
+        # Looks for lines starting with "1. ", "2. ", etc.
+        raw_splits = re.split(r'(?:^|\n)\s*(\d+)\.\s+', "\n" + main_questions_text)
         
         quiz_data = []
         
-        # Group data: [preamble, Q1_num, Q1_text, Q2_num, Q2_text...]
         for i in range(1, len(raw_splits), 2):
-            q_num = raw_splits[i]
-            q_content = raw_splits[i+1].strip()
+            q_id = int(raw_splits[i])
+            q_content = raw_splits[i+1]
             
-            # Step D: FIND OPTIONS INSIDE THE QUESTION
-            # Looks for (A), (B), A., B., a), b), 1), 2)
-            opt_pattern = r'\n?\s*(?:\([A-Da-d1-4]\)|[A-Da-d1-4][\.\)])\s+'
-            q_parts = re.split(opt_pattern, q_content)
+            # Step F: Extract options [A], [B], [C], [D] dynamically
+            # Using Lookahead regex to grab text between tags regardless of their order
+            opt_a_match = re.search(r'\[A\](.*?)(?=\[B\]|\[C\]|\[D\]|$)', q_content, re.DOTALL | re.IGNORECASE)
+            opt_b_match = re.search(r'\[B\](.*?)(?=\[A\]|\[C\]|\[D\]|$)', q_content, re.DOTALL | re.IGNORECASE)
+            opt_c_match = re.search(r'\[C\](.*?)(?=\[A\]|\[B\]|\[D\]|$)', q_content, re.DOTALL | re.IGNORECASE)
+            opt_d_match = re.search(r'\[D\](.*?)(?=\[A\]|\[B\]|\[C\]|$)', q_content, re.DOTALL | re.IGNORECASE)
             
-            question_text = q_parts[0].strip()
-            options = []
+            opt_a = opt_a_match.group(1).strip() if opt_a_match else "Option A missing"
+            opt_b = opt_b_match.group(1).strip() if opt_b_match else "Option B missing"
+            opt_c = opt_c_match.group(1).strip() if opt_c_match else "Option C missing"
+            opt_d = opt_d_match.group(1).strip() if opt_d_match else "Option D missing"
             
-            if len(q_parts) > 1:
-                for opt in q_parts[1:]:
-                    if opt.strip():
-                        # Clean up formatting spacing
-                        options.append(re.sub(r'\s+', ' ', opt.strip()))
+            # The Question text is everything before the first Option bracket
+            first_opt_idx = len(q_content)
+            for tag in ['[A]', '[B]', '[C]', '[D]', '[a]', '[b]', '[c]', '[d]']:
+                idx = q_content.find(tag)
+                if idx != -1 and idx < first_opt_idx:
+                    first_opt_idx = idx
+                    
+            question_text = q_content[:first_opt_idx].strip()
             
-            # Fallback if options were not cleanly found
-            if len(options) < 2:
-                options = ["Option A", "Option B", "Option C", "Option D"]
-                question_text = q_content # Keep the whole block
+            # Step G: Map the correct answer from the Answer Key
+            correct_letter = correct_answers_dict.get(q_id, 'A') # Default to A if no key found
+            if correct_letter == 'A': correct_text = opt_a
+            elif correct_letter == 'B': correct_text = opt_b
+            elif correct_letter == 'C': correct_text = opt_c
+            elif correct_letter == 'D': correct_text = opt_d
+            else: correct_text = opt_a
             
-            # Package the question
-            quiz_data.append({
-                "id": int(q_num),
-                "question": question_text,
-                "options": options[:4], 
-                "answer": options[0] if options else "Option A", # Placeholder answer
-                "explanation": "No explanation extracted from PDF."
-            })
-            
+            if question_text:
+                quiz_data.append({
+                    "id": q_id,
+                    "question": question_text,
+                    "options": [opt_a, opt_b, opt_c, opt_d],
+                    "answer": correct_text,
+                    "explanation": f"Based on the Answer Key, the correct option is [{correct_letter}]."
+                })
+                
         if not quiz_data:
-            st.warning("Could not automatically detect questions. Ensure they start with numbers on a new line (e.g., '1. ').")
+            st.warning("Could not format questions. Please check PDF compatibility.")
             return []
             
         return quiz_data
@@ -115,18 +123,15 @@ def parse_pdf_to_quiz(file):
 
 # --- 4. TIMER & JS INJECTION ---
 def inject_timer(seconds):
-    """Injects JS to create a live timer and auto-clicks 'Next' when time is up."""
     html_code = f"""
     <div id="timer" style="font-size: 24px; font-weight: bold; color: #ef4444; text-align: right;"></div>
     <script>
         var timeLeft = {seconds};
         var timerElem = document.getElementById('timer');
         var timerId = setInterval(countdown, 1000);
-        
         function countdown() {{
             if (timeLeft == 0) {{
                 clearTimeout(timerId);
-                // Look for the Next button and click it
                 var buttons = window.parent.document.querySelectorAll('button');
                 buttons.forEach(function(btn) {{
                     if(btn.innerText === 'Next Question' || btn.innerText === 'Submit Quiz') {{
@@ -142,7 +147,7 @@ def inject_timer(seconds):
     """
     st.components.v1.html(html_code, height=50)
 
-# --- 5. MAIN UI & NAVIGATION ---
+# --- 5. MAIN UI & DASHBOARD ---
 def render_dashboard():
     st.title("📊 Exam Analysis Dashboard")
     st.success("Quiz Completed Successfully!")
@@ -152,21 +157,19 @@ def render_dashboard():
     
     for i, q in enumerate(st.session_state.quiz_data):
         user_ans = st.session_state.user_answers.get(i)
-        is_correct = (user_ans == q["answer"])
-        if is_correct:
+        if user_ans == q["answer"]:
             correct_count += 1
             
-    # Calculate accuracy safely to avoid division by zero
     accuracy = (correct_count / total_qs) * 100 if total_qs > 0 else 0
     st.metric("Total Score", f"{correct_count} / {total_qs}", f"{accuracy:.1f}% Accuracy")
     
     st.write("### Detailed Review")
     for i, q in enumerate(st.session_state.quiz_data):
-        with st.expander(f"Q{i+1}: {q['question'][:50]}..."):
-            st.write(f"**Question:** {q['question']}")
+        with st.expander(f"Q{i+1}: {q['question'][:40]}..."):
+            st.markdown(f"**Question:**\n {q['question']}")
             st.write(f"**Your Answer:** {st.session_state.user_answers.get(i, 'Not Attempted')}")
-            st.write(f"**Correct Answer:** {q['answer']}") # Reminder: these are placeholder answers right now!
-            st.info(f"**Explanation:** {q['explanation']}")
+            st.write(f"**Correct Answer:** {q['answer']}")
+            st.info(q['explanation'])
             
     if st.button("Start New Test"):
         st.session_state.clear()
@@ -176,27 +179,24 @@ def main():
     inject_custom_css()
     initialize_state()
 
-    # SETUP SCREEN
     if not st.session_state.quiz_active and not st.session_state.user_answers:
         st.markdown('<div class="top-bar"><h2>CBT Simulator Setup</h2></div>', unsafe_allow_html=True)
-        uploaded_file = st.file_uploader("Upload your study material (PDF)", type="pdf")
+        uploaded_file = st.file_uploader("Upload your sheet (PDF)", type="pdf")
         st.session_state.time_per_question = st.number_input("Time per question (seconds)", min_value=10, value=60)
         
         if uploaded_file and st.button("Parse & Start Quiz"):
-            with st.spinner("Extracting text and formatting questions..."):
+            with st.spinner("Processing questions and mapping answer key..."):
                 parsed_data = parse_pdf_to_quiz(uploaded_file)
                 if parsed_data:
                     st.session_state.quiz_data = parsed_data
                     st.session_state.quiz_active = True
                     st.rerun()
 
-    # ACTIVE QUIZ SCREEN
     elif st.session_state.quiz_active:
         q_index = st.session_state.current_q_index
         q_data = st.session_state.quiz_data[q_index]
         total_qs = len(st.session_state.quiz_data)
 
-        # Header bar
         st.markdown(f'''
             <div class="top-bar">
                 <div>Section: Quantitative Aptitude</div>
@@ -204,24 +204,19 @@ def main():
             </div>
         ''', unsafe_allow_html=True)
 
-        # Timer
         inject_timer(st.session_state.time_per_question)
 
-        # Question Area
-        st.markdown(f'<div class="question-box"><b>Q{q_index + 1}.</b> {q_data["question"]}</div>', unsafe_allow_html=True)
+        # Using Markdown to natively render LaTeX equations embedded in the PDF
+        st.markdown(f'<div class="question-box"><b>Q{q_index + 1}.</b><br><br> {q_data["question"]}</div>', unsafe_allow_html=True)
         
-        # Options
         selected_option = st.radio("Select an option:", q_data["options"], key=f"q_{q_index}", index=None)
         
-        # Navigation Buttons
         col1, col2, col3 = st.columns([1, 1, 1])
-        
         with col1:
             if q_index > 0:
                 if st.button("Previous"):
                     st.session_state.current_q_index -= 1
                     st.rerun()
-                    
         with col3:
             if q_index < total_qs - 1:
                 if st.button("Next Question", type="primary"):
@@ -235,8 +230,6 @@ def main():
                         st.session_state.user_answers[q_index] = selected_option
                     st.session_state.quiz_active = False
                     st.rerun()
-
-    # DASHBOARD SCREEN
     else:
         render_dashboard()
 
