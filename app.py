@@ -3,7 +3,7 @@ import pdfplumber
 import re
 import time
 import os
-import json
+import random
 
 # --- 1. PAGE CONFIGURATION & CSS ---
 st.set_page_config(page_title="Pro CBT Hub", layout="wide", initial_sidebar_state="collapsed")
@@ -16,22 +16,35 @@ def inject_custom_css():
         .top-bar { background-color: #1e3a8a; color: white; padding: 15px; border-radius: 5px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;}
         .topic-card { background-color: white; padding: 20px; border-radius: 10px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1); cursor: pointer; border: 2px solid transparent; transition: 0.3s;}
         .topic-card:hover { border-color: #1e3a8a; }
-        /* Hide the data bridge input used for Local Storage */
-        div[data-testid="stTextInput"] { display: none; }
         </style>
     """, unsafe_allow_html=True)
-    
-    # Anti-Reload Protection (Warns user if they pull-to-refresh on mobile)
-    st.components.v1.html("""
-        <script>
-            window.parent.addEventListener('beforeunload', function (e) {
-                e.preventDefault();
-                e.returnValue = 'You have an active test. Are you sure you want to reload?';
-            });
-        </script>
-    """, height=0)
 
-# --- 2. SESSION STATE MANAGEMENT ---
+# --- 2. GLOBAL CLOUD SESSION STORE (REPLACES LOCAL STORAGE) ---
+# This cache stores active sessions on the server for 5 hours.
+@st.cache_resource
+def get_global_sessions():
+    return {}
+
+def save_state_to_cloud():
+    sessions = get_global_sessions()
+    now = time.time()
+    
+    # Cleanup expired sessions (older than 5 hours / 18000 seconds)
+    expired = [pin for pin, data in sessions.items() if (now - data['timestamp']) > 18000]
+    for pin in expired:
+        del sessions[pin]
+        
+    # Save current user's progress
+    sessions[st.session_state.resume_pin] = {
+        "file": st.session_state.selected_topic_file,
+        "q_index": st.session_state.current_q_index,
+        "answers": st.session_state.user_answers.copy(),
+        "time": st.session_state.time_per_question,
+        "max_qs": st.session_state.max_questions,
+        "timestamp": now
+    }
+
+# --- 3. SESSION STATE MANAGEMENT ---
 def initialize_state():
     if 'page' not in st.session_state: st.session_state.page = "home"
     if 'selected_topic_file' not in st.session_state: st.session_state.selected_topic_file = None
@@ -41,8 +54,10 @@ def initialize_state():
     if 'time_per_question' not in st.session_state: st.session_state.time_per_question = 60
     if 'max_questions' not in st.session_state: st.session_state.max_questions = 10
     if 'app_lang' not in st.session_state: st.session_state.app_lang = "Bilingual"
+    # Generate a unique 4-digit PIN for the user's current attempt
+    if 'resume_pin' not in st.session_state: st.session_state.resume_pin = str(random.randint(1000, 9999))
 
-# --- 3. CACHED PDF PARSER ---
+# --- 4. CACHED PDF PARSER ---
 @st.cache_data
 def parse_pdf_to_quiz(file_path):
     extracted_text = ""
@@ -109,7 +124,7 @@ def parse_pdf_to_quiz(file_path):
     except Exception as e:
         return []
 
-# --- 4. LANGUAGE FILTER ---
+# --- 5. SMART LANGUAGE FILTER ---
 def filter_text(text, lang):
     if not text or lang == "Bilingual": return text
     lines = text.split('\n')
@@ -135,9 +150,8 @@ def filter_text(text, lang):
     res = '\n'.join(filtered_lines).strip()
     return res if res else text 
 
-# --- 5. TIMER INJECTION (FIXED) ---
+# --- 6. TIMER INJECTION ---
 def inject_timer(seconds, q_index):
-    # The q_index is now natively part of the div ID and JS variable, making the string unique every load
     html_code = f"""
     <div id="timer_display_{q_index}" style="font-size: 24px; font-weight: bold; color: #ef4444; text-align: right;"></div>
     <script>
@@ -160,47 +174,6 @@ def inject_timer(seconds, q_index):
     """
     st.components.v1.html(html_code, height=50)
 
-# --- 6. LOCAL STORAGE BRIDGE (FIXED) ---
-def save_state_to_local_storage():
-    state_dict = {
-        "file": st.session_state.selected_topic_file,
-        "q_index": st.session_state.current_q_index,
-        "answers": st.session_state.user_answers,
-        "time": st.session_state.time_per_question,
-        "max_qs": st.session_state.max_questions,
-        "timestamp": time.time() * 1000 
-    }
-    state_json = json.dumps(state_dict)
-    
-    # We add an invisible unique HTML comment so Streamlit treats it as a fresh component without a key error
-    st.components.v1.html(f"""
-        <script>
-            const stateData = {state_json};
-            localStorage.setItem('cbt_backup_session', JSON.stringify(stateData));
-        </script>
-    """, height=0)
-
-def check_and_load_local_storage():
-    st.components.v1.html("""
-        <script>
-            const backup = localStorage.getItem('cbt_backup_session');
-            if (backup) {
-                const data = JSON.parse(backup);
-                const now = Date.now();
-                if ((now - data.timestamp) < 18000000) {
-                    const inputs = window.parent.document.querySelectorAll('input');
-                    inputs.forEach(input => {
-                        if(input.getAttribute('aria-label') === 'LS_BRIDGE') {
-                            let nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
-                            nativeInputValueSetter.call(input, backup);
-                            input.dispatchEvent(new Event('input', { bubbles: true }));
-                        }
-                    });
-                }
-            }
-        </script>
-    """, height=0)
-
 # --- 7. SETUP POPUP (DIALOG) ---
 @st.dialog("⚙️ Quiz Setup")
 def setup_dialog(file_name, total_available):
@@ -214,6 +187,8 @@ def setup_dialog(file_name, total_available):
         st.session_state.max_questions = selected_qs
         st.session_state.time_per_question = timer_sec
         st.session_state.quiz_data = st.session_state.quiz_data[:selected_qs]
+        # Generate a fresh PIN when starting a new quiz
+        st.session_state.resume_pin = str(random.randint(1000, 9999))
         st.session_state.page = "quiz"
         st.rerun()
 
@@ -221,29 +196,32 @@ def setup_dialog(file_name, total_available):
 def render_home():
     st.markdown('<div class="top-bar"><h2>📚 CBT Topic Hub</h2></div>', unsafe_allow_html=True)
     
-    bridge_data = st.text_input("LS_BRIDGE", key="ls_bridge", label_visibility="hidden")
-    check_and_load_local_storage()
+    # --- RESUME PREVIOUS QUIZ SECTION ---
+    with st.expander("🔄 Did you accidentally close the app? Resume Quiz Here", expanded=True):
+        st.write("Enter the 4-digit Recovery PIN you were given during your test to restore your progress.")
+        col1, col2 = st.columns([1, 2])
+        with col1:
+            entered_pin = st.text_input("Enter 4-Digit PIN", max_chars=4, placeholder="e.g., 4921")
+            if st.button("Resume My Quiz", type="primary"):
+                sessions = get_global_sessions()
+                if entered_pin in sessions:
+                    saved = sessions[entered_pin]
+                    st.session_state.selected_topic_file = saved['file']
+                    st.session_state.current_q_index = saved['q_index']
+                    st.session_state.user_answers = saved['answers']
+                    st.session_state.time_per_question = saved['time']
+                    st.session_state.max_questions = saved['max_qs']
+                    st.session_state.resume_pin = entered_pin
+                    
+                    with st.spinner("Restoring your session..."):
+                        parsed_data = parse_pdf_to_quiz(st.session_state.selected_topic_file)
+                        st.session_state.quiz_data = parsed_data[:st.session_state.max_questions]
+                        st.session_state.page = "quiz"
+                        st.rerun()
+                else:
+                    st.error("PIN not found or the 5-hour session expired.")
     
-    if bridge_data:
-        try:
-            saved_state = json.loads(bridge_data)
-            topic = saved_state.get('file', 'Unknown')
-            st.success(f"📌 Found an active session for **{topic.replace('.pdf', '')}**!")
-            if st.button("▶️ Resume Quiz", type="primary"):
-                st.session_state.selected_topic_file = saved_state['file']
-                st.session_state.current_q_index = saved_state['q_index']
-                st.session_state.user_answers = {int(k): v for k, v in saved_state['answers'].items()}
-                st.session_state.time_per_question = saved_state['time']
-                st.session_state.max_questions = saved_state['max_qs']
-                
-                with st.spinner("Restoring session..."):
-                    parsed_data = parse_pdf_to_quiz(st.session_state.selected_topic_file)
-                    st.session_state.quiz_data = parsed_data[:st.session_state.max_questions]
-                    st.session_state.page = "quiz"
-                    st.rerun()
-        except:
-            pass 
-            
+    st.write("---")
     st.write("Select a topic below to start a new practice session.")
     
     topics = {
@@ -274,7 +252,6 @@ def render_home():
     for idx, (topic_name, file_name) in enumerate(topics.items()):
         with cols[idx % 2]:
             if st.button(topic_name, use_container_width=True, icon="📄"):
-                st.components.v1.html("<script>localStorage.removeItem('cbt_backup_session');</script>", height=0)
                 st.session_state.selected_topic_file = file_name
                 st.session_state.current_q_index = 0
                 st.session_state.user_answers = {}
@@ -287,17 +264,23 @@ def render_home():
                         st.error(f"Could not load {file_name}. Ensure it is uploaded to your GitHub repository!")
 
 def render_quiz():
-    save_state_to_local_storage()
+    # Save the state securely to the Streamlit Server Memory!
+    save_state_to_cloud()
     
     q_index = st.session_state.current_q_index
     q_data = st.session_state.quiz_data[q_index]
     total_qs = len(st.session_state.quiz_data)
 
     col_sect, col_lang, col_qnum = st.columns([2, 1, 1], vertical_alignment="center")
-    with col_sect: st.markdown(f"##### {st.session_state.selected_topic_file.replace('.pdf', '')}")
+    with col_sect: 
+        st.markdown(f"##### {st.session_state.selected_topic_file.replace('.pdf', '')}")
+        # Note the user's PIN prominently on the screen!
+        st.markdown(f"<span style='color:#ef4444; font-weight:bold;'>Save this PIN to resume if closed: {st.session_state.resume_pin}</span>", unsafe_allow_html=True)
+        
     with col_lang:
         st.session_state.app_lang = st.selectbox("Language", ["Bilingual", "English", "Hindi"], label_visibility="collapsed")
-    with col_qnum: st.markdown(f"##### Q {q_index + 1} / {total_qs}")
+    with col_qnum: 
+        st.markdown(f"##### Q {q_index + 1} / {total_qs}")
     st.divider()
 
     inject_timer(st.session_state.time_per_question, q_index)
@@ -325,12 +308,14 @@ def render_quiz():
         else:
             if st.button("Submit Test", type="primary", use_container_width=True):
                 if selected_option: st.session_state.user_answers[q_index] = selected_option
+                # Clean up session upon completion
+                sessions = get_global_sessions()
+                if st.session_state.resume_pin in sessions:
+                    del sessions[st.session_state.resume_pin]
                 st.session_state.page = "analysis"
                 st.rerun()
 
 def render_analysis():
-    st.components.v1.html("<script>localStorage.removeItem('cbt_backup_session');</script>", height=0)
-    
     st.title("📊 Exam Analysis")
     total_qs = len(st.session_state.quiz_data)
     correct_count = sum(1 for i, q in enumerate(st.session_state.quiz_data) if st.session_state.user_answers.get(i) == q["answer"])
