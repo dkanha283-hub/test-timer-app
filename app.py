@@ -23,14 +23,11 @@ def init_session():
 
 init_session()
 
-# ---------- ENHANCED CSS INJECTION ----------
+# ---------- UI CSS (UNTOUCHED) ----------
 def inject_custom_ui():
     st.markdown("""
     <style>
-    /* Main Background */
     [data-testid="stAppViewContainer"] { background-color: #f0f2f6; }
-    
-    /* Question Card */
     .q-card {
         background: white;
         padding: 25px;
@@ -39,8 +36,6 @@ def inject_custom_ui():
         margin-bottom: 25px;
         border-left: 5px solid #4B90FF;
     }
-    
-    /* Feedback Banner Animation */
     .feedback-banner {
         padding: 12px;
         border-radius: 8px;
@@ -53,25 +48,16 @@ def inject_custom_ui():
         from { transform: translateY(-20px); opacity: 0; }
         to { transform: translateY(0); opacity: 1; }
     }
-
-    /* Custom Timer Pulse */
     .timer-box { font-size: 1.5rem; font-weight: 800; }
     .timer-low { color: #ff4b4b; animation: pulse 1s infinite; }
-    @keyframes pulse {
-        0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; }
-    }
-
-    /* Sidebar Palette Grid */
-    .stButton > button {
-        border-radius: 8px;
-        transition: all 0.2s;
-    }
+    @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+    .stButton > button { border-radius: 8px; transition: all 0.2s; }
     </style>
     """, unsafe_allow_html=True)
 
 inject_custom_ui()
 
-# ---------- PDF & OCR ENGINE ----------
+# ---------- EXTRACTION ENGINES ----------
 def extract_text(file):
     text = ""
     with pdfplumber.open(file) as pdf:
@@ -97,39 +83,41 @@ def parse_mcqs(text):
         opt_dict = {k: v.strip() for k, v in options}
         for op in ["A","B","C","D"]:
             if op not in opt_dict: opt_dict[op] = "N/A"
-        
         q_lines = block.split("[A]")[0].strip().split("\n")
         questions.append({
             "en": q_lines[0],
             "hi": q_lines[1] if len(q_lines)>1 else q_lines[0],
             "options": opt_dict,
-            "answer": "A" # Logic: Parse key from PDF if available
+            "answer": "A" # Adjust parsing logic for keys if needed
         })
         qn += 1
     return questions
 
-# ---------- APP LOGIC ----------
+def alert():
+    st.markdown('<script>new Audio("https://www.soundjay.com/button/beep-07.wav").play();</script>', unsafe_allow_html=True)
+
+# ---------- MAIN APP FLOW ----------
 if not st.session_state.questions:
     st.title("🚀 Pro CBT Center")
     with st.container(border=True):
-        st.session_state.time_per_q = st.slider("Difficulty: Seconds per question", 5, 120, 30)
+        st.session_state.time_per_q = st.slider("Set Timer (Seconds)", 5, 120, 30)
         file = st.file_uploader("Upload Exam PDF", type=["pdf"])
         if file:
-            with st.spinner("Processing Questions..."):
+            with st.spinner("Processing..."):
                 st.session_state.questions = parse_mcqs(extract_text(file))
             st.rerun()
 
 elif st.session_state.finished:
-    st.title("🏁 Test Completed")
+    st.title("🏁 Results")
     score = sum(1 for i, q in enumerate(st.session_state.questions) if st.session_state.answers.get(i) == q["answer"])
-    st.metric("Final Result", f"{score} / {len(st.session_state.questions)}")
-    if st.button("Try Again"):
+    st.metric("Score", f"{score} / {len(st.session_state.questions)}")
+    if st.button("Restart"):
         for k in list(st.session_state.keys()): del st.session_state[k]
         st.rerun()
 
 else:
-    # 1. SIDEBAR PALETTE
-    st.sidebar.title("📋 Question Navigator")
+    # 1. NAVIGATION PALETTE
+    st.sidebar.title("📋 Navigation")
     total_qs = len(st.session_state.questions)
     for row in range((total_qs // 4) + 1):
         cols = st.sidebar.columns(4)
@@ -140,28 +128,33 @@ else:
                 if cols[c].button(f"{icon}\n{idx+1}", key=f"nav_{idx}"):
                     st.session_state.current_q = idx
                     st.session_state.start_time = None
-                    st.session_state.revealed = False
+                    st.session_state.revealed = False # RESET REVEAL
                     st.rerun()
 
-    # 2. TOP TIMER
+    # 2. TIMER LOGIC
     if st.session_state.start_time is None:
         st.session_state.start_time = time.time()
     
     elapsed = time.time() - st.session_state.start_time
     rem = int(st.session_state.time_per_q - elapsed)
 
+    # Trigger Timeout
     if rem <= 0 and not st.session_state.revealed:
+        alert()
+        if st.session_state.current_q not in st.session_state.answers:
+            st.session_state.answers[st.session_state.current_q] = "Timed Out"
         st.session_state.revealed = True
         st.rerun()
 
+    # Timer UI
     t_col1, t_col2 = st.columns([5, 1])
     with t_col1:
-        st.progress(max(0.0, rem / st.session_state.time_per_q))
+        st.progress(max(0.0, min(1.0, rem / st.session_state.time_per_q)))
     with t_col2:
         t_class = "timer-low" if rem < 10 else ""
-        st.markdown(f"<div class='timer-box {t_class}'>{rem}s</div>", unsafe_allow_html=True)
+        st.markdown(f"<div class='timer-box {t_class}'>{max(0, rem)}s</div>", unsafe_allow_html=True)
 
-    # 3. QUESTION AREA
+    # 3. QUESTION DISPLAY
     curr_idx = st.session_state.current_q
     q = st.session_state.questions[curr_idx]
 
@@ -172,46 +165,62 @@ else:
     </div>
     """, unsafe_allow_html=True)
 
-    st.session_state.lang = st.radio("Language Toggle", ["EN", "HI"], horizontal=True, label_visibility="collapsed")
+    st.session_state.lang = st.radio("Lang", ["EN", "HI"], horizontal=True, label_visibility="collapsed")
 
     # 4. FEEDBACK BANNER
     if st.session_state.revealed:
         user_ans = st.session_state.answers.get(curr_idx)
         if user_ans == q["answer"]:
-            st.markdown('<div class="feedback-banner" style="background:#d4edda; color:#155724;">✅ Excellent! Correct Answer.</div>', unsafe_allow_html=True)
+            st.markdown('<div class="feedback-banner" style="background:#d4edda; color:#155724;">✅ Correct!</div>', unsafe_allow_html=True)
         else:
-            st.markdown(f'<div class="feedback-banner" style="background:#f8d7da; color:#721c24;">❌ Incorrect. Correct Option was {q["answer"]}.</div>', unsafe_allow_html=True)
+            st.markdown(f'<div class="feedback-banner" style="background:#f8d7da; color:#721c24;">❌ Timeout/Incorrect. Answer: {q["answer"]}</div>', unsafe_allow_html=True)
 
     # 5. OPTIONS
     for label, text in q["options"].items():
-        # Determine Visual Style
         btn_type = "secondary"
         prefix = f"{label}."
         
         if st.session_state.revealed:
             if label == q["answer"]:
-                btn_type = "primary" # Highlights the correct one
+                btn_type = "primary"
                 prefix = f"✅ {label}."
             elif label == st.session_state.answers.get(curr_idx):
                 prefix = f"❌ {label}."
 
-        if st.button(f"{prefix} {text}", key=f"opt_{curr_idx}_{label}", use_container_width=True, type=btn_type):
+        if st.button(f"{prefix} {text}", key=f"q{curr_idx}_opt_{label}", use_container_width=True, type=btn_type):
             if not st.session_state.revealed:
                 st.session_state.answers[curr_idx] = label
                 st.session_state.revealed = True
                 st.rerun()
 
-    # 6. AUTO-NEXT
+    # 6. AUTO-ADVANCE (2.5s Delay)
     if st.session_state.revealed:
-        time.sleep(2.5) # Time for user to see the colors
+        time.sleep(2.5)
         if curr_idx < total_qs - 1:
             st.session_state.current_q += 1
             st.session_state.start_time = None
-            st.session_state.revealed = False
+            st.session_state.revealed = False # RESET REVEAL FOR NEXT
+            st.rerun()
         else:
             st.session_state.finished = True
-        st.rerun()
+            st.rerun()
 
-    # Refresher for Timer
+    # 7. NAVIGATION FOOTER
+    st.divider()
+    f1, f2, f3 = st.columns([1,1,1])
+    if curr_idx > 0:
+        if f1.button("⬅️ Previous", use_container_width=True):
+            st.session_state.current_q -= 1
+            st.session_state.start_time = None
+            st.session_state.revealed = False
+            st.rerun()
+    if curr_idx < total_qs - 1:
+        if f3.button("Next ➡️", use_container_width=True):
+            st.session_state.current_q += 1
+            st.session_state.start_time = None
+            st.session_state.revealed = False
+            st.rerun()
+
+    # Refresh for live timer
     time.sleep(1)
     st.rerun()
