@@ -4,6 +4,7 @@ import re
 import time
 from PIL import Image
 import pytesseract
+import pandas as pd # Added for the analytics table
 
 # ---------- SESSION INITIALIZATION ----------
 def init_session():
@@ -11,6 +12,7 @@ def init_session():
         "questions": [],
         "current_q": 0,
         "answers": {},
+        "question_times": {}, # Track time spent per Q
         "start_time": None,
         "time_per_q": 30,
         "finished": False,
@@ -57,6 +59,21 @@ def inject_custom_ui():
 
 inject_custom_ui()
 
+# ---------- AUDIO ENGINE ----------
+def play_sound(sound_type):
+    urls = {
+        "correct": "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav",
+        "wrong": "https://www.soundjay.com/buttons/sounds/button-10.wav",
+        "timeout": "https://www.soundjay.com/button/beep-07.wav",
+        "finish": "https://www.soundjay.com/misc/sounds/tada-fanfare-01.wav"
+    }
+    st.markdown(f"""
+    <script>
+    var audio = new Audio("{urls[sound_type]}");
+    audio.play();
+    </script>
+    """, unsafe_allow_html=True)
+
 # ---------- EXTRACTION ENGINES ----------
 def extract_text(file):
     text = ""
@@ -88,13 +105,10 @@ def parse_mcqs(text):
             "en": q_lines[0],
             "hi": q_lines[1] if len(q_lines)>1 else q_lines[0],
             "options": opt_dict,
-            "answer": "A" # Adjust parsing logic for keys if needed
+            "answer": "A" # Note: Replace with actual parsing logic if answer keys exist
         })
         qn += 1
     return questions
-
-def alert():
-    st.markdown('<script>new Audio("https://www.soundjay.com/button/beep-07.wav").play();</script>', unsafe_allow_html=True)
 
 # ---------- MAIN APP FLOW ----------
 if not st.session_state.questions:
@@ -108,10 +122,41 @@ if not st.session_state.questions:
             st.rerun()
 
 elif st.session_state.finished:
-    st.title("🏁 Results")
-    score = sum(1 for i, q in enumerate(st.session_state.questions) if st.session_state.answers.get(i) == q["answer"])
-    st.metric("Score", f"{score} / {len(st.session_state.questions)}")
-    if st.button("Restart"):
+    # Play finish sound only once
+    if "played_finish" not in st.session_state:
+        play_sound("finish")
+        st.session_state.played_finish = True
+
+    st.title("📊 Performance Analytics")
+    total = len(st.session_state.questions)
+    
+    # Calculate Score
+    results = []
+    correct_count = 0
+    for i, q in enumerate(st.session_state.questions):
+        u_ans = st.session_state.answers.get(i)
+        is_correct = (u_ans == q["answer"])
+        if is_correct: correct_count += 1
+        
+        results.append({
+            "Q": i + 1,
+            "Status": "✅ Correct" if is_correct else ("🕒 Timeout" if u_ans == "Timed Out" else "❌ Wrong"),
+            "Time Spent": f"{st.session_state.question_times.get(i, 0):.1f}s"
+        })
+
+    # Top Metrics
+    m1, m2, m3 = st.columns(3)
+    m1.metric("Total Score", f"{correct_count} / {total}")
+    m2.metric("Accuracy", f"{(correct_count/total)*100:.1f}%")
+    avg_time = sum(st.session_state.question_times.values()) / total if total > 0 else 0
+    m3.metric("Avg Speed", f"{avg_time:.1f}s / Q")
+
+    # Analytics Table
+    st.divider()
+    st.subheader("Question Breakdown")
+    st.table(pd.DataFrame(results))
+
+    if st.button("Restart New Test"):
         for k in list(st.session_state.keys()): del st.session_state[k]
         st.rerun()
 
@@ -128,7 +173,7 @@ else:
                 if cols[c].button(f"{icon}\n{idx+1}", key=f"nav_{idx}"):
                     st.session_state.current_q = idx
                     st.session_state.start_time = None
-                    st.session_state.revealed = False # RESET REVEAL
+                    st.session_state.revealed = False
                     st.rerun()
 
     # 2. TIMER LOGIC
@@ -138,11 +183,10 @@ else:
     elapsed = time.time() - st.session_state.start_time
     rem = int(st.session_state.time_per_q - elapsed)
 
-    # Trigger Timeout
     if rem <= 0 and not st.session_state.revealed:
-        alert()
-        if st.session_state.current_q not in st.session_state.answers:
-            st.session_state.answers[st.session_state.current_q] = "Timed Out"
+        play_sound("timeout")
+        st.session_state.question_times[st.session_state.current_q] = st.session_state.time_per_q
+        st.session_state.answers[st.session_state.current_q] = "Timed Out"
         st.session_state.revealed = True
         st.rerun()
 
@@ -173,7 +217,7 @@ else:
         if user_ans == q["answer"]:
             st.markdown('<div class="feedback-banner" style="background:#d4edda; color:#155724;">✅ Correct!</div>', unsafe_allow_html=True)
         else:
-            st.markdown(f'<div class="feedback-banner" style="background:#f8d7da; color:#721c24;">❌ Timeout/Incorrect. Answer: {q["answer"]}</div>', unsafe_allow_html=True)
+            st.markdown(f'<div class="feedback-banner" style="background:#f8d7da; color:#721c24;">❌ Incorrect/Timeout. Answer: {q["answer"]}</div>', unsafe_allow_html=True)
 
     # 5. OPTIONS
     for label, text in q["options"].items():
@@ -189,38 +233,32 @@ else:
 
         if st.button(f"{prefix} {text}", key=f"q{curr_idx}_opt_{label}", use_container_width=True, type=btn_type):
             if not st.session_state.revealed:
+                # Record time taken
+                time_taken = time.time() - st.session_state.start_time
+                st.session_state.question_times[curr_idx] = min(time_taken, st.session_state.time_per_q)
+                
+                # Check answer and play sound
                 st.session_state.answers[curr_idx] = label
+                if label == q["answer"]:
+                    play_sound("correct")
+                else:
+                    play_sound("wrong")
+                
                 st.session_state.revealed = True
                 st.rerun()
 
-    # 6. AUTO-ADVANCE (2.5s Delay)
+    # 6. AUTO-ADVANCE
     if st.session_state.revealed:
         time.sleep(2.5)
         if curr_idx < total_qs - 1:
             st.session_state.current_q += 1
             st.session_state.start_time = None
-            st.session_state.revealed = False # RESET REVEAL FOR NEXT
+            st.session_state.revealed = False
             st.rerun()
         else:
             st.session_state.finished = True
             st.rerun()
 
-    # 7. NAVIGATION FOOTER
-    st.divider()
-    f1, f2, f3 = st.columns([1,1,1])
-    if curr_idx > 0:
-        if f1.button("⬅️ Previous", use_container_width=True):
-            st.session_state.current_q -= 1
-            st.session_state.start_time = None
-            st.session_state.revealed = False
-            st.rerun()
-    if curr_idx < total_qs - 1:
-        if f3.button("Next ➡️", use_container_width=True):
-            st.session_state.current_q += 1
-            st.session_state.start_time = None
-            st.session_state.revealed = False
-            st.rerun()
-
-    # Refresh for live timer
+    # Refresher for Timer
     time.sleep(1)
     st.rerun()
