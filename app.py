@@ -20,7 +20,6 @@ def inject_custom_css():
     """, unsafe_allow_html=True)
 
 # --- 2. GLOBAL CLOUD SESSION STORE (REPLACES LOCAL STORAGE) ---
-# This cache stores active sessions on the server for 5 hours.
 @st.cache_resource
 def get_global_sessions():
     return {}
@@ -29,12 +28,10 @@ def save_state_to_cloud():
     sessions = get_global_sessions()
     now = time.time()
     
-    # Cleanup expired sessions (older than 5 hours / 18000 seconds)
     expired = [pin for pin, data in sessions.items() if (now - data['timestamp']) > 18000]
     for pin in expired:
         del sessions[pin]
         
-    # Save current user's progress
     sessions[st.session_state.resume_pin] = {
         "file": st.session_state.selected_topic_file,
         "q_index": st.session_state.current_q_index,
@@ -54,10 +51,9 @@ def initialize_state():
     if 'time_per_question' not in st.session_state: st.session_state.time_per_question = 60
     if 'max_questions' not in st.session_state: st.session_state.max_questions = 10
     if 'app_lang' not in st.session_state: st.session_state.app_lang = "Bilingual"
-    # Generate a unique 4-digit PIN for the user's current attempt
     if 'resume_pin' not in st.session_state: st.session_state.resume_pin = str(random.randint(1000, 9999))
 
-# --- 4. CACHED PDF PARSER ---
+# --- 4. CACHED PDF PARSER (FIXED ANSWER KEY EXTRACTOR) ---
 @st.cache_data
 def parse_pdf_to_quiz(file_path):
     extracted_text = ""
@@ -73,16 +69,37 @@ def parse_pdf_to_quiz(file_path):
         clean_text = re.sub(r'Bagan Pratap Sir', '', clean_text, flags=re.IGNORECASE)
         clean_text = re.sub(r'Maths\n', '', clean_text, flags=re.IGNORECASE)
         
-        parts = re.split(r'Answer\s+key', clean_text, flags=re.IGNORECASE)
-        main_questions_text = parts[0]
-        answer_key_text = parts[1] if len(parts) > 1 else ""
+        # 1. Safely find the very LAST instance of "Answer key" in the document
+        ak_matches = list(re.finditer(r'Answer\s*key|Answers', clean_text, flags=re.IGNORECASE))
+        if ak_matches:
+            last_match = ak_matches[-1]
+            main_questions_text = clean_text[:last_match.start()]
+            answer_key_text = clean_text[last_match.end():]
+        else:
+            main_questions_text = clean_text
+            answer_key_text = ""
         
+        # 2. DUAL-STRATEGY ANSWER KEY ENGINE
         correct_answers_dict = {}
         if answer_key_text:
-            ans_matches = re.findall(r'(\d+)\.\s*\(([a-d])\)', answer_key_text, re.IGNORECASE)
+            # Replace OCR errors like the alpha symbol with 'a'
+            ak_text = answer_key_text.lower().replace('α', 'a')
+            
+            # Strategy A: Direct matching (e.g., "1. (b)")
+            ans_matches = re.findall(r'(\d+)\s*\.?\s*[\(\[]\s*([a-d])\s*[\)\]]', ak_text)
+            
+            # Extract independent numbers and options to check for fragmentation
+            nums = re.findall(r'\b(\d+)\s*\.', ak_text)
+            opts = re.findall(r'[\(\[]\s*([a-d])\s*[\)\]]', ak_text)
+            
+            # Strategy B: Zip Fallback (If PDF columns split numbers and letters)
+            if len(ans_matches) < len(opts) * 0.5: 
+                ans_matches = list(zip(nums, opts))
+                
             for qnum, ans in ans_matches:
                 correct_answers_dict[int(qnum)] = ans.upper()
         
+        # 3. QUESTION SPLITTING
         raw_splits = re.split(r'(?:^|\n)\s*(\d+)\.\s+', "\n" + main_questions_text)
         quiz_data = []
         for i in range(1, len(raw_splits), 2):
@@ -105,6 +122,8 @@ def parse_pdf_to_quiz(file_path):
                 if idx != -1 and idx < first_opt_idx: first_opt_idx = idx
                     
             question_text = q_content[:first_opt_idx].strip()
+            
+            # Map Answer Key here
             correct_letter = correct_answers_dict.get(q_id, 'A') 
             if correct_letter == 'A': correct_text = opt_a
             elif correct_letter == 'B': correct_text = opt_b
@@ -187,7 +206,6 @@ def setup_dialog(file_name, total_available):
         st.session_state.max_questions = selected_qs
         st.session_state.time_per_question = timer_sec
         st.session_state.quiz_data = st.session_state.quiz_data[:selected_qs]
-        # Generate a fresh PIN when starting a new quiz
         st.session_state.resume_pin = str(random.randint(1000, 9999))
         st.session_state.page = "quiz"
         st.rerun()
@@ -196,7 +214,6 @@ def setup_dialog(file_name, total_available):
 def render_home():
     st.markdown('<div class="top-bar"><h2>📚 CBT Topic Hub</h2></div>', unsafe_allow_html=True)
     
-    # --- RESUME PREVIOUS QUIZ SECTION ---
     with st.expander("🔄 Did you accidentally close the app? Resume Quiz Here", expanded=True):
         st.write("Enter the 4-digit Recovery PIN you were given during your test to restore your progress.")
         col1, col2 = st.columns([1, 2])
@@ -264,7 +281,6 @@ def render_home():
                         st.error(f"Could not load {file_name}. Ensure it is uploaded to your GitHub repository!")
 
 def render_quiz():
-    # Save the state securely to the Streamlit Server Memory!
     save_state_to_cloud()
     
     q_index = st.session_state.current_q_index
@@ -274,7 +290,6 @@ def render_quiz():
     col_sect, col_lang, col_qnum = st.columns([2, 1, 1], vertical_alignment="center")
     with col_sect: 
         st.markdown(f"##### {st.session_state.selected_topic_file.replace('.pdf', '')}")
-        # Note the user's PIN prominently on the screen!
         st.markdown(f"<span style='color:#ef4444; font-weight:bold;'>Save this PIN to resume if closed: {st.session_state.resume_pin}</span>", unsafe_allow_html=True)
         
     with col_lang:
@@ -308,7 +323,6 @@ def render_quiz():
         else:
             if st.button("Submit Test", type="primary", use_container_width=True):
                 if selected_option: st.session_state.user_answers[q_index] = selected_option
-                # Clean up session upon completion
                 sessions = get_global_sessions()
                 if st.session_state.resume_pin in sessions:
                     del sessions[st.session_state.resume_pin]
