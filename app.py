@@ -102,21 +102,43 @@ def parse_pdf_to_quiz(file_path):
     except Exception as e:
         return []
 
-# --- 4. LANGUAGE FILTER ---
+# --- 4. LANGUAGE FILTER (UPDATED WITH SMART DEDUPLICATION) ---
 def filter_text(text, lang):
     if not text or lang == "Bilingual": return text
     lines = text.split('\n')
     filtered_lines = []
+    seen_normalized = set()
+    
     for l in lines:
+        if not l.strip(): continue
         has_hindi = bool(re.search(r'[\u0900-\u097F]', l))
         eng_word_count = len(re.findall(r'\b[a-zA-Z]{2,}\b', l))
+        
+        processed_line = ""
+        
         if lang == "English":
             if has_hindi:
-                clean_en = re.sub(r'[\u0900-\u097F।]+', '', l).strip()
-                if clean_en: filtered_lines.append(clean_en)
-            else: filtered_lines.append(l)
+                # Drop the Hindi line completely to prevent leftover math variables showing up
+                continue
+            else:
+                processed_line = l
         elif lang == "Hindi":
-            if has_hindi or eng_word_count < 3: filtered_lines.append(l)
+            # Keep lines with Hindi, OR lines with very few English words (which are usually math formulas)
+            if has_hindi or eng_word_count < 3:
+                processed_line = l
+                
+        if processed_line:
+            # Normalize the line by removing spaces and symbols to check for PDF shadow text duplicates
+            norm = re.sub(r'\W+', '', processed_line).lower()
+            
+            # If the line is substantial (more than 3 characters), check if we've already seen it
+            if norm and len(norm) > 3:
+                if norm in seen_normalized:
+                    continue # Skip this duplicate shadow text!
+                seen_normalized.add(norm)
+            
+            filtered_lines.append(processed_line)
+            
     res = '\n'.join(filtered_lines).strip()
     return res if res else text 
 
@@ -165,7 +187,7 @@ def render_home():
     st.markdown('<div class="top-bar"><h2>📚 CBT Topic Hub</h2></div>', unsafe_allow_html=True)
     st.write("Select a topic below to start practicing.")
     
-    # Updated list containing all 20 PDF files exactly as named
+    # Updated list containing all 21 PDF files exactly as named
     topics = {
         "Percentage Part 1": "percent1 (1).pdf",
         "Percentage Part 2": "perceentage2.pdf",
@@ -186,7 +208,8 @@ def render_home():
         "Polygon": "polygon_sheet.pdf",
         "Mensuration 3D (Cone)": "Mensuration 3d Cone Sheet.pdf",
         "Mensuration 3D (Cube & Cuboid)": "Mensuration_3D_cube_and_cuboid_Sheet_01.pdf",
-        "Mensuration 3D (Cylinder)": "Mensuration_3D_Cylinder.pdf"
+        "Mensuration 3D (Cylinder)": "Mensuration_3D_Cylinder.pdf",
+        "Mensuration 3D (Sphere & Hemisphere)": "3D SPARE AND HEMISPHERE Sheet.pdf"
     }
     
     cols = st.columns(2)
@@ -273,4 +296,4 @@ def main():
 
 if __name__ == "__main__":
     main()
-            
+    
