@@ -49,42 +49,63 @@ def initialize_state():
 # --- 3. PDF PARSING LOGIC (MOCKUP/FOUNDATION) ---
 def parse_pdf_to_quiz(file):
     """
-    This is a foundational parser. PDF formatting varies wildly.
-    This attempts to read text via pdfplumber.
+    Real extraction engine using pdfplumber, OCR fallback, and Regex.
     """
-    questions = []
+    extracted_text = ""
     try:
+        # 1. Extract text from all pages
         with pdfplumber.open(file) as pdf:
-            text = ""
             for page in pdf.pages:
-                text += page.extract_text() + "\n"
-                
-            # MOCK LOGIC: In a real scenario, you'd use RegEx to find "Q1.", "(A)", etc.
-            # For demonstration, we will generate dummy parsed data if extraction is empty/unformatted.
-            if len(text) > 50:
-                # Placeholder for your specific RegEx parsing logic
-                pass 
+                text = page.extract_text()
+                # If standard text exists, add it
+                if text and text.strip():
+                    extracted_text += text + "\n"
+                else:
+                    # If the page is a scanned image, use OCR to read it
+                    img = page.to_image(resolution=300).original
+                    extracted_text += pytesseract.image_to_string(img) + "\n"
+        
+        # 2. Parse the extracted text into individual questions
+        # This Regex looks for numbers followed by dots or brackets (e.g., "1.", "2)", "Q3.")
+        question_pattern = re.compile(r'(?:Q)?(\d+)[\.\)]\s*(.*?)(?=(?:Q)?\d+[\.\)]|$)', re.DOTALL | re.IGNORECASE)
+        
+        raw_questions = question_pattern.findall(extracted_text)
+        quiz_data = []
+        
+        for q_num, q_text in raw_questions:
+            # Clean up the text
+            q_text = q_text.strip()
+            
+            # Default fallback options if we can't find specific A, B, C, D formatting
+            options = ["Option A", "Option B", "Option C", "Option D"]
+            
+            # Try to hunt for options formatted like A) B) C) D) or (A) (B) (C) (D)
+            opt_pattern = re.compile(r'\(?[A-D]\)?[.\s]+([^\n]+)')
+            found_options = opt_pattern.findall(q_text)
+            
+            # If we successfully found 4 options, use them and remove them from the question text
+            if len(found_options) >= 4:
+                options = found_options[:4]
+                q_text = re.sub(r'\(?[A-D]\)?[.\s]+([^\n]+)', '', q_text).strip()
+            
+            # Package the question into our dictionary format
+            quiz_data.append({
+                "id": int(q_num),
+                "question": q_text,
+                "options": options,
+                "answer": options[0], # Note: We don't know the right answer yet! Defaulting to the first option.
+                "explanation": "No explanation extracted."
+            })
+            
+        if not quiz_data:
+            st.warning("Could not automatically detect questions. Ensure they start with numbers like '1.' or 'Q1.'")
+            return []
+            
+        return quiz_data
 
     except Exception as e:
         st.error(f"Error parsing PDF: {e}")
-        
-    # Returning dummy data for UI testing purposes
-    return [
-        {
-            "id": 1,
-            "question": "Working together, A, B, and C can do a certain work in 10 days. A is 20% more efficient than B, and C is 50% less efficient than B. B alone can complete the work in:",
-            "options": ["22.5 days", "27 days", "30 days", "35 days"],
-            "answer": "27 days",
-            "explanation": "Assume efficiency of B = 10 units/day. A = 12 units/day. C = 5 units/day. Total efficiency = 27 units/day. Total work = 27 * 10 = 270 units. B alone = 270 / 10 = 27 days."
-        },
-        {
-            "id": 2,
-            "question": "What is the capital of France?",
-            "options": ["Berlin", "Madrid", "Paris", "Rome"],
-            "answer": "Paris",
-            "explanation": "Paris is the capital and most populous city of France."
-        }
-    ]
+        return []
 
 # --- 4. TIMER & JS INJECTION ---
 def inject_timer(seconds):
