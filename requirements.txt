@@ -2,3 +2,4 @@ streamlit
 pdfplumber
 pytesseract
 Pillow
+PyPDF2
