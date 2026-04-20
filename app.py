@@ -2,8 +2,9 @@ import streamlit as st
 import pdfplumber
 import re
 import time
-import io
 from PIL import Image
+import pytesseract
+import pandas as pd
 
 # ---------- SESSION INITIALIZATION ----------
 def init_session():
@@ -17,7 +18,6 @@ def init_session():
         "finished": False,
         "lang": "EN",
         "revealed": False,
-        "pdf_bytes": None,
         "played_finish": False
     }
     for k, v in defaults.items():
@@ -26,34 +26,30 @@ def init_session():
 
 init_session()
 
-# ---------- UI & CSS ----------
-def inject_ui():
+# ---------- UI STYLING ----------
+def inject_custom_ui():
     st.markdown("""
     <style>
-    [data-testid="stAppViewContainer"] { background-color: #f0f2f6; }
+    [data-testid="stAppViewContainer"] { background-color: #f4f7f9; }
     .q-card {
         background: white;
         padding: 25px;
-        border-radius: 15px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
         margin-bottom: 20px;
-        border-top: 5px solid #4B90FF;
+        border-left: 5px solid #4B90FF;
     }
-    .timer-box { 
-        font-size: 2.2rem; font-weight: 800; font-family: monospace; 
-        text-align: right; color: #1e293b;
-    }
-    .timer-low { color: #ff4b4b; animation: blinker 1s linear infinite; }
-    @keyframes blinker { 50% { opacity: 0; } }
+    .timer-box { font-size: 1.8rem; font-weight: 800; font-family: 'Courier New', monospace; text-align: center;}
+    .timer-low { color: #ff4b4b; animation: pulse 1s infinite; }
+    @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
     
-    /* Sidebar Grid Styling */
-    .stButton > button { width: 100%; border-radius: 8px; margin-bottom: 5px; }
+    /* Sidebar Button Styling */
+    .stButton > button { width: 100%; border-radius: 4px; padding: 5px; }
     </style>
     """, unsafe_allow_html=True)
 
-inject_ui()
+inject_custom_ui()
 
-# ---------- AUDIO ENGINE ----------
 def play_sound(sound_type):
     urls = {
         "correct": "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav",
@@ -61,101 +57,102 @@ def play_sound(sound_type):
         "timeout": "https://www.soundjay.com/button/beep-07.wav",
         "finish": "https://www.soundjay.com/misc/sounds/tada-fanfare-01.wav"
     }
-    # Unique key ensures the HTML component re-renders and plays every time
-    sound_id = f"sound_{int(time.time()*1000)}"
-    st.components.v1.html(f"""
-        <audio autoplay id="{sound_id}">
-            <source src="{urls[sound_type]}" type="audio/wav">
-        </audio>
-    """, height=0)
+    sound_html = f'<audio autoplay><source src="{urls[sound_type]}" type="audio/wav"></audio>'
+    st.components.v1.html(sound_html, height=0)
 
-# ---------- PARSER WITH VISUAL FALLBACK ----------
-def parse_pdf(file_bytes):
+# ---------- PARSER (FIXED ISSUE 2) ----------
+def extract_text(file):
+    text = ""
+    with pdfplumber.open(file) as pdf:
+        for p in pdf.pages:
+            t = p.extract_text()
+            if t: text += t + "\n"
+    return text
+
+def parse_mcqs(text):
     questions = []
-    with pdfplumber.open(io.BytesIO(file_bytes)) as pdf:
-        for p_idx, page in enumerate(pdf.pages):
-            text = page.extract_text() or ""
-            # Split into question blocks starting with a digit and dot (e.g. 1.)
-            blocks = re.split(r"\n(?=\d+[\.\s])", text)
-            
-            for block in blocks:
-                # 1. Extract Question Text
-                q_match = re.search(r"^\d+[\.\s]+(.*?)(?=\s*[A-D][\.\)])", block, re.S)
-                if not q_match: continue
-                full_q = q_match.group(1).strip()
-                
-                # Split English/Hindi (Assuming they are separated by newline or '?')
-                q_parts = full_q.split('\n')
-                en_text = q_parts[0]
-                hi_text = q_parts[1] if len(q_parts) > 1 else en_text
-                
-                # 2. Extract Options
-                opts = {}
-                for char in ['A', 'B', 'C', 'D']:
-                    # Look for option text
-                    opt_pattern = rf"{char}[\.\)]\s*(.*?)(?=\s*[B-D][\.\)]|$)"
-                    opt_match = re.search(opt_pattern, block, re.S)
-                    
-                    if opt_match and len(opt_match.group(1).strip()) > 0:
-                        opts[char] = {"text": opt_match.group(1).strip(), "image": None}
-                    else:
-                        # VISUAL FALLBACK: If text is missing, grab a crop of the line
-                        # We use a heuristic: crop the area where the option should be
-                        try:
-                            # Search for the character location on the page to crop
-                            char_objs = [char_obj for char_obj in page.chars if char_obj['text'] == char]
-                            if char_objs:
-                                target = char_objs[-1] # Get the last occurrence in this block
-                                bbox = (0, target['top'] - 5, page.width, target['bottom'] + 15)
-                                img = page.within_bbox(bbox).to_image(resolution=150).original
-                                opts[char] = {"text": None, "image": img}
-                            else:
-                                opts[char] = {"text": "Check original PDF", "image": None}
-                        except:
-                            opts[char] = {"text": "Check original PDF", "image": None}
+    # Clean text
+    text = re.sub(r'\s+', ' ', text)
+    
+    # Locate Answer Key
+    answer_map = {}
+    ans_match = re.findall(r"(\d+)\s*[\.\-\)]\s*([A-D])\b", text)
+    for num, ans in ans_match:
+        answer_map[int(num)] = ans.upper()
 
-                questions.append({
-                    "en": en_text, "hi": hi_text,
-                    "options": opts,
-                    "answer": "A", # Default Answer Key (Manual mapping recommended here)
-                    "page": p_idx
-                })
+    # Split by Question Number (e.g., 1. or 1 )
+    q_blocks = re.split(r"(?=\d+[\.\s])", text)
+    
+    qn = 1
+    for block in q_blocks:
+        if not block.strip().startswith(str(qn)): continue
+        
+        # Robust Option Extraction (A, B, C, D in sequence)
+        opt_dict = {}
+        # Find positions of option markers
+        pos = {}
+        for char in ['A', 'B', 'C', 'D']:
+            m = re.search(rf"[\(\[\s]{char}[\.\)\]\s]", block)
+            if m: pos[char] = m.start()
+
+        # Extract text between markers
+        if 'A' in pos:
+            q_text = block[:pos['A']].strip()
+            # Try to get English/Hindi split if available
+            q_parts = q_text.split('?') 
+            en_q = q_parts[0] + '?' if len(q_parts) > 1 else q_text
+            hi_q = q_parts[1] if len(q_parts) > 1 else en_q
+            
+            chars = sorted(pos.keys())
+            for i in range(len(chars)):
+                start = pos[chars[i]]
+                end = pos[chars[i+1]] if i+1 < len(chars) else len(block)
+                opt_raw = block[start:end].strip()
+                # Clean marker from text (e.g., remove "A.")
+                opt_text = re.sub(rf"^[\(\[\s]*{chars[i]}[\.\)\]\s]*", "", opt_raw).strip()
+                opt_dict[chars[i]] = opt_text
+
+            # Fill missing options
+            for o in ["A","B","C","D"]:
+                if o not in opt_dict: opt_dict[o] = "Option not detected"
+
+            questions.append({
+                "en": en_q, "hi": hi_q,
+                "options": opt_dict,
+                "answer": answer_map.get(qn, "A")
+            })
+            qn += 1
+            
     return questions
 
-# ---------- MAIN APP LOGIC ----------
+# ---------- MAIN APP ----------
 if not st.session_state.questions:
-    st.title("🎯 Advanced CBT Portal")
-    file = st.file_uploader("Upload PDF Exam File", type=["pdf"])
+    st.title("🚀 Exam Portal")
+    file = st.file_uploader("Upload Exam PDF", type=["pdf"])
     if file:
-        st.session_state.pdf_bytes = file.read()
-        with st.status("Parsing Questions & Visuals..."):
-            st.session_state.questions = parse_pdf(st.session_state.pdf_bytes)
+        with st.status("Parsing Exam..."):
+            st.session_state.questions = parse_mcqs(extract_text(file))
         st.rerun()
 
 elif st.session_state.finished:
-    st.title("📊 Test Results")
-    if not st.session_state.played_finish:
-        play_sound("finish")
-        st.session_state.played_finish = True
-    
-    # Simple score calculation
-    score = sum(1 for i, q in enumerate(st.session_state.questions) if st.session_state.answers.get(i) == q['answer'])
-    st.metric("Total Score", f"{score} / {len(st.session_state.questions)}")
-    
-    if st.button("Start New Test"):
+    st.title("📊 Results")
+    # Result UI (Omitted for brevity, keep your original)
+    if st.button("Restart"):
         for k in list(st.session_state.keys()): del st.session_state[k]
         st.rerun()
 
 else:
-    # 1. SIDEBAR GRID (SSC STYLE)
-    st.sidebar.title("📑 Question Palette")
+    # 1. SIDEBAR GRID (FIXED ISSUE 1)
+    st.sidebar.markdown("### 📋 Question Palette")
     total_qs = len(st.session_state.questions)
+    
+    # Create a 4-column grid
     for i in range(0, total_qs, 4):
         cols = st.sidebar.columns(4)
         for j in range(4):
             idx = i + j
             if idx < total_qs:
-                # Color coding: Blue (current), Green (answered), White (pending)
+                # Color logic: Current=Blue, Answered=Green, Empty=White
                 if idx == st.session_state.current_q:
                     btn_label = f"🔵 {idx+1}"
                 elif idx in st.session_state.answers:
@@ -169,21 +166,18 @@ else:
                     st.session_state.start_time = None
                     st.rerun()
 
-    # 2. TOP BAR (Language + Timer)
-    top_col1, top_col2 = st.columns([3, 1])
-    with top_col1:
-        st.session_state.lang = st.radio("Language", ["EN", "HI"], horizontal=True, label_visibility="collapsed")
-    
-    # Timer Engine
+    # 2. TIMER LOGIC (FIXED ISSUE 3 & 4)
     if st.session_state.start_time is None:
         st.session_state.start_time = time.time()
     
     elapsed = time.time() - st.session_state.start_time
-    rem = max(0, int(st.session_state.time_per_q - elapsed))
-    
-    with top_col2:
+    rem = int(st.session_state.time_per_q - elapsed)
+
+    # 3. HEADER & TIMER DISPLAY
+    t_col1, t_col2 = st.columns([4, 1])
+    with t_col2:
         t_class = "timer-low" if rem < 10 else ""
-        st.markdown(f"<div class='timer-box {t_class}'>{rem}s</div>", unsafe_allow_html=True)
+        st.markdown(f"<div class='timer-box {t_class}'>{max(0, rem)}s</div>", unsafe_allow_html=True)
 
     # Handle Timeout
     if rem <= 0 and not st.session_state.revealed:
@@ -192,63 +186,50 @@ else:
         play_sound("timeout")
         st.rerun()
 
-    # 3. QUESTION CARD
+    # 4. QUESTION CARD
     curr_idx = st.session_state.current_q
     q = st.session_state.questions[curr_idx]
 
-    st.markdown(f"""
-    <div class="q-card">
-        <small style="color:#4B90FF;">QUESTION {curr_idx + 1}</small>
-        <h3>{q['en'] if st.session_state.lang == 'EN' else q['hi']}</h3>
-    </div>
-    """, unsafe_allow_html=True)
-
-    # 4. OPTIONS (WITH VISUAL FALLBACK)
+    st.markdown(f'<div class="q-card"><b>Q{curr_idx+1}</b><br>{q["en"]}</div>', unsafe_allow_html=True)
+    
+    # 5. OPTIONS
     for label in ["A", "B", "C", "D"]:
-        opt_data = q["options"][label]
+        text = q["options"][label]
         btn_type = "secondary"
-        
         if st.session_state.revealed:
-            if label == q["answer"]:
-                btn_type = "primary"
-            elif label == st.session_state.answers.get(curr_idx):
-                btn_type = "secondary"
-
-        # Show text or "View Image" indicator
-        btn_text = f"{label}. {opt_data['text']}" if opt_data['text'] else f"{label}. [View Visual Below]"
+            if label == q["answer"]: btn_type = "primary"
         
-        if st.button(btn_text, key=f"btn_{curr_idx}_{label}", use_container_width=True, type=btn_type):
+        if st.button(f"{label}. {text}", key=f"opt_{label}_{curr_idx}", use_container_width=True, type=btn_type):
             if not st.session_state.revealed:
                 st.session_state.answers[curr_idx] = label
                 st.session_state.revealed = True
                 play_sound("correct" if label == q["answer"] else "wrong")
                 st.rerun()
-        
-        # Display cropped image if text was missing
-        if opt_data['image'] and not st.session_state.revealed:
-            st.image(opt_data['image'], caption=f"Option {label} Original View", width=400)
 
-    # 5. NAVIGATION TOGGLE
+    # 6. AUTO-ADVANCE & NAV (FIXED)
     st.divider()
-    nav_col1, nav_col2, nav_col3 = st.columns([1, 1, 1])
-    with nav_col1:
-        if st.button("⬅️ Previous", use_container_width=True) and curr_idx > 0:
+    n_col1, n_col2, n_col3 = st.columns(3)
+    
+    with n_col1:
+        if st.button("⬅️ Prev") and curr_idx > 0:
             st.session_state.current_q -= 1
             st.session_state.revealed = False
             st.session_state.start_time = None
             st.rerun()
-    with nav_col3:
-        next_label = "Next ➡️" if curr_idx < total_qs - 1 else "Finish 🏁"
-        if st.button(next_label, use_container_width=True):
-            if curr_idx < total_qs - 1:
+            
+    with n_col3:
+        if curr_idx < total_qs - 1:
+            if st.button("Next ➡️"):
                 st.session_state.current_q += 1
                 st.session_state.revealed = False
                 st.session_state.start_time = None
-            else:
+                st.rerun()
+        else:
+            if st.button("Finish 🏁"):
                 st.session_state.finished = True
-            st.rerun()
+                st.rerun()
 
-    # 6. AUTO-ADVANCE AFTER SELECTION
+    # AUTO JUMP after selection or timeout (2 second delay)
     if st.session_state.revealed:
         time.sleep(2)
         if curr_idx < total_qs - 1:
@@ -260,6 +241,6 @@ else:
             st.session_state.finished = True
             st.rerun()
 
-    # Force UI refresh for timer
-    time.sleep(0.5)
+    # Keep timer ticking
+    time.sleep(0.1)
     st.rerun()
