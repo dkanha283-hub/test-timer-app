@@ -1,3 +1,4 @@
+# [span_1](start_span)requirements.txt needs: streamlit, pdfplumber, pytesseract, Pillow[span_1](end_span)
 import streamlit as st
 import pdfplumber
 import re
@@ -14,7 +15,8 @@ def init_session():
         "start_time": None,
         "time_per_q": 30,
         "finished": False,
-        "lang": "EN"
+        "lang": "EN",
+        "revealed": False # New: Tracks if answer colors are shown
     }
     for k, v in defaults.items():
         if k not in st.session_state:
@@ -22,66 +24,34 @@ def init_session():
 
 init_session()
 
-# ---------- CUSTOM CSS (The "Magic" for UI/Animations) ----------
+# ---------- CUSTOM CSS (With Color Logic) ----------
 def inject_custom_css():
     st.markdown("""
     <style>
-    /* Main Background and Font */
-    [data-testid="stAppViewContainer"] {
-        background-color: #f8f9fa;
-    }
+    [data-testid="stAppViewContainer"] { background-color: #f8f9fa; }
     
-    /* Card Style for Question */
-    .q-card {
-        background: white;
-        padding: 2rem;
-        border-radius: 15px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    /* Animation for the feedback banner */
+    .feedback-box {
+        padding: 15px;
+        border-radius: 10px;
+        text-align: center;
         margin-bottom: 20px;
-        animation: fadeIn 0.5s ease-in-out;
-    }
-    
-    /* Animations */
-    @keyframes fadeIn {
-        0% { opacity: 0; transform: translateY(10px); }
-        100% { opacity: 1; transform: translateY(0); }
-    }
-    
-    @keyframes pulse {
-        0% { transform: scale(1); color: #ff4b4b; }
-        50% { transform: scale(1.1); color: #b91c1c; }
-        100% { transform: scale(1); color: #ff4b4b; }
-    }
-    
-    .timer-critical {
-        animation: pulse 1s infinite;
+        animation: fadeIn 0.3s ease-in;
         font-weight: bold;
+        font-size: 1.2rem;
     }
+    
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-    /* Professional Grid Palette */
-    .sidebar-grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 8px;
-        padding: 10px;
-    }
-    
-    /* Button Hover Smoothing */
-    div.stButton > button {
-        transition: all 0.2s ease-in-out;
-        border-radius: 8px;
-    }
-    
-    div.stButton > button:hover {
-        transform: scale(1.02);
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    }
+    /* Custom Button Colors for Feedback */
+    /* We use data-testid to target buttons precisely if needed, 
+       but for this version, we will use Streamlit's native 'type' and icons */
     </style>
     """, unsafe_allow_html=True)
 
 inject_custom_css()
 
-# ---------- OCR & PARSER (Retained from previous) ----------
+# ---------- OCR & PARSER (Retained) ----------
 def extract_text(file):
     text = ""
     with pdfplumber.open(file) as pdf:
@@ -106,148 +76,111 @@ def parse_mcqs(text):
         options = re.findall(r"\[([A-D])\]\s*([^\[]+)", block)
         opt_dict = {k: v.strip() for k, v in options}
         for op in ["A","B","C","D"]:
-            if op not in opt_dict: opt_dict[op] = "Missing"
-        q_text = block.split("[A]")[0].strip().split("\n")
+            if op not in opt_dict: opt_dict[op] = "N/A"
+        
+        # Simple extraction of English/Hindi lines
+        q_text_area = block.split("[A]")[0].strip().split("\n")
+        
         questions.append({
-            "en": q_text[0], "hi": q_text[1] if len(q_text)>1 else q_text[0],
-            "A": opt_dict["A"], "B": opt_dict["B"], "C": opt_dict["C"], "D": opt_dict["D"],
-            "answer": "A" # Placeholder logic
+            "en": q_text_area[0],
+            "hi": q_text_area[1] if len(q_text_area)>1 else q_text_area[0],
+            "options": opt_dict,
+            "answer": "A" # Note: In a real app, parse the answer key from the PDF footer
         })
         qn += 1
     return questions
 
-def alert():
-    st.markdown('<script>new Audio("https://www.soundjay.com/button/beep-07.wav").play();</script>', unsafe_allow_html=True)
-
-# ---------- APPLICATION FLOW ----------
+# ---------- APP FLOW ----------
 if not st.session_state.questions:
-    st.title("🧪 CBT Exam Portal")
-    st.markdown("### Prepare for your test with custom timers and smart tracking.")
-    
-    with st.expander("⚙️ Test Settings", expanded=True):
-        st.session_state.time_per_q = st.slider("Time per question (seconds)", 5, 120, 30)
-    
-    file = st.file_uploader("Drop your PDF here", type=["pdf"])
+    st.title("🧪 Smart CBT Prep")
+    st.session_state.time_per_q = st.slider("Time per question", 5, 120, 30)
+    file = st.file_uploader("Upload PDF Exam", type=["pdf"])
     if file:
-        with st.status("Reading Exam File..."):
-            text = extract_text(file)
-            st.session_state.questions = parse_mcqs(text)
+        with st.status("Parsing Exam..."):
+            st.session_state.questions = parse_mcqs(extract_text(file))
         st.rerun()
 
 elif st.session_state.finished:
-    st.balloons()
-    st.title("📊 Performance Dashboard")
-    # (Results summary metrics code...)
-    if st.button("Re-take Test"):
+    st.title("📊 Test Summary")
+    score = sum(1 for i, q in enumerate(st.session_state.questions) if st.session_state.answers.get(i) == q["answer"])
+    st.metric("Final Score", f"{score}/{len(st.session_state.questions)}")
+    if st.button("Restart"):
         for key in list(st.session_state.keys()): del st.session_state[key]
         st.rerun()
 
 else:
-    # 1. LIVE TIMER (TOP)
+    # 1. TIMER & AUTO-REVEAL
     if st.session_state.start_time is None:
         st.session_state.start_time = time.time()
 
     elapsed = time.time() - st.session_state.start_time
     rem = int(st.session_state.time_per_q - elapsed)
 
-    if rem <= 0:
-        alert()
-        st.session_state.answers[st.session_state.current_q] = "None"
-        if st.session_state.current_q < len(st.session_state.questions) - 1:
+    if rem <= 0 and not st.session_state.revealed:
+        st.session_state.revealed = True
+        st.rerun()
+
+    # 2. TOP UI
+    c1, c2 = st.columns([5, 1])
+    with c1: st.progress(max(0.0, rem / st.session_state.time_per_q))
+    with c2: st.markdown(f"### {'⌛' if rem > 5 else '⚠️'} {rem}s")
+
+    # 3. QUESTION
+    idx = st.session_state.current_q
+    q = st.session_state.questions[idx]
+    
+    st.sidebar.title("Exam Map")
+    # Palette logic
+    cols = st.sidebar.columns(4)
+    for i in range(len(st.session_state.questions)):
+        icon = "🔵" if i == idx else ("🟩" if i in st.session_state.answers else "⬜")
+        if cols[i%4].button(f"{icon}{i+1}", key=f"p_{i}"):
+            st.session_state.current_q = i
+            st.session_state.start_time = None
+            st.session_state.revealed = False
+            st.rerun()
+
+    st.markdown(f"**Question {idx+1} of {len(st.session_state.questions)}**")
+    lang = st.radio("Lang", ["EN", "HI"], horizontal=True, label_visibility="collapsed")
+    st.markdown(f"### {q['en'] if lang == 'EN' else q['hi']}")
+
+    # 4. INSTANT FEEDBACK UI
+    if st.session_state.revealed:
+        user_choice = st.session_state.answers.get(idx)
+        if user_choice == q["answer"]:
+            st.markdown('<div class="feedback-box" style="background:#d4edda; color:#155724;">🌟 Correct! Well done.</div>', unsafe_allow_html=True)
+        else:
+            st.markdown(f'<div class="feedback-box" style="background:#f8d7da; color:#721c24;">❌ Incorrect. The right answer was {q["answer"]}.</div>', unsafe_allow_html=True)
+
+    # 5. OPTIONS
+    for label, text in q["options"].items():
+        btn_type = "secondary"
+        prefix = ""
+        
+        if st.session_state.revealed:
+            if label == q["answer"]:
+                btn_type = "primary" # Highlight Green
+                prefix = "✅ "
+            else:
+                btn_type = "secondary"
+                prefix = "❌ "
+        
+        if st.button(f"{prefix} {label}. {text}", key=f"opt_{idx}_{label}", use_container_width=True, type=btn_type):
+            if not st.session_state.revealed:
+                st.session_state.answers[idx] = label
+                st.session_state.revealed = True
+                st.rerun()
+
+    # 6. AUTO-ADVANCE LOGIC
+    if st.session_state.revealed:
+        time.sleep(2) # Give user 2 seconds to see the "picture" (colors)
+        if idx < len(st.session_state.questions) - 1:
             st.session_state.current_q += 1
             st.session_state.start_time = None
-            st.rerun()
+            st.session_state.revealed = False
         else:
             st.session_state.finished = True
-            st.rerun()
+        st.rerun()
 
-    # Timer Display with Animation Class
-    t_class = "timer-critical" if rem < 10 else ""
-    col1, col2 = st.columns([5, 1])
-    with col1:
-        st.progress(max(0.0, rem / st.session_state.time_per_q))
-    with col2:
-        st.markdown(f"<h3 class='{t_class}' style='margin-top:-10px;'>{rem}s</h3>", unsafe_allow_html=True)
-
-    # 2. SIDEBAR PALETTE
-    st.sidebar.title("🎯 Exam Map")
-    st.sidebar.markdown("---")
-    
-    total = len(st.session_state.questions)
-    grid = st.sidebar.container()
-    
-    # Render Palette buttons in a clean layout
-    # Streamlit doesn't support custom HTML button clicks easily, 
-    # so we use native columns but style the container
-    with grid:
-        # We loop through columns to create the grid effect
-        for row in range((total // 4) + 1):
-            cols = st.columns(4)
-            for col_idx in range(4):
-                q_idx = row * 4 + col_idx
-                if q_idx < total:
-                    # Logic for emoji indicators
-                    label = f"{q_idx + 1}"
-                    if q_idx == st.session_state.current_q: icon = "🔵"
-                    elif q_idx in st.session_state.answers: icon = "🟩"
-                    else: icon = "⬜"
-                    
-                    if cols[col_idx].button(f"{icon}\n{label}", key=f"nav_{q_idx}"):
-                        st.session_state.current_q = q_idx
-                        st.session_state.start_time = None
-                        st.rerun()
-
-    # 3. QUESTION CARD
-    i = st.session_state.current_q
-    q = st.session_state.questions[i]
-
-    st.markdown(f"""
-    <div class="q-card">
-        <p style="color: #6c757d; font-weight: bold;">QUESTION {i+1} OF {total}</p>
-        <hr>
-        <h3>{'English' if st.session_state.lang == 'EN' else 'Hindi'}</h3>
-    </div>
-    """, unsafe_allow_html=True)
-    
-    st.session_state.lang = st.radio("Switch Language", ["EN", "HI"], horizontal=True, label_visibility="collapsed")
-    
-    q_txt = q["en"] if st.session_state.lang == "EN" else q["hi"]
-    st.markdown(f"### {q_txt}")
-
-    # 4. OPTIONS (STYLISH)
-    st.write("")
-    for op in ["A", "B", "C", "D"]:
-        selected = st.session_state.answers.get(i) == op
-        if st.button(f"**{op}** : {q[op]}", key=f"btn_{i}_{op}", 
-                     use_container_width=True, 
-                     type="primary" if selected else "secondary"):
-            st.session_state.answers[i] = op
-            # Smoothly move to next
-            if i < total - 1:
-                st.session_state.current_q += 1
-                st.session_state.start_time = None
-            else:
-                st.session_state.finished = True
-            st.rerun()
-
-    # 5. FOOTER NAVIGATION
-    st.divider()
-    f1, f2, f3 = st.columns([1,2,1])
-    if i > 0:
-        if f1.button("⬅️ Previous", use_container_width=True):
-            st.session_state.current_q -= 1
-            st.session_state.start_time = None
-            st.rerun()
-    if i < total - 1:
-        if f3.button("Next ➡️", use_container_width=True):
-            st.session_state.current_q += 1
-            st.session_state.start_time = None
-            st.rerun()
-    else:
-        if f3.button("Submit 🏁", type="primary", use_container_width=True):
-            st.session_state.finished = True
-            st.rerun()
-
-    # 6. REFRESH LOOP
     time.sleep(1)
     st.rerun()
