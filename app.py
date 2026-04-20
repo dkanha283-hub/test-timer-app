@@ -19,7 +19,7 @@ def inject_custom_css():
         </style>
     """, unsafe_allow_html=True)
 
-# --- 2. GLOBAL CLOUD SESSION STORE (REPLACES LOCAL STORAGE) ---
+# --- 2. GLOBAL CLOUD SESSION STORE ---
 @st.cache_resource
 def get_global_sessions():
     return {}
@@ -38,6 +38,7 @@ def save_state_to_cloud():
         "answers": st.session_state.user_answers.copy(),
         "time": st.session_state.time_per_question,
         "max_qs": st.session_state.max_questions,
+        "quiz_data": st.session_state.quiz_data, # Save the shuffled sequence too!
         "timestamp": now
     }
 
@@ -53,7 +54,7 @@ def initialize_state():
     if 'app_lang' not in st.session_state: st.session_state.app_lang = "Bilingual"
     if 'resume_pin' not in st.session_state: st.session_state.resume_pin = str(random.randint(1000, 9999))
 
-# --- 4. CACHED PDF PARSER (FIXED ANSWER KEY EXTRACTOR) ---
+# --- 4. CACHED PDF PARSER ---
 @st.cache_data
 def parse_pdf_to_quiz(file_path):
     extracted_text = ""
@@ -69,7 +70,6 @@ def parse_pdf_to_quiz(file_path):
         clean_text = re.sub(r'Bagan Pratap Sir', '', clean_text, flags=re.IGNORECASE)
         clean_text = re.sub(r'Maths\n', '', clean_text, flags=re.IGNORECASE)
         
-        # 1. Safely find the very LAST instance of "Answer key" in the document
         ak_matches = list(re.finditer(r'Answer\s*key|Answers', clean_text, flags=re.IGNORECASE))
         if ak_matches:
             last_match = ak_matches[-1]
@@ -79,27 +79,19 @@ def parse_pdf_to_quiz(file_path):
             main_questions_text = clean_text
             answer_key_text = ""
         
-        # 2. DUAL-STRATEGY ANSWER KEY ENGINE
         correct_answers_dict = {}
         if answer_key_text:
-            # Replace OCR errors like the alpha symbol with 'a'
             ak_text = answer_key_text.lower().replace('α', 'a')
-            
-            # Strategy A: Direct matching (e.g., "1. (b)")
             ans_matches = re.findall(r'(\d+)\s*\.?\s*[\(\[]\s*([a-d])\s*[\)\]]', ak_text)
-            
-            # Extract independent numbers and options to check for fragmentation
             nums = re.findall(r'\b(\d+)\s*\.', ak_text)
             opts = re.findall(r'[\(\[]\s*([a-d])\s*[\)\]]', ak_text)
             
-            # Strategy B: Zip Fallback (If PDF columns split numbers and letters)
             if len(ans_matches) < len(opts) * 0.5: 
                 ans_matches = list(zip(nums, opts))
                 
             for qnum, ans in ans_matches:
                 correct_answers_dict[int(qnum)] = ans.upper()
         
-        # 3. QUESTION SPLITTING
         raw_splits = re.split(r'(?:^|\n)\s*(\d+)\.\s+', "\n" + main_questions_text)
         quiz_data = []
         for i in range(1, len(raw_splits), 2):
@@ -123,7 +115,6 @@ def parse_pdf_to_quiz(file_path):
                     
             question_text = q_content[:first_opt_idx].strip()
             
-            # Map Answer Key here
             correct_letter = correct_answers_dict.get(q_id, 'A') 
             if correct_letter == 'A': correct_text = opt_a
             elif correct_letter == 'B': correct_text = opt_b
@@ -205,7 +196,11 @@ def setup_dialog(file_name, total_available):
     if st.button("🚀 Start Quiz", type="primary", use_container_width=True):
         st.session_state.max_questions = selected_qs
         st.session_state.time_per_question = timer_sec
-        st.session_state.quiz_data = st.session_state.quiz_data[:selected_qs]
+        
+        # --- THE FIX: RANDOMLY SAMPLE THE QUESTIONS ---
+        # This selects `selected_qs` random questions from the full PDF, shuffling them instantly!
+        st.session_state.quiz_data = random.sample(st.session_state.quiz_data, selected_qs)
+        
         st.session_state.resume_pin = str(random.randint(1000, 9999))
         st.session_state.page = "quiz"
         st.rerun()
@@ -228,13 +223,12 @@ def render_home():
                     st.session_state.user_answers = saved['answers']
                     st.session_state.time_per_question = saved['time']
                     st.session_state.max_questions = saved['max_qs']
+                    # Restore the exact shuffled sequence they were taking
+                    st.session_state.quiz_data = saved['quiz_data'] 
                     st.session_state.resume_pin = entered_pin
                     
-                    with st.spinner("Restoring your session..."):
-                        parsed_data = parse_pdf_to_quiz(st.session_state.selected_topic_file)
-                        st.session_state.quiz_data = parsed_data[:st.session_state.max_questions]
-                        st.session_state.page = "quiz"
-                        st.rerun()
+                    st.session_state.page = "quiz"
+                    st.rerun()
                 else:
                     st.error("PIN not found or the 5-hour session expired.")
     
@@ -301,7 +295,8 @@ def render_quiz():
     inject_timer(st.session_state.time_per_question, q_index)
 
     filtered_question = filter_text(q_data["question"], st.session_state.app_lang)
-    st.markdown(f'<div class="question-box"><b>Q{q_index + 1}.</b><br><br> {filtered_question}</div>', unsafe_allow_html=True)
+    # Added original Q number to let user know which question they pulled from the PDF
+    st.markdown(f'<div class="question-box"><b>Q{q_index + 1}.</b> <i>(From PDF Q{q_data["id"]})</i><br><br> {filtered_question}</div>', unsafe_allow_html=True)
     
     current_response = st.session_state.user_answers.get(q_index, None)
     
@@ -349,7 +344,7 @@ def render_analysis():
         disp_ans = filter_text(q['answer'], st.session_state.app_lang)
         disp_user = filter_text(st.session_state.user_answers.get(i, 'Not Attempted'), st.session_state.app_lang)
         
-        with st.expander(f"Q{i+1}: {disp_q[:40]}..."):
+        with st.expander(f"Q{i+1} (PDF Q{q['id']}): {disp_q[:40]}..."):
             st.markdown(f"**Question:**\n {disp_q}")
             st.write(f"**Your Answer:** {disp_user}")
             st.write(f"**Correct Answer:** {disp_ans}")
