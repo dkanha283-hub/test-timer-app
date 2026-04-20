@@ -1,255 +1,276 @@
 import streamlit as st
+import pdfplumber
 import re
 import time
-import json
+import os
 
-# --- 1. PAGE CONFIGURATION ---
-st.set_page_config(page_title="Professional RRB/OJEE CBT", layout="wide", initial_sidebar_state="expanded")
+# --- 1. PAGE CONFIGURATION & CSS ---
+st.set_page_config(page_title="Pro CBT Hub", layout="wide", initial_sidebar_state="collapsed")
 
-# --- 2. ADVANCED CSS INJECTION (The "Exact UI") ---
-# We inject comprehensive CSS to handle fixed positioning, coloring, and specific CBT component styling.
-def inject_cbt_css():
+def inject_custom_css():
     st.markdown("""
         <style>
-        /* Base styles */
-        .stApp { background-color: #f0f2f5; font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; margin: 0; padding: 0;}
-        header { visibility: hidden; } # Main streamlit header hide
-        [data-testid="stSidebar"] { background-color: white; border-right: 1px solid #ddd; padding-top: 60px; } /* Adjust for top bar */
-
-        /* TOP HEADER ZONE (Fixed) */
-        .cbt-top-header { position: fixed; top: 0; left: 0; right: 0; height: 50px; background-color: #1e3a8a; color: white; display: flex; align-items: center; padding: 0 20px; z-index: 1000; box-shadow: 0 2px 4px rgba(0,0,0,0.1); font-weight: bold;}
-        .top-timer { margin-left: auto; color: #ef4444; font-size: 1.2em;}
-        
-        /* SECTION TABS ZONE (Fixed below header) */
-        .cbt-sections { position: fixed; top: 50px; left: 0; right: 0; height: 40px; background-color: white; display: flex; align-items: center; padding: 0 20px; z-index: 999; border-bottom: 1px solid #ddd;}
-        .section-tab { padding: 8px 15px; cursor: pointer; border-bottom: 3px solid transparent; color: #555; font-weight: 500;}
-        .section-tab.active { border-bottom: 3px solid #ef4444; color: #ef4444; font-weight: 700;}
-
-        /* MAIN CONTENT AREA (Scrollable) */
-        [data-testid="block-container"] { padding-top: 100px; padding-bottom: 60px; padding-left: 20px; padding-right: 20px;} /* Spacing for fixed header/footer */
-        .question-meta { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 0.9em; color: #666; font-weight: bold;}
-        .mark-positive { color: #16a34a; } .mark-negative { color: #dc2626; }
-        .question-box { background-color: white; padding: 25px; border-radius: 5px; border: 1px solid #ddd; }
-        .bilingual-eng { font-weight: bold; font-size: 1.1em; color: black; margin-bottom: 15px;}
-        .bilingual-hindi { color: #444; font-size: 1.05em;}
-
-        /* QUESTION PALETTE (Sidebar) */
-        .sidebar-title { font-weight: bold; color: #333; margin-bottom: 15px; display: block; padding: 0 10px;}
-        .palette-container { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; padding: 10px;}
-        
-        .q-tile { display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50% 50% 0 0; background-color: #e5e7eb; color: #555; font-weight: bold; cursor: pointer; font-size: 0.9em;}
-        /* Status Colors per picture */
-        .q-tile.answered { background-color: #22c55e; color: white; border-radius: 50%;} /* Round green */
-        .q-tile.marked { background-color: #a855f7; color: white; border-radius: 50% 50% 0 0;} /* Purple shape */
-        .q-tile.marked-answered { background-color: #a855f7; color: white; border-radius: 50% 50% 0 0; position: relative;} 
-        .q-tile.marked-answered::after { content: '✓'; color: #22c55e; position: absolute; bottom: -5px; right: 0px; font-weight: bold; font-size: 1.2em;}
-        .q-tile.not-answered { background-color: #ef4444; color: white; border-radius: 0 0 50% 50%;} /* Red shape */
-        .q-tile.active-q { border: 3px solid #1e3a8a; } /* Blue highlight for current Q */
-
-        /* BOTTOM NAV ZONE (Fixed) */
-        .cbt-bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; height: 55px; background-color: white; display: flex; align-items: center; padding: 0 20px; z-index: 1000; border-top: 1px solid #ddd;}
-        /* Force Streamlit buttons to look like CBT buttons in this footer */
-        div[data-testid="stColumn"] button { width: 100%; border-radius: 3px;}
-        
+        .stApp { background-color: #f4f6f9; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .question-box { background-color: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 20px; font-size: 18px; }
+        .top-bar { background-color: #1e3a8a; color: white; padding: 15px; border-radius: 5px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;}
+        .topic-card { background-color: white; padding: 20px; border-radius: 10px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1); cursor: pointer; border: 2px solid transparent; transition: 0.3s;}
+        .topic-card:hover { border-color: #1e3a8a; }
         </style>
     """, unsafe_allow_html=True)
 
-# --- 3. INITIALIZE COMPLEX STATE ---
+# --- 2. SESSION STATE MANAGEMENT ---
 def initialize_state():
-    if 'test_data' not in st.session_state:
-        # Complex data structure: Sections containing questions
-        st.session_state.test_data = {
-            "Arithmetic": [
-                {"id": 1, "marks": "+1.0, -0.25", "q_eng": "Question 1 in English", "q_hindi": "प्रश्न 1 हिंदी में", "options": ["A", "B", "C", "D"], "correct": "A"},
-                {"id": 2, "marks": "+1.0, -0.25", "q_eng": "Question 2 in English", "q_hindi": "प्रश्न 2 हिंदी में", "options": ["A", "B", "C", "D"], "correct": "B"},
-                # ... add more to make 20
-            ],
-            "General Awareness": [
-                {"id": 3, "marks": "+1.0, -0.25", "q_eng": "GA Question 3 English", "q_hindi": "जीए प्रश्न 3 हिंदी", "options": ["A", "B", "C", "D"], "correct": "C"}
-            ]
-        }
-        # Status Map: Stores user state for every single question number
-        # Possible states: 'Not Visited', 'Answered', 'Not Answered', 'Marked for Review', 'Marked & Answered'
-        # We also need a reverse map from global QID to section index
-        st.session_state.status_map = {}
-        st.session_state.section_map = {} # To find which section Q1 belongs to
-        counter = 1
-        for sec_name, questions in st.session_state.test_data.items():
-            for i, q in enumerate(questions):
-                st.session_state.status_map[counter] = 'Not Visited'
-                st.session_state.section_map[counter] = {"section": sec_name, "index_in_section": i}
-                counter += 1
-        st.session_state.total_questions = counter - 1
-        
-    if 'current_global_q' not in st.session_state: st.session_state.current_global_q = 1
-    if 'user_responses' not in st.session_state: st.session_state.user_responses = {}
-    if 'test_active' not in st.session_state: st.session_state.test_active = True
-    if 'remaining_time' not in st.session_state: st.session_state.remaining_time = 3600 # 1 hour dummy
+    if 'page' not in st.session_state: st.session_state.page = "home"
+    if 'selected_topic_file' not in st.session_state: st.session_state.selected_topic_file = None
+    if 'quiz_data' not in st.session_state: st.session_state.quiz_data = []
+    if 'current_q_index' not in st.session_state: st.session_state.current_q_index = 0
+    if 'user_answers' not in st.session_state: st.session_state.user_answers = {}
+    if 'time_per_question' not in st.session_state: st.session_state.time_per_question = 60
+    if 'max_questions' not in st.session_state: st.session_state.max_questions = 10
+    if 'app_lang' not in st.session_state: st.session_state.app_lang = "Bilingual"
 
-# --- 4. RENDER UI COMPONENTS ---
-
-def render_fixed_header():
-    # Renders the absolute top bar with test name, icons, and timer snippet
-    timer_text = time.strftime('%H:%M:%S', time.gmtime(st.session_state.remaining_time))
-    st.markdown(f'''
-        <div class="cbt-top-header">
-            <div>RRB ALP Mock Test 1</div>
-            <div style="margin-left: 20px;">⏱ Total Time: 60 min</div>
-            <div class="top-timer">{timer_text}</div>
-            <div style="margin-left: 15px; cursor:pointer;">💾</div>
-            <div style="margin-left: 15px; cursor:pointer;">➕➖</div>
-        </div>
-    ''', unsafe_allow_html=True)
-
-def render_section_tabs():
-    # Renders section tabs below header. Detects active section.
-    current_q_info = st.session_state.section_map[st.session_state.current_global_q]
-    active_section = current_q_info["section"]
-    
-    tabs_html = '<div class="cbt-sections">'
-    for sec_name in st.session_state.test_data.keys():
-        active_class = "active" if sec_name == active_section else ""
-        tabs_html += f'<div class="section-tab {active_class}">{sec_name}</div>'
-    tabs_html += '</div>'
-    st.markdown(tabs_html, unsafe_allow_html=True)
-
-def render_sidebar_palette():
-    # Renders the complex 1-20 palette in the sidebar with dynamic coloring
-    with st.sidebar:
-        st.markdown('<span class="sidebar-title">Question Palette</span>', unsafe_allow_html=True)
-        
-        # Legend (as seen in picture)
-        # Note: Implementing specific shape/color CSS in legend too if wanted. Simple legend for now.
-        st.write("🟩 Answered | 🟥 Not Answered | ⬜ Not Visited | 🟪 Marked")
-        
-        st.divider()
-        
-        palette_html = '<div class="palette-container">'
-        for qid in range(1, st.session_state.total_questions + 1):
-            status = st.session_state.status_map[qid]
-            active_class = "active-q" if qid == st.session_state.current_global_q else ""
+# --- 3. CACHED PDF PARSER ---
+@st.cache_data
+def parse_pdf_to_quiz(file_path):
+    extracted_text = ""
+    try:
+        if not os.path.exists(file_path):
+            return []
             
-            # Match class from inject_cbt_css based on state
-            css_class = ""
-            if status == 'Answered': css_class = "answered"
-            elif status == 'Not Answered': css_class = "not-answered"
-            elif status == 'Marked for Review': css_class = "marked"
-            elif status == 'Marked & Answered': css_class = "marked-answered"
-            # Not Visited stays default light gray
+        with pdfplumber.open(file_path) as pdf:
+            for page in pdf.pages:
+                text = page.extract_text()
+                if text: extracted_text += text + "\n"
+        
+        # Clean headers specifically for Gagan Pratap Sir sheets
+        clean_text = re.sub(r'INDIAN\s*RAILWAY FOUNDATION BATCH\s*.*?(?=\n)', '', extracted_text, flags=re.IGNORECASE)
+        clean_text = re.sub(r'Maths by Gagan Pratap Sir', '', clean_text, flags=re.IGNORECASE)
+        clean_text = re.sub(r'Bagan Pratap Sir', '', clean_text, flags=re.IGNORECASE)
+        clean_text = re.sub(r'Maths\n', '', clean_text, flags=re.IGNORECASE)
+        
+        parts = re.split(r'Answer\s+key', clean_text, flags=re.IGNORECASE)
+        main_questions_text = parts[0]
+        answer_key_text = parts[1] if len(parts) > 1 else ""
+        
+        correct_answers_dict = {}
+        if answer_key_text:
+            ans_matches = re.findall(r'(\d+)\.\s*\(([a-d])\)', answer_key_text, re.IGNORECASE)
+            for qnum, ans in ans_matches:
+                correct_answers_dict[int(qnum)] = ans.upper()
+        
+        raw_splits = re.split(r'(?:^|\n)\s*(\d+)\.\s+', "\n" + main_questions_text)
+        quiz_data = []
+        
+        for i in range(1, len(raw_splits), 2):
+            q_id = int(raw_splits[i])
+            q_content = raw_splits[i+1]
             
-            palette_html += f'<div class="q-tile {css_class} {active_class}">{qid}</div>'
-        palette_html += '</div>'
-        
-        st.markdown(palette_html, unsafe_allow_html=True)
-        
-        st.divider()
-        if st.button("Submit Group"):
-            st.session_state.test_active = False
-            st.rerun()
+            opt_a_match = re.search(r'\[A\](.*?)(?=\[B\]|\[C\]|\[D\]|$)', q_content, re.DOTALL | re.IGNORECASE)
+            opt_b_match = re.search(r'\[B\](.*?)(?=\[A\]|\[C\]|\[D\]|$)', q_content, re.DOTALL | re.IGNORECASE)
+            opt_c_match = re.search(r'\[C\](.*?)(?=\[A\]|\[B\]|\[D\]|$)', q_content, re.DOTALL | re.IGNORECASE)
+            opt_d_match = re.search(r'\[D\](.*?)(?=\[A\]|\[B\]|\[C\]|$)', q_content, re.DOTALL | re.IGNORECASE)
+            
+            opt_a = opt_a_match.group(1).strip() if opt_a_match else "Option A"
+            opt_b = opt_b_match.group(1).strip() if opt_b_match else "Option B"
+            opt_c = opt_c_match.group(1).strip() if opt_c_match else "Option C"
+            opt_d = opt_d_match.group(1).strip() if opt_d_match else "Option D"
+            
+            first_opt_idx = len(q_content)
+            for tag in ['[A]', '[B]', '[C]', '[D]', '[a]', '[b]', '[c]', '[d]']:
+                idx = q_content.find(tag)
+                if idx != -1 and idx < first_opt_idx:
+                    first_opt_idx = idx
+                    
+            question_text = q_content[:first_opt_idx].strip()
+            
+            correct_letter = correct_answers_dict.get(q_id, 'A') 
+            if correct_letter == 'A': correct_text = opt_a
+            elif correct_letter == 'B': correct_text = opt_b
+            elif correct_letter == 'C': correct_text = opt_c
+            elif correct_letter == 'D': correct_text = opt_d
+            else: correct_text = opt_a
+            
+            if question_text:
+                quiz_data.append({
+                    "id": q_id,
+                    "question": question_text,
+                    "options": [opt_a, opt_b, opt_c, opt_d],
+                    "answer": correct_text,
+                    "explanation": f"Based on the Answer Key, the correct option is [{correct_letter}]."
+                })
+        return quiz_data
+    except Exception as e:
+        return []
 
-def render_main_question_area():
-    # Main content zone with bilingual stacked questions
-    qid = st.session_state.current_global_q
-    q_info = st.session_state.section_map[qid]
-    q_data = st.session_state.test_data[q_info["section"]][q_info["index_in_section"]]
+# --- 4. LANGUAGE FILTER ---
+def filter_text(text, lang):
+    if not text or lang == "Bilingual": return text
+    lines = text.split('\n')
+    filtered_lines = []
+    for l in lines:
+        has_hindi = bool(re.search(r'[\u0900-\u097F]', l))
+        eng_word_count = len(re.findall(r'\b[a-zA-Z]{2,}\b', l))
+        if lang == "English":
+            if has_hindi:
+                clean_en = re.sub(r'[\u0900-\u097F।]+', '', l).strip()
+                if clean_en: filtered_lines.append(clean_en)
+            else: filtered_lines.append(l)
+        elif lang == "Hindi":
+            if has_hindi or eng_word_count < 3: filtered_lines.append(l)
+    res = '\n'.join(filtered_lines).strip()
+    return res if res else text 
+
+# --- 5. TIMER INJECTION ---
+def inject_timer(seconds):
+    html_code = f"""
+    <div id="timer" style="font-size: 24px; font-weight: bold; color: #ef4444; text-align: right;"></div>
+    <script>
+        var timeLeft = {seconds};
+        var timerElem = document.getElementById('timer');
+        var timerId = setInterval(countdown, 1000);
+        function countdown() {{
+            if (timeLeft == 0) {{
+                clearTimeout(timerId);
+                var buttons = window.parent.document.querySelectorAll('button');
+                buttons.forEach(function(btn) {{
+                    if(btn.innerText === 'Next' || btn.innerText === 'Submit Test') btn.click();
+                }});
+            }} else {{
+                timerElem.innerHTML = "Time Left: " + timeLeft + "s";
+                timeLeft--;
+            }}
+        }}
+    </script>
+    """
+    st.components.v1.html(html_code, height=50)
+
+# --- 6. SETUP POPUP (DIALOG) ---
+@st.dialog("⚙️ Quiz Setup")
+def setup_dialog(file_name, total_available):
+    st.write(f"**Topic:** {file_name.replace('.pdf', '')}")
+    st.write(f"Total questions available: {total_available}")
     
-    # Meta row (Marks, Q Number)
-    col_meta1, col_meta2 = st.columns([1,1])
-    with col_meta1:
-        st.markdown(f"**Q {qid}**")
-    with col_meta2:
-        st.markdown(f'<div style="text-align:right;">Marks: <span class="mark-positive">{q_data["marks"].split(",")[0]}</span>, <span class="mark-negative">{q_data["marks"].split(",")[1]}</span> | <span style="color:#1e3a8a; cursor:pointer;">⚠️ Report</span></div>', unsafe_allow_html=True)
+    selected_qs = st.slider("How many questions to attempt?", min_value=1, max_value=total_available, value=min(20, total_available))
+    timer_sec = st.number_input("Time per question (seconds)", min_value=10, max_value=300, value=60)
     
+    if st.button("🚀 Start Quiz", type="primary", use_container_width=True):
+        st.session_state.max_questions = selected_qs
+        st.session_state.time_per_question = timer_sec
+        st.session_state.quiz_data = st.session_state.quiz_data[:selected_qs]
+        st.session_state.page = "quiz"
+        st.rerun()
+
+# --- 7. RENDER VIEWS ---
+def render_home():
+    st.markdown('<div class="top-bar"><h2>📚 CBT Topic Hub</h2></div>', unsafe_allow_html=True)
+    st.write("Select a topic below to start practicing.")
+    
+    # Updated list containing all 20 PDF files exactly as named
+    topics = {
+        "Percentage Part 1": "percent1 (1).pdf",
+        "Percentage Part 2": "perceentage2.pdf",
+        "Ratio & Proportion": "RATIO_(1).pdf",
+        "Problems on Ages": "ages_sheet.pdf",
+        "Profit & Loss": "PROFIT_AND_LOSS_SHEET_-_01.pdf",
+        "Time & Work": "TIME_AND_WORK_sheet_01.pdf",
+        "Discount": "DISCOUNT_SHEET-01.pdf",
+        "Pipe & Cistern": "pipe and christen.pdf",
+        "Partnership": "Partnership.pdf",
+        "Mixture & Alligation Part 1": "mixture and aligation (1).pdf",
+        "Mixture & Alligation Part 2": "mixture and aligation (2).pdf",
+        "Simple Interest": "simple interest.pdf",
+        "Compound Interest": "Compound intrest.pdf",
+        "Mensuration 2D (Triangle)": "Mensuration_2D_Triangle_sheet (1).pdf",
+        "Mensuration 2D (Quadrilateral)": "Mensuration_2D_(quadrilateral).pdf",
+        "Mensuration 2D (Circle)": "circle.pdf",
+        "Polygon": "polygon_sheet.pdf",
+        "Mensuration 3D (Cone)": "Mensuration 3d Cone Sheet.pdf",
+        "Mensuration 3D (Cube & Cuboid)": "Mensuration_3D_cube_and_cuboid_Sheet_01.pdf",
+        "Mensuration 3D (Cylinder)": "Mensuration_3D_Cylinder.pdf"
+    }
+    
+    cols = st.columns(2)
+    for idx, (topic_name, file_name) in enumerate(topics.items()):
+        with cols[idx % 2]:
+            if st.button(topic_name, use_container_width=True, icon="📄"):
+                st.session_state.selected_topic_file = file_name
+                with st.spinner(f"Loading {topic_name}..."):
+                    parsed_data = parse_pdf_to_quiz(file_name)
+                    if parsed_data:
+                        st.session_state.quiz_data = parsed_data
+                        setup_dialog(file_name, len(parsed_data))
+                    else:
+                        st.error(f"Could not load {file_name}. Ensure it is uploaded to your GitHub repository!")
+
+def render_quiz():
+    q_index = st.session_state.current_q_index
+    q_data = st.session_state.quiz_data[q_index]
+    total_qs = len(st.session_state.quiz_data)
+
+    col_sect, col_lang, col_qnum = st.columns([2, 1, 1], vertical_alignment="center")
+    with col_sect: st.markdown(f"##### {st.session_state.selected_topic_file.replace('.pdf', '')}")
+    with col_lang:
+        st.session_state.app_lang = st.selectbox("Language", ["Bilingual", "English", "Hindi"], label_visibility="collapsed")
+    with col_qnum: st.markdown(f"##### Q {q_index + 1} / {total_qs}")
     st.divider()
 
-    # Question Box (Bilingual Stacked)
-    question_html = f'''
-        <div class="question-box">
-            <div class="bilingual-eng">Question:<br>{q_data["q_eng"]}</div>
-            <div class="bilingual-hindi">प्रश्न:<br>{q_data["q_hindi"]}</div>
-        </div>
-    '''
-    st.markdown(question_html, unsafe_allow_html=True)
-    
-    # Options (Radio Buttons below question box)
-    options = q_data["options"]
-    current_response = st.session_state.user_responses.get(qid, None)
-    
-    st.write("##### Choose Answer:")
-    selected = st.radio("Options", options, index=options.index(current_response) if current_response else None, label_visibility="collapsed", key=f"global_radio_{qid}")
-    
-    # Update state temporarily while they are on the question
-    if selected:
-        st.session_state.user_responses[qid] = selected
+    inject_timer(st.session_state.time_per_question)
 
-def render_fixed_footer_nav():
-    # Renders the bottom fixed bar with action buttons
-    qid = st.session_state.current_global_q
-    total_qs = st.session_state.total_questions
+    filtered_question = filter_text(q_data["question"], st.session_state.app_lang)
+    st.markdown(f'<div class="question-box"><b>Q{q_index + 1}.</b><br><br> {filtered_question}</div>', unsafe_allow_html=True)
     
-    st.markdown('<div class="cbt-bottom-nav">', unsafe_allow_html=True)
+    selected_option = st.radio("Select an option:", q_data["options"], format_func=lambda x: filter_text(x, st.session_state.app_lang), key=f"q_{q_index}", index=None)
     
-    # Use Streamlit columns inside the fixed footer via specific positioning hacks in CSS
-    nav_cols = st.columns([2, 1, 1, 1, 1, 1]) # Adjust spacing
-    
-    # Logic for button clicks to update the Palette status map
-    with nav_cols[2]:
-        if st.button("Clear Response"):
-            if qid in st.session_state.user_responses:
-                del st.session_state.user_responses[qid]
-                st.session_state.status_map[qid] = 'Not Answered'
+    col1, col2, col3 = st.columns([1, 1, 1])
+    with col3:
+        if q_index < total_qs - 1:
+            if st.button("Next", type="primary", use_container_width=True):
+                if selected_option: st.session_state.user_answers[q_index] = selected_option
+                st.session_state.current_q_index += 1
                 st.rerun()
-                
-    with nav_cols[3]:
-        if st.button("Mark for Review"):
-            has_answered = qid in st.session_state.user_responses
-            st.session_state.status_map[qid] = 'Marked & Answered' if has_answered else 'Marked for Review'
-            
-            # Auto save & next logic after marking
-            if qid < total_qs: st.session_state.current_global_q += 1
-            st.rerun()
-            
-    with nav_cols[5]:
-        # Identify as "Save & Next" per picture
-        if st.button("Save & Next", type="primary"):
-            has_answered = qid in st.session_state.user_responses
-            
-            # Update status map color
-            st.session_state.status_map[qid] = 'Answered' if has_answered else 'Not Answered'
-            
-            # Move to next global question
-            if qid < total_qs:
-                st.session_state.current_global_q += 1
-            else:
-                st.toast("Last Question reached")
-            st.rerun()
-            
-    st.markdown('</div>', unsafe_allow_html=True)
+        else:
+            if st.button("Submit Test", type="primary", use_container_width=True):
+                if selected_option: st.session_state.user_answers[q_index] = selected_option
+                st.session_state.page = "analysis"
+                st.rerun()
 
-# --- 5. MAIN EXECUTION FLOW ---
+def render_analysis():
+    st.title("📊 Exam Analysis")
+    total_qs = len(st.session_state.quiz_data)
+    correct_count = sum(1 for i, q in enumerate(st.session_state.quiz_data) if st.session_state.user_answers.get(i) == q["answer"])
+            
+    accuracy = (correct_count / total_qs) * 100 if total_qs > 0 else 0
+    st.metric("Total Score", f"{correct_count} / {total_qs}", f"{accuracy:.1f}% Accuracy")
+    
+    if st.button("🏠 Go to Home Page", type="primary"):
+        st.session_state.clear()
+        st.rerun()
+        
+    st.write("### Detailed Review")
+    st.session_state.app_lang = st.radio("Review Language", ["Bilingual", "English", "Hindi"], horizontal=True)
+    
+    for i, q in enumerate(st.session_state.quiz_data):
+        disp_q = filter_text(q['question'], st.session_state.app_lang)
+        disp_ans = filter_text(q['answer'], st.session_state.app_lang)
+        disp_user = filter_text(st.session_state.user_answers.get(i, 'Not Attempted'), st.session_state.app_lang)
+        
+        with st.expander(f"Q{i+1}: {disp_q[:40]}..."):
+            st.markdown(f"**Question:**\n {disp_q}")
+            st.write(f"**Your Answer:** {disp_user}")
+            st.write(f"**Correct Answer:** {disp_ans}")
+            st.info(q['explanation'])
 
 def main():
-    inject_cbt_css()
+    inject_custom_css()
     initialize_state()
-    
-    if st.session_state.test_active:
-        # Mandatory zones per CBT picture
-        render_fixed_header()
-        render_section_tabs()
-        render_sidebar_palette()
-        
-        render_main_question_area()
-        
-        render_fixed_footer_nav() # NAVIGATION CONTROL CENTER
-        
-    else:
-        st.title("Test Submitted")
-        st.metric("Total Score (Mock)", f"{len(st.session_state.user_responses)} / {st.session_state.total_questions}")
-        st.write("Analysis dashboard would load here.")
-        if st.button("Restart"):
-            st.session_state.clear()
-            st.rerun()
+
+    if st.session_state.page == "home":
+        render_home()
+    elif st.session_state.page == "quiz":
+        render_quiz()
+    elif st.session_state.page == "analysis":
+        render_analysis()
 
 if __name__ == "__main__":
     main()
-    
+            
