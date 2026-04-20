@@ -3,6 +3,7 @@ import pdfplumber
 import re
 import time
 import os
+import json
 
 # --- 1. PAGE CONFIGURATION & CSS ---
 st.set_page_config(page_title="Pro CBT Hub", layout="wide", initial_sidebar_state="collapsed")
@@ -15,8 +16,20 @@ def inject_custom_css():
         .top-bar { background-color: #1e3a8a; color: white; padding: 15px; border-radius: 5px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;}
         .topic-card { background-color: white; padding: 20px; border-radius: 10px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1); cursor: pointer; border: 2px solid transparent; transition: 0.3s;}
         .topic-card:hover { border-color: #1e3a8a; }
+        /* Hide the data bridge input used for Local Storage */
+        div[data-testid="stTextInput"] { display: none; }
         </style>
     """, unsafe_allow_html=True)
+    
+    # Anti-Reload Protection (Warns user if they pull-to-refresh on mobile)
+    st.components.v1.html("""
+        <script>
+            window.parent.addEventListener('beforeunload', function (e) {
+                e.preventDefault();
+                e.returnValue = 'You have an active test. Are you sure you want to reload?';
+            });
+        </script>
+    """, height=0)
 
 # --- 2. SESSION STATE MANAGEMENT ---
 def initialize_state():
@@ -34,15 +47,12 @@ def initialize_state():
 def parse_pdf_to_quiz(file_path):
     extracted_text = ""
     try:
-        if not os.path.exists(file_path):
-            return []
-            
+        if not os.path.exists(file_path): return []
         with pdfplumber.open(file_path) as pdf:
             for page in pdf.pages:
                 text = page.extract_text()
                 if text: extracted_text += text + "\n"
         
-        # Clean headers specifically for Gagan Pratap Sir sheets
         clean_text = re.sub(r'INDIAN\s*RAILWAY FOUNDATION BATCH\s*.*?(?=\n)', '', extracted_text, flags=re.IGNORECASE)
         clean_text = re.sub(r'Maths by Gagan Pratap Sir', '', clean_text, flags=re.IGNORECASE)
         clean_text = re.sub(r'Bagan Pratap Sir', '', clean_text, flags=re.IGNORECASE)
@@ -60,7 +70,6 @@ def parse_pdf_to_quiz(file_path):
         
         raw_splits = re.split(r'(?:^|\n)\s*(\d+)\.\s+', "\n" + main_questions_text)
         quiz_data = []
-        
         for i in range(1, len(raw_splits), 2):
             q_id = int(raw_splits[i])
             q_content = raw_splits[i+1]
@@ -78,11 +87,9 @@ def parse_pdf_to_quiz(file_path):
             first_opt_idx = len(q_content)
             for tag in ['[A]', '[B]', '[C]', '[D]', '[a]', '[b]', '[c]', '[d]']:
                 idx = q_content.find(tag)
-                if idx != -1 and idx < first_opt_idx:
-                    first_opt_idx = idx
+                if idx != -1 and idx < first_opt_idx: first_opt_idx = idx
                     
             question_text = q_content[:first_opt_idx].strip()
-            
             correct_letter = correct_answers_dict.get(q_id, 'A') 
             if correct_letter == 'A': correct_text = opt_a
             elif correct_letter == 'B': correct_text = opt_b
@@ -102,48 +109,34 @@ def parse_pdf_to_quiz(file_path):
     except Exception as e:
         return []
 
-# --- 4. LANGUAGE FILTER (UPDATED WITH SMART DEDUPLICATION) ---
+# --- 4. LANGUAGE FILTER ---
 def filter_text(text, lang):
     if not text or lang == "Bilingual": return text
     lines = text.split('\n')
     filtered_lines = []
     seen_normalized = set()
-    
     for l in lines:
         if not l.strip(): continue
         has_hindi = bool(re.search(r'[\u0900-\u097F]', l))
         eng_word_count = len(re.findall(r'\b[a-zA-Z]{2,}\b', l))
-        
         processed_line = ""
-        
         if lang == "English":
-            if has_hindi:
-                # Drop the Hindi line completely to prevent leftover math variables showing up
-                continue
-            else:
-                processed_line = l
+            if has_hindi: continue
+            else: processed_line = l
         elif lang == "Hindi":
-            # Keep lines with Hindi, OR lines with very few English words (which are usually math formulas)
-            if has_hindi or eng_word_count < 3:
-                processed_line = l
+            if has_hindi or eng_word_count < 3: processed_line = l
                 
         if processed_line:
-            # Normalize the line by removing spaces and symbols to check for PDF shadow text duplicates
             norm = re.sub(r'\W+', '', processed_line).lower()
-            
-            # If the line is substantial (more than 3 characters), check if we've already seen it
             if norm and len(norm) > 3:
-                if norm in seen_normalized:
-                    continue # Skip this duplicate shadow text!
+                if norm in seen_normalized: continue 
                 seen_normalized.add(norm)
-            
             filtered_lines.append(processed_line)
-            
     res = '\n'.join(filtered_lines).strip()
     return res if res else text 
 
-# --- 5. TIMER INJECTION ---
-def inject_timer(seconds):
+# --- 5. TIMER INJECTION (FIXED FOR STICKING) ---
+def inject_timer(seconds, q_index):
     html_code = f"""
     <div id="timer" style="font-size: 24px; font-weight: bold; color: #ef4444; text-align: right;"></div>
     <script>
@@ -151,7 +144,7 @@ def inject_timer(seconds):
         var timerElem = document.getElementById('timer');
         var timerId = setInterval(countdown, 1000);
         function countdown() {{
-            if (timeLeft == 0) {{
+            if (timeLeft <= 0) {{
                 clearTimeout(timerId);
                 var buttons = window.parent.document.querySelectorAll('button');
                 buttons.forEach(function(btn) {{
@@ -164,9 +157,53 @@ def inject_timer(seconds):
         }}
     </script>
     """
-    st.components.v1.html(html_code, height=50)
+    # FIX: Adding q_index to the key forces Streamlit to rebuild the timer fresh every question!
+    st.components.v1.html(html_code, height=50, key=f"timer_widget_{q_index}")
 
-# --- 6. SETUP POPUP (DIALOG) ---
+# --- 6. LOCAL STORAGE BRIDGE (SAVE & LOAD) ---
+def save_state_to_local_storage():
+    """Injects JS to save current quiz state to browser LocalStorage"""
+    state_dict = {
+        "file": st.session_state.selected_topic_file,
+        "q_index": st.session_state.current_q_index,
+        "answers": st.session_state.user_answers,
+        "time": st.session_state.time_per_question,
+        "max_qs": st.session_state.max_questions,
+        "timestamp": time.time() * 1000 # Save in milliseconds
+    }
+    state_json = json.dumps(state_dict)
+    st.components.v1.html(f"""
+        <script>
+            localStorage.setItem('cbt_backup_session', JSON.stringify({state_json}));
+        </script>
+    """, height=0, key=f"ls_save_{st.session_state.current_q_index}")
+
+def check_and_load_local_storage():
+    """Reads LocalStorage and creates a Resume button if valid session exists"""
+    # 5 hours = 5 * 60 * 60 * 1000 = 18000000 ms
+    st.components.v1.html("""
+        <script>
+            const backup = localStorage.getItem('cbt_backup_session');
+            if (backup) {
+                const data = JSON.parse(backup);
+                const now = Date.now();
+                // Check if backup is less than 5 hours old
+                if ((now - data.timestamp) < 18000000) {
+                    // Send data back to Streamlit text input bridge
+                    const inputs = window.parent.document.querySelectorAll('input');
+                    inputs.forEach(input => {
+                        if(input.getAttribute('aria-label') === 'LS_BRIDGE') {
+                            let nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
+                            nativeInputValueSetter.call(input, backup);
+                            input.dispatchEvent(new Event('input', { bubbles: true }));
+                        }
+                    });
+                }
+            }
+        </script>
+    """, height=0)
+
+# --- 7. SETUP POPUP (DIALOG) ---
 @st.dialog("⚙️ Quiz Setup")
 def setup_dialog(file_name, total_available):
     st.write(f"**Topic:** {file_name.replace('.pdf', '')}")
@@ -182,12 +219,41 @@ def setup_dialog(file_name, total_available):
         st.session_state.page = "quiz"
         st.rerun()
 
-# --- 7. RENDER VIEWS ---
+# --- 8. RENDER VIEWS ---
 def render_home():
     st.markdown('<div class="top-bar"><h2>📚 CBT Topic Hub</h2></div>', unsafe_allow_html=True)
-    st.write("Select a topic below to start practicing.")
     
-    # Updated list containing all 21 PDF files exactly as named
+    # ---------------------------------------------------------
+    # LOCAL STORAGE RESUME LOGIC
+    # ---------------------------------------------------------
+    bridge_data = st.text_input("LS_BRIDGE", key="ls_bridge", label_visibility="hidden")
+    check_and_load_local_storage()
+    
+    if bridge_data:
+        try:
+            saved_state = json.loads(bridge_data)
+            topic = saved_state.get('file', 'Unknown')
+            st.success(f"📌 Found an active session for **{topic.replace('.pdf', '')}**!")
+            if st.button("▶️ Resume Quiz", type="primary"):
+                # Restore the state
+                st.session_state.selected_topic_file = saved_state['file']
+                st.session_state.current_q_index = saved_state['q_index']
+                # Convert string keys back to integers for the answers dictionary
+                st.session_state.user_answers = {int(k): v for k, v in saved_state['answers'].items()}
+                st.session_state.time_per_question = saved_state['time']
+                st.session_state.max_questions = saved_state['max_qs']
+                
+                with st.spinner("Restoring session..."):
+                    parsed_data = parse_pdf_to_quiz(st.session_state.selected_topic_file)
+                    st.session_state.quiz_data = parsed_data[:st.session_state.max_questions]
+                    st.session_state.page = "quiz"
+                    st.rerun()
+        except:
+            pass # Ignore JSON errors
+    # ---------------------------------------------------------
+    
+    st.write("Select a topic below to start a new practice session.")
+    
     topics = {
         "Percentage Part 1": "percent1 (1).pdf",
         "Percentage Part 2": "perceentage2.pdf",
@@ -216,7 +282,11 @@ def render_home():
     for idx, (topic_name, file_name) in enumerate(topics.items()):
         with cols[idx % 2]:
             if st.button(topic_name, use_container_width=True, icon="📄"):
+                # Clear old local storage if starting a NEW test
+                st.components.v1.html("<script>localStorage.removeItem('cbt_backup_session');</script>", height=0)
                 st.session_state.selected_topic_file = file_name
+                st.session_state.current_q_index = 0
+                st.session_state.user_answers = {}
                 with st.spinner(f"Loading {topic_name}..."):
                     parsed_data = parse_pdf_to_quiz(file_name)
                     if parsed_data:
@@ -226,6 +296,9 @@ def render_home():
                         st.error(f"Could not load {file_name}. Ensure it is uploaded to your GitHub repository!")
 
 def render_quiz():
+    # Save current state to local storage every time the page renders!
+    save_state_to_local_storage()
+    
     q_index = st.session_state.current_q_index
     q_data = st.session_state.quiz_data[q_index]
     total_qs = len(st.session_state.quiz_data)
@@ -237,14 +310,23 @@ def render_quiz():
     with col_qnum: st.markdown(f"##### Q {q_index + 1} / {total_qs}")
     st.divider()
 
-    inject_timer(st.session_state.time_per_question)
+    # Fixed Timer call! Passing q_index forces it to reset cleanly.
+    inject_timer(st.session_state.time_per_question, q_index)
 
     filtered_question = filter_text(q_data["question"], st.session_state.app_lang)
     st.markdown(f'<div class="question-box"><b>Q{q_index + 1}.</b><br><br> {filtered_question}</div>', unsafe_allow_html=True)
     
-    selected_option = st.radio("Select an option:", q_data["options"], format_func=lambda x: filter_text(x, st.session_state.app_lang), key=f"q_{q_index}", index=None)
+    current_response = st.session_state.user_answers.get(q_index, None)
+    
+    selected_option = st.radio("Select an option:", q_data["options"], format_func=lambda x: filter_text(x, st.session_state.app_lang), key=f"q_{q_index}", index=q_data["options"].index(current_response) if current_response in q_data["options"] else None)
     
     col1, col2, col3 = st.columns([1, 1, 1])
+    with col1:
+        if q_index > 0:
+            if st.button("Previous", use_container_width=True):
+                if selected_option: st.session_state.user_answers[q_index] = selected_option
+                st.session_state.current_q_index -= 1
+                st.rerun()
     with col3:
         if q_index < total_qs - 1:
             if st.button("Next", type="primary", use_container_width=True):
@@ -258,6 +340,9 @@ def render_quiz():
                 st.rerun()
 
 def render_analysis():
+    # Clear backup on completion so it doesn't prompt to resume a finished test
+    st.components.v1.html("<script>localStorage.removeItem('cbt_backup_session');</script>", height=0)
+    
     st.title("📊 Exam Analysis")
     total_qs = len(st.session_state.quiz_data)
     correct_count = sum(1 for i, q in enumerate(st.session_state.quiz_data) if st.session_state.user_answers.get(i) == q["answer"])
