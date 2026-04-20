@@ -2,7 +2,6 @@ import streamlit as st
 import pdfplumber
 import pytesseract
 from PIL import Image
-import json
 import re
 import time
 
@@ -46,59 +45,66 @@ def initialize_state():
     if 'time_per_question' not in st.session_state:
         st.session_state.time_per_question = 60 # Default 60 seconds
 
-# --- 3. PDF PARSING LOGIC (MOCKUP/FOUNDATION) ---
+# --- 3. ADVANCED PDF PARSING LOGIC ---
 def parse_pdf_to_quiz(file):
     """
-    Real extraction engine using pdfplumber, OCR fallback, and Regex.
+    Advanced extraction engine to handle bilingual (Hindi/English) PDFs
+    and accurately separate questions from options.
     """
     extracted_text = ""
     try:
-        # 1. Extract text from all pages
+        # Step A: Extract text from all pages
         with pdfplumber.open(file) as pdf:
             for page in pdf.pages:
                 text = page.extract_text()
-                # If standard text exists, add it
-                if text and text.strip():
+                if text:
                     extracted_text += text + "\n"
-                else:
-                    # If the page is a scanned image, use OCR to read it
-                    img = page.to_image(resolution=300).original
-                    extracted_text += pytesseract.image_to_string(img) + "\n"
         
-        # 2. Parse the extracted text into individual questions
-        # This Regex looks for numbers followed by dots or brackets (e.g., "1.", "2)", "Q3.")
-        question_pattern = re.compile(r'(?:Q)?(\d+)[\.\)]\s*(.*?)(?=(?:Q)?\d+[\.\)]|$)', re.DOTALL | re.IGNORECASE)
+        # Step B: FILTER OUT HINDI (Devanagari characters)
+        # This removes the Unicode range for Hindi, keeping only English/Numbers
+        extracted_text = re.sub(r'[\u0900-\u097F]+', '', extracted_text)
         
-        raw_questions = question_pattern.findall(extracted_text)
+        # Step C: SPLIT INTO QUESTIONS
+        # Strictly looks for a newline, followed by a number and a dot/bracket
+        raw_splits = re.split(r'\n\s*(?:Q\.|Q)?\s*(\d+)[\.\)]\s+', "\n" + extracted_text)
+        
         quiz_data = []
         
-        for q_num, q_text in raw_questions:
-            # Clean up the text
-            q_text = q_text.strip()
+        # Group data: [preamble, Q1_num, Q1_text, Q2_num, Q2_text...]
+        for i in range(1, len(raw_splits), 2):
+            q_num = raw_splits[i]
+            q_content = raw_splits[i+1].strip()
             
-            # Default fallback options if we can't find specific A, B, C, D formatting
-            options = ["Option A", "Option B", "Option C", "Option D"]
+            # Step D: FIND OPTIONS INSIDE THE QUESTION
+            # Looks for (A), (B), A., B., a), b), 1), 2)
+            opt_pattern = r'\n?\s*(?:\([A-Da-d1-4]\)|[A-Da-d1-4][\.\)])\s+'
+            q_parts = re.split(opt_pattern, q_content)
             
-            # Try to hunt for options formatted like A) B) C) D) or (A) (B) (C) (D)
-            opt_pattern = re.compile(r'\(?[A-D]\)?[.\s]+([^\n]+)')
-            found_options = opt_pattern.findall(q_text)
+            question_text = q_parts[0].strip()
+            options = []
             
-            # If we successfully found 4 options, use them and remove them from the question text
-            if len(found_options) >= 4:
-                options = found_options[:4]
-                q_text = re.sub(r'\(?[A-D]\)?[.\s]+([^\n]+)', '', q_text).strip()
+            if len(q_parts) > 1:
+                for opt in q_parts[1:]:
+                    if opt.strip():
+                        # Clean up formatting spacing
+                        options.append(re.sub(r'\s+', ' ', opt.strip()))
             
-            # Package the question into our dictionary format
+            # Fallback if options were not cleanly found
+            if len(options) < 2:
+                options = ["Option A", "Option B", "Option C", "Option D"]
+                question_text = q_content # Keep the whole block
+            
+            # Package the question
             quiz_data.append({
                 "id": int(q_num),
-                "question": q_text,
-                "options": options,
-                "answer": options[0], # Note: We don't know the right answer yet! Defaulting to the first option.
-                "explanation": "No explanation extracted."
+                "question": question_text,
+                "options": options[:4], 
+                "answer": options[0] if options else "Option A", # Placeholder answer
+                "explanation": "No explanation extracted from PDF."
             })
             
         if not quiz_data:
-            st.warning("Could not automatically detect questions. Ensure they start with numbers like '1.' or 'Q1.'")
+            st.warning("Could not automatically detect questions. Ensure they start with numbers on a new line (e.g., '1. ').")
             return []
             
         return quiz_data
@@ -120,7 +126,7 @@ def inject_timer(seconds):
         function countdown() {{
             if (timeLeft == 0) {{
                 clearTimeout(timerId);
-                // Look for the Next button in Streamlit DOM and click it
+                // Look for the Next button and click it
                 var buttons = window.parent.document.querySelectorAll('button');
                 buttons.forEach(function(btn) {{
                     if(btn.innerText === 'Next Question' || btn.innerText === 'Submit Quiz') {{
@@ -150,14 +156,16 @@ def render_dashboard():
         if is_correct:
             correct_count += 1
             
-    st.metric("Total Score", f"{correct_count} / {total_qs}", f"{(correct_count/total_qs)*100:.1f}% Accuracy")
+    # Calculate accuracy safely to avoid division by zero
+    accuracy = (correct_count / total_qs) * 100 if total_qs > 0 else 0
+    st.metric("Total Score", f"{correct_count} / {total_qs}", f"{accuracy:.1f}% Accuracy")
     
     st.write("### Detailed Review")
     for i, q in enumerate(st.session_state.quiz_data):
         with st.expander(f"Q{i+1}: {q['question'][:50]}..."):
             st.write(f"**Question:** {q['question']}")
             st.write(f"**Your Answer:** {st.session_state.user_answers.get(i, 'Not Attempted')}")
-            st.write(f"**Correct Answer:** {q['answer']}")
+            st.write(f"**Correct Answer:** {q['answer']}") # Reminder: these are placeholder answers right now!
             st.info(f"**Explanation:** {q['explanation']}")
             
     if st.button("Start New Test"):
@@ -168,18 +176,21 @@ def main():
     inject_custom_css()
     initialize_state()
 
+    # SETUP SCREEN
     if not st.session_state.quiz_active and not st.session_state.user_answers:
         st.markdown('<div class="top-bar"><h2>CBT Simulator Setup</h2></div>', unsafe_allow_html=True)
         uploaded_file = st.file_uploader("Upload your study material (PDF)", type="pdf")
         st.session_state.time_per_question = st.number_input("Time per question (seconds)", min_value=10, value=60)
         
         if uploaded_file and st.button("Parse & Start Quiz"):
-            with st.spinner("Extracting text and running OCR..."):
+            with st.spinner("Extracting text and formatting questions..."):
                 parsed_data = parse_pdf_to_quiz(uploaded_file)
-                st.session_state.quiz_data = parsed_data
-                st.session_state.quiz_active = True
-                st.rerun()
+                if parsed_data:
+                    st.session_state.quiz_data = parsed_data
+                    st.session_state.quiz_active = True
+                    st.rerun()
 
+    # ACTIVE QUIZ SCREEN
     elif st.session_state.quiz_active:
         q_index = st.session_state.current_q_index
         q_data = st.session_state.quiz_data[q_index]
@@ -225,6 +236,7 @@ def main():
                     st.session_state.quiz_active = False
                     st.rerun()
 
+    # DASHBOARD SCREEN
     else:
         render_dashboard()
 
