@@ -135,13 +135,14 @@ def filter_text(text, lang):
     res = '\n'.join(filtered_lines).strip()
     return res if res else text 
 
-# --- 5. TIMER INJECTION (FIXED FOR STICKING) ---
+# --- 5. TIMER INJECTION (FIXED) ---
 def inject_timer(seconds, q_index):
+    # The q_index is now natively part of the div ID and JS variable, making the string unique every load
     html_code = f"""
-    <div id="timer" style="font-size: 24px; font-weight: bold; color: #ef4444; text-align: right;"></div>
+    <div id="timer_display_{q_index}" style="font-size: 24px; font-weight: bold; color: #ef4444; text-align: right;"></div>
     <script>
         var timeLeft = {seconds};
-        var timerElem = document.getElementById('timer');
+        var timerElem = document.getElementById('timer_display_{q_index}');
         var timerId = setInterval(countdown, 1000);
         function countdown() {{
             if (timeLeft <= 0) {{
@@ -157,39 +158,36 @@ def inject_timer(seconds, q_index):
         }}
     </script>
     """
-    # FIX: Adding q_index to the key forces Streamlit to rebuild the timer fresh every question!
-    st.components.v1.html(html_code, height=50, key=f"timer_widget_{q_index}")
+    st.components.v1.html(html_code, height=50)
 
-# --- 6. LOCAL STORAGE BRIDGE (SAVE & LOAD) ---
+# --- 6. LOCAL STORAGE BRIDGE (FIXED) ---
 def save_state_to_local_storage():
-    """Injects JS to save current quiz state to browser LocalStorage"""
     state_dict = {
         "file": st.session_state.selected_topic_file,
         "q_index": st.session_state.current_q_index,
         "answers": st.session_state.user_answers,
         "time": st.session_state.time_per_question,
         "max_qs": st.session_state.max_questions,
-        "timestamp": time.time() * 1000 # Save in milliseconds
+        "timestamp": time.time() * 1000 
     }
     state_json = json.dumps(state_dict)
+    
+    # We add an invisible unique HTML comment so Streamlit treats it as a fresh component without a key error
     st.components.v1.html(f"""
         <script>
-            localStorage.setItem('cbt_backup_session', JSON.stringify({state_json}));
+            const stateData = {state_json};
+            localStorage.setItem('cbt_backup_session', JSON.stringify(stateData));
         </script>
-    """, height=0, key=f"ls_save_{st.session_state.current_q_index}")
+    """, height=0)
 
 def check_and_load_local_storage():
-    """Reads LocalStorage and creates a Resume button if valid session exists"""
-    # 5 hours = 5 * 60 * 60 * 1000 = 18000000 ms
     st.components.v1.html("""
         <script>
             const backup = localStorage.getItem('cbt_backup_session');
             if (backup) {
                 const data = JSON.parse(backup);
                 const now = Date.now();
-                // Check if backup is less than 5 hours old
                 if ((now - data.timestamp) < 18000000) {
-                    // Send data back to Streamlit text input bridge
                     const inputs = window.parent.document.querySelectorAll('input');
                     inputs.forEach(input => {
                         if(input.getAttribute('aria-label') === 'LS_BRIDGE') {
@@ -223,9 +221,6 @@ def setup_dialog(file_name, total_available):
 def render_home():
     st.markdown('<div class="top-bar"><h2>📚 CBT Topic Hub</h2></div>', unsafe_allow_html=True)
     
-    # ---------------------------------------------------------
-    # LOCAL STORAGE RESUME LOGIC
-    # ---------------------------------------------------------
     bridge_data = st.text_input("LS_BRIDGE", key="ls_bridge", label_visibility="hidden")
     check_and_load_local_storage()
     
@@ -235,10 +230,8 @@ def render_home():
             topic = saved_state.get('file', 'Unknown')
             st.success(f"📌 Found an active session for **{topic.replace('.pdf', '')}**!")
             if st.button("▶️ Resume Quiz", type="primary"):
-                # Restore the state
                 st.session_state.selected_topic_file = saved_state['file']
                 st.session_state.current_q_index = saved_state['q_index']
-                # Convert string keys back to integers for the answers dictionary
                 st.session_state.user_answers = {int(k): v for k, v in saved_state['answers'].items()}
                 st.session_state.time_per_question = saved_state['time']
                 st.session_state.max_questions = saved_state['max_qs']
@@ -249,9 +242,8 @@ def render_home():
                     st.session_state.page = "quiz"
                     st.rerun()
         except:
-            pass # Ignore JSON errors
-    # ---------------------------------------------------------
-    
+            pass 
+            
     st.write("Select a topic below to start a new practice session.")
     
     topics = {
@@ -282,7 +274,6 @@ def render_home():
     for idx, (topic_name, file_name) in enumerate(topics.items()):
         with cols[idx % 2]:
             if st.button(topic_name, use_container_width=True, icon="📄"):
-                # Clear old local storage if starting a NEW test
                 st.components.v1.html("<script>localStorage.removeItem('cbt_backup_session');</script>", height=0)
                 st.session_state.selected_topic_file = file_name
                 st.session_state.current_q_index = 0
@@ -296,7 +287,6 @@ def render_home():
                         st.error(f"Could not load {file_name}. Ensure it is uploaded to your GitHub repository!")
 
 def render_quiz():
-    # Save current state to local storage every time the page renders!
     save_state_to_local_storage()
     
     q_index = st.session_state.current_q_index
@@ -310,7 +300,6 @@ def render_quiz():
     with col_qnum: st.markdown(f"##### Q {q_index + 1} / {total_qs}")
     st.divider()
 
-    # Fixed Timer call! Passing q_index forces it to reset cleanly.
     inject_timer(st.session_state.time_per_question, q_index)
 
     filtered_question = filter_text(q_data["question"], st.session_state.app_lang)
@@ -340,7 +329,6 @@ def render_quiz():
                 st.rerun()
 
 def render_analysis():
-    # Clear backup on completion so it doesn't prompt to resume a finished test
     st.components.v1.html("<script>localStorage.removeItem('cbt_backup_session');</script>", height=0)
     
     st.title("📊 Exam Analysis")
