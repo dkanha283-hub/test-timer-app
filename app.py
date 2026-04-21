@@ -27,24 +27,11 @@ def inject_custom_css():
             margin-bottom: 20px;
             box-shadow: 0 10px 25px rgba(99, 102, 241, 0.2);
         }
-        
-        /* Floating Action Bar for Selection Mode */
-        .action-bar {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255,255,255,0.3);
-            padding: 15px;
-            border-radius: 16px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-            position: sticky;
-            top: 10px;
-            z-index: 100;
-        }
-        @media (prefers-color-scheme: dark) {
-            .action-bar { background: rgba(30, 30, 30, 0.85); border: 1px solid rgba(255,255,255,0.05); }
-        }
+
+        /* Hide default Streamlit elements */
+        header {visibility: hidden;}
+        div[data-testid="stTextInput"] { display: none; } /* Hide the JS Bridge */
+        .stTextInput { display: block !important; } /* Keep normal text inputs visible */
 
         /* Modern Question Box */
         .question-box { 
@@ -59,63 +46,23 @@ def inject_custom_css():
             line-height: 1.7; 
             border: 1px solid var(--faded-text-color);
         }
-        
-        /* Hide default Streamlit header */
-        header {visibility: hidden;}
         </style>
     """, unsafe_allow_html=True)
 
-# --- 2. HAPTICS & SYNTHESIZER AUDIO ENGINE ---
-def play_feedback(feedback_type="pop"):
-    """Injects JS to play synthetic sounds and trigger mobile device vibrations."""
-    js_code = f"""
-    <script>
-        try {{
-            const ctx = new (window.AudioContext || window.webkitAudioContext)();
-            const osc = ctx.createOscillator();
-            const gain = ctx.createGain();
-            osc.connect(gain); gain.connect(ctx.destination);
-            
-            if ('{feedback_type}' === 'success') {{
-                if(navigator.vibrate) navigator.vibrate([100, 50, 100]);
-                osc.frequency.setValueAtTime(400, ctx.currentTime);
-                osc.frequency.exponentialRampToValueAtTime(800, ctx.currentTime + 0.15);
-                gain.gain.setValueAtTime(0.2, ctx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.15);
-                osc.start(); osc.stop(ctx.currentTime + 0.15);
-            }} else if ('{feedback_type}' === 'warning') {{
-                if(navigator.vibrate) navigator.vibrate([50, 100, 50, 100]);
-                osc.type = 'square';
-                osc.frequency.setValueAtTime(200, ctx.currentTime);
-                osc.frequency.exponentialRampToValueAtTime(150, ctx.currentTime + 0.2);
-                gain.gain.setValueAtTime(0.1, ctx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.2);
-                osc.start(); osc.stop(ctx.currentTime + 0.2);
-            }} else {{ // 'pop' for long press
-                if(navigator.vibrate) navigator.vibrate(50);
-                osc.frequency.setValueAtTime(300, ctx.currentTime);
-                gain.gain.setValueAtTime(0.1, ctx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.05);
-                osc.start(); osc.stop(ctx.currentTime + 0.05);
-            }}
-        }} catch(e) {{}}
-    </script>
-    """
-    st.components.v1.html(js_code, height=0)
-
-# --- 3. LONG-PRESS JS TOUCH BRIDGE ---
+# --- 2. HAPTICS & RIGHT-CLICK / LONG-PRESS BRIDGE ---
 def inject_long_press_bridge():
-    """Injects the advanced event listeners to override mobile selection and detect long-holds."""
+    """Listens for Desktop Right-Click OR Mobile Long-Press and triggers the Popup."""
     js_code = """
     <script>
         const inputs = window.parent.document.querySelectorAll('input');
         let actionBridge;
         inputs.forEach(i => { if(i.getAttribute('aria-label') === 'JS_ACTION_BRIDGE') actionBridge = i; });
 
-        function sendLongPress(fileName) {
+        function triggerMenu(fileName) {
             if(actionBridge) {
+                if(navigator.vibrate) navigator.vibrate(50); // Haptic Pop
                 let nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
-                nativeInputValueSetter.call(actionBridge, "LONGPRESS:" + fileName);
+                nativeInputValueSetter.call(actionBridge, "MENU:" + fileName);
                 actionBridge.dispatchEvent(new Event('input', { bubbles: true }));
             }
         }
@@ -123,43 +70,62 @@ def inject_long_press_bridge():
         const buttons = window.parent.document.querySelectorAll('button');
         buttons.forEach(btn => {
             if(btn.innerText.includes('📄') || btn.innerText.includes('⚡')) {
-                // Prevent mobile right-click/text selection menu
-                btn.addEventListener('contextmenu', e => e.preventDefault());
+                // Prevent default browser right-click menu
+                btn.addEventListener('contextmenu', (e) => {
+                    e.preventDefault();
+                    triggerMenu(btn.innerText);
+                });
                 
+                // Mobile Long Press Logic
                 let timer;
-                let pressFired = false;
+                let isLongPress = false;
                 
-                const startPress = (e) => {
-                    pressFired = false;
+                btn.addEventListener('touchstart', (e) => {
+                    isLongPress = false;
                     timer = setTimeout(() => {
-                        pressFired = true;
-                        sendLongPress(btn.innerText);
-                    }, 600); // Hold for 0.6 seconds to select
-                };
+                        isLongPress = true;
+                        triggerMenu(btn.innerText);
+                    }, 500); // 0.5 seconds hold
+                }, {passive: true});
                 
-                const endPress = (e) => {
+                btn.addEventListener('touchend', (e) => {
                     clearTimeout(timer);
-                    if(pressFired) {
-                        e.preventDefault(); // Stop the normal click if it was a long press!
+                    if(isLongPress) {
+                        e.preventDefault(); // Stop it from opening the quiz
                         e.stopPropagation();
                     }
-                };
-                
-                btn.addEventListener('touchstart', startPress, {passive: true});
-                btn.addEventListener('touchend', endPress);
+                });
                 btn.addEventListener('touchmove', () => clearTimeout(timer));
-                
-                // Desktop support
-                btn.addEventListener('mousedown', startPress);
-                btn.addEventListener('mouseup', endPress);
-                btn.addEventListener('mouseleave', () => clearTimeout(timer));
             }
         });
     </script>
     """
     st.components.v1.html(js_code, height=0)
 
-# --- 4. GITHUB CLOUD SYNC ENGINE ---
+def play_feedback(ftype="success"):
+    js_code = f"""
+    <script>
+        try {{
+            const ctx = new (window.AudioContext || window.webkitAudioContext)();
+            const osc = ctx.createOscillator(); const gain = ctx.createGain();
+            osc.connect(gain); gain.connect(ctx.destination);
+            if ('{ftype}' === 'success') {{
+                if(navigator.vibrate) navigator.vibrate([100, 50, 100]);
+                osc.frequency.setValueAtTime(400, ctx.currentTime); osc.frequency.exponentialRampToValueAtTime(800, ctx.currentTime + 0.15);
+                gain.gain.setValueAtTime(0.2, ctx.currentTime); gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.15);
+                osc.start(); osc.stop(ctx.currentTime + 0.15);
+            }} else if ('{ftype}' === 'warning') {{
+                if(navigator.vibrate) navigator.vibrate([50, 100, 50, 100]);
+                osc.type = 'square'; osc.frequency.setValueAtTime(200, ctx.currentTime); osc.frequency.exponentialRampToValueAtTime(150, ctx.currentTime + 0.2);
+                gain.gain.setValueAtTime(0.1, ctx.currentTime); gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.2);
+                osc.start(); osc.stop(ctx.currentTime + 0.2);
+            }}
+        }} catch(e) {{}}
+    </script>
+    """
+    st.components.v1.html(js_code, height=0)
+
+# --- 3. GITHUB CLOUD SYNC ENGINE ---
 def get_github_repo():
     if "GITHUB_TOKEN" not in st.secrets or "GITHUB_REPO" not in st.secrets: return None
     from github import Github
@@ -187,7 +153,7 @@ def github_delete(file_path):
         return True
     except: return False
 
-# --- 5. DYNAMIC LIBRARY SCANNER ---
+# --- 4. DYNAMIC LIBRARY SCANNER ---
 def get_library():
     library = {}
     ignore_dirs = {'.git', '.streamlit', 'venv', '__pycache__'}
@@ -205,7 +171,7 @@ def get_library():
     if "Uncategorized" in library: sorted_library["Uncategorized"] = library["Uncategorized"]
     return sorted_library
 
-# --- 6. SESSION STATE INIT & CLOUD STORE ---
+# --- 5. SESSION INIT & CLOUD STORE ---
 @st.cache_resource
 def get_global_sessions(): return {}
 
@@ -216,13 +182,9 @@ def save_state_to_cloud():
     for pin in expired: del sessions[pin]
     if 'resume_pin' in st.session_state:
         sessions[st.session_state.resume_pin] = {
-            "file": st.session_state.selected_topic_file,
-            "q_index": st.session_state.current_q_index,
-            "answers": st.session_state.user_answers.copy(),
-            "time": st.session_state.time_per_question,
-            "max_qs": st.session_state.max_questions,
-            "quiz_data": st.session_state.quiz_data, 
-            "timestamp": now
+            "file": st.session_state.selected_topic_file, "q_index": st.session_state.current_q_index,
+            "answers": st.session_state.user_answers.copy(), "time": st.session_state.time_per_question,
+            "max_qs": st.session_state.max_questions, "quiz_data": st.session_state.quiz_data, "timestamp": now
         }
 
 def initialize_state():
@@ -231,12 +193,12 @@ def initialize_state():
         'current_q_index': 0, 'user_answers': {}, 'time_per_question': 60, 
         'max_questions': 10, 'app_lang': "Bilingual",
         'resume_pin': str(random.randint(1000, 9999)),
-        'selection_mode': False, 'selected_files': set(), 'clipboard_files': []
+        'active_menu_file': None, 'clipboard': None, 'confirm_delete': False
     }
     for k, v in defaults.items():
         if k not in st.session_state: st.session_state[k] = v
 
-# --- 7. PDF TO JSON ENGINE & SURGICAL FILTER ---
+# --- 6. PDF TO JSON ENGINE ---
 def parse_pdf_to_raw_data(pdf_source):
     extracted_text = ""
     try:
@@ -310,7 +272,7 @@ def load_and_auto_save_quiz_data(filename):
 
 def filter_text(text, lang, is_option=False):
     if not text or lang == "Bilingual": return text
-    lines = text.split('\n'); filtered_lines = []; seen_normalized = set()
+    lines = text.split('\n'); filtered_lines = []
     for l in lines:
         if not l.strip(): continue
         has_hindi = bool(re.search(r'[\u0900-\u097F]', l))
@@ -320,13 +282,12 @@ def filter_text(text, lang, is_option=False):
                     clean_l = re.sub(r'[\u0900-\u097F।]+', '', l).strip()
                     clean_l = re.sub(r'[\/\-\|\,]\s*$', '', clean_l).strip() 
                     if clean_l: filtered_lines.append(clean_l)
-                else: continue
             else: filtered_lines.append(l)
         elif lang == "Hindi":
             if has_hindi or len(re.findall(r'\b[a-zA-Z]{3,}\b', l)) < 4: filtered_lines.append(l)
     return '\n'.join(filtered_lines).strip()
 
-# --- 8. SMART TIMER INJECTION ---
+# --- 7. SMART TIMER INJECTION ---
 def inject_timer(seconds, q_index, is_paused, pin):
     paused_str = "true" if is_paused else "false"
     html_code = f"""
@@ -355,8 +316,74 @@ def inject_timer(seconds, q_index, is_paused, pin):
     """
     st.components.v1.html(html_code, height=50)
 
-# --- 9. DIALOGS (QUIZ, RENAME, MOVE, DELETE) ---
-@st.dialog("⚙️ Quiz Setup")
+# --- 8. POPUPS (LONG PRESS CONTEXT MENU & QUIZ SETUP) ---
+@st.dialog("⚙️ Options Menu")
+def file_options_dialog(file_path, library):
+    """The Desktop-Style Popup that appears on Long Press / Right Click."""
+    filename_display = os.path.basename(file_path).replace('.json', '').replace('_', ' ')
+    st.markdown(f"### 📄 {filename_display}")
+    st.write("---")
+
+    # 1. RENAME
+    with st.expander("✏️ Rename", expanded=False):
+        new_name = st.text_input("New Name:", value=filename_display)
+        if st.button("Save Rename", type="primary", use_container_width=True):
+            new_path = os.path.join(os.path.dirname(file_path), new_name.replace(" ", "_") + ".json")
+            if file_path != new_path:
+                with open(file_path, 'r', encoding='utf-8') as f: data = json.load(f)
+                with open(new_path, 'w', encoding='utf-8') as f: json.dump(data, f, indent=4, ensure_ascii=False)
+                os.remove(file_path); github_save(new_path, data); github_delete(file_path)
+                st.session_state.active_menu_file = None
+                play_feedback('success'); st.rerun()
+
+    # 2. COPY
+    if st.button("📋 Copy to Clipboard", use_container_width=True):
+        st.session_state.clipboard = file_path
+        st.session_state.active_menu_file = None
+        play_feedback('success'); st.toast(f"Copied {filename_display}!"); st.rerun()
+
+    # 3. MOVE
+    with st.expander("📁 Move to Folder", expanded=False):
+        folders = list(library.keys())
+        if "Uncategorized" in folders: folders.remove("Uncategorized")
+        folders.append("+ Create New Folder")
+        target_folder = st.selectbox("Select Destination", folders)
+        if target_folder == "+ Create New Folder": target_folder = st.text_input("New Folder Name").strip()
+        
+        if st.button("Confirm Move", type="primary", use_container_width=True):
+            if target_folder:
+                save_dir = "." if target_folder == "Uncategorized" else target_folder
+                os.makedirs(save_dir, exist_ok=True)
+                new_path = os.path.join(save_dir, os.path.basename(file_path))
+                if file_path != new_path:
+                    with open(file_path, 'r', encoding='utf-8') as f: data = json.load(f)
+                    with open(new_path, 'w', encoding='utf-8') as f: json.dump(data, f, indent=4, ensure_ascii=False)
+                    os.remove(file_path); github_save(new_path, data); github_delete(file_path)
+                    st.session_state.active_menu_file = None
+                    play_feedback('success'); st.rerun()
+
+    st.write("---")
+    # 4. DELETE (With Warning State)
+    if not st.session_state.confirm_delete:
+        if st.button("🗑️ Delete", use_container_width=True):
+            st.session_state.confirm_delete = True
+            play_feedback('warning')
+            st.rerun()
+            
+    if st.session_state.confirm_delete:
+        st.error("⚠️ Are you sure? This will delete the file from the Cloud permanently.")
+        col1, col2 = st.columns(2)
+        with col1:
+            if st.button("Cancel"): 
+                st.session_state.confirm_delete = False; st.rerun()
+        with col2:
+            if st.button("🚨 YES, DELETE", type="primary"):
+                os.remove(file_path); github_delete(file_path)
+                st.session_state.active_menu_file = None
+                st.session_state.confirm_delete = False
+                play_feedback('pop'); st.rerun()
+
+@st.dialog("🚀 Quiz Setup")
 def setup_dialog(file_path):
     st.write(f"**Topic:** {os.path.basename(file_path).replace('.json', '').replace('_', ' ')}")
     with open(file_path, 'r', encoding='utf-8') as f: raw_data = json.load(f)
@@ -366,118 +393,41 @@ def setup_dialog(file_path):
     selected_qs = st.slider("How many questions to attempt?", min_value=1, max_value=total_available, value=min(20, total_available))
     timer_sec = st.number_input("Time per question (seconds)", min_value=10, max_value=300, value=60)
     
-    if st.button("🚀 Start Quiz", type="primary", use_container_width=True):
+    if st.button("Start Quiz", type="primary", use_container_width=True):
         st.session_state.max_questions = selected_qs
         st.session_state.time_per_question = timer_sec
         st.session_state.quiz_data = random.sample(raw_data, selected_qs) if order_choice == "Shuffled" else raw_data[:selected_qs]
         st.session_state.selected_topic_file = file_path
         st.session_state.resume_pin = str(random.randint(1000, 9999))
-        st.session_state.page = "quiz"
-        st.rerun()
+        st.session_state.page = "quiz"; st.rerun()
 
-@st.dialog("✏️ Rename File")
-def rename_dialog(file_path):
-    old_name = os.path.basename(file_path).replace('.json', '').replace('_', ' ')
-    new_name = st.text_input("New Name:", value=old_name)
-    if st.button("Save Rename", type="primary"):
-        new_path = os.path.join(os.path.dirname(file_path), new_name.replace(" ", "_") + ".json")
-        with open(file_path, 'r', encoding='utf-8') as f: data = json.load(f)
-        with open(new_path, 'w', encoding='utf-8') as f: json.dump(data, f, indent=4, ensure_ascii=False)
-        os.remove(file_path)
-        github_save(new_path, data); github_delete(file_path)
-        st.session_state.selected_files.clear()
-        st.session_state.selection_mode = False
-        play_feedback('success')
-        st.rerun()
-
-@st.dialog("📁 Move Files")
-def move_dialog(files_to_move, library):
-    st.write(f"Moving {len(files_to_move)} file(s).")
-    folders = list(library.keys())
-    if "Uncategorized" in folders: folders.remove("Uncategorized")
-    folders.append("+ Create New Folder")
-    
-    target_folder = st.selectbox("Select Destination:", folders)
-    if target_folder == "+ Create New Folder": target_folder = st.text_input("New Folder Name").strip()
-    
-    if st.button("Confirm Move", type="primary"):
-        if target_folder:
-            save_dir = "." if target_folder == "Uncategorized" else target_folder
-            os.makedirs(save_dir, exist_ok=True)
-            for path in files_to_move:
-                new_path = os.path.join(save_dir, os.path.basename(path))
-                if path != new_path:
-                    with open(path, 'r', encoding='utf-8') as f: data = json.load(f)
-                    with open(new_path, 'w', encoding='utf-8') as f: json.dump(data, f, indent=4, ensure_ascii=False)
-                    os.remove(path)
-                    github_save(new_path, data); github_delete(path)
-            st.session_state.selected_files.clear()
-            st.session_state.selection_mode = False
-            play_feedback('success')
-            st.rerun()
-
-@st.dialog("⚠️ Warning: Delete Confirmation")
-def delete_dialog(files_to_delete):
-    st.error(f"Are you sure you want to permanently delete {len(files_to_delete)} file(s)?")
-    st.write("This action cannot be undone. Files will be deleted locally and from GitHub.")
-    if st.button("🚨 Yes, Delete Permanently"):
-        for path in files_to_delete:
-            os.remove(path)
-            github_delete(path)
-        st.session_state.selected_files.clear()
-        st.session_state.selection_mode = False
-        play_feedback('warning') # Play warning buzz
-        st.rerun()
-
-# --- 10. RENDER VIEWS ---
+# --- 9. RENDER VIEWS ---
 def render_home():
-    # --- JS TOUCH BRIDGE LISTENER ---
-    action = st.text_input("JS_ACTION_BRIDGE", key="js_action_bridge", label_visibility="hidden")
     library = get_library()
     
-    if action.startswith("LONGPRESS:"):
-        topic_clean = re.sub(r'^[⚡📄]\s*', '', action.replace("LONGPRESS:", "")).strip()
-        # Find exact path in library
+    # --- CATCH JAVASCRIPT RIGHT-CLICK / LONG-PRESS EVENT ---
+    action = st.text_input("JS_ACTION_BRIDGE", key="js_action_bridge", label_visibility="hidden")
+    if action.startswith("MENU:"):
+        topic_clean = re.sub(r'^[⚡📄]\s*', '', action.replace("MENU:", "")).strip()
+        # Find path
         target_path = None
         for folder, files in library.items():
             for name, path in files.items():
                 if name == topic_clean: target_path = path
         
         if target_path:
-            st.session_state.selection_mode = True
-            st.session_state.selected_files.add(target_path)
-            play_feedback('pop')
+            st.session_state.active_menu_file = target_path
+            st.session_state.confirm_delete = False # Reset delete warning
+            # Clear the input so it doesn't loop
             st.components.v1.html("<script>window.parent.document.querySelector('input[aria-label=\"JS_ACTION_BRIDGE\"]').value = '';</script>", height=0)
             st.rerun()
 
+    # Render the Context Menu Dialog if a file was held/right-clicked
+    if st.session_state.get('active_menu_file'):
+        file_options_dialog(st.session_state.active_menu_file, library)
+
     st.markdown('<div class="top-bar"><h2 style="margin:0; font-weight:800;">📚 Pro CBT Hub</h2></div>', unsafe_allow_html=True)
     
-    # --- MULTI-SELECT ACTION BAR ---
-    if st.session_state.selection_mode:
-        st.markdown("<div class='action-bar'>", unsafe_allow_html=True)
-        ac1, ac2, ac3, ac4, ac5, ac6 = st.columns([2, 1, 1, 1, 1, 1])
-        with ac1: st.markdown(f"**☑️ {len(st.session_state.selected_files)} Selected**")
-        with ac2: 
-            if st.button("📋 Copy"):
-                st.session_state.clipboard_files = list(st.session_state.selected_files)
-                st.session_state.selection_mode = False
-                st.session_state.selected_files.clear()
-                play_feedback('success')
-                st.rerun()
-        with ac3:
-            if st.button("📁 Move"): move_dialog(list(st.session_state.selected_files), library)
-        with ac4:
-            if len(st.session_state.selected_files) == 1:
-                if st.button("✏️ Rename"): rename_dialog(list(st.session_state.selected_files)[0])
-        with ac5:
-            if st.button("🗑️ Delete"): delete_dialog(list(st.session_state.selected_files))
-        with ac6:
-            if st.button("❌ Cancel"): 
-                st.session_state.selection_mode = False
-                st.session_state.selected_files.clear()
-                st.rerun()
-        st.markdown("</div>", unsafe_allow_html=True)
-
     # --- ADMIN UPLOAD PANEL ---
     with st.expander("📤 Upload New PDF to Hub", expanded=False):
         c1, c2 = st.columns(2)
@@ -488,7 +438,7 @@ def render_home():
             selected_folder = st.selectbox("Select Target Folder", folder_options)
             if selected_folder == "+ Create New Folder": selected_folder = st.text_input("Enter New Folder Name").strip()
         with c2:
-            new_topic_name = st.text_input("Enter Topic Name (e.g., Geometry Part 2)").strip()
+            new_topic_name = st.text_input("Enter Topic Name").strip()
             
         new_pdf = st.file_uploader("Upload PDF Sheet", type="pdf")
         if st.button("Convert & Save", type="primary"):
@@ -500,53 +450,63 @@ def render_home():
                         file_path = os.path.join(selected_folder, new_topic_name.replace(" ", "_") + ".json")
                         with open(file_path, 'w', encoding='utf-8') as f: json.dump(raw_data, f, indent=4, ensure_ascii=False)
                         github_save(file_path, raw_data)
-                        play_feedback('success')
-                        st.success(f"✅ Success! PDF deleted from memory.")
-                        time.sleep(1)
-                        st.rerun()
+                        play_feedback('success'); st.success(f"✅ Success!"); time.sleep(1); st.rerun()
                     else: st.error("Failed to parse PDF.")
             else: st.warning("Please complete all fields.")
+    
+    # --- RESUME PIN ---
+    with st.expander("🔄 Resume Active Quiz", expanded=False):
+        col1, col2 = st.columns([1, 2])
+        with col1:
+            entered_pin = st.text_input("Enter 4-Digit PIN", max_chars=4)
+            if st.button("Resume My Quiz"):
+                sessions = get_global_sessions()
+                if entered_pin in sessions:
+                    saved = sessions[entered_pin]
+                    st.session_state.selected_topic_file = saved['file']
+                    st.session_state.current_q_index = saved['q_index']
+                    st.session_state.user_answers = saved['answers']
+                    st.session_state.time_per_question = saved['time']
+                    st.session_state.max_questions = saved['max_qs']
+                    st.session_state.quiz_data = saved['quiz_data'] 
+                    st.session_state.resume_pin = entered_pin
+                    st.session_state.page = "quiz"; st.rerun()
+                else: st.error("PIN not found or expired.")
+
+    st.write("---")
     
     # --- LIBRARY DISPLAY ---
     if not library:
         st.info("Welcome to your Hub! Upload your first PDF above.")
     else:
+        st.info("💡 **Pro Tip:** Right-Click (or Press and Hold) any topic to Rename, Copy, Move, or Delete it!")
         tabs = st.tabs(list(library.keys()))
         for idx, folder_name in enumerate(library.keys()):
             with tabs[idx]:
                 # --- PASTE FUNCTIONALITY ---
-                if st.session_state.clipboard_files:
-                    st.info(f"📋 **Clipboard contains {len(st.session_state.clipboard_files)} file(s).**")
+                if st.session_state.clipboard:
+                    cb_path = st.session_state.clipboard
+                    cb_name = os.path.basename(cb_path).replace('.json', '').replace('_', ' ')
+                    st.success(f"📋 **Ready to Paste:** {cb_name}")
                     if st.button(f"📥 Paste Here", key=f"paste_{folder_name}"):
                         save_dir = "." if folder_name == "Uncategorized" else folder_name
-                        for cb_path in st.session_state.clipboard_files:
-                            new_path = os.path.join(save_dir, os.path.basename(cb_path))
-                            if cb_path != new_path:
-                                with open(cb_path, 'r', encoding='utf-8') as f: data = json.load(f)
-                                with open(new_path, 'w', encoding='utf-8') as f: json.dump(data, f, indent=4, ensure_ascii=False)
-                                github_save(new_path, data)
-                        st.session_state.clipboard_files = [] 
-                        play_feedback('success')
-                        st.rerun()
+                        new_path = os.path.join(save_dir, os.path.basename(cb_path))
+                        if cb_path != new_path:
+                            with open(cb_path, 'r', encoding='utf-8') as f: data = json.load(f)
+                            with open(new_path, 'w', encoding='utf-8') as f: json.dump(data, f, indent=4, ensure_ascii=False)
+                            github_save(new_path, data)
+                        st.session_state.clipboard = None 
+                        play_feedback('success'); st.rerun()
                 
                 st.markdown("<br>", unsafe_allow_html=True)
                 cols = st.columns(3) 
                 for c_idx, (topic_name, file_path) in enumerate(library[folder_name].items()):
                     with cols[c_idx % 3]:
-                        # Dynamic rendering based on selection mode
-                        is_selected = file_path in st.session_state.selected_files
-                        btn_type = "primary" if is_selected else "secondary"
-                        icon = "☑️" if is_selected else ("⚡" if file_path.endswith('.json') else "📄")
-                        
-                        if st.button(f"{icon} {topic_name}", key=f"start_{file_path}", type=btn_type, use_container_width=True):
-                            if st.session_state.selection_mode:
-                                if is_selected: st.session_state.selected_files.remove(file_path)
-                                else: st.session_state.selected_files.add(file_path)
-                                st.rerun()
-                            else:
-                                setup_dialog(file_path)
+                        icon = "⚡" if file_path.endswith('.json') else "📄"
+                        if st.button(f"{icon} {topic_name}", key=f"start_{file_path}", use_container_width=True):
+                            setup_dialog(file_path)
     
-    # Inject JS to enable long-press after all buttons render
+    # Inject JS to enable long-press and right-click
     inject_long_press_bridge()
 
 def render_quiz():
@@ -568,7 +528,7 @@ def render_quiz():
     inject_timer(st.session_state.time_per_question, q_index, is_paused=edit_mode, pin=st.session_state.resume_pin)
 
     safe_question = filter_text(q_data["question"], st.session_state.app_lang, is_option=False).replace('<', '&lt;').replace('>', '&gt;')
-    st.info(f"**Q{q_index + 1}.** *(Database Q{q_data['id']})*\n\n{safe_question}")
+    st.markdown(f'<div class="question-box"><b>Q{q_index + 1}.</b> *(DB Q{q_data["id"]})*<br><br>{safe_question}</div>', unsafe_allow_html=True)
     
     current_response = st.session_state.user_answers.get(q_index, None)
     selected_option = st.radio("Select an option:", q_data["options"], 
