@@ -1,0 +1,1130 @@
+[
+    {
+        "id": 1,
+        "question": "The volumes of two spheres are in the ratio of 512: 3375. The ratio of their surface\nareas is:\nदॉ गॉरों के आमतन का अनुऩात 512:3375 वै। उनके ऩृष्ठीम क्षेत्रपरों का अनुऩात वै:\nSSC CPO 2024",
+        "options": [
+            "64:225",
+            "49:325",
+            "27:144",
+            "68:125"
+        ],
+        "answer": "64:225",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 2,
+        "question": "If volume of a sphere is numerically equal to the surface area of the sphere, then\nfind the radius and surface area of the sphere. (Correct to 3 decimal places)\n𝟐𝟐\n(𝑼𝒔𝒆 𝝅 = )\n𝟕\nमदद ककऴी गॉरे का आमतन, उऴके ऩृष्ठीम क्षेत्रपर के ऴंख्यात्मक रूऩ ऴे ऴभतुल्य वै, तॉ गॉरे की\nत्रत्रज्या ऒय ऩृष्ठीम क्षेत्रपर ज्ञात कीजिए। (दलभरऱ के 3 स्थानों तक ऴवी उत्तय दीजिए)\n𝟐𝟐\n(𝝅 = ऱीजिए)\n𝟕\n[RRB ALP CBT-1 2025]",
+        "options": [
+            "2 unit and 113.143 unit2",
+            "3 unit and 113.143 unit2",
+            "3 unit and 131.143 unit2",
+            "3 unit and 112.143 unit2"
+        ],
+        "answer": "2 unit and 113.143 unit2",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 3,
+        "question": "A sphere and a cube have equal surface areas. The ratio of the volume of the\nsphere to that of the cube is:\nएक गॉरे ऒय एक घन के ऩृष्ठीम क्षेत्रपर ऴभान वैं। गॉरे के आमतन ऒय घन के आमतन का\nअनुऩात ज्ञात कय।ें\nSSC Selection Post 2024 (Phase-XII)",
+        "options": [
+            "√𝟑 ∶ √𝝅",
+            "√𝟔 ∶ √𝝅",
+            "√𝝅 ∶ √𝟖",
+            "√𝟐 ∶ √𝝅"
+        ],
+        "answer": "√𝟑 ∶ √𝝅",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 4,
+        "question": "Find the surface area of the sphere whose radius is 112 cm and π = 22/7(cm2).\nउऴ गॉरे का ऩृष्ठीम क्षेत्रपर ज्ञात कीजिए जिऴकी त्रत्रज्या 112 ऴेभी ऒय π = 22/7 ऴेभी2 वै।\n(UP-SI POLICE 2021)",
+        "options": [
+            "177696",
+            "187696",
+            "157696",
+            "167696"
+        ],
+        "answer": "177696",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 5,
+        "question": "Find the surface area of the sphere (in cm2) whose radius is 24 cm and 𝝅 = 3.14.\nउऴ गॉरे का ऩृष्ठीम क्षेत्रपर (ऴेभी² भें) ज्ञात कीजिए जिऴकी त्रत्रज्या 24 ऴेभी वै ऒय π = 3.14 वै।",
+        "options": [
+            "7444.56",
+            "7234.56",
+            "7554.56",
+            "7334.56"
+        ],
+        "answer": "7444.56",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 6,
+        "question": "The cost of painting surface of a large spherical ball at the rate of Rs. 2.40 per sq\n𝟐𝟐\ncm is Rs. 9240. What is the radius (in cm) of the ball? (Take 𝝅 = )\n𝟕\nएक फडी गॉराकाय गेंद की ऴतव कॉ 2.40 रुऩमे प्रत्रत ऱगग ऴेभी की दय ऴे ऩेंट कयने की रागत 9240\n𝟐𝟐\nरुऩमे वै। गेंद की त्रत्रज्या (ऴेभी भें) क्या वै? (𝝅 = रीजिए)\n𝟕\nBY Gagan Pratap\n(SSC MTS 2024)",
+        "options": [
+            "16.5",
+            "21",
+            "18.5",
+            "17.5"
+        ],
+        "answer": "16.5",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 7,
+        "question": "The volume of a sphere of radius 4.2 cm is?\n4.2 ऴेभी त्रत्रज्या ऱारे एक गॉरे का आमतन वै?",
+        "options": [
+            "278.234\n𝒄𝒎𝟑",
+            "312.725\n𝒄𝒎𝟑",
+            "297.824𝒄𝒎𝟑",
+            "310.464𝒄𝒎𝟑"
+        ],
+        "answer": "278.234\n𝒄𝒎𝟑",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 8,
+        "question": "What is the volume (in cm3) of a solid sphere whose radius is 2.1 cm (rounded off\n𝟐𝟐\nto two decimal places)? (Use 𝝅 = )\n𝟕\nएक ठॉऴ गॉरे का आमतन (cm3 भ)ें क्या वै जिऴकी त्रत्रज्या 2.1 cm (दलभरऱ के दॉ स्थानों तक\n𝟐𝟐\nऩूणाांककत) वै? (𝝅 = का प्रमॉग कय।ें )\n𝟕\n(RRB JE 2025) SSC CPO 2024",
+        "options": [
+            "36.80",
+            "38.81",
+            "32.80",
+            "34.81"
+        ],
+        "answer": "36.80",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 9,
+        "question": "Find the volume (in cm3) of a sphere having a diameter of 16.8 cm, giving your\n𝟐𝟐\nanswer correct to two decimal places. Take 𝝅 = .\n𝟕\n16.8 ऴेभी व्याऴ ऱारे गॉरे का आमतन (ऴेभी³) ज्ञात कीजिए, उत्तय कॉ दॉ दलभरऱ स्थानों तक ऴवी\n𝟐𝟐\nदीजिए। 𝝅 = रीजिए।\n𝟕\n(RRB NTPC LEVEL-12 2025)",
+        "options": [
+            "2483.71",
+            "2503.71",
+            "2493.71",
+            "2473.71"
+        ],
+        "answer": "2483.71",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 10,
+        "question": "What will be the volume of sphere with radius 65 cm? (approximately)\n65 ऴेभी त्रत्रज्या ऱारे गॉरे का आमतन क्या वॉगा? (रगबग)",
+        "options": [
+            "𝟒.𝟓 × 𝟏𝟎𝟔 𝒄𝒎𝟑",
+            "𝟔 × 𝟏𝟎𝟔 𝒄𝒎𝟑",
+            "𝟏.𝟏𝟓 × 𝟏𝟎𝟔 𝒄𝒎𝟑",
+            "𝟐 × 𝟏𝟎𝟔 𝒄𝒎𝟑"
+        ],
+        "answer": "𝟒.𝟓 × 𝟏𝟎𝟔 𝒄𝒎𝟑",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 11,
+        "question": "The radius of a sphere (in cm) whose volume is 𝟔𝟒𝝅 𝐜𝐦𝟑 , is\nएक गॉरे की त्रत्रज्या (ऴेंटीभीटय भें) जिऴका आमतन 𝟔𝟒𝝅 ऴेंटीभीटय3, वै\n(DELHI POLICE CONSTABLE Executive 2025)",
+        "options": [
+            "2.5 cm",
+            "5.6 cm",
+            "𝟔.𝟑 𝐜𝐦",
+            "3.63 cm\n𝟐𝟐"
+        ],
+        "answer": "2.5 cm",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 12,
+        "question": "The surface area of a sphere is 2464 cm2. Calculate its volume. (Use 𝝅 = )\n𝟕\n𝟐𝟐\nएक गॉरे का ऩृष्ठीम क्षेत्रफ़र 2464 cm2 वै। इऴके आमतन की गणना कीजिए। (𝝅 = का प्रमॉग कीजिए)\n𝟕\nSSC Selection Post (Phase-XII)",
+        "options": [
+            "11598.67 cm3",
+            "11498.67 cm3",
+            "11488.67 cm3",
+            "11478.67 cm3\nBY Gagan Pratap"
+        ],
+        "answer": "11598.67 cm3",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 13,
+        "question": "A spherical metallic ball of density 3.5 gram/cm3 has total mass 3.168 kg. Find\n𝟐𝟐\nthe cost of painting the ball at the rate of ₹5.6 per cm2. (Use 𝝅 = , Volume =\n𝟕\n𝑴𝒂𝒔𝒔\n)\n𝑫𝒆𝒏𝒔𝒊𝒕𝒚\n3.5 gm/cm3 घनत्व ऱारी धातु की एक गॉराकाय गेंद का कु र द्रव्यभान 3.168 kg वै। गेंद कॉ ₹5.6 प्रत्रत\n𝟐𝟐\ncm2 की दय ऴे ऩेंट कयन े का खर्ग ज्ञात कय।ें (𝝅 = , आमतन = द्रव्यभान\\घनत्व का उऩमॉग कीजिए)\n𝟕\n[RRB GROUP - D 2025]",
+        "options": [
+            "₹3,534.70",
+            "₹2,534.40",
+            "₹2,830.60",
+            "₹3,235.20"
+        ],
+        "answer": "₹3,534.70",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 14,
+        "question": "If the radius of a sphere is increased by 2 cm. its surface area increases by 704\n𝟐𝟐\ncm2. What was the radius of the sphere before the increase? (Use 𝝅 = )\n𝟕\nमदद एक गॉरे की त्रत्रज्या भ ें 2 cm की ऱृद्धि की िाती वै] तॉ इऴके ऩृष्ठीम क्षेत्रपर भें 704 cm2 की\n𝟐𝟐\nऱृद्धि वॉती वै। ऱृद्धि ऴे ऩवरे गॉर की त्रत्रज्या क्या थी? (𝝅 = का प्रमॉग कीजिए)\n𝟕\nSSC Selection Post (Phase-XII)",
+        "options": [
+            "12 cm",
+            "11 cm",
+            "13 cm",
+            "14 cm"
+        ],
+        "answer": "12 cm",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 15,
+        "question": "Three solid metallic spheres of radii 1 cm, 6 cm and 8 cm, respectively, are\nmalted and recast into a single solid sphere, The radius of the new sphere so\nformed is :\nक्रभल :1 cm, 6 cm ऒय 8 cm त्रत्रज्या ऱारे तीन ठॉऴ धातु के गॉरों कॉ कऩघराकय एक ठॉऴ गॉरे भें\nढारा िाता वै। इऴ प्रकाय फने नए गॉरे की त्रत्रज्या ककतनी वॉगी?\nSSC CGL 2023 PRE",
+        "options": [
+            "9.0 cm",
+            "5.9 cm",
+            "7.7 cm",
+            "8.5 cm"
+        ],
+        "answer": "9.0 cm",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 16,
+        "question": "Three metallic spheres of radii 3cm, 4cm and 5cm respectively are melted to\n𝟐𝟐\nform a sphere. What will be the volume of this new sphere? (Use 𝝅 = )\n𝟕\nक्रभलः 3 ऴेभी, 4 ऴेभी ऒय 5 ऴेभी त्रत्रज्याऑ ं ऱारे तीन धात्वत्वक गॉरों कॉ कऩघराकय एक गॉरा\n𝟐𝟐\nफनामा गमा वै, इऴ नए गॉरे का आमतन ककतना वॉगा? (𝝅 = का उऩमॉग कीजिए)\n𝟕\n[RRB Group D - 2022]\n𝟐 𝟓",
+        "options": [
+            "825 cm3",
+            "345 cm3\n𝟕 𝟕\n𝟏 𝟑",
+            "905 cm3",
+            "675 cm3\n𝟕 𝟕"
+        ],
+        "answer": "825 cm3",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 17,
+        "question": "The radius of a ball of iron is 1.5 cm. Three smaller balls are formed by melting it. If the\nradii of two smaller balls are 0.75 cm and 1.0 cm, find the diameter of the third ball.\nरॉवे की एक गेंद की त्रत्रज्या 1.5 cm वै। इऴे कऩघराकय तीन छॉटी गेंदें फनाई िाती वैं। मदद दॉ छॉटी\nगेंदों की त्रत्रज्याएं 0.75 cm ऒय 1.0 cm वैं, तॉ तीऴयी गेंद का व्याऴ ज्ञात कीजिए।\n[RRB GROUP - D 2025]",
+        "options": [
+            "2.1 cm",
+            "2.2 cm",
+            "2.3 cm",
+            "2.5 cm\nBY Gagan Pratap"
+        ],
+        "answer": "2.1 cm",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 18,
+        "question": "A metallic solid spherical ball of radius 3 cm is melted and recast into three\nspherical balls. The radii of two of these balls are 2 cm and 1.5 cm. What is the\nsurface area (in cm2) of the third ball?\n3 cm त्रत्रज्या ऱारी धातु की ठॉऴ गॉराकाय गेंद कॉ कऩघरामा िाता वै ऒय कपय ऴे तीन गॉराकाय गेंद\nफनाई िाती वैं, तॉ इनभें ऴे दॉ गेंदों की त्रत्रज्या 2 cm ऒय 1.5 cm वॉती वै। तीऴयी गेंद का ऩृष्ठीम\nक्षेत्रपर (cm2 भ)ें ज्ञात कीजिए।\n𝟐𝟓 𝟐𝟓",
+        "options": [
+            "𝝅",
+            "𝝅\n𝟐 𝟒",
+            "𝟓𝟎 𝝅",
+            "25 𝝅"
+        ],
+        "answer": "𝝅",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 19,
+        "question": "Air is leaking from a spherical-shaped advertising balloon at the rate of 24 cubic\nfeet per minute. If the radius of the balloon is 8 feet, how long would it take for the\nballoon to empty? Round your answer to the nearest minute. (Use the\napproximate of value of π, that is 3.14)\nएक गॉराकाय कऱज्ञाऩन गुब्बाय े ऴे 24 घन पीट प्रत्रत जभनट की दय ऴे वऱा का रयऴाऱ वॉ यवा वै। मदद\nगुब्बाय े की त्रत्रज्या 8 पीट वै, तॉ गुब्बाय े कॉ खारी वॉने भें ककतना ऴभम रगेगा? अऩने उत्तय कॉ\nजनकटतभ जभनट तक ऩणू ाांककत कय।ें (π के अनुभाजनत भान का उऩमॉग कय,ें िॉ कक 3.14 वै)\n(SSC MTS 2024)",
+        "options": [
+            "89 minutes",
+            "80 minutes",
+            "65 minutes",
+            "94 minutes"
+        ],
+        "answer": "89 minutes",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 20,
+        "question": "A solid sphere is placed inside a cube in such a way that it touches all the six surfaces of\nthe cube. What percentage of the cube's volume is not occupied by the sphere?\nएक ठॉऴ गॉरा एक घन के बीतय इऴ प्रकाय यखा गमा वै कक ऱव घन की ऴबी छवों ऴतवों कॉ स्पलग\nकयता वै, तॉ घन के आमतन का ककतना प्रत्रतलत बाग गॉरे द्वाया नवीं घेया गमा वै?\n[SSC CGL PRE 2025]",
+        "options": [
+            "𝟒𝟕.%𝟔𝟕",
+            "𝟒𝟖.%𝟓𝟔",
+            "𝟒𝟗.%𝟐𝟖 [C] 𝟒𝟐.%𝟓𝟒",
+            "Option D"
+        ],
+        "answer": "𝟒𝟕.%𝟔𝟕",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 21,
+        "question": "The length of the side of a cube is 5.6 cm. What is the volume of the largest\nsphere that can be taken out of the cube?\nएक घन की बुिा की रंफाई 5.6 ऴेभी वै। घन ऴे जनकारे िा ऴकने ऱारे ऴफऴे फडे गॉरे का आमतन क्या\nवॉगा?\n(SSC CGL 2022)",
+        "options": [
+            "91.98 cm³",
+            "99.96 cm³",
+            "96.98 cm³",
+            "90.69 cm³"
+        ],
+        "answer": "91.98 cm³",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 22,
+        "question": "The length of the largest possible rod that can be placed in cubical room is 42√𝟑 𝒎. The\nsurface area (in sq m) of the largest possible sphere that fit within the cubical room is?\nघनाकाय कभय े भें यखी िा ऴकने ऱारी ऴफऴे फडी ऴंबाकऱत छड की रंफाई 𝟒𝟐√𝟑 भीटय वै। घनाकाय\nकभय े के बीतय कपट वॉने ऱारे ऴफऴे फडे ऴंबाकऱत गॉरे का ऴतव क्षेत्र (ऱगग भीटय भें) क्या वै?\nSSC CPO 2024",
+        "options": [
+            "3590",
+            "4589\nBY Gagan Pratap",
+            "2564",
+            "5544"
+        ],
+        "answer": "3590",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 23,
+        "question": "There is a wooden sphere of radius 15√𝟑 cm. the total surface area of the largest\npossible cube cut from the sphere will be?\n15√𝟑 ऴेभी त्रत्रज्या का एक रकडी का गॉरा वै। गॉरे ऴे काटे गए ऴफऴे फडे ऴंबाकऱत घन का कु र\nऩृष्ठीम क्षेत्रपर वॉगा?\n(SSC GD 2022)",
+        "options": [
+            "540𝒄𝒎𝟐",
+            "600𝒄𝒎𝟐",
+            "5400𝒄𝒎𝟐",
+            "900𝒄𝒎𝟐"
+        ],
+        "answer": "540𝒄𝒎𝟐",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 24,
+        "question": "A sphere is placed inside a cube so that it fits exactly inside. Then the cube is inscribed\nin a larger sphere. What is the ratio of the volumes of the inner and outer spheres?\nएक गॉरा एक घन के अंदय इऴ प्रकाय यखा गमा वै कक ऱव ठीक अंदय कपट वॉ िाए। कपय उऴ घन कॉ एक फडे\nगॉरे भ ें अंककत ककमा िाता वै। अंदय ऱारे गॉरे ऒय फावय ऱारे गॉरे के आमतनों का अनुऩात क्या वॉगा?\nSSC CHSL PRE 2025",
+        "options": [
+            "𝟏:√𝟐",
+            "𝟏:𝟐√𝟐",
+            "𝟏:𝟑√𝟑",
+            "𝟏:√𝟔"
+        ],
+        "answer": "𝟏:√𝟐",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 25,
+        "question": "What is the radius of the sphere passing through the corners of the cuboid with\nedges 8 cm, 12 cm and 24 cm?\n8 ऴेभी, 12 ऴेभी ऒय 24 ऴेभी ककनायों ऱारे घनाब के कॉनों ऴे गुियने ऱारे गॉरे की त्रत्रज्या क्या वै?\n(CDS 2023)",
+        "options": [
+            "10.5 cm",
+            "14 cm",
+            "21 cm",
+            "28 cm"
+        ],
+        "answer": "10.5 cm",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 26,
+        "question": "A right circular cylinder of radius r and height h is contained in a sphere. The\nsphere has a diameter D. What is the relationship between the cylinder's height\nh and its radius r in terms of the sphere's diameter D?\nएक ऴवी ऱृत्तीम जऴजरिंडय जिऴका त्रत्रज्या 𝒓 ऒय ऊँ र्ाई 𝒉 वै ,एक गॉरे भें जनरवत वै। गॉरे का व्याऴ 𝑫 वै।\nजऴजरिंडय की ऊँ र्ाई 𝒉 ऒय इऴकी त्रत्रज्या 𝒓 के फीर् गॉरे के व्याऴ 𝑫 के ऴंदब ग भें क्या ऴंफंध वै?\nSSC CHSL PRE 2025\n√ 𝟐 𝟐 √ 𝟐 𝟐",
+        "options": [
+            "𝒉 = 𝑫 − 𝟒𝒓",
+            "𝟐𝒉 = 𝟓𝑫 − 𝟒𝒓\n√ 𝟐 𝟐 √ 𝟐 𝟐",
+            "𝟑𝒉 = 𝑫 − 𝒓",
+            "𝒉 = 𝟓𝑫 − 𝒓"
+        ],
+        "answer": "𝒉 = 𝑫 − 𝟒𝒓",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 27,
+        "question": "A cube is inscribed in a sphere. A right circular cylinder is within the cube\ntouching all the vertical faces. A right circular cone is inside the cylinder. Their\nheights are same and the diameter of the cone is equal to that of the cylinder.\nWhat is the ratio of the volume of the sphere to that of cone?\nएक घन ककऴी गॉरे के अंतगगत वै। घन क अन्दय एक रम्ब-ऱृतीम फेरन वै िॉ उऴके ऴबी ऊर्ध्ागघय\nपरकों कॉ स्पलग कयता वै। फेरन के अन्दय एक रंफ-ऱृतीम लंकु वै। उनकी ऊँ र्ाईमों फयाफय वै ऒय\nलंकु का व्याऴ फेरन के व्याऴ के फयाफय वै? गॉरे के आमतन का लंकु के आमतन ऴे क्या अनुऩात वै?",
+        "options": [
+            "6√𝟑 : 1",
+            "7 : 2\nBY Gagan Pratap",
+            "3√𝟑 : 1",
+            "5√𝟑 : 1"
+        ],
+        "answer": "6√𝟑 : 1",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 28,
+        "question": "One laddoo with a radius of 5 cm belongs to a shopkeeper. How many laddoos of\nradius 2.5 cm may be created from the same one laddoo?\n5 ऴेभी त्रत्रज्या ऱारा एक रड्ड एक दकु ानदाय का वै। एक वी रड्ड ऴे 2.5 ऴेभी त्रत्रज्या ऱारे ककतने रड्ड\nू ू ू\nफनाए िा ऴकते वैं?\nSSC CPO 2024",
+        "options": [
+            "2",
+            "6",
+            "4",
+            "8"
+        ],
+        "answer": "2",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 29,
+        "question": "A metallic sphere of diameter 40cm is melted into smaller spheres of radius 0.5\ncm. How many such small balls can be made?\n40 ऴेभी व्याऴ ऱारे एक धात्वत्वक गॉरे कॉ कऩघराकय 0.5 ऴेभी त्रत्रज्या ऱारे छॉटे गॉरे फनाए िाते वैं।\nऐऴे ककतने छॉटे गॉरे फनाए िा ऴकते वैं?",
+        "options": [
+            "6400",
+            "64,000",
+            "32,000",
+            "3200"
+        ],
+        "answer": "6400",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 30,
+        "question": "A solid metallic sphere of radius 12 cm is melted and recast into 27 identical\nspheres. What is the ratio of the surface area of the original sphere to the total\nsurface area of 8 smaller spheres so formed?\n12 cm त्रत्रज्या ऱारे एक ठॉऴ धात ु के गॉरे कॉ कऩघराकय 27 ऴभरूऩ गॉरे फनाए िाते वैं। भूर गॉरे के ऩृष्ठीम\nक्षेत्रपर ऒय इऴ प्रकाय फने 8 छॉटे-छॉटे गॉरों के कु र ऩृष्ठीम क्षेत्रपर का अनऩु ात ज्ञात कीजिए।\n(RRB TECHNICIAN GRADE-3 2024)",
+        "options": [
+            "9 : 4",
+            "9 : 8",
+            "3 : 1",
+            "3 : 2"
+        ],
+        "answer": "9 : 4",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 31,
+        "question": "A solid metallic sphere of radius 10.5 cm is melted and recast into smaller\nspherical balls, each of radius 3.5 cm. Find the ratio of the total surface area of\nall the smaller spheres to the surface area of the original sphere.\n10.5 cm त्रत्रज्या ऱारे एक ठॉऴ धातु के गॉरे कॉ कऩघराकय 3.5 cm त्रत्रज्या ऱारे छॉटे गॉराकाय\nगॉरे फनाए िाते वैं। ऴबी छॉटे गॉरों के ऴंऩूणग ऩृष्ठीम क्षेत्रपर ऒय भूर गॉरे के ऩृष्ठीम क्षेत्रपर का\nअनुऩात ज्ञात कीजिए।",
+        "options": [
+            "6 : 1",
+            "3 : 1",
+            "9 : 1",
+            "12 : 1"
+        ],
+        "answer": "6 : 1",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 32,
+        "question": "If 2744 identical small spheres are made out of a big sphere of radius 7 cm, then\nwhat is the surface area of each small sphere?\nमदद 7 ऴेभी त्रत्रज्या ऱारे एक फडे गॉरे ऴे 2744 ऴभान छॉटे गॉरे फनाए िाते वैं, तॉ प्रत्येक छॉटे गॉरे\nका ऩृष्ठीम क्षेत्रपर क्या वै?\n(SSC MTS 2024)",
+        "options": [
+            "2π cm2",
+            "3π cm2",
+            "π cm2",
+            "4π cm2\nBY Gagan Pratap"
+        ],
+        "answer": "2π cm2",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 33,
+        "question": "A spherical cannonball with a diameter of 28 cm is melted and recast into a\nrectangular block. The length and breadth of the block are 44 cm and 14 cm\n𝟐𝟐\nrespectively. What is the height of the rectangular block? (𝐓𝐚𝐤𝐞 𝝅 = )\n𝟕\n28 ऴेभी व्याऴ ऱारे एक गॉराकाय तॉऩ के गॉरे कॉ कऩघराकय एक आमताकाय ब्लॉक फनामा गमा\nवै। ब्लॉक की रंफाई ऒय र्ॊडाई क्रभलः 44 ऴेभी ऒय 14 ऴेभी वै। आमताकाय ब्लॉक की ऊँ र्ाई क्या वै?\n𝟐𝟐\n(प्रमॉग कयना = )\n𝟕",
+        "options": [
+            "17.23 cm",
+            "20.16 cm",
+            "18.67 cm",
+            "19.67 cm"
+        ],
+        "answer": "17.23 cm",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 34,
+        "question": "The inner and outer radii of a hollow metal cylinder are 1.1 cm and 4.3 cm\n𝟐\nrespectively, and its height is 16 cm. It is melted and made into a sphere. What\n𝟑\nwill be the surface area\n(𝒄𝒎𝟐)of\nthe sphere?\nधात ु के एक खॉखरे फेरन की आतंरयक ऒय फावयी त्रत्रज्याएँ क्रभलः 1.1 cm ऒय 4.3 cm वै, ऒय इऴकी ऊं र्ाई\n𝟐\n𝟏𝟔 cm वै। इऴ े कऩघराकय एक गॉरा फनामा गमा वै। गॉरे का ऩृष्ठीम क्षेत्रपर ककतना वॉगा?\n𝟑\n(ICAR Technician 2022)",
+        "options": [
+            "196𝝅",
+            "100 𝝅",
+            "256 𝝅",
+            "144 𝝅"
+        ],
+        "answer": "196𝝅",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 35,
+        "question": "A solid metal sphere has radius 14cm. It is melted to form small cones of radius 1.75cm\nand height 3.5cm. How many small cones will be obtained from the sphere?\nएक ठॉऴ गॉरे की त्रत्रज्या 14 cm वै, इऴ गॉरे कॉ कऩघराकय छॉटे लंकु फनामे गमे वैं, जिनकी त्रत्रज्या\n1.75 cm ऒय ऊं र्ाई 3.5 cm वै, ज्ञात कीजिमे इऴ े ककतने लंकु फनेगे?",
+        "options": [
+            "512",
+            "256",
+            "1024",
+            "2048"
+        ],
+        "answer": "512",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 36,
+        "question": "Two metallic right circular cones having their heights of 5.2 cm and 6 cm and the\nradii of their bases 2.8 cm each, have been melted together and recast into a\nsphere. The diameter of the sphere is:\n5.2 ऴेभी ऒय 6 ऴभे ी की ऊं र्ाई ऒय प्रत्येक 2.8 ऴभे ी की आधाय त्रत्रज्या ऱारे धातु के दॉ,धात्वत्वक रंफऱृत्तीम\nलंकु ऑ ंकॉ एक ऴाथ कऩघरामा गमा वै ऒय एक गॉरे भ ें ढारा गमा वै। गॉरे का व्याऴ ककतना वै?\n(ICAR Technician 2023)",
+        "options": [
+            "6.4 cm",
+            "5.0 cm",
+            "6.2 cm",
+            "5.6cm"
+        ],
+        "answer": "6.4 cm",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 37,
+        "question": "Some marbles, each of diameter 4.2 cm, are dropped into a cylindrical beaker\ncontaining some water and are fully submerged. The diameter of the beaker is 28 cm.\nFind how many marbles have been dropped in it if the water rises by 15.75 cm.\nकु छ कं र्े, जिनभे ऴे प्रत्येक का व्याऴ 4.2 ऴेभी वै, उन्हें एक फेरनाकाय फीकय भें डारा िाता वै जिऴभें\nकु छ ऩानी वॉता वै ऒय ऩयू ी तयव ऴे डूफ िाता वै। फीकय का व्याऴ 28 ऴेभी वै। मदद ऩानी 15.75 ऴेभी फढ़\nिाता वै तॉ ज्ञात कीजिए कक इऴभें ककतन े कं र्े गगयाए गए वैं।",
+        "options": [
+            "225",
+            "275",
+            "250",
+            "290\nBY Gagan Pratap"
+        ],
+        "answer": "225",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 38,
+        "question": "A rectangular tank measures 12 cm long, 10 cm wide, and 6 cm high. If a\nspherical ball of the largest possible size is placed inside this tank, what is the\nvolume of the space not occupied by the ball?\nएक आमताकाय टैंक 12 ऴेभी रंफा, 10 ऴेभी र्ॊडा ऒय 6 ऴेभी ऊँ र्ा वै। मदद इऴ टैंक के अंदय ऴफऴ े फडे\nआकाय की एक गॉराकाय गेंद यखी िाए, तॉ गेंद द्वाया घेय े न गए स्थान का आमतन क्या वै?\n(SSC CGL 2025 PRE )",
+        "options": [
+            "(𝟕𝟐𝟎 − 𝟐𝟕𝝅)𝐜𝐦𝟑",
+            "(𝟕𝟐𝟎 − 𝟑𝟔𝝅)𝐜𝐦𝟑",
+            "(𝟔𝟎𝟎 − 𝟑𝟔𝝅)𝐜𝐦𝟑",
+            "(𝟕𝟐𝟎 − 𝟐𝟖𝟖𝝅)𝐜𝐦𝟑"
+        ],
+        "answer": "(𝟕𝟐𝟎 − 𝟐𝟕𝝅)𝐜𝐦𝟑",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 39,
+        "question": "A rectangular fish tank with a base of 𝟏𝟎𝟎 𝐜𝐦 × 𝟓𝟎 𝐜𝐦 contains water up to a\nheight of 20 cm . If 5 identical spherical stones, each with a radius of 5 cm , are\ndropped into the tank and fully submerged, what is the rise in the water level?\n100 ऴेभी × 𝟓𝟎 ऴेभी के आधाय ऱारे एक आमताकाय भछरी टैंक भें 20 ऴेभी की ऊँ र्ाई तक ऩानी वै।\nमदद 5 ऴेभी त्रत्रज्या ऱारे 5 ऴभान गॉराकाय ऩत्थयों कॉ टैंक भें डारकय उन्हें ऩूयी तयव ऴे डुफॉ ददमा\nिाए, तॉ िर स्तय भें ककतनी ऱृद्धि वॉगी?\n(SSC CGL 2025 PRE )\n𝛑 𝛑",
+        "options": [
+            "𝐜𝐦",
+            "𝐜𝐦\n𝟏𝟎 𝟔\n𝛑 𝛑",
+            "𝐜𝐦",
+            "𝐜𝐦\n𝟓 𝟑"
+        ],
+        "answer": "𝐜𝐦",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 40,
+        "question": "A metal sphere is dropped into a cylindrical container of diameter 20 cm partially filled\nwith water. If the water rises by 1.5 cm, what is the radius of the sphere?\nएक धातु के गॉरे कॉ 20 ऴेभी व्याऴ ऱारे एक फेरनाकाय ऩात्र भें डारा िाता वै िॉ आंजलक रूऩ ऴ े\nऩानी ऴे बया वै। मदद ऩानी 1.5 ऴेभी ऊऩय उठता वै, तॉ गॉरे की त्रत्रज्या क्या वै?\nSSC CHSL PRE 2025",
+        "options": [
+            "4.5 cm",
+            "5.1 cm",
+            "4.8 cm",
+            "5.7 cm"
+        ],
+        "answer": "4.5 cm",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 41,
+        "question": "Raj had a cake in the shape of a sphere of radius 8 cm. He then dipped it in chocolate\nand kept it in the freezer. After some time, he observed that the chocolate formed a\nlayer of thickness 2 cm over the cake. What is the percentage increase of the surface\narea of the cake after it is dipped in chocolate?\nयाि के ऩाऴ 8 cm त्रत्रज्या का एक गॉर आकाय का के क था। उऴन े उऴ े र्ॉकरेट भें डुफॉकय फ्रीिय भ ें\nयख ददमा। कु छ ऴभम फाद उऴन े देखा कक के क ऩय र्ॉकरेट की 2 cm भॉटी ऩयत िभ िाती वै।\nर्ॉकरेट भें डुफॉन े के फाद के क के ऩृष्ठीम क्षेत्रपर भें ककतने प्रत्रतलत की ऱृद्धि रृई?\n[RRB ALP CBT-1 2025]",
+        "options": [
+            "52.25%",
+            "56.25%",
+            "58.25%",
+            "62.25%"
+        ],
+        "answer": "52.25%",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 42,
+        "question": "What is the approximate volume of a spherical shell whose inner and outer radii\nare 10 cm and 12 cm respectively 𝝅 = 𝟑.𝟏𝟒).\nएक गॉराकाय लेर का रगबग आमतन क्या वै जिऴकी आंतरयक ऒय फावयी त्रत्रज्या क्रभलः 10\nऴेंटीभीटय ऒय 12 ऴेंटीभीटय वैं ( 𝝅 = 𝟑.𝟏𝟒 )।\nBY Gagan Pratap\n(DELHI POLICE CONSTABLE Executive 2025)",
+        "options": [
+            "𝟐𝟓𝟔𝟎.𝟎𝟐 𝐜𝐦𝟑",
+            "𝟕𝟖𝟔𝟎.𝟎𝟐 𝐜𝐦𝟑",
+            "𝟒𝟔𝟕𝟐.𝟎𝟐 𝐜𝐦𝟑",
+            "𝟑𝟎𝟓𝟎.𝟎𝟐 𝐜𝐦𝟑"
+        ],
+        "answer": "𝟐𝟓𝟔𝟎.𝟎𝟐 𝐜𝐦𝟑",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 43,
+        "question": "A solid sphere of radius 7 cm is coated with a layer of paint that increases its\nradius to 7.5 cm, find the volume of the painted layer. (Use π = 22/7 and round off\nyour answer to the nearest integer)\nऴेभी त्रत्रज्या ऱारे एक ठॉऴ गॉरे ऩय ऩेंट की एक ऩयत र्ढ़ाई िाती वै जिऴऴे उऴकी त्रत्रज्या फढ़कय 7\n7.ऴेभी वॉ िाती वै। 5 ऩटें की ऩयत का आमतन ज्ञात कीजिए। )π = 22/का प्रमॉग कय ें ऒय अऩने 7\n(उत्तय कॉ जनकटतभ ऩूणाकां तक ऩूणाांककत कय।ें",
+        "options": [
+            "331 cm3",
+            "442 cm3",
+            "330 cm3",
+            "440 cm3"
+        ],
+        "answer": "331 cm3",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 44,
+        "question": "A hollow spherical shell is made of a metal of density 36 g/cm3. Its internal and\nexternal radius are 9 cm and 11 cm, respectively. What is the weight (in kg) of the\n𝟐𝟐\nshell? (𝒕𝒂𝒌𝒆 𝝅 = )\n𝟕\nएक खॉखरे गॉराकाय खॉर कॉ 36 g/cm3 घनत्व ऱारी धातु ऴे फनामा गमा वै। इऴकी आंतरयक\nत्रत्रज्या ऒय फाह्य त्रत्रज्या क्रभल: 9 cm ऒय 11 cm वै। खॉर का बाय (kg भें)ज्ञात कीजिए।\n𝟐𝟐\n(𝝅 = ऱीजिए))\n𝟕\n(RRB NTPC LEVEL-12 2025)",
+        "options": [
+            "92.52",
+            "90.816",
+            "87.816",
+            "92.75"
+        ],
+        "answer": "92.52",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 45,
+        "question": "A hollow sphere has an outer radius of 6 cm and an inner radius of 4 cm . If the\nmaterial used to make the sphere costs ₹𝟏𝟎 per 𝐜𝐦𝟑 , what is the total cost of the\nmaterial used to make the sphere? (Use 𝝅 ≈ 𝟑.𝟏𝟒 )\nएक खॉखरे गॉरे की फावयी त्रत्रज्या 6 ऴेभी ऒय आंतरयक त्रत्रज्या 4 ऴेभी वै। मदद गॉरे कॉ फनाने भ ें\nप्रमुक्त ऴाभग्री की रागत ₹ 10 प्रत्रत ऱग ग ऴेभी वै, तॉ गॉरे कॉ फनाने भें प्रमुक्त ऴाभग्री की कु र रागत\nक्या वै? (𝝅 ≈ 𝟑.𝟏𝟒 का प्रमॉग कय)ें\n(SSC CPO 2025)",
+        "options": [
+            "₹6024.60",
+            "₹6184.70",
+            "₹6363.80",
+            "₹6495.20"
+        ],
+        "answer": "₹6024.60",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 46,
+        "question": "A spherical metallic shell with 6 cm external radius weighs 6688 g. What is the\n𝟐𝟐\nthickness of the shell if the density of metal is 10.5 g per cm3? (Take 𝝅 = )\n𝟕\n6 cm फावम त्रत्रज्या ऱारे गॉराकाय धात्वत्वक लैर का ऱिन 6688g वै। मदद धातु का घनत्व 10.5g\n𝟐𝟐\nप्रत्रत cm3 वै, तॉ लैर की भॉटाई िात कीजिए। (𝝅 = रें)\n𝟕",
+        "options": [
+            "2 cm",
+            "3 cm\n𝟏",
+            "𝟐 cm",
+            "4 cm\n𝟐\nBY Gagan Pratap"
+        ],
+        "answer": "2 cm",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 47,
+        "question": "A solid metal sphere of radius 10 cm is melted and recast into hollow spherical\nshells with outer radius 3 cm and inner radius 2 cm. How many such complete\nshells can be formed if 15% of the metal is wasted during recasting?\n10 cm त्रत्रज्या ऱारे एक ठॉऴ धातु के गॉरे कॉ कऩघराकय 3 cm फावयी त्रत्रज्या ऒय 2 cm आंतरयक\nत्रत्रज्या ऱारे खॉखरे गॉराकाय खॉरों के रूऩ भें ढारा िाता वै। मदद ऩुनः ढारने के दॊयान 15% धातु\nनष्ट वॉ िाए, तॉ ऐऴे ककतने ऩूणग खॉर फनाए िा ऴकते वैं?",
+        "options": [
+            "42",
+            "46",
+            "45",
+            "44"
+        ],
+        "answer": "42",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 48,
+        "question": "A hollow metal sphere of internal and external radii 5 cm and 6cm, respectively,\nis melted in to a solid cone of base radius 5.2 cm. what is the height (in cm,\nrounded of to 1 decimal place) of the cone?\nक्रभलः आंतरयक ऒय फावयी त्रत्रज्या 5 ऴेभी ऒय 6 ऴेभी ऱारे एक खॉखरे धातु के गॉरे कॉ कऩघराकय\nआधाय त्रत्रज्या 5.2 ऴेभी के एक ठॉऴ लंकु भें फदर ददमा िाता वै। लंकु की ऊं र्ाई (ऴेभी भें, दलभरऱ\nके 1 स्थान तक गॉराकाय) क्या वै?\n(MTS 2023)",
+        "options": [
+            "11.8",
+            "12.8",
+            "13.5",
+            "14.5"
+        ],
+        "answer": "11.8",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 49,
+        "question": "A solid sphere has a surface area of 616 cm2. This sphere is now cut into two\nhemispheres. What is the total surface area of one of the hemispheres?\nएक ठॉऴ गॉरे का ऩृष्ठीम क्षेत्रपर 616 ऴेभी2 वै। इऴ गॉरे के दॉ गॉराधों भें काटा िाता वै। ककऴी एक\nगॉराध ग का ऴम्पूणग ऩृष्ठीम क्षेत्रपर ज्ञात कयें?\n(SSC SELECTION POST XI 2023)",
+        "options": [
+            "440 cm2",
+            "462 cm2",
+            "452 cm2",
+            "390 cm2"
+        ],
+        "answer": "440 cm2",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 50,
+        "question": "It takes 2 litres to paint the surface of a solid sphere. If this solid sphere is sliced into 4\nidentical pieces, how many litres will be required to paint all the surface of these 4\npieces?\nएक ठॉऴ गॉरे की ऴतव कॉ यगं ने भें 2 रीटय ऩेंट रगता वै, मदद ठॉऴ गॉरे कॉ 4 ऴभान बाग भें काट\nददमा िाता वै, ज्ञात कीजिमे अफ इन ऴबी 4 बागॉ कॉ यगं ने भें ककतना ऩेंट रगेगा?\n(DSSSB Junior Secretariat Assistant 2022 ) (XAT 2018)",
+        "options": [
+            "2.2 litres",
+            "2.5 litres",
+            "3.0 litres",
+            "4.0 litres"
+        ],
+        "answer": "2.2 litres",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 51,
+        "question": "A sphere of radius 21 cm is cut into 8 identical pieces by making three mutually\nperpendicular cuts through its center (one along each axis). Find the total\nsurface area of each piece in cm2.\n21 cm त्रत्रज्या ऱारे एक गॉरे कॉ उऴके कें द्र ऴे तीन एक-दऴू य े के रंफऱत कट रगाकय 8 फयाफय टुकडों भ ें\nकाटा िाता वै (वय एक्सिऴ ऩय एक कट)। वय टुकडे का कु र ऴतव क्षेत्रपर cm2 भ ें ज्ञात कीजिए।\n(SSC CGL MAINS 2025). (SSC CGL MAINS 2018)\nBY Gagan Pratap",
+        "options": [
+            "551.25 𝝅 cm2",
+            "625.25 𝝅 cm2",
+            "450.75 𝝅 cm2",
+            "560 𝝅 cm2"
+        ],
+        "answer": "551.25 𝝅 cm2",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 52,
+        "question": "A solid metallic sphere is cut into 8 identical pieces by making 3 mutually\nperpendicular cuts through its centre. By what percentage is the sum of the total\nsurface areas of the 8 pieces more than the surface area of the original sphere?\nएक ठॉऴ धात्वत्वक गॉरे कॉ उऴके कें द्र ऴ े तीन ऩयस्पय रंफऱत कट रगाकय 8 ऴभान टुकडों भ ें काटा िाता वै। 8\nटुकडों के ऴम्पूणग ऩष्ठृ ीम क्षत्रे परों का मॉग भूर गॉरे के ऩष्ठृ ीम क्षेत्रपर ऴ े ककतने प्रत्रतलत अत्रधक वै?",
+        "options": [
+            "150%",
+            "250%",
+            "200%",
+            "250%"
+        ],
+        "answer": "150%",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 53,
+        "question": "The volume and surface area of a solid hemisphere are numerically equal. What\nis the diameter of the hemisphere?\nएक ठॉऴ गॉराधग का आमतन ऒय ऴतव का क्षेत्रपर ऴंख्यात्मक रूऩ ऴ े फयाफय वै। गॉराथ ग का व्याऴ क्या वै?\n(DELHI POLICE CONSTABLE Executive 2025)",
+        "options": [
+            "6 cm",
+            "7 cm",
+            "8 cm",
+            "9 cm"
+        ],
+        "answer": "6 cm",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 54,
+        "question": "The total surface area of a solid hemisphere is 166.32 sq cm, find its curved surface\narea?\nएक ठॉऴ अधगगॉरे का कु र ऩृष्ठीम क्षेत्रपर 166.32 ऱगग ऴभे ी वै। इऴका ऱक्र ऩष्ठृ ीम क्षेत्रपर ज्ञात कीजिए?\n(RRB TECHNICIAN GRADE-3 2024)",
+        "options": [
+            "55.44 sq cm",
+            "110.88 sq cm",
+            "221.76 sq cm",
+            "196.96 sq cm"
+        ],
+        "answer": "55.44 sq cm",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 55,
+        "question": "Find the Total surface area of the hemisphere (in cm2) whose radius is 26 cm and 𝝅 =\n3.14.\nउऴ अधगगॉरे का कु र ऩृष्ठीम क्षेत्रपर (ऴेभी² भ)ें ज्ञात कीजिए जिऴकी त्रत्रज्या 26 ऴेभी वै ऒय 𝝅 = 3.14 वै।\nUP S.I. 13/11/2021 (Afternoon)",
+        "options": [
+            "6376.92",
+            "6367.92",
+            "6347.92",
+            "6357.92"
+        ],
+        "answer": "6376.92",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 56,
+        "question": "The total surface area of a solid hemisphere is 155 cm2. Its radius (in cm) is ___.\n𝟐𝟐\n(𝑻𝒂𝒌𝒆 𝝅 = )\n𝟕\nएक ठॉऴ अधगगॉरे का कु र ऩृष्ठीम क्षेत्रपर 155 cm² वै। इऴकी त्रत्रज्या (ऴेभी भें) ___ वै।\n𝟐𝟐\n(ऱें 𝝅 = )\n𝟕\n(RRB NTPC CBT-2 GRADUATE LEVEL 2025)\n𝟏𝟎𝟗𝟒 𝟏𝟎𝟕𝟕",
+        "options": [
+            "√",
+            "√\n𝟔𝟔 𝟏𝟑𝟐\n𝟏𝟎𝟖𝟓 𝟏𝟎𝟗𝟎",
+            "√",
+            "√\n𝟔𝟔 𝟔𝟔"
+        ],
+        "answer": "√",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 57,
+        "question": "A hemispherical dome of radius 14 m is to be painted both inside and outside. If\nthe cost of painting is ₹45 per m2 and a platform costing ₹1,200 is needed for the\n𝟐𝟐\nwork, find the total cost. (𝑼𝒔𝒆 𝝅 = )\n𝟕\nBY Gagan Pratap\n14 m त्रत्रज्या ऱारे एक अधगगॉराकाय गुंफद कॉ अंदय ऒय फावय दॉनों तयप ऴ े यगं ना वै। मदद यगं ाई की\nरागत ₹45 प्रत्रत m2 वै ऒय इऴ काम ग के जरए ₹1,200 की रागत ऱारे एक प्लेटपॉभग की आऱश्यकता\n𝟐𝟐\nवै, तॉ कु र रागत ज्ञात कीजिए। (𝝅 = का उऩमॉग कीजिए)\n𝟕\n(RRB Section Controller 2025)",
+        "options": [
+            "₹1,10,200",
+            "₹1,12,080",
+            "₹1,08,500",
+            "₹1,14,500"
+        ],
+        "answer": "₹1,10,200",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 58,
+        "question": "A spherical ball of diameter 8 cm is cut into two equal parts. The curved area of one\nsuch part has to be painted with green colour, while the other part has to be painted\nwith red colour. The bases of both the hemispheres are to be painted with blue colour.\nThe cost of painting with blue is 2/cm², while the cost of painting the curved area is\n₹3/cm². What will be the cost (in) of painting the hemispheres? (Тakе 𝝅 = 3.14)\n8 ऴेभी व्याऴ ऱारी एक गॉराकाय गेंद कॉ दॉ फयाफय बागों भें काटा िाता वै। एक बाग के ऱक्र क्षेत्र कॉ\nवय े यगं ऴे यगं ना वै, िफकक दऴू य े बाग कॉ रार यंग ऴे यगं ना वै। दॉनों अधगगॉरे के आधायों कॉ नीरे यगं\nऴे यगं ना वै। नीरे यगं ऴे यगं ने की रागत ₹2/ऴेभी² वै, िफकक ऱक्र क्षेत्र कॉ यगं ने की रागत ₹3/ऴेभी²\nवै। अधगगॉरे कॉ यगं ने की रागत (इंर् भें) क्या वॉगी? (π = 3.14 रें)\n(SSC SELECTION POST XI 2023)",
+        "options": [
+            "₹451.92",
+            "₹492.92",
+            "₹803.84",
+            "₹401.92"
+        ],
+        "answer": "₹451.92",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 59,
+        "question": "A hemisphere has radius 3.5 cm. If total surface area of hemisphere is equal to\n𝟐𝟐\nthe surface area of a sphere, then what is the volume of the sphere? (𝑻𝒂𝒌𝒆 𝝅 = )\n𝟕\nएक अधगगॉरे की त्रत्रज्या 3.5 cm वै। मदद अधगगॉरे का ऴंऩूणग ऩृष्ठीम क्षेत्रपर, एक गॉरे के ऩृष्ठीम\n𝟐𝟐\nक्षेत्रपर के फयाफय वै, तॉ गॉरे का आमतन ककतना वै? (𝝅 = रीजिए)\n𝟕\n𝟓𝟑𝟗√𝟑 𝟓𝟗𝟑√𝟑",
+        "options": [
+            "cm3",
+            "cm3\n𝟖 𝟖\n𝟓𝟑𝟗√𝟑",
+            "cm3",
+            "𝟒𝟏𝟖√𝟑 cm3\n𝟐"
+        ],
+        "answer": "cm3",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 60,
+        "question": "A hemispherical bowl of diameter 10 cm is used to serve soup. Find its capacity.\nऴूऩ ऩयॉऴन े के जरए 10 ऴेभी व्याऴ ऱारे एक अधगगॉराकाय कटॉय े का उऩमॉग ककमा िाता वै। इऴकी\nक्षभता ज्ञात कीजिए।\n(DELHI POLICE CONSTABLE Executive 2025)",
+        "options": [
+            "≈ 𝟐𝟓𝟎 𝐜𝐦𝟑",
+            "≈ 𝟐𝟕𝟎 𝐜𝐦𝟑",
+            "≈ 𝟐𝟖𝟎 𝐜𝐦𝟑",
+            "≈ 𝟐𝟔𝟐 𝐜𝐦𝟑"
+        ],
+        "answer": "≈ 𝟐𝟓𝟎 𝐜𝐦𝟑",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 61,
+        "question": "The volume of the hemisphere (to the nearest integer) with a radius of 5.5cm is\n(use 𝝅 = 3.14):\n5.5 ऴेभी त्रत्रज्या ऱारे अधगग ॉरे का आमतन (जनकटतभ ऩूणाांक तक) ज्ञात कीजिए (π = 3.14 का प्रमॉग कय)ें :\nSSC CHSL Pre 2024",
+        "options": [
+            "378 cm3",
+            "325 cm3",
+            "348 cm3",
+            "362 cm3\nBY Gagan Pratap"
+        ],
+        "answer": "378 cm3",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 62,
+        "question": "If the diameter of a hemisphere is 63 cm, then what is the volume of\nhemisphere?\nमदद एक गॉराधग का व्याऴ 63 ऴेभी वै, तॉ गॉराधग का आमतन ककतना वै?",
+        "options": [
+            "72654.5𝒄𝒎𝟑",
+            "61324.5\n𝒄𝒎𝟑",
+            "65488.5\n𝒄𝒎𝟑",
+            "69246.5\n𝒄𝒎𝟑"
+        ],
+        "answer": "72654.5𝒄𝒎𝟑",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 63,
+        "question": "How many liters of water can a hemispherical tank of radius 2.1 m contain?\n2.1 भीटय त्रत्रज्या ऱारे एक अधगगॉराकाय टैंक भें ककतने रीटय ऩानी आ ऴकता वै?",
+        "options": [
+            "18984",
+            "19324",
+            "18404",
+            "19404"
+        ],
+        "answer": "18984",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 64,
+        "question": "If the area of the circular base of a hemisphere is 308 square centimeters, find\nthe volume of the hemisphere.\nमदद एक अधगगॉरे के ऱृत्ताकाय आधाय का क्षेत्रपर 308 ऱगग ऴेंटीभीटय वै, तॉ अधगगॉरे का आमतन ज्ञात\nकीजिए।\n(SSC CPO 2025)",
+        "options": [
+            "𝟏𝟐𝟑𝟓.𝟑𝟑√𝟐 𝐜𝐦𝟑",
+            "𝟏𝟔𝟓𝟖.𝟑𝟑√𝟐 𝐜𝐦𝟑",
+            "𝟏𝟓𝟑𝟕.𝟑𝟑√𝟐 𝐜𝐦𝟑",
+            "𝟏𝟒𝟑𝟕.𝟑𝟑√𝟐 𝐜𝐦𝟑\n𝟏 𝟐𝟐"
+        ],
+        "answer": "𝟏𝟐𝟑𝟓.𝟑𝟑√𝟐 𝐜𝐦𝟑",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 65,
+        "question": "The volume of a hemisphere is 𝟐𝟒𝟐𝟓 cm3. Find its radius. (Take 𝝅 = )\n𝟐 𝟕\n𝟏 𝟐𝟐\nएक गॉराधग का आमतन 𝟐𝟒𝟐𝟓 cm3 वै। इऴकी त्रत्रज्या ज्ञात कीजिए। (𝝅 = ऱें)\n𝟐 𝟕",
+        "options": [
+            "10cm",
+            "9.5 cm",
+            "12 cm",
+            "10.5 cm"
+        ],
+        "answer": "10cm",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 66,
+        "question": "The volume of a solid hemisphere is 19,404 cm3. Its total surface area (in cm²) is:\n𝟐𝟐\n(Take 𝝅 = )\n𝟕\nएक ठॉऴ अधगगॉरे का आमतन 19,404 cm3 वै। इऴका ऴऩं ूणग ऩृष्ठीम क्षेत्रपर (cm2 भें) ककतना\n𝟐𝟐\nवॉगा? (𝝅 = रें)\n𝟕",
+        "options": [
+            "2079",
+            "3465",
+            "2772",
+            "4158"
+        ],
+        "answer": "2079",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 67,
+        "question": "The total surface area of a solid hemisphere is 𝟕𝟖𝟔𝟒 𝐜𝐦𝟐 , Its volume is : (𝝅 = 𝟐𝟐 )\n𝟕\nएक ठॉऴ गॉर गॉराधग का कु र ऴतवी क्षेत्रपर 7864 ऴेंटीभीटय 𝟐 वै, इऴका आमतन वै: (𝝅 = 𝟐𝟐 )\n𝟕\n(DELHI POLICE CONSTABLE Executive 2025)",
+        "options": [
+            "𝟔𝟓𝟑𝟒𝟐.𝟔 𝐜𝐦𝟑",
+            "𝟖𝟗𝟕𝟏𝟔.𝟔 𝐜𝐦𝟑",
+            "𝟕𝟔𝟖𝟐𝟐.𝟔 𝐜𝐦𝟑",
+            "𝟓𝟎𝟒𝟒𝟔.𝟔 𝐜𝐦𝟑"
+        ],
+        "answer": "𝟔𝟓𝟑𝟒𝟐.𝟔 𝐜𝐦𝟑",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 68,
+        "question": "The ratio of the volume of a sphere to the total surface area of a hemisphere is 28 : 3. If\nthe radii of the sphere and the hemisphere are equal, find the volume of the sphere (in\n𝟐𝟐\ncubic centimetres).(𝑼𝒔𝒆 𝝅 = )\n𝟕\nएक गॉरे के आमतन ऒय एक अधगगॉरे के ऴंऩूणग ऩृष्ठीम क्षेत्रपर का अनुऩात 28 : 3 वै। मदद गॉरे\nऒय अधगगॉरे की त्रत्रज्याएँ फयाफय वैं, तॉ गॉरे का आमतन ज्ञात कीजिए। (घन ऴेंटीभीटय भें)\n𝟐𝟐\n(𝝅 = का उपयोग कर)ें\n𝟕\nBY Gagan Pratap",
+        "options": [
+            "38,542",
+            "38,808",
+            "38,208",
+            "38,460"
+        ],
+        "answer": "38,542",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 69,
+        "question": "A hemispherical solid of radius 21 cm is melted and made into a cylinder whose\nheight is 14 cm. the volume of the cylinder is given by (𝒂 × 𝒃𝒂 × 𝒄𝒃)𝝅 where a, b\nand c are prime. Then the value of (a+b)c is?\n21 ऴेभी त्रत्रज्या ऱारे एक अधगगॉराकाय ठॉऴ कॉ कऩघराकय एक फेरन फनामा िाता वै जिऴकी ऊं र्ाई\n14 ऴेभी वै। जऴरेंडय का आमतन (𝒂 × 𝒃𝒂 × 𝒄𝒃)𝝅 द्वाया ददमा िाता वै िवां a, b ऒय c अबाज्य वैं। तॉ\n(a+b)c का भान क्या वै?\n(SSC MTS 2024)",
+        "options": [
+            "66",
+            "42",
+            "54",
+            "35"
+        ],
+        "answer": "66",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 70,
+        "question": "The diameter of a hollow hemisphere is 40 cm. Water is filled in it up to its brim.\nWhen spherical lead shots each of diameter 0.8 cm are dropped into the\nhemisphere, three-fifths of the water flows out. How many lead shots were\ndropped into the hemisphere?\nएक खॉखरे गॉराधग का व्याऴ 40 ऴेभी वै। इऴभें ऩानी रफारफ बय िाता वै। िफ 0.8 ऴेभी व्याऴ ऱारे\nगॉराकाय ऴीऴ े के गॉरे गॉराधग भें गगयाए िाते वैं, तॉ ऩानी का तीन-ऩांर्ऱां रवस्सा फावय जनकर\nिाता वै। गॉराधग भें ककतने रीड लॉट गगयाए गए?\n(SSC MTS 2024)",
+        "options": [
+            "30500",
+            "35700",
+            "37500",
+            "35500"
+        ],
+        "answer": "30500",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 71,
+        "question": "A cylindrical vessel with a radius of 16 cm can hold milk to a depth of 30 cm. If a\nsolid hemisphere is immersed in the milk, the liquid level rises by 9 cm. Find the\nradius of the hemisphere.\n16 ऴेंटीभीटय त्रत्रज्या ऱारे एक फेरनाकाय फतगन भें 30 ऴेंटीभीटय की गवयाई तक दधू यखा िा ऴकता\nवै। मदद एक ठॉऴ अधगगॉरा दधू भें डुफॉमा िाए, तॉ द्रऱ का स्तय 9 ऴेंटीभीटय फढ़ िाता वै। अधगगॉराकाय\nगेंद की त्रत्रज्या ज्ञात कीजिए।\n(SSC CPO 2025)",
+        "options": [
+            "𝟏𝟖√𝟐 𝐜𝐦",
+            "𝟏𝟔√𝟐 𝐜𝐦",
+            "𝟐𝟐 + √𝟐 cm",
+            "𝟏𝟐√𝟐 cm"
+        ],
+        "answer": "𝟏𝟖√𝟐 𝐜𝐦",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 72,
+        "question": "A hemispherical tank is full of water. It is connected to a pipe that empties it at a rate of\n7 litres per second. How much approximate time (in minutes) will it take to empty half if\n𝟐𝟐\nthe internal radius of the tank is 2.1 meters? (Use 𝝅 = and 1 m3 = 1000 liters)\n𝟕\nएक अधगगॉर टैंक ऩानी ऴे बया वै। मव एक ऩाइऩ ऴे िुडा वै िॉ इऴ े 7 रीटय प्रत्रत ऴेकं ड की दय ऴ े खारी\nकयता वै। अगय टैंक का अंदरूनी यरे डमऴ 2.1 भीटय वै, तॉ टैंक कॉ आधा खारी कयने भें रगबग\n𝟐𝟐\nककतना ऴभम (जभनट भ)ें रगेगा? (𝝅 = ऒय 1 भीटय3=1000 रीटय का उऩमॉग कय)ें\n𝟕\n(SSC CGL MAINS 2025)",
+        "options": [
+            "11 minutes",
+            "16 minutes\nBY Gagan Pratap",
+            "46 minutes",
+            "23 minutes"
+        ],
+        "answer": "11 minutes",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 73,
+        "question": "A hemispherical tank full of water is emptied by a pipe at the rate of 7.7 litres per\n𝟐\nsecond. How much time (in hours) will it take to empty part of the tank, if the\n𝟑\ninternal radius of the tank is 10.5 m?\nऩानी ऴ े बयी अिग गॉरीम टंकी कॉ 7.7 रीटय प्रत्रत ऴके ं ड की दय ऴे ककऴी ऩाइऩ द्वाया खारी ककमा िाता वै। टंकी\n𝟐\nके बाग कॉ खारी कयने भें ककतना ऴभम रगेगा (घंटे भें), मदद टंकी की आंतरयक त्रत्रज्या 10.5 m वै?\n𝟑\n(SSC CGL MAINS 2021)\n𝟏𝟖𝟓 𝟏𝟕𝟓",
+        "options": [
+            "",
+            "𝟔 𝟑\n𝟏𝟖𝟓 𝟏𝟕𝟓",
+            "",
+            "𝟑 𝟐"
+        ],
+        "answer": "",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 74,
+        "question": "Three toys are in a shape of cylinder, hemisphere and cone. The three toys have\nsame base. Height of each toy is 2√2cm. what is the ratio of the total surface\nareas of cylinder, hemisphere and cone respectively?\nतीन खखरॊन े फेरन, गॉरािग ऒय लकं ु के आकाय भ ें वैं। तीनों खखरॊनों का आधाय एक वी वै। प्रत्येक खखरॊन े\nकी ऊं र्ाई 2√2 ऴेभी वै। क्रभलः फेरन, गॉरािग ऒय लंकु के कु र ऩष्ठृ क्षेत्रपर का अनुऩात क्या वै?",
+        "options": [
+            "4:3:(√2+1)",
+            "4:3:(2+√2)",
+            "2:1:(1+√2)",
+            "4:3:2√2"
+        ],
+        "answer": "4:3:(√2+1)",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 75,
+        "question": "A hemispherical shell has an inner radius of 12 cm and an outer radius of 13 cm .\nCalculate the volume of the material forming the shell.\nएक अधगगॉराकाय खॉर की आंतरयक त्रत्रज्या 12 ऴेभी ऒय फावयी त्रत्रज्या 13 ऴेभी वै। खॉर फनाने ऱारे\nऩदाथग का आमतन ज्ञात कीजिए।\n(SSC CHSL PRE 2025)",
+        "options": [
+            "𝟗𝟖𝟑𝝅 𝐜𝐦𝟑",
+            "𝟗𝟑𝟖𝝅 𝐜𝐦𝟑\n𝟑 𝟑",
+            "𝟗𝟐𝟔𝝅 𝐜𝐦𝟑",
+            "𝟖𝟑𝟖𝝅 𝐜𝐦𝟑\n𝟑 𝟑"
+        ],
+        "answer": "𝟗𝟖𝟑𝝅 𝐜𝐦𝟑",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 76,
+        "question": "A sphere of radius 30 cm is melted and recast into hemispherical bowls, each of\nexternal radius 10 cm and wall thickness 1 cm. How many such bowls can be made?\n(in approx)\n30 ऴेभी त्रत्रज्या ऱारे एक गॉरे कॉ कऩघराकय अधगगॉराकाय कटॉय े फनाए िात े वैं, जिनभ ें ऴ े प्रत्यके की फाह्य\nत्रत्रज्या 10 ऴेभी ऒय दीऱाय की भॉटाई 1 ऴेभी वै। ऐऴ े ककतन े कटॉय े फनाए िा ऴकते वैं? (रगबग)\nSSC CHSL PRE 2025",
+        "options": [
+            "188",
+            "203",
+            "182",
+            "199\n𝟔𝟖𝟔𝝅"
+        ],
+        "answer": "188",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 77,
+        "question": "A hollow hemispherical steel bowl can contain cubic units of liquid. The outer radius\n𝟑\nof the bowl is 9 units. How much steel (in cubic units) was used to make the bowl?\n𝟔𝟖𝟔𝝅\nएक खॉखरे अधगगॉराकाय स्टीर के कटॉय े भें घन इकाई द्रऱ आ ऴकता वै। कटॉय े की फावयी\n𝟑\nत्रत्रज्या 9 इकाई वै। कटॉया फनान े भ ें ककतने स्टीर (घन इकाई भें) का उऩमॉग रृआ?\n(RRB Section Controller 2025) (SSC MTS 2024)\n𝟕𝟕𝟐𝝅 𝟕𝟔𝟗𝝅",
+        "options": [
+            "",
+            "𝟑 𝟑\nBY Gagan Pratap\n𝟕𝟔𝟕𝝅 𝟕𝟕𝟎𝝅",
+            "",
+            "𝟑 𝟑"
+        ],
+        "answer": "",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 78,
+        "question": "The internal and external radii of a hollow hemispherical bowl are 20 cm and 23\ncm, respectively. What is the total surface area (in cm²) of the bowl?\nककऴी खॉखरे अिगगॉरीम कटॉय े की आंतरयक ऒय फावयी त्रत्रज्याएं क्रभलः 20 ऴेभी. ऒय 23 ऴेभी. वैं।\nकटॉय े का कु र ऩृष्ठीम क्षेत्रपर (cm2 भें) ज्ञात कय।ें",
+        "options": [
+            "2082 ",
+            "1858 ",
+            "1987 ",
+            "2194 "
+        ],
+        "answer": "2082 ",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 79,
+        "question": "The internal diameter of a hollow hemispherical vessel is 24cm. It is made of a steel\nsheet which is 0.5 cm thick. What is the total surface area (in cm2) of the vessel?\nएक खॉखरे अधग-गॉरे ऱारे फतगन का आंतरयक व्याऴ 24 ऴेभी. वै। मव फतगन 0.5 ऴेभी भॉटाई ऱारी\nइस्पात की र्ादय ऴे फना रृआ वै। फतगन का कु र ऩश्ृ ठीम क्षेत्र (ऱगग ऴेभी भें) ककतना वै?",
+        "options": [
+            "600.5𝝅",
+            "600.2𝝅",
+            "612.75𝝅",
+            "468.75𝝅"
+        ],
+        "answer": "600.5𝝅",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 80,
+        "question": "The inner and outer radii of a hemispherical wooden bowl are 6 cm and 8 cm,\nrespectively. Its entire surface has to be polished and the cost of polishing πcm2\nis Rs.50. How much will it cost to polish the bowl?\nएक अधगगॉराकाय रकडी के कटॉय े की बीतयी ऒय फावयी त्रत्रज्याएँ क्रभलः 6 cm ऒय 8 cm वैं।\nइऴकी ऩूयी ऴतव कॉ ऩॉजरल ककमा िाना वै ऒय πcm2 कॉ ऩॉजरल कयने की रागत Rs. 50 वै। कटॉय े\nकॉ ऩॉजरल कयने भें ककतना खर्ग आएगा?\nSSC CHSL Pre 202",
+        "options": [
+            "Rs.12,000",
+            "Rs.10,000",
+            "Rs.11,600",
+            "Rs. 11,400"
+        ],
+        "answer": "Rs.12,000",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 81,
+        "question": "A hollow spherical container is completely filled with water. A solid cube-shaped\nblock of metal is fully submerged inside it such that the diagonal of the cube is\nequal to the radius of the sphere. What percentage of the sphere's volume is\noccupied by the metal block? (in approximate value)\nएक खॉखरा गॉराकाय ऩात्र ऩूयी तयव ऴे ऩानी ऴ े बया वै। एक ठॉऴ घन के आकाय का धातु का ब्लॉक\nउऴभें इऴ प्रकाय डुफॉमा गमा वै कक घन का कऱकणग गॉरे की त्रत्रज्या के फयाफय वै। गॉरे के आमतन का\nककतना प्रत्रतलत बाग धातु के ब्लॉक द्वाया घेया गमा वै? (रगबग भान भें)\nSSC CHSL PRE 2025",
+        "options": [
+            "1.8%",
+            "2.7%",
+            "4.6%",
+            "3.8%"
+        ],
+        "answer": "1.8%",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 82,
+        "question": "A hemispherical bowl is 88 cm round the brim. Assuming it to be full, how many\npersons may be served from it in hemispherical glasses, 7 cm in diameter at the\n𝟐𝟐\ntop? (Where 𝝅 = )\n𝟕\nएक अधगगॉराकाय कटॉय े की ककनायी 88 cm वै। इऴे बया रृआ भानत े रृए, इऴऴ े ककतने रॉगों कॉ\n𝟐𝟐\nअधगगॉराकाय गगराऴों भ ें ऩयॉऴा िा ऴकता वै, मदद गगराऴ के लीळ ग का व्याऴ 7 cm वै, (िवाa 𝝅 = )\n𝟕\nSSC CPO 2024\nBY Gagan Pratap",
+        "options": [
+            "74",
+            "68",
+            "64",
+            "70"
+        ],
+        "answer": "74",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 83,
+        "question": "A vertical cylindrical container is filled with oil. A solid hemispherical stone of\nRadius 7 cm is immersed completely, and the oil level rises by 3 cm. What is the\nradius of the cylinder?\nएक ऊर्ध्ागधय फेरनाकाय ऩात्र तेर ऴ े बया वै। 7 ऴेभी त्रत्रज्या का एक ठॉऴ अधगगॉराकाय ऩत्थय ऩूयी\nतयव ऴ े डुफॉ ददमा िाता वै, ऒय तेर का स्तय 3 ऴेभी फढ़ िाता वै। फेरन की त्रत्रज्या क्या वै?\n(SSC CGL PRE 2025)",
+        "options": [
+            "6.29 cm",
+            "7.43 cm",
+            "8.73 cm",
+            "11.41 cm"
+        ],
+        "answer": "6.29 cm",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 84,
+        "question": "A solid top is in the form of a cone surmounted by a hemisphere. If the volume of\nthe solid is 2816 cube cm and the radius of the hemispherical part is 8 cm, then\n𝟐𝟐\nthe height of the top is? (Take 𝝅 = )\n𝟕\nएक ठॉऴ लीळग एक लकं ु के आकाय का वै जिऴके ऊऩय एक गॉराधग वै। मदद ठॉऴ का आमतन 2816 घन\n𝟐𝟐\nऴेभी वै ऒय अधगगॉराकाय बाग की त्रत्रज्या 8 ऴेभी वै, तॉ लीळग की ऊं र्ाई वै? (𝝅 = रीजिए)\n𝟕\n(SSC MTS 2024)",
+        "options": [
+            "26 cm",
+            "50 cm",
+            "34 cm",
+            "42 cm"
+        ],
+        "answer": "26 cm",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 85,
+        "question": "A medicine capsule is shaped like a cylinder with two hemispheres attached to\neach of its ends. The length of the entire capsule is 15 mm, and its diameter is 6\n𝟐𝟐\nmm. calculate the surface area (in sq mm) of the capsule? (Take 𝝅 = )\n𝟕\nएक दऱा कै प्सूर एक जऴरेंडय के आकाय का वॉता वै जिऴके प्रत्येक जऴय े ऩय दॉ गॉराधग िुडे वॉते वैं। ऩूय े\nकै प्सूर की रंफाई 15 जभभी ऒय इऴका व्याऴ 6 जभभी वै। कै प्सूर के ऴतव क्षेत्र (ऱगग जभभी भें) की\n𝟐𝟐\nगणना कय?ें (𝝅 = रीजिए)\n𝟕\n(SSC MTS 2024)",
+        "options": [
+            "286",
+            "283",
+            "280",
+            "289"
+        ],
+        "answer": "286",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 86,
+        "question": "To make a toy, a hemisphere is attached to one end of a cylinder and a cone is\nattached to the other end of the cylinder. The common radius of the cylinder,\ncone and hemisphere is 4.2 cm. The height of the cylinder and the height of the\ncone are 7 cm. Find the volume (in cubic cm) of the toy?\nएक खखरॊना फनाने के जरए, एक फेरन के एक जऴय े ऩय एक अधगगॉरा िुडा रृआ वै ऒय फेरन के दऴू य े\nजऴय े ऩय एक लंकु िुडा रृआ वै। फेरन, लंकु ऒय अधगगॉरे की उबमजनष्ठ त्रत्रज्या 4.2 cm वै। फेरन की\nऊं र्ाई ऒय लंकु की ऊं र्ाई 7 ऴेभी वै। खखरॊना का आमतन (घन ऴेभी भें) ज्ञात कीजिमे?\n(SSC CHSL MAINS 2024)",
+        "options": [
+            "863.25",
+            "358.8",
+            "672.672",
+            "762.255\nBY Gagan Pratap"
+        ],
+        "answer": "863.25",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 87,
+        "question": "A cubical block of wood of side 14 cm is surmounted by a hemisphere of the\nlargest possible diameter. What is the total surface area (in cm2) of the solid\n𝟐𝟐\nthus formed? (𝑼𝒔𝒆 𝝅 = )\n𝟕\n14 cm कॉय ऱारे रकडी के एक घनाकाय ब्लॉक के ऊऩय ऴफऴ े फडे व्याऴ का एक अधगग ॉरा यखा गमा वै। इऴ\n𝟐𝟐\nप्रकाय फने ठॉऴ का ऴंऩूणग ऩृष्ठीम क्षेत्रपर (cm2 भ)ें ककतना वॉगा? (𝝅 = का उऩमॉग कीजिए)\n𝟕\n[RRB GROUP - D 2025]",
+        "options": [
+            "1296",
+            "1482",
+            "1330",
+            "1176"
+        ],
+        "answer": "1296",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 88,
+        "question": "A toy is in the form of a cone mounted on a hemisphere. The radius of the\nhemisphere and that of the cone is 36 cm and height of the cone is 105 cm. The\ntotal surface area (in cm2) of the toy is:\nएक खखरॊना एक अधगगॉरे ऩय रगे लंकु के आकाय का वै। अधगगॉरे ऒय लंकु दॉनों की त्रत्रज्या 36\nऴेभी वै ऒय लंकु की ऊँ र्ाई 105 ऴेभी वै। खखरॊने का कु र ऩृष्ठीम क्षेत्रपर (ऴेभी²) वै:\n(SSC CGL MAINS 2024)",
+        "options": [
+            "6588 π",
+            "5240 π",
+            "6025 π",
+            "5799 π"
+        ],
+        "answer": "6588 π",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 89,
+        "question": "From a solid cylinder of height 48 cm and radius 14 cm, a conical cavity of radius 7 cm\nand height 24 cm is drilled out from one end of the cylinder. A hemisphere of radius 14\ncm is scooped out from the other end. Find the total surface area (in cm2) of the\n𝟐𝟐\nremaining solid. (Take = )\n𝟕\n48 ऴेभी ऊँ र्ाई ऒय 14 ऴेभी त्रत्रज्या ऱारे एक ठॉऴ फेरन के एक जऴय े ऴे 7 ऴेभी त्रत्रज्या ऒय 24 ऴेभी\nऊँ र्ाई ऱारी एक लंक्वाकाय गुवा खॉदी िाती वै। दऴू य े जऴय े ऴे 14 ऴेभी त्रत्रज्या ऱारा एक अधगगॉरा\n𝟐𝟐\nजनकारा िाता वै। लेळ ठॉऴ का कु र ऩृष्ठीम क्षेत्रपर (ऴेभी²) ज्ञात कीजिए। (𝝅 = भान रीजिए)\n𝟕\n[RRB GROUP - D 2025]",
+        "options": [
+            "6463",
+            "6006",
+            "6468",
+            "6864"
+        ],
+        "answer": "6463",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 90,
+        "question": "The radius of base of solid cylinder is 7 cm and its height is 21 cm. It melted and\nconverted into small bullets. Each bullet is of same size. Each bullet consisted of\ntwo parts viz. a cylinder and a hemisphere on one of its base. The total height of\nbullet is 3.5 cm and radius of base is 2.1 cm. Approximately how many complete\nbullets can be obtained?\nठॉऴ फेरन के आधाय की त्रत्रज्या 7 ऴेभी वै ऒय इऴकी ऊं र्ाई 21 ऴेभी वै। मव कऩघर गमा ऒय छॉटी\nगॉजरमों भें फदर गमा। प्रत्येक गॉरी एक वी आकाय की वै। प्रत्येक गॉरी भें दॉ बाग वै, इऴके एक वी\nआधाय ऩय एक फेरन ऒय एक गॉराधग वै। फुरेट की कु र ऊं र्ाई 3.5 ऴेभी ऒय आधाय की त्रत्रज्या 2.1\nऴेभी वै। तॉ ज्ञात कय े ककतनी गॉजरमां प्राप्त की िा ऴकती वैं?",
+        "options": [
+            "83",
+            "89",
+            "74",
+            "79\nBY Gagan Pratap"
+        ],
+        "answer": "83",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 91,
+        "question": "A metallic sphere of unknown radius is melted and recast into 64 smaller spherical\nballs. During the recasting process, 20% of the total metal is lost as waste. If the total\nvolume of the 64 smaller spheres after the loss is 10,752 cm³, determine the radius\n(rounded off to the nearest integer) of the original sphere. (Use π = 3.14)\nअज्ञात त्रत्रज्या ऱारे एक धात्वत्वक गॉरे कॉ कऩघराकय 64 छॉटे गॉराकाय गॉरे फनाए िाते वैं। इऴ\nप्रकक्रमा के दॊयान कु र धातु का 20% अऩजलष्ट के रूऩ भें नष्ट वॉ िाता वै। मदद नष्ट रृई धातु के फाद\nइन 64 छॉटे गॉरों का कु र आमतन 10,752 cm³ वै, तॉ भूर गॉरे की त्रत्रज्या ज्ञात कीजिए\n(जनकटतभ ऩूणाकां तक ऩूणाांककत कयके )। (π = 3.14 का प्रमॉग कय)ें\n[RRB GROUP - D 2025]",
+        "options": [
+            "16 cm",
+            "17 cm",
+            "15 cm",
+            "14 cm"
+        ],
+        "answer": "16 cm",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 92,
+        "question": "A sphere is lowered into water which is filled up to the brim in a conical vessel of\nradius 12 cm and height 16 cm. The size of the sphere is such that when it touches\nthe sides of the cone, the sphere is just immersed into the cone. Find the ratio of\nthe volume of water that has overflown to the volume of water left in the cone.\n𝟐𝟐\n(𝑼𝒔𝒆 𝝅 = )\n𝟕\nएक लंक्वाकाय ऩात्र जिऴकी त्रत्रज्या 12 cm ऒय ऊँ र्ाई 16 cm वै, ऩानी ऴे ऩूणग रूऩ ऴे बया रृआ वै,\nउऴभें एक गॉरा डुफॉमा िाता वै। गॉरे का आकाय ऐऴा वै कक िफ ऱव लकं ु की बुिाऑ ंकॉ छू ता वै, तॉ\nऱव उऴभें ऩूणगतमा डूफ िाता वै। छरक कय फावय जनकरे ऩानी के आमतन ऒय लंकु भें फर्े ऩानी के\n𝟐𝟐\nआमतन का अनुऩात ज्ञात कीजिए। (𝝅 = का उपयोग कर)ें\n𝟕\n[RRB GROUP - D 2025]",
+        "options": [
+            "2 : 7",
+            "3 : 5",
+            "5 : 7",
+            "4 : 5"
+        ],
+        "answer": "2 : 7",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 93,
+        "question": "The base radius and slant height of a conical vessel is 3 cm and 6 cm\nrespectively. Find the volume of sufficient water in the vessel such that a sphere\nof radius 1 cm is placed into it water just immerse it?\nएक लंक्वाकाय फतगन की त्रत्रज्या 3cm ऒय त्रतमगक ऊं र्ाई 6cm वै, इऴ लंकु भें ककतने ऩानी की\nआऱश्यकता वॉगी ताकक इऴके अंदय यखा रृआ 1cm त्रत्रज्या का गॉरा ऩूणतग ः डूफ ऴके ?\n𝟒𝝅 𝟓𝝅",
+        "options": [
+            "",
+            "𝟑 𝟑\n𝟕𝝅 𝟐𝝅",
+            "",
+            "𝟑 𝟑"
+        ],
+        "answer": "",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 94,
+        "question": "The inside of a bowl is part of a sphere. When water is put into the bowl to a depth d, the\nwater surface becomes a circle of radius 2d. What is the radius of the sphere?\nएक कटॉय े के अंदय एक गॉरे का रवस्सा वै। िफ ऩानी कॉ कटॉय े भें गवयाई d तक डारा िाता वै, तॉ\nऩानी की ऴतव 2d त्रत्रज्या का एक ऱृत्त फन िाती वै। गॉरे की त्रत्रज्या क्या वै?\n(UPSC CDS-1 2025)",
+        "options": [
+            "2.5d",
+            "2.75d",
+            "3d",
+            "3.25 d\nBY Gagan Pratap"
+        ],
+        "answer": "2.5d",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    }
+]
