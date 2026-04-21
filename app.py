@@ -81,11 +81,18 @@ def initialize_state():
     if 'resume_pin' not in st.session_state: st.session_state.resume_pin = str(random.randint(1000, 9999))
 
 # --- 5. BACKEND CONVERTER ENGINE (PDF -> DICT) ---
-def parse_pdf_to_raw_data(file_path):
+def parse_pdf_to_raw_data(file_input):
+    """Parses PDF from either a file path or an uploaded file object."""
     extracted_text = ""
     try:
-        if not os.path.exists(file_path): return []
-        with pdfplumber.open(file_path) as pdf:
+        # Handle string path vs uploaded file object
+        if isinstance(file_input, str):
+            if not os.path.exists(file_input): return []
+            pdf_source = file_input
+        else:
+            pdf_source = file_input
+
+        with pdfplumber.open(pdf_source) as pdf:
             for page in pdf.pages:
                 text = page.extract_text(x_tolerance=2, y_tolerance=3)
                 if text: extracted_text += text + "\n"
@@ -156,11 +163,18 @@ def parse_pdf_to_raw_data(file_path):
                 })
         return quiz_data
     except Exception as e:
+        st.error(f"Parsing error: {e}")
         return []
 
-# --- 6. AUTOMATIC JSON MANAGER (CACHING REMOVED TO PREVENT CRASH) ---
-def load_and_auto_save_quiz_data(pdf_filename):
-    json_filename = pdf_filename.replace('.pdf', '.json')
+# --- 6. AUTOMATIC JSON MANAGER ---
+def load_and_auto_save_quiz_data(filename):
+    """Loads JSON if available, otherwise processes PDF."""
+    if filename.endswith('.json'):
+        json_filename = filename
+        pdf_filename = filename.replace('.json', '.pdf')
+    else:
+        json_filename = filename.replace('.pdf', '.json')
+        pdf_filename = filename
     
     # 1. Load from local JSON if it exists
     if os.path.exists(json_filename):
@@ -168,12 +182,11 @@ def load_and_auto_save_quiz_data(pdf_filename):
             data = json.load(f)
         return data, True
         
-    # 2. If no JSON, extract from PDF, save locally, AND push to GitHub automatically!
+    # 2. Fallback to PDF if JSON is missing
     data = parse_pdf_to_raw_data(pdf_filename)
     if data:
         with open(json_filename, 'w', encoding='utf-8') as f:
             json.dump(data, f, indent=4, ensure_ascii=False)
-        
         sync_to_github(json_filename, data)
         
     return data, False
@@ -193,7 +206,6 @@ def update_question_in_database(file_name, updated_q):
             json.dump(all_data, f, indent=4, ensure_ascii=False)
             
         sync_to_github(json_filename, all_data)
-        
         return True
     except Exception as e:
         st.error(f"Failed to update database: {e}")
@@ -251,7 +263,7 @@ def inject_timer(seconds, q_index):
 # --- 9. SETUP POPUP (DIALOG) ---
 @st.dialog("⚙️ Quiz Setup")
 def setup_dialog(file_name, total_available, is_json):
-    st.write(f"**Topic:** {file_name.replace('.pdf', '')}")
+    st.write(f"**Topic:** {file_name.replace('.pdf', '').replace('.json', '')}")
     if is_json:
         st.success("⚡ Loaded instantly from Database!")
     else:
@@ -273,7 +285,34 @@ def setup_dialog(file_name, total_available, is_json):
 def render_home():
     st.markdown('<div class="top-bar"><h2>📚 CBT Topic Hub</h2></div>', unsafe_allow_html=True)
     
-    with st.expander("🔄 Did you accidentally close the app? Resume Quiz Here", expanded=True):
+    # --- ADMIN UPLOAD FEATURE ---
+    with st.expander("🛠️ Admin: Add New Topic (Upload PDF)", expanded=False):
+        st.write("Upload a new PDF. The app will convert it to a database, push it to GitHub, and instantly delete the PDF from memory!")
+        new_pdf = st.file_uploader("Upload PDF Sheet", type="pdf")
+        new_topic_name = st.text_input("Enter Topic Name (e.g., Geometry Part 2)")
+        
+        if st.button("Convert & Save to Cloud", type="primary"):
+            if new_pdf and new_topic_name:
+                with st.spinner("Extracting data and generating database..."):
+                    raw_data = parse_pdf_to_raw_data(new_pdf)
+                    if raw_data:
+                        json_filename = new_topic_name.replace(" ", "_") + ".json"
+                        # Save locally so it appears instantly on the dashboard
+                        with open(json_filename, 'w', encoding='utf-8') as f:
+                            json.dump(raw_data, f, indent=4, ensure_ascii=False)
+                        
+                        # Push to GitHub
+                        sync_to_github(json_filename, raw_data)
+                        st.success(f"✅ Success! Database created and uploaded. PDF deleted from memory.")
+                        time.sleep(2)
+                        st.rerun()
+                    else:
+                        st.error("Failed to parse PDF. Ensure the format is correct.")
+            else:
+                st.warning("Please upload a PDF and enter a topic name.")
+    
+    # --- RESUME SESSION FEATURE ---
+    with st.expander("🔄 Did you accidentally close the app? Resume Quiz Here", expanded=False):
         st.write("Enter the 4-digit Recovery PIN you were given during your test to restore your progress.")
         col1, col2 = st.columns([1, 2])
         with col1:
@@ -297,6 +336,8 @@ def render_home():
     st.write("---")
     st.write("Select a topic below to start a new practice session.")
     
+    # DYNAMIC TOPIC DISCOVERY
+    # First, list the hardcoded legacy PDFs to ensure they are never lost
     topics = {
         "Percentage Part 1": "percent1 (1).pdf",
         "Percentage Part 2": "perceentage2.pdf",
@@ -321,10 +362,24 @@ def render_home():
         "Mensuration 3D (Sphere & Hemisphere)": "3D SPARE AND HEMISPHERE Sheet.pdf"
     }
     
+    # Automatically detect any new .json databases created by the Admin Upload Tool!
+    for f in os.listdir('.'):
+        if f.endswith('.json'):
+            is_legacy = False
+            for t_name, t_file in topics.items():
+                if t_file.replace('.pdf', '.json') == f:
+                    is_legacy = True
+                    break
+            if not is_legacy:
+                display_name = f.replace('.json', '').replace('_', ' ')
+                topics[display_name] = f
+
     cols = st.columns(2)
     for idx, (topic_name, file_name) in enumerate(topics.items()):
         with cols[idx % 2]:
-            if st.button(topic_name, use_container_width=True, icon="📄"):
+            # Use a lightning bolt icon if it's running purely off the fast JSON database
+            icon = "⚡" if file_name.endswith('.json') or os.path.exists(file_name.replace('.pdf', '.json')) else "📄"
+            if st.button(topic_name, use_container_width=True, icon=icon):
                 st.session_state.selected_topic_file = file_name
                 st.session_state.current_q_index = 0
                 st.session_state.user_answers = {}
@@ -344,7 +399,8 @@ def render_quiz():
 
     col_sect, col_lang, col_qnum = st.columns([2, 1, 1], vertical_alignment="center")
     with col_sect: 
-        st.markdown(f"##### {st.session_state.selected_topic_file.replace('.pdf', '')}")
+        display_title = st.session_state.selected_topic_file.replace('.pdf', '').replace('.json', '').replace('_', ' ')
+        st.markdown(f"##### {display_title}")
         st.markdown(f"<span style='color:#ef4444; font-weight:bold;'>Save this PIN to resume if closed: {st.session_state.resume_pin}</span>", unsafe_allow_html=True)
     with col_lang:
         st.session_state.app_lang = st.selectbox("Language", ["Bilingual", "English", "Hindi"], label_visibility="collapsed")
