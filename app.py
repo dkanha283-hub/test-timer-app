@@ -6,88 +6,57 @@ import os
 import random
 import json
 
-# --- 1. PAGE CONFIGURATION & THEME-AWARE CSS ---
+# --- 1. PAGE CONFIGURATION & CSS ---
 st.set_page_config(page_title="Pro CBT Hub", layout="wide", initial_sidebar_state="collapsed")
 
 def inject_custom_css():
-    # We now use Streamlit's native CSS variables so it flawlessly adapts to Light/Dark Mode
     st.markdown("""
         <style>
-        .question-box { background-color: var(--secondary-background-color); color: var(--text-color); padding: 25px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); margin-bottom: 20px; font-size: 18px; white-space: pre-wrap; line-height: 1.6; border: 1px solid var(--faded-text-color);}
-        .top-bar { background-color: var(--primary-color); color: white; padding: 15px; border-radius: 5px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;}
+        .stApp { background-color: #f4f6f9; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .question-box { background-color: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 20px; font-size: 18px; white-space: pre-wrap; line-height: 1.6;}
+        .top-bar { background-color: #1e3a8a; color: white; padding: 15px; border-radius: 5px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;}
+        .topic-card { background-color: white; padding: 20px; border-radius: 10px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1); cursor: pointer; border: 2px solid transparent; transition: 0.3s;}
+        .topic-card:hover { border-color: #1e3a8a; }
         </style>
     """, unsafe_allow_html=True)
 
-# --- 2. GITHUB CLOUD SYNC ENGINE (NOW SUPPORTS DELETE & MOVE) ---
-def get_github_repo():
-    if "GITHUB_TOKEN" not in st.secrets or "GITHUB_REPO" not in st.secrets: return None
-    from github import Github
-    return Github(st.secrets["GITHUB_TOKEN"]).get_repo(st.secrets["GITHUB_REPO"])
-
-def github_save(file_path, json_data):
-    repo = get_github_repo()
-    if not repo: 
-        st.toast("⚠️ Saved locally, but GitHub secrets missing.")
-        return False
-    # Normalize path for GitHub API
-    git_path = file_path.replace("\\", "/")
-    json_str = json.dumps(json_data, indent=4, ensure_ascii=False)
+# --- 2. GITHUB CLOUD SYNC ENGINE ---
+def sync_to_github(file_name, json_data):
+    """Automatically pushes the JSON database to your GitHub Repository."""
     try:
-        contents = repo.get_contents(git_path)
-        repo.update_file(contents.path, f"Update {git_path}", json_str, contents.sha)
-        st.toast("☁️ Synced to GitHub!")
-    except:
-        repo.create_file(git_path, f"Create {git_path}", json_str)
-        st.toast("☁️ Created in GitHub!")
-    return True
-
-def github_delete(file_path):
-    repo = get_github_repo()
-    if not repo: return False
-    git_path = file_path.replace("\\", "/")
-    try:
-        contents = repo.get_contents(git_path)
-        repo.delete_file(contents.path, f"Delete {git_path}", contents.sha)
-        st.toast("🗑️ Deleted from GitHub!")
+        if "GITHUB_TOKEN" not in st.secrets or "GITHUB_REPO" not in st.secrets:
+            st.toast("⚠️ GitHub Secrets not found. Saved locally, but not pushed to cloud.")
+            return False
+            
+        from github import Github
+        g = Github(st.secrets["GITHUB_TOKEN"])
+        repo = g.get_repo(st.secrets["GITHUB_REPO"])
+        
+        json_str = json.dumps(json_data, indent=4, ensure_ascii=False)
+        
+        try:
+            contents = repo.get_contents(file_name)
+            repo.update_file(contents.path, f"Auto-sync updated {file_name}", json_str, contents.sha)
+            st.toast("☁️ Successfully synced updates to GitHub!")
+        except:
+            repo.create_file(file_name, f"Auto-sync created {file_name}", json_str)
+            st.toast("☁️ New JSON Database successfully created in GitHub!")
         return True
     except Exception as e:
+        st.toast(f"❌ GitHub Sync Error: Ensure secrets are correct. Error: {e}")
         return False
 
-# --- 3. DYNAMIC LIBRARY SCANNER (FOLDERS & FILES) ---
-def get_library():
-    """Scans the repository and builds a dictionary of folders and their JSON files."""
-    library = {}
-    ignore_dirs = {'.git', '.streamlit', 'venv', '__pycache__'}
-    
-    for root, dirs, files in os.walk('.'):
-        # Skip hidden/system directories
-        dirs[:] = [d for d in dirs if d not in ignore_dirs and not d.startswith('.')]
-        
-        folder = os.path.basename(root)
-        if root == '.': folder = "Uncategorized"
-        
-        for f in files:
-            if f.endswith('.json'):
-                if folder not in library: library[folder] = {}
-                topic_name = f.replace('.json', '').replace('_', ' ')
-                library[folder][topic_name] = os.path.join(root, f)
-                
-    # Sort folders alphabetically, but put 'Uncategorized' last
-    sorted_library = {k: library[k] for k in sorted(library.keys()) if k != "Uncategorized"}
-    if "Uncategorized" in library:
-        sorted_library["Uncategorized"] = library["Uncategorized"]
-        
-    return sorted_library
-
-# --- 4. CLOUD SESSION STORE ---
+# --- 3. GLOBAL CLOUD SESSION STORE ---
 @st.cache_resource
-def get_global_sessions(): return {}
+def get_global_sessions():
+    return {}
 
 def save_state_to_cloud():
     sessions = get_global_sessions()
     now = time.time()
     expired = [pin for pin, data in sessions.items() if (now - data['timestamp']) > 18000]
     for pin in expired: del sessions[pin]
+        
     if 'resume_pin' in st.session_state:
         sessions[st.session_state.resume_pin] = {
             "file": st.session_state.selected_topic_file,
@@ -99,7 +68,7 @@ def save_state_to_cloud():
             "timestamp": now
         }
 
-# --- 5. SESSION STATE INIT ---
+# --- 4. SESSION STATE MANAGEMENT ---
 def initialize_state():
     if 'page' not in st.session_state: st.session_state.page = "home"
     if 'selected_topic_file' not in st.session_state: st.session_state.selected_topic_file = None
@@ -111,10 +80,16 @@ def initialize_state():
     if 'app_lang' not in st.session_state: st.session_state.app_lang = "Bilingual"
     if 'resume_pin' not in st.session_state: st.session_state.resume_pin = str(random.randint(1000, 9999))
 
-# --- 6. PDF TO JSON ENGINE ---
-def parse_pdf_to_raw_data(pdf_source):
+# --- 5. BACKEND CONVERTER ENGINE (PDF -> DICT) ---
+def parse_pdf_to_raw_data(file_input):
     extracted_text = ""
     try:
+        if isinstance(file_input, str):
+            if not os.path.exists(file_input): return []
+            pdf_source = file_input
+        else:
+            pdf_source = file_input
+
         with pdfplumber.open(pdf_source) as pdf:
             for page in pdf.pages:
                 text = page.extract_text(x_tolerance=2, y_tolerance=3)
@@ -142,18 +117,22 @@ def parse_pdf_to_raw_data(pdf_source):
             ans_matches = re.findall(r'(\d+)\s*\.?\s*[\(\[]\s*([a-d])\s*[\)\]]', ak_text)
             nums = re.findall(r'\b(\d+)\s*\.', ak_text)
             opts = re.findall(r'[\(\[]\s*([a-d])\s*[\)\]]', ak_text)
-            if len(ans_matches) < len(opts) * 0.5: ans_matches = list(zip(nums, opts))
-            for qnum, ans in ans_matches: correct_answers_dict[int(qnum)] = ans.upper()
+            if len(ans_matches) < len(opts) * 0.5: 
+                ans_matches = list(zip(nums, opts))
+            for qnum, ans in ans_matches:
+                correct_answers_dict[int(qnum)] = ans.upper()
         
         raw_splits = re.split(r'(?:^|\n)\s*(\d+)[\.\)]\s+', "\n" + main_questions_text)
         quiz_data = []
         for i in range(1, len(raw_splits), 2):
             q_id = int(raw_splits[i])
             q_content = raw_splits[i+1]
+            
             opt_a_match = re.search(r'\[A\](.*?)(?=\[B\]|\[C\]|\[D\]|$)', q_content, re.DOTALL | re.IGNORECASE)
             opt_b_match = re.search(r'\[B\](.*?)(?=\[A\]|\[C\]|\[D\]|$)', q_content, re.DOTALL | re.IGNORECASE)
             opt_c_match = re.search(r'\[C\](.*?)(?=\[A\]|\[B\]|\[D\]|$)', q_content, re.DOTALL | re.IGNORECASE)
             opt_d_match = re.search(r'\[D\](.*?)(?=\[A\]|\[B\]|\[C\]|$)', q_content, re.DOTALL | re.IGNORECASE)
+            
             opt_a = opt_a_match.group(1).strip() if opt_a_match else "Option A"
             opt_b = opt_b_match.group(1).strip() if opt_b_match else "Option B"
             opt_c = opt_c_match.group(1).strip() if opt_c_match else "Option C"
@@ -163,8 +142,8 @@ def parse_pdf_to_raw_data(pdf_source):
             for tag in ['[A]', '[B]', '[C]', '[D]', '[a]', '[b]', '[c]', '[d]']:
                 idx = q_content.find(tag)
                 if idx != -1 and idx < first_opt_idx: first_opt_idx = idx
+                    
             question_text = q_content[:first_opt_idx].strip()
-            
             correct_letter = correct_answers_dict.get(q_id, 'A') 
             if correct_letter == 'A': correct_text = opt_a
             elif correct_letter == 'B': correct_text = opt_b
@@ -174,13 +153,58 @@ def parse_pdf_to_raw_data(pdf_source):
             
             if question_text:
                 quiz_data.append({
-                    "id": q_id, "question": question_text, "options": [opt_a, opt_b, opt_c, opt_d],
-                    "answer": correct_text, "explanation": f"Based on the Answer Key, the correct option is [{correct_letter}]."
+                    "id": q_id,
+                    "question": question_text,
+                    "options": [opt_a, opt_b, opt_c, opt_d],
+                    "answer": correct_text,
+                    "explanation": f"Based on the Answer Key, the correct option is [{correct_letter}]."
                 })
         return quiz_data
     except Exception as e:
         st.error(f"Parsing error: {e}")
         return []
+
+# --- 6. AUTOMATIC JSON MANAGER ---
+def load_and_auto_save_quiz_data(filename):
+    if filename.endswith('.json'):
+        json_filename = filename
+        pdf_filename = filename.replace('.json', '.pdf')
+    else:
+        json_filename = filename.replace('.pdf', '.json')
+        pdf_filename = filename
+    
+    if os.path.exists(json_filename):
+        with open(json_filename, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+        return data, True
+        
+    data = parse_pdf_to_raw_data(pdf_filename)
+    if data:
+        with open(json_filename, 'w', encoding='utf-8') as f:
+            json.dump(data, f, indent=4, ensure_ascii=False)
+        sync_to_github(json_filename, data)
+        
+    return data, False
+
+def update_question_in_database(file_name, updated_q):
+    json_filename = file_name.replace('.pdf', '.json')
+    try:
+        with open(json_filename, 'r', encoding='utf-8') as f:
+            all_data = json.load(f)
+            
+        for i, q in enumerate(all_data):
+            if q['id'] == updated_q['id']:
+                all_data[i] = updated_q
+                break
+                
+        with open(json_filename, 'w', encoding='utf-8') as f:
+            json.dump(all_data, f, indent=4, ensure_ascii=False)
+            
+        sync_to_github(json_filename, all_data)
+        return True
+    except Exception as e:
+        st.error(f"Failed to update database: {e}")
+        return False
 
 # --- 7. SURGICAL LANGUAGE FILTER ---
 def filter_text(text, lang, is_option=False):
@@ -207,7 +231,7 @@ def filter_text(text, lang, is_option=False):
                 if is_option or eng_word_count < 4: filtered_lines.append(l)
     return '\n'.join(filtered_lines).strip()
 
-# --- 8. SMART TIMER INJECTION ---
+# --- 8. SMART TIMER INJECTION (Supports Pausing and Memory) ---
 def inject_timer(seconds, q_index, is_paused, pin):
     paused_str = "true" if is_paused else "false"
     html_code = f"""
@@ -215,27 +239,35 @@ def inject_timer(seconds, q_index, is_paused, pin):
     <script>
         var current_q = {q_index};
         var isPaused = {paused_str};
+        
+        // Use sessionStorage so the timer survives Streamlit reruns
         var stored_q = sessionStorage.getItem('active_q_pin_{pin}');
         var timeLeft;
+        
         if (stored_q == current_q.toString()) {{
+            // If we are on the same question, resume exactly where we left off
             var savedTime = sessionStorage.getItem('timeLeft_pin_{pin}');
             timeLeft = savedTime !== null ? parseInt(savedTime) : {seconds};
         }} else {{
+            // If this is a new question, start the timer fresh
             timeLeft = {seconds};
             sessionStorage.setItem('active_q_pin_{pin}', current_q);
             sessionStorage.setItem('timeLeft_pin_{pin}', timeLeft);
         }}
+
         var timerElem = document.getElementById('timer_display_{q_index}');
         if (isPaused) {{
             timerElem.innerHTML = "Time Left: " + timeLeft + "s ⏸️";
-            timerElem.style.color = "#f59e0b"; 
+            timerElem.style.color = "#f59e0b"; // Orange when paused
         }} else {{
             timerElem.innerHTML = "Time Left: " + timeLeft + "s";
-            timerElem.style.color = "#ef4444"; 
+            timerElem.style.color = "#ef4444"; // Red when active
         }}
+
         var timerId = setInterval(countdown, 1000);
         function countdown() {{
-            if (isPaused) return; 
+            if (isPaused) return; // FREEZE TIMER IF PAUSED
+            
             if (timeLeft <= 0) {{
                 clearTimeout(timerId);
                 var buttons = window.parent.document.querySelectorAll('button');
@@ -252,139 +284,68 @@ def inject_timer(seconds, q_index, is_paused, pin):
     """
     st.components.v1.html(html_code, height=50)
 
-# --- 9. SETUP POPUP (DIALOG) ---
+# --- 9. SETUP POPUP (DIALOG WITH SHUFFLE) ---
 @st.dialog("⚙️ Quiz Setup")
-def setup_dialog(file_path):
-    st.write(f"**Topic:** {os.path.basename(file_path).replace('.json', '').replace('_', ' ')}")
-    
-    with open(file_path, 'r', encoding='utf-8') as f:
-        raw_data = json.load(f)
-        
-    total_available = len(raw_data)
+def setup_dialog(file_name, total_available, is_json):
+    st.write(f"**Topic:** {file_name.replace('.pdf', '').replace('.json', '')}")
+    if is_json:
+        st.success("⚡ Loaded instantly from Database!")
+    else:
+        st.info("📄 PDF Scanned. New JSON Database automatically saved to your GitHub!")
+
     st.write(f"Total questions available: {total_available}")
     
+    # Feature: Sequence vs Shuffle Selection
     order_choice = st.radio("Question Order:", ["In Sequence", "Shuffled"], horizontal=True)
+    
     selected_qs = st.slider("How many questions to attempt?", min_value=1, max_value=total_available, value=min(20, total_available))
     timer_sec = st.number_input("Time per question (seconds)", min_value=10, max_value=300, value=60)
     
     if st.button("🚀 Start Quiz", type="primary", use_container_width=True):
         st.session_state.max_questions = selected_qs
         st.session_state.time_per_question = timer_sec
+        
         if order_choice == "Shuffled":
-            st.session_state.quiz_data = random.sample(raw_data, selected_qs)
+            st.session_state.quiz_data = random.sample(st.session_state.raw_parsed_data, selected_qs)
         else:
-            st.session_state.quiz_data = raw_data[:selected_qs]
+            st.session_state.quiz_data = st.session_state.raw_parsed_data[:selected_qs]
             
-        st.session_state.selected_topic_file = file_path
         st.session_state.resume_pin = str(random.randint(1000, 9999))
         st.session_state.page = "quiz"
         st.rerun()
 
-# --- 10. RENDER VIEWS (WITH FULL CMS ADMIN) ---
+# --- 10. RENDER VIEWS ---
 def render_home():
     st.markdown('<div class="top-bar"><h2>📚 CBT Topic Hub</h2></div>', unsafe_allow_html=True)
-    library = get_library()
     
-    # --- FULL CMS ADMIN PANEL ---
-    with st.expander("🛠️ Admin Dashboard (Upload, Move, Rename, Delete)", expanded=False):
-        admin_tab1, admin_tab2 = st.tabs(["📤 Upload PDF", "📁 Manage Library"])
+    with st.expander("🛠️ Admin: Add New Topic (Upload PDF)", expanded=False):
+        st.write("Upload a new PDF. The app will convert it to a database, push it to GitHub, and instantly delete the PDF from memory!")
+        new_pdf = st.file_uploader("Upload PDF Sheet", type="pdf")
+        new_topic_name = st.text_input("Enter Topic Name (e.g., Geometry Part 2)")
         
-        with admin_tab1:
-            st.write("Upload a PDF. It will be converted to a database and saved in the selected folder.")
-            c1, c2 = st.columns(2)
-            with c1:
-                folder_options = list(library.keys()) if library else []
-                if "Uncategorized" in folder_options: folder_options.remove("Uncategorized")
-                folder_options.append("+ Create New Folder")
-                selected_folder = st.selectbox("Select Target Folder", folder_options)
-                
-                if selected_folder == "+ Create New Folder":
-                    selected_folder = st.text_input("Enter New Folder Name").strip()
-            with c2:
-                new_topic_name = st.text_input("Enter Topic Name (e.g., Geometry Part 2)").strip()
-                
-            new_pdf = st.file_uploader("Upload PDF Sheet", type="pdf")
-            
-            if st.button("Convert & Save to Folder", type="primary"):
-                if new_pdf and new_topic_name and selected_folder:
-                    with st.spinner("Generating database..."):
-                        raw_data = parse_pdf_to_raw_data(new_pdf)
-                        if raw_data:
-                            # Create local folder if needed
-                            os.makedirs(selected_folder, exist_ok=True)
-                            filename = new_topic_name.replace(" ", "_") + ".json"
-                            file_path = os.path.join(selected_folder, filename)
-                            
-                            with open(file_path, 'w', encoding='utf-8') as f:
-                                json.dump(raw_data, f, indent=4, ensure_ascii=False)
-                            github_save(file_path, raw_data)
-                            st.success(f"✅ Saved to {selected_folder}/{filename}!")
-                            time.sleep(1)
-                            st.rerun()
-                        else:
-                            st.error("Failed to parse PDF.")
-                else:
-                    st.warning("Please complete all fields and upload a PDF.")
-
-        with admin_tab2:
-            if not library:
-                st.info("Your library is empty.")
-            else:
-                c1, c2, c3 = st.columns(3)
-                with c1:
-                    edit_folder = st.selectbox("1. Select Folder", list(library.keys()), key="edit_f")
-                with c2:
-                    topics_in_folder = list(library[edit_folder].keys()) if edit_folder in library else []
-                    edit_topic = st.selectbox("2. Select Topic", topics_in_folder, key="edit_t")
-                
-                if edit_topic:
-                    old_path = library[edit_folder][edit_topic]
-                    st.write(f"**Managing:** `{old_path}`")
-                    
-                    with st.container(border=True):
-                        st.write("##### Rename or Move Topic")
-                        new_f_options = list(library.keys())
-                        if "Uncategorized" in new_f_options: new_f_options.remove("Uncategorized")
-                        new_f_options.append("+ Create New Folder")
-                        
-                        nc1, nc2 = st.columns(2)
-                        with nc1:
-                            new_folder = st.selectbox("Move to Folder:", new_f_options, index=new_f_options.index(edit_folder) if edit_folder in new_f_options else 0)
-                            if new_folder == "+ Create New Folder":
-                                new_folder = st.text_input("New Folder Name", key="new_fn").strip()
-                        with nc2:
-                            new_name = st.text_input("Rename Topic To:", value=edit_topic).strip()
-                            
-                        if st.button("Apply Changes", type="primary"):
-                            if new_folder and new_name:
-                                # Ensure we handle 'Uncategorized' as root locally
-                                save_dir = "." if new_folder == "Uncategorized" else new_folder
-                                os.makedirs(save_dir, exist_ok=True)
-                                new_path = os.path.join(save_dir, new_name.replace(" ", "_") + ".json")
-                                
-                                if old_path != new_path:
-                                    with open(old_path, 'r', encoding='utf-8') as f: data = json.load(f)
-                                    with open(new_path, 'w', encoding='utf-8') as f: json.dump(data, f, indent=4, ensure_ascii=False)
-                                    os.remove(old_path)
-                                    
-                                    github_save(new_path, data)
-                                    github_delete(old_path)
-                                    st.success("✅ Moved/Renamed successfully!")
-                                    time.sleep(1)
-                                    st.rerun()
-
-                    if st.button("🚨 Delete Topic", type="primary"):
-                        os.remove(old_path)
-                        github_delete(old_path)
-                        st.success("✅ Topic Deleted!")
-                        time.sleep(1)
+        if st.button("Convert & Save to Cloud", type="primary"):
+            if new_pdf and new_topic_name:
+                with st.spinner("Extracting data and generating database..."):
+                    raw_data = parse_pdf_to_raw_data(new_pdf)
+                    if raw_data:
+                        json_filename = new_topic_name.replace(" ", "_") + ".json"
+                        with open(json_filename, 'w', encoding='utf-8') as f:
+                            json.dump(raw_data, f, indent=4, ensure_ascii=False)
+                        sync_to_github(json_filename, raw_data)
+                        st.success(f"✅ Success! Database created and uploaded. PDF deleted from memory.")
+                        time.sleep(2)
                         st.rerun()
-
-    with st.expander("🔄 Resume Quiz Here", expanded=False):
+                    else:
+                        st.error("Failed to parse PDF. Ensure the format is correct.")
+            else:
+                st.warning("Please upload a PDF and enter a topic name.")
+    
+    with st.expander("🔄 Did you accidentally close the app? Resume Quiz Here", expanded=False):
+        st.write("Enter the 4-digit Recovery PIN you were given during your test to restore your progress.")
         col1, col2 = st.columns([1, 2])
         with col1:
-            entered_pin = st.text_input("Enter 4-Digit PIN", max_chars=4)
-            if st.button("Resume My Quiz"):
+            entered_pin = st.text_input("Enter 4-Digit PIN", max_chars=4, placeholder="e.g., 4921")
+            if st.button("Resume My Quiz", type="primary"):
                 sessions = get_global_sessions()
                 if entered_pin in sessions:
                     saved = sessions[entered_pin]
@@ -398,43 +359,83 @@ def render_home():
                     st.session_state.page = "quiz"
                     st.rerun()
                 else:
-                    st.error("PIN not found or expired.")
-
-    st.write("---")
+                    st.error("PIN not found or the 5-hour session expired.")
     
-    # --- LIBRARY DISPLAY (TABS FOR FOLDERS) ---
-    if not library:
-        st.info("Welcome to your Hub! Open the Admin Dashboard above to upload your first PDF.")
-    else:
-        # Create Streamlit tabs for each folder
-        tabs = st.tabs(list(library.keys()))
-        for idx, folder_name in enumerate(library.keys()):
-            with tabs[idx]:
-                st.write(f"**{folder_name} Topics**")
-                cols = st.columns(3) # 3 columns for better grid
-                for c_idx, (topic_name, file_path) in enumerate(library[folder_name].items()):
-                    with cols[c_idx % 3]:
-                        if st.button(topic_name, key=f"btn_{file_path}", use_container_width=True, icon="⚡"):
-                            setup_dialog(file_path)
+    st.write("---")
+    st.write("Select a topic below to start a new practice session.")
+    
+    topics = {
+        "Percentage Part 1": "percent1 (1).pdf",
+        "Percentage Part 2": "perceentage2.pdf",
+        "Ratio & Proportion": "RATIO_(1).pdf",
+        "Problems on Ages": "ages_sheet.pdf",
+        "Profit & Loss": "PROFIT_AND_LOSS_SHEET_-_01.pdf",
+        "Time & Work": "TIME_AND_WORK_sheet_01.pdf",
+        "Discount": "DISCOUNT_SHEET-01.pdf",
+        "Pipe & Cistern": "pipe and christen.pdf",
+        "Partnership": "Partnership.pdf",
+        "Mixture & Alligation Part 1": "mixture and aligation (1).pdf",
+        "Mixture & Alligation Part 2": "mixture and aligation (2).pdf",
+        "Simple Interest": "simple interest.pdf",
+        "Compound Interest": "Compound intrest.pdf",
+        "Mensuration 2D (Triangle)": "Mensuration_2D_Triangle_sheet (1).pdf",
+        "Mensuration 2D (Quadrilateral)": "Mensuration_2D_(quadrilateral).pdf",
+        "Mensuration 2D (Circle)": "circle.pdf",
+        "Polygon": "polygon_sheet.pdf",
+        "Mensuration 3D (Cone)": "Mensuration 3d Cone Sheet.pdf",
+        "Mensuration 3D (Cube & Cuboid)": "Mensuration_3D_cube_and_cuboid_Sheet_01.pdf",
+        "Mensuration 3D (Cylinder)": "Mensuration_3D_Cylinder.pdf",
+        "Mensuration 3D (Sphere & Hemisphere)": "3D SPARE AND HEMISPHERE Sheet.pdf"
+    }
+    
+    for f in os.listdir('.'):
+        if f.endswith('.json'):
+            is_legacy = False
+            for t_name, t_file in topics.items():
+                if t_file.replace('.pdf', '.json') == f:
+                    is_legacy = True
+                    break
+            if not is_legacy:
+                display_name = f.replace('.json', '').replace('_', ' ')
+                topics[display_name] = f
+
+    cols = st.columns(2)
+    for idx, (topic_name, file_name) in enumerate(topics.items()):
+        with cols[idx % 2]:
+            icon = "⚡" if file_name.endswith('.json') or os.path.exists(file_name.replace('.pdf', '.json')) else "📄"
+            if st.button(topic_name, use_container_width=True, icon=icon):
+                st.session_state.selected_topic_file = file_name
+                st.session_state.current_q_index = 0
+                st.session_state.user_answers = {}
+                with st.spinner(f"Loading Database for {topic_name}..."):
+                    parsed_data, is_json = load_and_auto_save_quiz_data(file_name)
+                    if parsed_data:
+                        st.session_state.raw_parsed_data = parsed_data
+                        setup_dialog(file_name, len(parsed_data), is_json)
+                    else:
+                        st.error(f"Could not load {file_name}. Ensure it is uploaded to your GitHub repository!")
 
 def render_quiz():
     save_state_to_cloud()
     q_index = st.session_state.current_q_index
     q_data = st.session_state.quiz_data[q_index]
     total_qs = len(st.session_state.quiz_data)
+    
+    # Check if Edit Mode is active to Pause Timer
     edit_mode = st.session_state.get('edit_toggle', False)
 
     col_sect, col_lang, col_qnum = st.columns([2, 1, 1], vertical_alignment="center")
     with col_sect: 
-        display_title = os.path.basename(st.session_state.selected_topic_file).replace('.json', '').replace('_', ' ')
+        display_title = st.session_state.selected_topic_file.replace('.pdf', '').replace('.json', '').replace('_', ' ')
         st.markdown(f"##### {display_title}")
-        st.markdown(f"<span style='color:#ef4444; font-weight:bold;'>Save PIN: {st.session_state.resume_pin}</span>", unsafe_allow_html=True)
+        st.markdown(f"<span style='color:#ef4444; font-weight:bold;'>Save this PIN to resume if closed: {st.session_state.resume_pin}</span>", unsafe_allow_html=True)
     with col_lang:
         st.session_state.app_lang = st.selectbox("Language", ["Bilingual", "English", "Hindi"], label_visibility="collapsed")
     with col_qnum: 
         st.markdown(f"##### Q {q_index + 1} / {total_qs}")
     st.divider()
 
+    # Inject smart timer with pause support
     inject_timer(st.session_state.time_per_question, q_index, is_paused=edit_mode, pin=st.session_state.resume_pin)
 
     filtered_question = filter_text(q_data["question"], st.session_state.app_lang, is_option=False)
@@ -465,15 +466,20 @@ def render_quiz():
             if st.button("Submit Test", type="primary", use_container_width=True):
                 if selected_option: st.session_state.user_answers[q_index] = selected_option
                 sessions = get_global_sessions()
-                if st.session_state.resume_pin in sessions: del sessions[st.session_state.resume_pin]
+                if st.session_state.resume_pin in sessions:
+                    del sessions[st.session_state.resume_pin]
                 st.session_state.page = "analysis"
                 st.rerun()
 
     st.divider()
+    
+    # --- LIVE EDITOR WITH PAUSE TOGGLE ---
     st.toggle("✏️ Admin: Notice a mistake? Edit this Question (PAUSES TIMER)", key="edit_toggle")
     
     if st.session_state.edit_toggle:
+        st.warning("Fixes made here will automatically be uploaded and saved to your GitHub repo!")
         new_q = st.text_area("Question Text", value=q_data["question"], height=150)
+        
         c_opt1, c_opt2 = st.columns(2)
         with c_opt1:
             new_opt_a = st.text_input("Option A", value=q_data["options"][0])
@@ -488,23 +494,18 @@ def render_quiz():
         
         if st.button("💾 Save Fixes & Sync to Cloud", type="primary"):
             updated_q = {
-                "id": q_data["id"], "question": new_q, "options": [new_opt_a, new_opt_b, new_opt_c, new_opt_d],
-                "answer": new_ans, "explanation": new_exp
+                "id": q_data["id"],
+                "question": new_q,
+                "options": [new_opt_a, new_opt_b, new_opt_c, new_opt_d],
+                "answer": new_ans,
+                "explanation": new_exp
             }
             st.session_state.quiz_data[q_index] = updated_q
-            # Update local and sync
-            with open(st.session_state.selected_topic_file, 'r', encoding='utf-8') as f: all_data = json.load(f)
-            for i, q in enumerate(all_data):
-                if q['id'] == updated_q['id']:
-                    all_data[i] = updated_q
-                    break
-            with open(st.session_state.selected_topic_file, 'w', encoding='utf-8') as f: json.dump(all_data, f, indent=4, ensure_ascii=False)
-            github_save(st.session_state.selected_topic_file, all_data)
-            
-            st.success("✅ Fix saved! Database permanently updated.")
-            st.session_state.edit_toggle = False
-            time.sleep(1)
-            st.rerun()
+            if update_question_in_database(st.session_state.selected_topic_file, updated_q):
+                st.success("✅ Fix saved! The database is permanently updated in GitHub.")
+                st.session_state.edit_toggle = False # Turn off edit mode
+                time.sleep(1.5)
+                st.rerun()
 
 def render_analysis():
     st.title("📊 Exam Analysis")
@@ -536,9 +537,12 @@ def main():
     inject_custom_css()
     initialize_state()
 
-    if st.session_state.page == "home": render_home()
-    elif st.session_state.page == "quiz": render_quiz()
-    elif st.session_state.page == "analysis": render_analysis()
+    if st.session_state.page == "home":
+        render_home()
+    elif st.session_state.page == "quiz":
+        render_quiz()
+    elif st.session_state.page == "analysis":
+        render_analysis()
 
 if __name__ == "__main__":
     main()
