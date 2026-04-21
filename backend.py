@@ -7,59 +7,27 @@ import json
 def inject_custom_css():
     st.markdown("""
         <style>
-        /* 1. SMOOTH ANIMATIONS */
-        @keyframes slideUpFade {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        /* 2. DYNAMIC GEOMETRIC BACKGROUND */
-        .stApp { 
-            font-family: 'Inter', '-apple-system', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
-            background-color: var(--background-color);
-            background-image: radial-gradient(var(--faded-text-color) 1px, transparent 1px);
-            background-size: 30px 30px;
-        }
-        
-        /* 3. GORGEOUS TOP BAR */
+        .stApp { font-family: 'Inter', '-apple-system', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
         .top-bar { 
             background: linear-gradient(135deg, var(--primary-color), #6366f1); 
-            color: white; padding: 25px; border-radius: 16px; 
+            color: white; padding: 20px; border-radius: 16px; 
             display: flex; justify-content: space-between; align-items: center; 
-            margin-bottom: 25px; box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
-            animation: slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            margin-bottom: 20px; box-shadow: 0 10px 25px rgba(99, 102, 241, 0.2);
         }
-        .top-bar h2 { margin: 0; font-weight: 800; letter-spacing: -0.5px; }
-        
-        /* Hide defaults */
         header {visibility: hidden;}
-        div[data-testid="stTextInput"] { display: none; }
-        .stTextInput { display: block !important; }
-        
-        /* 4. MODERN QUESTION BOX WITH ANIMATION */
+        div[data-testid="stTextInput"] { display: none; } 
+        .stTextInput { display: block !important; } 
         .question-box { 
             background-color: var(--secondary-background-color); color: var(--text-color); 
-            padding: 35px; border-radius: 16px; box-shadow: 0 8px 25px rgba(0,0,0,0.05); 
-            margin-bottom: 25px; font-size: 18px; white-space: pre-wrap; line-height: 1.8; 
+            padding: 30px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); 
+            margin-bottom: 20px; font-size: 18px; white-space: pre-wrap; line-height: 1.7; 
             border: 1px solid var(--faded-text-color);
-            animation: slideUpFade 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
-        
-        /* 5. SMOOTH BUTTON HOVER EFFECTS */
-        button[data-testid="baseButton-secondary"], button[data-testid="baseButton-primary"] {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-            border-radius: 10px !important;
-        }
-        button[data-testid="baseButton-secondary"]:hover, button[data-testid="baseButton-primary"]:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(0,0,0,0.1) !important;
-        }
-        
-        /* Smooth Expander Animation */
-        div[data-testid="stExpander"] {
-            animation: slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-            border-radius: 12px !important;
-            border: 1px solid var(--faded-text-color) !important;
+        /* Mobile override for clean long-press */
+        button {
+            -webkit-touch-callout: none !important;
+            -webkit-user-select: none !important;
+            user-select: none !important;
         }
         </style>
     """, unsafe_allow_html=True)
@@ -83,6 +51,57 @@ def play_feedback(ftype="success"):
                 osc.start(); osc.stop(ctx.currentTime + 0.2);
             }}
         }} catch(e) {{}}
+    </script>
+    """
+    st.components.v1.html(js_code, height=0)
+
+def inject_long_press_bridge():
+    js_code = """
+    <script>
+        const inputs = window.parent.document.querySelectorAll('input');
+        let actionBridge;
+        inputs.forEach(i => { 
+            if(i.getAttribute('aria-label') === 'JS_ACTION_BRIDGE') {
+                actionBridge = i;
+                const container = i.closest('div[data-testid="stElementContainer"]');
+                if(container) container.style.display = 'none';
+            }
+        });
+
+        function triggerMenu(fileName) {
+            if(actionBridge) {
+                if(navigator.vibrate) navigator.vibrate(50);
+                let nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
+                nativeInputValueSetter.call(actionBridge, "MENU:" + fileName);
+                actionBridge.dispatchEvent(new Event('input', { bubbles: true }));
+                setTimeout(() => {
+                    nativeInputValueSetter.call(actionBridge, "");
+                    actionBridge.dispatchEvent(new Event('input', { bubbles: true }));
+                }, 500);
+            }
+        }
+
+        function attachListeners() {
+            const buttons = window.parent.document.querySelectorAll('button');
+            buttons.forEach(btn => {
+                if(btn.dataset.longPressAttached) return; 
+                if(btn.innerText.includes('📄') || btn.innerText.includes('⚡')) {
+                    btn.dataset.longPressAttached = "true";
+                    btn.addEventListener('contextmenu', (e) => { e.preventDefault(); triggerMenu(btn.innerText); });
+                    let timer; let isLongPress = false; let startY = 0;
+                    btn.addEventListener('touchstart', (e) => {
+                        isLongPress = false; startY = e.touches[0].clientY;
+                        timer = setTimeout(() => { isLongPress = true; triggerMenu(btn.innerText); }, 500); 
+                    }, {passive: true});
+                    btn.addEventListener('touchmove', (e) => { if (Math.abs(e.touches[0].clientY - startY) > 10) clearTimeout(timer); }, {passive: true});
+                    btn.addEventListener('touchend', (e) => {
+                        clearTimeout(timer);
+                        if(isLongPress) { e.preventDefault(); e.stopPropagation(); }
+                    }, {passive: false});
+                }
+            });
+        }
+        setInterval(attachListeners, 1000); attachListeners();
     </script>
     """
     st.components.v1.html(js_code, height=0)
@@ -114,7 +133,7 @@ def github_delete(file_path):
         return True
     except: return False
 
-@st.cache_data 
+@st.cache_data
 def get_library():
     library = {}
     ignore_dirs = {'.git', '.streamlit', 'venv', '__pycache__'}
@@ -127,7 +146,6 @@ def get_library():
                 if folder not in library: library[folder] = {}
                 topic_name = f.replace('.json', '').replace('_', ' ')
                 library[folder][topic_name] = os.path.join(root, f)
-                
     sorted_library = {k: library[k] for k in sorted(library.keys()) if k != "Uncategorized"}
     if "Uncategorized" in library: sorted_library["Uncategorized"] = library["Uncategorized"]
     return sorted_library
@@ -135,13 +153,11 @@ def get_library():
 def parse_pdf_to_raw_data(pdf_source):
     extracted_text = ""
     try:
-        if isinstance(pdf_source, str):
-            if not os.path.exists(pdf_source): return []
+        if isinstance(pdf_source, str) and not os.path.exists(pdf_source): return []
         with pdfplumber.open(pdf_source) as pdf:
             for page in pdf.pages:
                 text = page.extract_text(x_tolerance=2, y_tolerance=3)
                 if text: extracted_text += text + "\n"
-        
         clean_text = re.sub(r'INDIAN\s*RAILWAY FOUNDATION BATCH\s*.*?(?=\n)', '', extracted_text, flags=re.IGNORECASE)
         clean_text = re.sub(r'Maths by Gagan Pratap Sir', '', clean_text, flags=re.IGNORECASE)
         clean_text = re.sub(r'Bagan Pratap Sir', '', clean_text, flags=re.IGNORECASE)
@@ -191,7 +207,7 @@ def parse_pdf_to_raw_data(pdf_source):
             if question_text:
                 quiz_data.append({"id": q_id, "question": question_text, "options": [opt_a, opt_b, opt_c, opt_d], "answer": correct_text, "explanation": f"Correct option is [{correct_letter}]."})
         return quiz_data
-    except Exception as e: return []
+    except: return []
 
 def filter_text(text, lang, is_option=False):
     if not text or lang == "Bilingual": return text
@@ -213,7 +229,7 @@ def filter_text(text, lang, is_option=False):
 def inject_timer(seconds, q_index, is_paused, pin):
     paused_str = "true" if is_paused else "false"
     html_code = f"""
-    <div id="timer_display_{q_index}" style="font-size: 24px; font-weight: bold; text-align: right; animation: slideUpFade 0.5s ease forwards;"></div>
+    <div id="timer_display_{q_index}" style="font-size: 24px; font-weight: bold; text-align: right;"></div>
     <script>
         var current_q = {q_index}; var isPaused = {paused_str};
         var stored_q = sessionStorage.getItem('active_q_pin_{pin}');
@@ -221,12 +237,7 @@ def inject_timer(seconds, q_index, is_paused, pin):
         if(stored_q != current_q.toString()) {{ sessionStorage.setItem('active_q_pin_{pin}', current_q); sessionStorage.setItem('timeLeft_pin_{pin}', timeLeft); }}
         
         var timerElem = document.getElementById('timer_display_{q_index}');
-        
-        // Timer icon integration
-        const pauseIcon = `<span style="font-size: 20px; vertical-align: middle;">⏸️</span>`;
-        const activeIcon = `<span style="font-size: 20px; vertical-align: middle;">⏳</span>`;
-        
-        timerElem.innerHTML = (isPaused ? pauseIcon : activeIcon) + " Time Left: " + timeLeft + "s";
+        timerElem.innerHTML = "Time Left: " + timeLeft + "s" + (isPaused ? " ⏸️" : "");
         timerElem.style.color = isPaused ? "#f59e0b" : "#ef4444"; 
         
         var timerId = setInterval(function() {{
@@ -235,7 +246,7 @@ def inject_timer(seconds, q_index, is_paused, pin):
                 clearTimeout(timerId);
                 window.parent.document.querySelectorAll('button').forEach(btn => {{ if(btn.innerText === 'Next' || btn.innerText === 'Submit Test') btn.click(); }});
             }} else {{
-                timeLeft--; timerElem.innerHTML = activeIcon + " Time Left: " + timeLeft + "s";
+                timeLeft--; timerElem.innerHTML = "Time Left: " + timeLeft + "s";
                 sessionStorage.setItem('timeLeft_pin_{pin}', timeLeft);
             }}
         }}, 1000);
