@@ -4,6 +4,7 @@ import re
 import time
 import os
 import random
+import json
 
 # --- 1. PAGE CONFIGURATION & CSS ---
 st.set_page_config(page_title="Pro CBT Hub", layout="wide", initial_sidebar_state="collapsed")
@@ -27,20 +28,20 @@ def get_global_sessions():
 def save_state_to_cloud():
     sessions = get_global_sessions()
     now = time.time()
-    
     expired = [pin for pin, data in sessions.items() if (now - data['timestamp']) > 18000]
     for pin in expired:
         del sessions[pin]
         
-    sessions[st.session_state.resume_pin] = {
-        "file": st.session_state.selected_topic_file,
-        "q_index": st.session_state.current_q_index,
-        "answers": st.session_state.user_answers.copy(),
-        "time": st.session_state.time_per_question,
-        "max_qs": st.session_state.max_questions,
-        "quiz_data": st.session_state.quiz_data, 
-        "timestamp": now
-    }
+    if 'resume_pin' in st.session_state:
+        sessions[st.session_state.resume_pin] = {
+            "file": st.session_state.selected_topic_file,
+            "q_index": st.session_state.current_q_index,
+            "answers": st.session_state.user_answers.copy(),
+            "time": st.session_state.time_per_question,
+            "max_qs": st.session_state.max_questions,
+            "quiz_data": st.session_state.quiz_data, 
+            "timestamp": now
+        }
 
 # --- 3. SESSION STATE MANAGEMENT ---
 def initialize_state():
@@ -54,29 +55,23 @@ def initialize_state():
     if 'app_lang' not in st.session_state: st.session_state.app_lang = "Bilingual"
     if 'resume_pin' not in st.session_state: st.session_state.resume_pin = str(random.randint(1000, 9999))
 
-# --- 4. CACHED PDF PARSER (WITH BRACKET STANDARDIZER) ---
-@st.cache_data
-def parse_pdf_to_quiz(file_path):
+# --- 4. BACKEND CONVERTER ENGINE (PDF -> DICT) ---
+def parse_pdf_to_raw_data(file_path):
     extracted_text = ""
     try:
         if not os.path.exists(file_path): return []
         with pdfplumber.open(file_path) as pdf:
             for page in pdf.pages:
-                # Using pure defaults so pdfplumber doesn't accidentally merge math lines with text
-                text = page.extract_text()
+                text = page.extract_text(x_tolerance=2, y_tolerance=3)
                 if text: extracted_text += text + "\n"
         
-        # Clean headers
         clean_text = re.sub(r'INDIAN\s*RAILWAY FOUNDATION BATCH\s*.*?(?=\n)', '', extracted_text, flags=re.IGNORECASE)
         clean_text = re.sub(r'Maths by Gagan Pratap Sir', '', clean_text, flags=re.IGNORECASE)
         clean_text = re.sub(r'Bagan Pratap Sir', '', clean_text, flags=re.IGNORECASE)
         clean_text = re.sub(r'Maths\n', '', clean_text, flags=re.IGNORECASE)
-        
-        # Standardize all option formats (e.g., (a), [ a ], (A)) directly to [A]
         clean_text = re.sub(r'\[\s*([A-Da-d])\s*\]', r'[\1]', clean_text)
         clean_text = re.sub(r'\(\s*([A-Da-d])\s*\)', r'[\1]', clean_text)
         
-        # Split Answer Key
         ak_matches = list(re.finditer(r'Answer\s*key|Answers', clean_text, flags=re.IGNORECASE))
         if ak_matches:
             last_match = ak_matches[-1]
@@ -86,28 +81,23 @@ def parse_pdf_to_quiz(file_path):
             main_questions_text = clean_text
             answer_key_text = ""
         
-        # Parse Answer Key
         correct_answers_dict = {}
         if answer_key_text:
             ak_text = answer_key_text.lower().replace('α', 'a')
             ans_matches = re.findall(r'(\d+)\s*\.?\s*[\(\[]\s*([a-d])\s*[\)\]]', ak_text)
             nums = re.findall(r'\b(\d+)\s*\.', ak_text)
             opts = re.findall(r'[\(\[]\s*([a-d])\s*[\)\]]', ak_text)
-            
             if len(ans_matches) < len(opts) * 0.5: 
                 ans_matches = list(zip(nums, opts))
-                
             for qnum, ans in ans_matches:
                 correct_answers_dict[int(qnum)] = ans.upper()
         
-        # Split Questions
         raw_splits = re.split(r'(?:^|\n)\s*(\d+)[\.\)]\s+', "\n" + main_questions_text)
         quiz_data = []
         for i in range(1, len(raw_splits), 2):
             q_id = int(raw_splits[i])
             q_content = raw_splits[i+1]
             
-            # Robust Option Extraction (Stops perfectly before the next option)
             opt_a_match = re.search(r'\[A\](.*?)(?=\[B\]|\[C\]|\[D\]|$)', q_content, re.DOTALL | re.IGNORECASE)
             opt_b_match = re.search(r'\[B\](.*?)(?=\[A\]|\[C\]|\[D\]|$)', q_content, re.DOTALL | re.IGNORECASE)
             opt_c_match = re.search(r'\[C\](.*?)(?=\[A\]|\[B\]|\[D\]|$)', q_content, re.DOTALL | re.IGNORECASE)
@@ -118,21 +108,12 @@ def parse_pdf_to_quiz(file_path):
             opt_c = opt_c_match.group(1).strip() if opt_c_match else "Option C"
             opt_d = opt_d_match.group(1).strip() if opt_d_match else "Option D"
             
-            # Fallback to prevent blank options crashing the UI
-            opt_a = opt_a if opt_a else "Option A"
-            opt_b = opt_b if opt_b else "Option B"
-            opt_c = opt_c if opt_c else "Option C"
-            opt_d = opt_d if opt_d else "Option D"
-            
-            # Extract Question text
             first_opt_idx = len(q_content)
             for tag in ['[A]', '[B]', '[C]', '[D]', '[a]', '[b]', '[c]', '[d]']:
                 idx = q_content.find(tag)
                 if idx != -1 and idx < first_opt_idx: first_opt_idx = idx
                     
             question_text = q_content[:first_opt_idx].strip()
-            
-            # Answer mapping
             correct_letter = correct_answers_dict.get(q_id, 'A') 
             if correct_letter == 'A': correct_text = opt_a
             elif correct_letter == 'B': correct_text = opt_b
@@ -152,42 +133,72 @@ def parse_pdf_to_quiz(file_path):
     except Exception as e:
         return []
 
-# --- 5. SURGICAL LANGUAGE FILTER ---
-def filter_text(text, lang):
+# --- 5. AUTOMATIC JSON MANAGER ---
+@st.cache_data
+def load_and_auto_save_quiz_data(pdf_filename):
+    """Automatically loads from JSON, or creates the JSON if missing."""
+    json_filename = pdf_filename.replace('.pdf', '.json')
+    
+    # If the JSON database already exists, load it instantly!
+    if os.path.exists(json_filename):
+        with open(json_filename, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+        return data, True
+        
+    # If JSON doesn't exist, read the PDF and CREATE the JSON automatically!
+    data = parse_pdf_to_raw_data(pdf_filename)
+    if data:
+        with open(json_filename, 'w', encoding='utf-8') as f:
+            json.dump(data, f, indent=4, ensure_ascii=False)
+    return data, False
+
+def update_question_in_database(file_name, updated_q):
+    """Saves edits permanently to the JSON file on the server."""
+    json_filename = file_name.replace('.pdf', '.json')
+    try:
+        with open(json_filename, 'r', encoding='utf-8') as f:
+            all_data = json.load(f)
+            
+        # Find the question by its ID and replace it
+        for i, q in enumerate(all_data):
+            if q['id'] == updated_q['id']:
+                all_data[i] = updated_q
+                break
+                
+        # Rewrite the JSON file
+        with open(json_filename, 'w', encoding='utf-8') as f:
+            json.dump(all_data, f, indent=4, ensure_ascii=False)
+        return True
+    except Exception as e:
+        st.error(f"Failed to update database: {e}")
+        return False
+
+# --- 6. SURGICAL LANGUAGE FILTER ---
+def filter_text(text, lang, is_option=False):
     if not text or lang == "Bilingual": return text
     lines = text.split('\n')
     filtered_lines = []
     seen_normalized = set()
-    
     for l in lines:
         if not l.strip(): continue
         has_hindi = bool(re.search(r'[\u0900-\u097F]', l))
-        eng_word_count = len(re.findall(r'\b[a-zA-Z]{2,}\b', l))
+        eng_word_count = len(re.findall(r'\b[a-zA-Z]{3,}\b', l))
         processed_line = ""
-        
         if lang == "English":
             if has_hindi:
-                # Surgical strip: Erases Hindi, but keeps %, numbers, and math!
-                clean_en = re.sub(r'[\u0900-\u097F।]+', '', l).strip()
-                if clean_en: processed_line = clean_en
-            else: 
-                processed_line = l
+                if is_option:
+                    clean_l = re.sub(r'[\u0900-\u097F।]+', '', l).strip()
+                    clean_l = re.sub(r'[\/\-\|\,]\s*$', '', clean_l).strip() 
+                    if clean_l: filtered_lines.append(clean_l)
+                else: continue
+            else: filtered_lines.append(l)
         elif lang == "Hindi":
-            if has_hindi or eng_word_count < 3: 
-                processed_line = l
-                
-        if processed_line:
-            norm = re.sub(r'\W+', '', processed_line).lower()
-            # Only deduplicate longer sentences to prevent accidentally deleting math answers
-            if len(norm) > 10:
-                if norm in seen_normalized: continue 
-                seen_normalized.add(norm)
-            filtered_lines.append(processed_line)
-            
-    res = '\n'.join(filtered_lines).strip()
-    return res if res else text 
+            if has_hindi: filtered_lines.append(l)
+            else:
+                if is_option or eng_word_count < 4: filtered_lines.append(l)
+    return '\n'.join(filtered_lines).strip()
 
-# --- 6. TIMER INJECTION ---
+# --- 7. TIMER INJECTION ---
 def inject_timer(seconds, q_index):
     html_code = f"""
     <div id="timer_display_{q_index}" style="font-size: 24px; font-weight: bold; color: #ef4444; text-align: right;"></div>
@@ -211,24 +222,28 @@ def inject_timer(seconds, q_index):
     """
     st.components.v1.html(html_code, height=50)
 
-# --- 7. SETUP POPUP (DIALOG) ---
+# --- 8. SETUP POPUP (DIALOG) ---
 @st.dialog("⚙️ Quiz Setup")
-def setup_dialog(file_name, total_available):
+def setup_dialog(file_name, total_available, is_json):
     st.write(f"**Topic:** {file_name.replace('.pdf', '')}")
+    if is_json:
+        st.success("⚡ Loaded instantly from JSON Database!")
+    else:
+        st.info("📄 PDF Scanned. New JSON Database automatically created!")
+
     st.write(f"Total questions available: {total_available}")
-    
     selected_qs = st.slider("How many questions to attempt?", min_value=1, max_value=total_available, value=min(20, total_available))
     timer_sec = st.number_input("Time per question (seconds)", min_value=10, max_value=300, value=60)
     
     if st.button("🚀 Start Quiz", type="primary", use_container_width=True):
         st.session_state.max_questions = selected_qs
         st.session_state.time_per_question = timer_sec
-        st.session_state.quiz_data = random.sample(st.session_state.quiz_data, selected_qs)
+        st.session_state.quiz_data = random.sample(st.session_state.raw_parsed_data, selected_qs)
         st.session_state.resume_pin = str(random.randint(1000, 9999))
         st.session_state.page = "quiz"
         st.rerun()
 
-# --- 8. RENDER VIEWS ---
+# --- 9. RENDER VIEWS ---
 def render_home():
     st.markdown('<div class="top-bar"><h2>📚 CBT Topic Hub</h2></div>', unsafe_allow_html=True)
     
@@ -287,17 +302,16 @@ def render_home():
                 st.session_state.selected_topic_file = file_name
                 st.session_state.current_q_index = 0
                 st.session_state.user_answers = {}
-                with st.spinner(f"Loading {topic_name}..."):
-                    parsed_data = parse_pdf_to_quiz(file_name)
+                with st.spinner(f"Loading Database for {topic_name}..."):
+                    parsed_data, is_json = load_and_auto_save_quiz_data(file_name)
                     if parsed_data:
-                        st.session_state.quiz_data = parsed_data
-                        setup_dialog(file_name, len(parsed_data))
+                        st.session_state.raw_parsed_data = parsed_data
+                        setup_dialog(file_name, len(parsed_data), is_json)
                     else:
                         st.error(f"Could not load {file_name}. Ensure it is uploaded to your GitHub repository!")
 
 def render_quiz():
     save_state_to_cloud()
-    
     q_index = st.session_state.current_q_index
     q_data = st.session_state.quiz_data[q_index]
     total_qs = len(st.session_state.quiz_data)
@@ -306,7 +320,6 @@ def render_quiz():
     with col_sect: 
         st.markdown(f"##### {st.session_state.selected_topic_file.replace('.pdf', '')}")
         st.markdown(f"<span style='color:#ef4444; font-weight:bold;'>Save this PIN to resume if closed: {st.session_state.resume_pin}</span>", unsafe_allow_html=True)
-        
     with col_lang:
         st.session_state.app_lang = st.selectbox("Language", ["Bilingual", "English", "Hindi"], label_visibility="collapsed")
     with col_qnum: 
@@ -315,17 +328,17 @@ def render_quiz():
 
     inject_timer(st.session_state.time_per_question, q_index)
 
-    filtered_question = filter_text(q_data["question"], st.session_state.app_lang)
-    
-    # --- HTML ESCAPER: Prevents math symbols from disappearing! ---
+    filtered_question = filter_text(q_data["question"], st.session_state.app_lang, is_option=False)
     safe_question = filtered_question.replace('<', '&lt;').replace('>', '&gt;')
-    
-    st.markdown(f'<div class="question-box"><b>Q{q_index + 1}.</b> <i>(From PDF Q{q_data["id"]})</i><br><br>{safe_question}</div>', unsafe_allow_html=True)
+    st.info(f"**Q{q_index + 1}.** *(From Database Q{q_data['id']})*\n\n{safe_question}")
     
     current_response = st.session_state.user_answers.get(q_index, None)
+    selected_option = st.radio("Select an option:", q_data["options"], 
+                               format_func=lambda x: filter_text(x, st.session_state.app_lang, is_option=True).replace('<', '&lt;').replace('>', '&gt;'), 
+                               key=f"q_{q_index}", 
+                               index=q_data["options"].index(current_response) if current_response in q_data["options"] else None)
     
-    selected_option = st.radio("Select an option:", q_data["options"], format_func=lambda x: filter_text(x, st.session_state.app_lang).replace('<', '&lt;').replace('>', '&gt;'), key=f"q_{q_index}", index=q_data["options"].index(current_response) if current_response in q_data["options"] else None)
-    
+    st.markdown("<br>", unsafe_allow_html=True)
     col1, col2, col3 = st.columns([1, 1, 1])
     with col1:
         if q_index > 0:
@@ -348,6 +361,41 @@ def render_quiz():
                 st.session_state.page = "analysis"
                 st.rerun()
 
+    st.divider()
+    
+    # --- LIVE EDITOR PANEL ---
+    with st.expander("✏️ Admin: Notice a mistake? Edit this Question permanently"):
+        st.warning("Any changes made here will be permanently saved to the .json database.")
+        new_q = st.text_area("Question Text", value=q_data["question"], height=150)
+        
+        c_opt1, c_opt2 = st.columns(2)
+        with c_opt1:
+            new_opt_a = st.text_input("Option A", value=q_data["options"][0])
+            new_opt_b = st.text_input("Option B", value=q_data["options"][1])
+        with c_opt2:
+            new_opt_c = st.text_input("Option C", value=q_data["options"][2])
+            new_opt_d = st.text_input("Option D", value=q_data["options"][3])
+            
+        new_ans = st.selectbox("Correct Answer", [new_opt_a, new_opt_b, new_opt_c, new_opt_d], 
+                               index=[new_opt_a, new_opt_b, new_opt_c, new_opt_d].index(q_data["answer"]) if q_data["answer"] in [new_opt_a, new_opt_b, new_opt_c, new_opt_d] else 0)
+        new_exp = st.text_area("Explanation", value=q_data["explanation"])
+        
+        if st.button("💾 Save Fixes to Database", type="primary"):
+            updated_q = {
+                "id": q_data["id"],
+                "question": new_q,
+                "options": [new_opt_a, new_opt_b, new_opt_c, new_opt_d],
+                "answer": new_ans,
+                "explanation": new_exp
+            }
+            # Update memory so it changes instantly
+            st.session_state.quiz_data[q_index] = updated_q
+            # Permanently update the JSON file on the server
+            if update_question_in_database(st.session_state.selected_topic_file, updated_q):
+                st.success("✅ Fix saved! The database is permanently updated.")
+                time.sleep(1)
+                st.rerun()
+
 def render_analysis():
     st.title("📊 Exam Analysis")
     total_qs = len(st.session_state.quiz_data)
@@ -357,34 +405,4 @@ def render_analysis():
     st.metric("Total Score", f"{correct_count} / {total_qs}", f"{accuracy:.1f}% Accuracy")
     
     if st.button("🏠 Go to Home Page", type="primary"):
-        st.session_state.clear()
-        st.rerun()
-        
-    st.write("### Detailed Review")
-    st.session_state.app_lang = st.radio("Review Language", ["Bilingual", "English", "Hindi"], horizontal=True)
-    
-    for i, q in enumerate(st.session_state.quiz_data):
-        disp_q = filter_text(q['question'], st.session_state.app_lang).replace('<', '&lt;').replace('>', '&gt;')
-        disp_ans = filter_text(q['answer'], st.session_state.app_lang).replace('<', '&lt;').replace('>', '&gt;')
-        disp_user = filter_text(st.session_state.user_answers.get(i, 'Not Attempted'), st.session_state.app_lang).replace('<', '&lt;').replace('>', '&gt;')
-        
-        with st.expander(f"Q{i+1} (PDF Q{q['id']}): {disp_q[:40]}..."):
-            st.markdown(f"**Question:**\n {disp_q}")
-            st.write(f"**Your Answer:** {disp_user}")
-            st.write(f"**Correct Answer:** {disp_ans}")
-            st.info(q['explanation'])
-
-def main():
-    inject_custom_css()
-    initialize_state()
-
-    if st.session_state.page == "home":
-        render_home()
-    elif st.session_state.page == "quiz":
-        render_quiz()
-    elif st.session_state.page == "analysis":
-        render_analysis()
-
-if __name__ == "__main__":
-    main()
-        
+        st.session_s
