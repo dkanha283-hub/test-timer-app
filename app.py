@@ -12,7 +12,6 @@ def inject_custom_css():
     st.markdown("""
         <style>
         .stApp { background-color: #f4f6f9; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        /* white-space: pre-wrap is CRITICAL here. It preserves the exact spacing of multi-line fractions! */
         .question-box { background-color: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 20px; font-size: 18px; white-space: pre-wrap; line-height: 1.6;}
         .top-bar { background-color: #1e3a8a; color: white; padding: 15px; border-radius: 5px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;}
         .topic-card { background-color: white; padding: 20px; border-radius: 10px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1); cursor: pointer; border: 2px solid transparent; transition: 0.3s;}
@@ -55,7 +54,7 @@ def initialize_state():
     if 'app_lang' not in st.session_state: st.session_state.app_lang = "Bilingual"
     if 'resume_pin' not in st.session_state: st.session_state.resume_pin = str(random.randint(1000, 9999))
 
-# --- 4. CACHED PDF PARSER ---
+# --- 4. CACHED PDF PARSER (WITH BRACKET STANDARDIZER) ---
 @st.cache_data
 def parse_pdf_to_quiz(file_path):
     extracted_text = ""
@@ -63,15 +62,21 @@ def parse_pdf_to_quiz(file_path):
         if not os.path.exists(file_path): return []
         with pdfplumber.open(file_path) as pdf:
             for page in pdf.pages:
-                # y_tolerance=3 ensures that numerators and denominators of fractions are kept together
-                text = page.extract_text(x_tolerance=2, y_tolerance=3)
+                # Using pure defaults so pdfplumber doesn't accidentally merge math lines with text
+                text = page.extract_text()
                 if text: extracted_text += text + "\n"
         
+        # Clean headers
         clean_text = re.sub(r'INDIAN\s*RAILWAY FOUNDATION BATCH\s*.*?(?=\n)', '', extracted_text, flags=re.IGNORECASE)
         clean_text = re.sub(r'Maths by Gagan Pratap Sir', '', clean_text, flags=re.IGNORECASE)
         clean_text = re.sub(r'Bagan Pratap Sir', '', clean_text, flags=re.IGNORECASE)
         clean_text = re.sub(r'Maths\n', '', clean_text, flags=re.IGNORECASE)
         
+        # Standardize all option formats (e.g., (a), [ a ], (A)) directly to [A]
+        clean_text = re.sub(r'\[\s*([A-Da-d])\s*\]', r'[\1]', clean_text)
+        clean_text = re.sub(r'\(\s*([A-Da-d])\s*\)', r'[\1]', clean_text)
+        
+        # Split Answer Key
         ak_matches = list(re.finditer(r'Answer\s*key|Answers', clean_text, flags=re.IGNORECASE))
         if ak_matches:
             last_match = ak_matches[-1]
@@ -81,6 +86,7 @@ def parse_pdf_to_quiz(file_path):
             main_questions_text = clean_text
             answer_key_text = ""
         
+        # Parse Answer Key
         correct_answers_dict = {}
         if answer_key_text:
             ak_text = answer_key_text.lower().replace('α', 'a')
@@ -94,12 +100,14 @@ def parse_pdf_to_quiz(file_path):
             for qnum, ans in ans_matches:
                 correct_answers_dict[int(qnum)] = ans.upper()
         
-        raw_splits = re.split(r'(?:^|\n)\s*(\d+)\.\s+', "\n" + main_questions_text)
+        # Split Questions
+        raw_splits = re.split(r'(?:^|\n)\s*(\d+)[\.\)]\s+', "\n" + main_questions_text)
         quiz_data = []
         for i in range(1, len(raw_splits), 2):
             q_id = int(raw_splits[i])
             q_content = raw_splits[i+1]
             
+            # Robust Option Extraction (Stops perfectly before the next option)
             opt_a_match = re.search(r'\[A\](.*?)(?=\[B\]|\[C\]|\[D\]|$)', q_content, re.DOTALL | re.IGNORECASE)
             opt_b_match = re.search(r'\[B\](.*?)(?=\[A\]|\[C\]|\[D\]|$)', q_content, re.DOTALL | re.IGNORECASE)
             opt_c_match = re.search(r'\[C\](.*?)(?=\[A\]|\[B\]|\[D\]|$)', q_content, re.DOTALL | re.IGNORECASE)
@@ -110,6 +118,13 @@ def parse_pdf_to_quiz(file_path):
             opt_c = opt_c_match.group(1).strip() if opt_c_match else "Option C"
             opt_d = opt_d_match.group(1).strip() if opt_d_match else "Option D"
             
+            # Fallback to prevent blank options crashing the UI
+            opt_a = opt_a if opt_a else "Option A"
+            opt_b = opt_b if opt_b else "Option B"
+            opt_c = opt_c if opt_c else "Option C"
+            opt_d = opt_d if opt_d else "Option D"
+            
+            # Extract Question text
             first_opt_idx = len(q_content)
             for tag in ['[A]', '[B]', '[C]', '[D]', '[a]', '[b]', '[c]', '[d]']:
                 idx = q_content.find(tag)
@@ -117,6 +132,7 @@ def parse_pdf_to_quiz(file_path):
                     
             question_text = q_content[:first_opt_idx].strip()
             
+            # Answer mapping
             correct_letter = correct_answers_dict.get(q_id, 'A') 
             if correct_letter == 'A': correct_text = opt_a
             elif correct_letter == 'B': correct_text = opt_b
@@ -136,7 +152,7 @@ def parse_pdf_to_quiz(file_path):
     except Exception as e:
         return []
 
-# --- 5. SMART LANGUAGE FILTER (PATCHED FOR MATH & % RECOVERY) ---
+# --- 5. SURGICAL LANGUAGE FILTER ---
 def filter_text(text, lang):
     if not text or lang == "Bilingual": return text
     lines = text.split('\n')
@@ -151,11 +167,9 @@ def filter_text(text, lang):
         
         if lang == "English":
             if has_hindi:
-                # DONT drop the line! Strip the Hindi words but KEEP the math, fractions, and %
+                # Surgical strip: Erases Hindi, but keeps %, numbers, and math!
                 clean_en = re.sub(r'[\u0900-\u097F।]+', '', l).strip()
-                # If there are numbers, %, or English letters left over, save it!
-                if re.search(r'[a-zA-Z0-9%]', clean_en):
-                    processed_line = clean_en
+                if clean_en: processed_line = clean_en
             else: 
                 processed_line = l
         elif lang == "Hindi":
@@ -164,7 +178,7 @@ def filter_text(text, lang):
                 
         if processed_line:
             norm = re.sub(r'\W+', '', processed_line).lower()
-            # Only deduplicate long sentences so we don't accidentally delete short math formulas
+            # Only deduplicate longer sentences to prevent accidentally deleting math answers
             if len(norm) > 10:
                 if norm in seen_normalized: continue 
                 seen_normalized.add(norm)
@@ -209,9 +223,7 @@ def setup_dialog(file_name, total_available):
     if st.button("🚀 Start Quiz", type="primary", use_container_width=True):
         st.session_state.max_questions = selected_qs
         st.session_state.time_per_question = timer_sec
-        
         st.session_state.quiz_data = random.sample(st.session_state.quiz_data, selected_qs)
-        
         st.session_state.resume_pin = str(random.randint(1000, 9999))
         st.session_state.page = "quiz"
         st.rerun()
@@ -236,7 +248,6 @@ def render_home():
                     st.session_state.max_questions = saved['max_qs']
                     st.session_state.quiz_data = saved['quiz_data'] 
                     st.session_state.resume_pin = entered_pin
-                    
                     st.session_state.page = "quiz"
                     st.rerun()
                 else:
@@ -306,14 +317,14 @@ def render_quiz():
 
     filtered_question = filter_text(q_data["question"], st.session_state.app_lang)
     
-    # HTML ESCAPER: Prevents math symbols like '<' and '>' from being swallowed by the web browser!
+    # --- HTML ESCAPER: Prevents math symbols from disappearing! ---
     safe_question = filtered_question.replace('<', '&lt;').replace('>', '&gt;')
     
     st.markdown(f'<div class="question-box"><b>Q{q_index + 1}.</b> <i>(From PDF Q{q_data["id"]})</i><br><br>{safe_question}</div>', unsafe_allow_html=True)
     
     current_response = st.session_state.user_answers.get(q_index, None)
     
-    selected_option = st.radio("Select an option:", q_data["options"], format_func=lambda x: filter_text(x, st.session_state.app_lang), key=f"q_{q_index}", index=q_data["options"].index(current_response) if current_response in q_data["options"] else None)
+    selected_option = st.radio("Select an option:", q_data["options"], format_func=lambda x: filter_text(x, st.session_state.app_lang).replace('<', '&lt;').replace('>', '&gt;'), key=f"q_{q_index}", index=q_data["options"].index(current_response) if current_response in q_data["options"] else None)
     
     col1, col2, col3 = st.columns([1, 1, 1])
     with col1:
@@ -353,9 +364,9 @@ def render_analysis():
     st.session_state.app_lang = st.radio("Review Language", ["Bilingual", "English", "Hindi"], horizontal=True)
     
     for i, q in enumerate(st.session_state.quiz_data):
-        disp_q = filter_text(q['question'], st.session_state.app_lang)
-        disp_ans = filter_text(q['answer'], st.session_state.app_lang)
-        disp_user = filter_text(st.session_state.user_answers.get(i, 'Not Attempted'), st.session_state.app_lang)
+        disp_q = filter_text(q['question'], st.session_state.app_lang).replace('<', '&lt;').replace('>', '&gt;')
+        disp_ans = filter_text(q['answer'], st.session_state.app_lang).replace('<', '&lt;').replace('>', '&gt;')
+        disp_user = filter_text(st.session_state.user_answers.get(i, 'Not Attempted'), st.session_state.app_lang).replace('<', '&lt;').replace('>', '&gt;')
         
         with st.expander(f"Q{i+1} (PDF Q{q['id']}): {disp_q[:40]}..."):
             st.markdown(f"**Question:**\n {disp_q}")
@@ -376,4 +387,4 @@ def main():
 
 if __name__ == "__main__":
     main()
-    
+        
