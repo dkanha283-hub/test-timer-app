@@ -82,10 +82,8 @@ def initialize_state():
 
 # --- 5. BACKEND CONVERTER ENGINE (PDF -> DICT) ---
 def parse_pdf_to_raw_data(file_input):
-    """Parses PDF from either a file path or an uploaded file object."""
     extracted_text = ""
     try:
-        # Handle string path vs uploaded file object
         if isinstance(file_input, str):
             if not os.path.exists(file_input): return []
             pdf_source = file_input
@@ -168,7 +166,6 @@ def parse_pdf_to_raw_data(file_input):
 
 # --- 6. AUTOMATIC JSON MANAGER ---
 def load_and_auto_save_quiz_data(filename):
-    """Loads JSON if available, otherwise processes PDF."""
     if filename.endswith('.json'):
         json_filename = filename
         pdf_filename = filename.replace('.json', '.pdf')
@@ -176,13 +173,11 @@ def load_and_auto_save_quiz_data(filename):
         json_filename = filename.replace('.pdf', '.json')
         pdf_filename = filename
     
-    # 1. Load from local JSON if it exists
     if os.path.exists(json_filename):
         with open(json_filename, 'r', encoding='utf-8') as f:
             data = json.load(f)
         return data, True
         
-    # 2. Fallback to PDF if JSON is missing
     data = parse_pdf_to_raw_data(pdf_filename)
     if data:
         with open(json_filename, 'w', encoding='utf-8') as f:
@@ -236,15 +231,43 @@ def filter_text(text, lang, is_option=False):
                 if is_option or eng_word_count < 4: filtered_lines.append(l)
     return '\n'.join(filtered_lines).strip()
 
-# --- 8. TIMER INJECTION ---
-def inject_timer(seconds, q_index):
+# --- 8. SMART TIMER INJECTION (Supports Pausing and Memory) ---
+def inject_timer(seconds, q_index, is_paused, pin):
+    paused_str = "true" if is_paused else "false"
     html_code = f"""
-    <div id="timer_display_{q_index}" style="font-size: 24px; font-weight: bold; color: #ef4444; text-align: right;"></div>
+    <div id="timer_display_{q_index}" style="font-size: 24px; font-weight: bold; text-align: right;"></div>
     <script>
-        var timeLeft = {seconds};
+        var current_q = {q_index};
+        var isPaused = {paused_str};
+        
+        // Use sessionStorage so the timer survives Streamlit reruns
+        var stored_q = sessionStorage.getItem('active_q_pin_{pin}');
+        var timeLeft;
+        
+        if (stored_q == current_q.toString()) {{
+            // If we are on the same question, resume exactly where we left off
+            var savedTime = sessionStorage.getItem('timeLeft_pin_{pin}');
+            timeLeft = savedTime !== null ? parseInt(savedTime) : {seconds};
+        }} else {{
+            // If this is a new question, start the timer fresh
+            timeLeft = {seconds};
+            sessionStorage.setItem('active_q_pin_{pin}', current_q);
+            sessionStorage.setItem('timeLeft_pin_{pin}', timeLeft);
+        }}
+
         var timerElem = document.getElementById('timer_display_{q_index}');
+        if (isPaused) {{
+            timerElem.innerHTML = "Time Left: " + timeLeft + "s ⏸️";
+            timerElem.style.color = "#f59e0b"; // Orange when paused
+        }} else {{
+            timerElem.innerHTML = "Time Left: " + timeLeft + "s";
+            timerElem.style.color = "#ef4444"; // Red when active
+        }}
+
         var timerId = setInterval(countdown, 1000);
         function countdown() {{
+            if (isPaused) return; // FREEZE TIMER IF PAUSED
+            
             if (timeLeft <= 0) {{
                 clearTimeout(timerId);
                 var buttons = window.parent.document.querySelectorAll('button');
@@ -252,15 +275,16 @@ def inject_timer(seconds, q_index):
                     if(btn.innerText === 'Next' || btn.innerText === 'Submit Test') btn.click();
                 }});
             }} else {{
-                timerElem.innerHTML = "Time Left: " + timeLeft + "s";
                 timeLeft--;
+                timerElem.innerHTML = "Time Left: " + timeLeft + "s";
+                sessionStorage.setItem('timeLeft_pin_{pin}', timeLeft);
             }}
         }}
     </script>
     """
     st.components.v1.html(html_code, height=50)
 
-# --- 9. SETUP POPUP (DIALOG) ---
+# --- 9. SETUP POPUP (DIALOG WITH SHUFFLE) ---
 @st.dialog("⚙️ Quiz Setup")
 def setup_dialog(file_name, total_available, is_json):
     st.write(f"**Topic:** {file_name.replace('.pdf', '').replace('.json', '')}")
@@ -270,13 +294,22 @@ def setup_dialog(file_name, total_available, is_json):
         st.info("📄 PDF Scanned. New JSON Database automatically saved to your GitHub!")
 
     st.write(f"Total questions available: {total_available}")
+    
+    # Feature: Sequence vs Shuffle Selection
+    order_choice = st.radio("Question Order:", ["In Sequence", "Shuffled"], horizontal=True)
+    
     selected_qs = st.slider("How many questions to attempt?", min_value=1, max_value=total_available, value=min(20, total_available))
     timer_sec = st.number_input("Time per question (seconds)", min_value=10, max_value=300, value=60)
     
     if st.button("🚀 Start Quiz", type="primary", use_container_width=True):
         st.session_state.max_questions = selected_qs
         st.session_state.time_per_question = timer_sec
-        st.session_state.quiz_data = random.sample(st.session_state.raw_parsed_data, selected_qs)
+        
+        if order_choice == "Shuffled":
+            st.session_state.quiz_data = random.sample(st.session_state.raw_parsed_data, selected_qs)
+        else:
+            st.session_state.quiz_data = st.session_state.raw_parsed_data[:selected_qs]
+            
         st.session_state.resume_pin = str(random.randint(1000, 9999))
         st.session_state.page = "quiz"
         st.rerun()
@@ -285,7 +318,6 @@ def setup_dialog(file_name, total_available, is_json):
 def render_home():
     st.markdown('<div class="top-bar"><h2>📚 CBT Topic Hub</h2></div>', unsafe_allow_html=True)
     
-    # --- ADMIN UPLOAD FEATURE ---
     with st.expander("🛠️ Admin: Add New Topic (Upload PDF)", expanded=False):
         st.write("Upload a new PDF. The app will convert it to a database, push it to GitHub, and instantly delete the PDF from memory!")
         new_pdf = st.file_uploader("Upload PDF Sheet", type="pdf")
@@ -297,11 +329,8 @@ def render_home():
                     raw_data = parse_pdf_to_raw_data(new_pdf)
                     if raw_data:
                         json_filename = new_topic_name.replace(" ", "_") + ".json"
-                        # Save locally so it appears instantly on the dashboard
                         with open(json_filename, 'w', encoding='utf-8') as f:
                             json.dump(raw_data, f, indent=4, ensure_ascii=False)
-                        
-                        # Push to GitHub
                         sync_to_github(json_filename, raw_data)
                         st.success(f"✅ Success! Database created and uploaded. PDF deleted from memory.")
                         time.sleep(2)
@@ -311,7 +340,6 @@ def render_home():
             else:
                 st.warning("Please upload a PDF and enter a topic name.")
     
-    # --- RESUME SESSION FEATURE ---
     with st.expander("🔄 Did you accidentally close the app? Resume Quiz Here", expanded=False):
         st.write("Enter the 4-digit Recovery PIN you were given during your test to restore your progress.")
         col1, col2 = st.columns([1, 2])
@@ -336,8 +364,6 @@ def render_home():
     st.write("---")
     st.write("Select a topic below to start a new practice session.")
     
-    # DYNAMIC TOPIC DISCOVERY
-    # First, list the hardcoded legacy PDFs to ensure they are never lost
     topics = {
         "Percentage Part 1": "percent1 (1).pdf",
         "Percentage Part 2": "perceentage2.pdf",
@@ -362,7 +388,6 @@ def render_home():
         "Mensuration 3D (Sphere & Hemisphere)": "3D SPARE AND HEMISPHERE Sheet.pdf"
     }
     
-    # Automatically detect any new .json databases created by the Admin Upload Tool!
     for f in os.listdir('.'):
         if f.endswith('.json'):
             is_legacy = False
@@ -377,7 +402,6 @@ def render_home():
     cols = st.columns(2)
     for idx, (topic_name, file_name) in enumerate(topics.items()):
         with cols[idx % 2]:
-            # Use a lightning bolt icon if it's running purely off the fast JSON database
             icon = "⚡" if file_name.endswith('.json') or os.path.exists(file_name.replace('.pdf', '.json')) else "📄"
             if st.button(topic_name, use_container_width=True, icon=icon):
                 st.session_state.selected_topic_file = file_name
@@ -396,6 +420,9 @@ def render_quiz():
     q_index = st.session_state.current_q_index
     q_data = st.session_state.quiz_data[q_index]
     total_qs = len(st.session_state.quiz_data)
+    
+    # Check if Edit Mode is active to Pause Timer
+    edit_mode = st.session_state.get('edit_toggle', False)
 
     col_sect, col_lang, col_qnum = st.columns([2, 1, 1], vertical_alignment="center")
     with col_sect: 
@@ -408,7 +435,8 @@ def render_quiz():
         st.markdown(f"##### Q {q_index + 1} / {total_qs}")
     st.divider()
 
-    inject_timer(st.session_state.time_per_question, q_index)
+    # Inject smart timer with pause support
+    inject_timer(st.session_state.time_per_question, q_index, is_paused=edit_mode, pin=st.session_state.resume_pin)
 
     filtered_question = filter_text(q_data["question"], st.session_state.app_lang, is_option=False)
     safe_question = filtered_question.replace('<', '&lt;').replace('>', '&gt;')
@@ -445,7 +473,10 @@ def render_quiz():
 
     st.divider()
     
-    with st.expander("✏️ Admin: Notice a mistake? Edit this Question permanently"):
+    # --- LIVE EDITOR WITH PAUSE TOGGLE ---
+    st.toggle("✏️ Admin: Notice a mistake? Edit this Question (PAUSES TIMER)", key="edit_toggle")
+    
+    if st.session_state.edit_toggle:
         st.warning("Fixes made here will automatically be uploaded and saved to your GitHub repo!")
         new_q = st.text_area("Question Text", value=q_data["question"], height=150)
         
@@ -472,6 +503,7 @@ def render_quiz():
             st.session_state.quiz_data[q_index] = updated_q
             if update_question_in_database(st.session_state.selected_topic_file, updated_q):
                 st.success("✅ Fix saved! The database is permanently updated in GitHub.")
+                st.session_state.edit_toggle = False # Turn off edit mode
                 time.sleep(1.5)
                 st.rerun()
 
