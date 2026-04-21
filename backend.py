@@ -23,7 +23,6 @@ def inject_custom_css():
             margin-bottom: 20px; font-size: 18px; white-space: pre-wrap; line-height: 1.7; 
             border: 1px solid var(--faded-text-color);
         }
-        /* Mobile override for clean long-press */
         button {
             -webkit-touch-callout: none !important;
             -webkit-user-select: none !important;
@@ -207,7 +206,7 @@ def parse_pdf_to_raw_data(pdf_source):
             if question_text:
                 quiz_data.append({"id": q_id, "question": question_text, "options": [opt_a, opt_b, opt_c, opt_d], "answer": correct_text, "explanation": f"Correct option is [{correct_letter}]."})
         return quiz_data
-    except: return []
+    except Exception as e: return []
 
 def filter_text(text, lang, is_option=False):
     if not text or lang == "Bilingual": return text
@@ -253,3 +252,4 @@ def inject_timer(seconds, q_index, is_paused, pin):
     </script>
     """
     st.components.v1.html(html_code, height=50)
+            
