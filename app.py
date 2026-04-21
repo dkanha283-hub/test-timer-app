@@ -12,7 +12,8 @@ def inject_custom_css():
     st.markdown("""
         <style>
         .stApp { background-color: #f4f6f9; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        .question-box { background-color: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 20px; font-size: 18px; }
+        /* white-space: pre-wrap is CRITICAL here. It preserves the exact spacing of multi-line fractions! */
+        .question-box { background-color: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 20px; font-size: 18px; white-space: pre-wrap; line-height: 1.6;}
         .top-bar { background-color: #1e3a8a; color: white; padding: 15px; border-radius: 5px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;}
         .topic-card { background-color: white; padding: 20px; border-radius: 10px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1); cursor: pointer; border: 2px solid transparent; transition: 0.3s;}
         .topic-card:hover { border-color: #1e3a8a; }
@@ -38,7 +39,7 @@ def save_state_to_cloud():
         "answers": st.session_state.user_answers.copy(),
         "time": st.session_state.time_per_question,
         "max_qs": st.session_state.max_questions,
-        "quiz_data": st.session_state.quiz_data, # Save the shuffled sequence too!
+        "quiz_data": st.session_state.quiz_data, 
         "timestamp": now
     }
 
@@ -62,7 +63,8 @@ def parse_pdf_to_quiz(file_path):
         if not os.path.exists(file_path): return []
         with pdfplumber.open(file_path) as pdf:
             for page in pdf.pages:
-                text = page.extract_text()
+                # y_tolerance=3 ensures that numerators and denominators of fractions are kept together
+                text = page.extract_text(x_tolerance=2, y_tolerance=3)
                 if text: extracted_text += text + "\n"
         
         clean_text = re.sub(r'INDIAN\s*RAILWAY FOUNDATION BATCH\s*.*?(?=\n)', '', extracted_text, flags=re.IGNORECASE)
@@ -134,29 +136,40 @@ def parse_pdf_to_quiz(file_path):
     except Exception as e:
         return []
 
-# --- 5. SMART LANGUAGE FILTER ---
+# --- 5. SMART LANGUAGE FILTER (PATCHED FOR MATH & % RECOVERY) ---
 def filter_text(text, lang):
     if not text or lang == "Bilingual": return text
     lines = text.split('\n')
     filtered_lines = []
     seen_normalized = set()
+    
     for l in lines:
         if not l.strip(): continue
         has_hindi = bool(re.search(r'[\u0900-\u097F]', l))
         eng_word_count = len(re.findall(r'\b[a-zA-Z]{2,}\b', l))
         processed_line = ""
+        
         if lang == "English":
-            if has_hindi: continue
-            else: processed_line = l
+            if has_hindi:
+                # DONT drop the line! Strip the Hindi words but KEEP the math, fractions, and %
+                clean_en = re.sub(r'[\u0900-\u097F।]+', '', l).strip()
+                # If there are numbers, %, or English letters left over, save it!
+                if re.search(r'[a-zA-Z0-9%]', clean_en):
+                    processed_line = clean_en
+            else: 
+                processed_line = l
         elif lang == "Hindi":
-            if has_hindi or eng_word_count < 3: processed_line = l
+            if has_hindi or eng_word_count < 3: 
+                processed_line = l
                 
         if processed_line:
             norm = re.sub(r'\W+', '', processed_line).lower()
-            if norm and len(norm) > 3:
+            # Only deduplicate long sentences so we don't accidentally delete short math formulas
+            if len(norm) > 10:
                 if norm in seen_normalized: continue 
                 seen_normalized.add(norm)
             filtered_lines.append(processed_line)
+            
     res = '\n'.join(filtered_lines).strip()
     return res if res else text 
 
@@ -197,8 +210,6 @@ def setup_dialog(file_name, total_available):
         st.session_state.max_questions = selected_qs
         st.session_state.time_per_question = timer_sec
         
-        # --- THE FIX: RANDOMLY SAMPLE THE QUESTIONS ---
-        # This selects `selected_qs` random questions from the full PDF, shuffling them instantly!
         st.session_state.quiz_data = random.sample(st.session_state.quiz_data, selected_qs)
         
         st.session_state.resume_pin = str(random.randint(1000, 9999))
@@ -223,7 +234,6 @@ def render_home():
                     st.session_state.user_answers = saved['answers']
                     st.session_state.time_per_question = saved['time']
                     st.session_state.max_questions = saved['max_qs']
-                    # Restore the exact shuffled sequence they were taking
                     st.session_state.quiz_data = saved['quiz_data'] 
                     st.session_state.resume_pin = entered_pin
                     
@@ -295,8 +305,11 @@ def render_quiz():
     inject_timer(st.session_state.time_per_question, q_index)
 
     filtered_question = filter_text(q_data["question"], st.session_state.app_lang)
-    # Added original Q number to let user know which question they pulled from the PDF
-    st.markdown(f'<div class="question-box"><b>Q{q_index + 1}.</b> <i>(From PDF Q{q_data["id"]})</i><br><br> {filtered_question}</div>', unsafe_allow_html=True)
+    
+    # HTML ESCAPER: Prevents math symbols like '<' and '>' from being swallowed by the web browser!
+    safe_question = filtered_question.replace('<', '&lt;').replace('>', '&gt;')
+    
+    st.markdown(f'<div class="question-box"><b>Q{q_index + 1}.</b> <i>(From PDF Q{q_data["id"]})</i><br><br>{safe_question}</div>', unsafe_allow_html=True)
     
     current_response = st.session_state.user_answers.get(q_index, None)
     
