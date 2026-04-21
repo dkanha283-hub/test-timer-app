@@ -7,21 +7,59 @@ import json
 def inject_custom_css():
     st.markdown("""
         <style>
-        .stApp { font-family: 'Inter', '-apple-system', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+        /* 1. SMOOTH ANIMATIONS */
+        @keyframes slideUpFade {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* 2. DYNAMIC GEOMETRIC BACKGROUND */
+        .stApp { 
+            font-family: 'Inter', '-apple-system', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+            background-color: var(--background-color);
+            background-image: radial-gradient(var(--faded-text-color) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+        
+        /* 3. GORGEOUS TOP BAR */
         .top-bar { 
             background: linear-gradient(135deg, var(--primary-color), #6366f1); 
-            color: white; padding: 20px; border-radius: 16px; 
+            color: white; padding: 25px; border-radius: 16px; 
             display: flex; justify-content: space-between; align-items: center; 
-            margin-bottom: 20px; box-shadow: 0 10px 25px rgba(99, 102, 241, 0.2);
+            margin-bottom: 25px; box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+            animation: slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
+        .top-bar h2 { margin: 0; font-weight: 800; letter-spacing: -0.5px; }
+        
+        /* Hide defaults */
         header {visibility: hidden;}
         div[data-testid="stTextInput"] { display: none; }
         .stTextInput { display: block !important; }
+        
+        /* 4. MODERN QUESTION BOX WITH ANIMATION */
         .question-box { 
             background-color: var(--secondary-background-color); color: var(--text-color); 
-            padding: 30px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); 
-            margin-bottom: 20px; font-size: 18px; white-space: pre-wrap; line-height: 1.7; 
+            padding: 35px; border-radius: 16px; box-shadow: 0 8px 25px rgba(0,0,0,0.05); 
+            margin-bottom: 25px; font-size: 18px; white-space: pre-wrap; line-height: 1.8; 
             border: 1px solid var(--faded-text-color);
+            animation: slideUpFade 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        
+        /* 5. SMOOTH BUTTON HOVER EFFECTS */
+        button[data-testid="baseButton-secondary"], button[data-testid="baseButton-primary"] {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            border-radius: 10px !important;
+        }
+        button[data-testid="baseButton-secondary"]:hover, button[data-testid="baseButton-primary"]:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1) !important;
+        }
+        
+        /* Smooth Expander Animation */
+        div[data-testid="stExpander"] {
+            animation: slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            border-radius: 12px !important;
+            border: 1px solid var(--faded-text-color) !important;
         }
         </style>
     """, unsafe_allow_html=True)
@@ -76,7 +114,6 @@ def github_delete(file_path):
         return True
     except: return False
 
-# ⚡ THIS CACHE FIXES 90% OF YOUR LAG! It stops scanning folders every second.
 @st.cache_data 
 def get_library():
     library = {}
@@ -176,7 +213,7 @@ def filter_text(text, lang, is_option=False):
 def inject_timer(seconds, q_index, is_paused, pin):
     paused_str = "true" if is_paused else "false"
     html_code = f"""
-    <div id="timer_display_{q_index}" style="font-size: 24px; font-weight: bold; text-align: right;"></div>
+    <div id="timer_display_{q_index}" style="font-size: 24px; font-weight: bold; text-align: right; animation: slideUpFade 0.5s ease forwards;"></div>
     <script>
         var current_q = {q_index}; var isPaused = {paused_str};
         var stored_q = sessionStorage.getItem('active_q_pin_{pin}');
@@ -184,7 +221,12 @@ def inject_timer(seconds, q_index, is_paused, pin):
         if(stored_q != current_q.toString()) {{ sessionStorage.setItem('active_q_pin_{pin}', current_q); sessionStorage.setItem('timeLeft_pin_{pin}', timeLeft); }}
         
         var timerElem = document.getElementById('timer_display_{q_index}');
-        timerElem.innerHTML = "Time Left: " + timeLeft + "s" + (isPaused ? " ⏸️" : "");
+        
+        // Timer icon integration
+        const pauseIcon = `<span style="font-size: 20px; vertical-align: middle;">⏸️</span>`;
+        const activeIcon = `<span style="font-size: 20px; vertical-align: middle;">⏳</span>`;
+        
+        timerElem.innerHTML = (isPaused ? pauseIcon : activeIcon) + " Time Left: " + timeLeft + "s";
         timerElem.style.color = isPaused ? "#f59e0b" : "#ef4444"; 
         
         var timerId = setInterval(function() {{
@@ -193,7 +235,7 @@ def inject_timer(seconds, q_index, is_paused, pin):
                 clearTimeout(timerId);
                 window.parent.document.querySelectorAll('button').forEach(btn => {{ if(btn.innerText === 'Next' || btn.innerText === 'Submit Test') btn.click(); }});
             }} else {{
-                timeLeft--; timerElem.innerHTML = "Time Left: " + timeLeft + "s";
+                timeLeft--; timerElem.innerHTML = activeIcon + " Time Left: " + timeLeft + "s";
                 sessionStorage.setItem('timeLeft_pin_{pin}', timeLeft);
             }}
         }}, 1000);
