@@ -1,0 +1,1094 @@
+[
+    {
+        "id": 1,
+        "question": "The marked price of a refrigerator is ₹47,500. During off season, it is sold for ₹41,800.\nDetermine the discount percentage.\nएक यफ्रे िजयटे य का अंफ्रकत भूल्य ₹47,500 वै। ऑप ऴीजन के दॊयान, इऴ े ₹41,800 भ ें फेचा जाता वै। छू ट प्रततलत\nज्ञात कीजजए।",
+        "options": [
+            "10.5%",
+            "12%",
+            "9%",
+            "11%"
+        ],
+        "answer": "12%",
+        "explanation": "Based on the Answer Key, the correct option is [B]."
+    },
+    {
+        "id": 2,
+        "question": "A person purchased a saree for Rs.7710 after availing a net discount of Rs.1285. The\npercentage of discount, the saree shop offers, is.\nएक व्यक्ति न े Rs.1285 की जनऱर छू ट जभरन े ऩय ऴाडी Rs.7710 भ ें खयीदी। ऴाडी दकु ानदाय न े ऴाडी ऩय फ्रकतन े\nप्रततलात छू ट दी?",
+        "options": [
+            "14 %",
+            "14 %",
+            "14 %",
+            "14 %"
+        ],
+        "answer": "14 %",
+        "explanation": "Based on the Answer Key, the correct option is [B]."
+    },
+    {
+        "id": 3,
+        "question": "What is the maximum percentage discount that a merchant can offer on his marked\nprice, so that he ends up selling at no profit or loss, if he initially marked his goods up by\n28%?\nमदद एक व्याऩायी न े लुरुआत भ ें अऩने भार ऩय 28% फढाकय भूल्य अंफ्रकत फ्रकमा वॉ, तॉ भार कॉ फ्रफना फ्रकऴी\nराब मा वाजन के फेचने के जरए, ऱव अऩन े द्वाया अंफ्रकत भूल्य ऩय अतधकतभ फ्रकतन े प्रततलत छू ट दे ऴकता वै?\n(ICAR Technician 2023)",
+        "options": [
+            "24.275 %",
+            "22.125%",
+            "21.875 %",
+            "23.575%"
+        ],
+        "answer": "21.875 %",
+        "explanation": "Based on the Answer Key, the correct option is [C]."
+    },
+    {
+        "id": 4,
+        "question": "A store sells a printer priced at ₹32,000, offering a trade discount of 9%. What is the\ndiscount amount?\nएक स्टॉय ₹32,000 की कीभत ऩय एक फ्रप्रिंटय फेचता वै, जजऴभ ें 9% की व्याऩाय छू ट दी जाती वै। छू ट की याजल\nफ्रकतनी वै?\n(RRB NTPC 12th LEVEL 2025)",
+        "options": [
+            "₹2,780",
+            "₹2,740",
+            "₹2,880",
+            "₹2,840"
+        ],
+        "answer": "₹2,880",
+        "explanation": "Based on the Answer Key, the correct option is [C]."
+    },
+    {
+        "id": 5,
+        "question": "During sale, Raghav bought a notebook marked for ₹28 at 25% discount and a pen\nmarked for ₹75 at 16% discount. How much (in ₹) did he save due to sale?\nफ्रफक्री के दॊयान, याघऱ न े ₹28 अंफ्रकत भूल्य ऱारी एक नॉटफुक 25% छू ट ऩय औय ₹75 अंफ्रकत भूल्य ऱारा एक\nऩेन 16% छू ट ऩय खयीदा। फ्रफक्री के कायण उऴन े फ्रकतनी (₹ भ)ें फचत की?\n(RRB RPF SI 2024)",
+        "options": [
+            "19",
+            "17",
+            "21",
+            "18"
+        ],
+        "answer": "19",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 6,
+        "question": "A shopkeeper offers a trade discount of 15% on the marked price of an item. If the marked\nprice of this product is ₹6500, what is its selling price (in ₹)?\nएक दकु ानदाय फ्रकऴी ऱस्तु के अंफ्रकत भूल्य ऩय 15% की व्याऩारयक छू ट देता वै। मदद इऴ उत्पाद का अंफ्रकत भूल्य\n₹6500 वै, तॉ इऴका फ्रऱक्रम भूल्य (₹ भ)ें ज्ञात कीजजए।\n(RRB NTPC 12TH LEVEL CBT-2 2025)",
+        "options": [
+            "5200",
+            "5255",
+            "5525",
+            "5552"
+        ],
+        "answer": "5525",
+        "explanation": "Based on the Answer Key, the correct option is [C]."
+    },
+    {
+        "id": 7,
+        "question": "The marked price of a table is ₹8,980. If the shopkeeper offers a discount of 19%, what is its\nselling price (in ₹, to the nearest rupee)?\nएक भेज का अंफ्रकत भूल्य ₹8,980 वै। मदद दकु ानदाय 19% की छू ट देता वै, तॉ इऴका फ्रऱक्रम भल्यू (₹ भ,ें\nजनकटतभ रुऩम े तक) फ्रकतना वॉगा?\n(RRB NTPC 12th LEVEL 2025)",
+        "options": [
+            "₹7,427",
+            "₹7,472",
+            "₹7,247",
+            "₹7,274"
+        ],
+        "answer": "₹7,274",
+        "explanation": "Based on the Answer Key, the correct option is [D]."
+    },
+    {
+        "id": 8,
+        "question": "After a discount of 34% an article is sold for Rs.3168. What is the marked price (in Rs) of the\narticle?\n34% की छू ट के फाद एक ऱस्त ु कॉ 3168 रू. भ ें फेचा जाता वै। ऱस्तु का अंफ्रकत भल्यू (रू. भें) क्या वै?\n(RRB NTPC GRADUATE LEVEL 2025)",
+        "options": [
+            "4750",
+            "4800",
+            "4850",
+            "5000"
+        ],
+        "answer": "4800",
+        "explanation": "Based on the Answer Key, the correct option is [B]."
+    },
+    {
+        "id": 9,
+        "question": "The SP of an article is Rs8820. If the discount on it is 16%. What would be the SP of the\narticle (in Rs) if the discount on it is 28%?\nफ्रकऴी ऱस्तु का फ्रऱक्रमभल्यू 8820 रु वै। मदद इऴ ऩय छू ट 16% की वै। ज्ञात कीजजम े इऴका फ्रऱक्रमभल्यू फ्रकतना\nवॉगा मदद अफ 28% की छू ट दी जाए।",
+        "options": [
+            "7560",
+            "7200",
+            "7920",
+            "8064"
+        ],
+        "answer": "7560",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 10,
+        "question": "A person bought a book at 31% discount on its printed price. If no discount was given, then\nhe would have to pay `2,480 more. How much did he pay (in ₹) for the book?\nएक व्यक्ति न े एक ऩुस्तक कॉ इऴके भुदित भूल्य ऩय 31% की छू ट ऩय खयीदा। मदद छू ट न दी जाती, तॉ उऴ े ₹2,480\nअतधक का बुगतान कयना ऩडता। ऩुस्तक के जरए उऴन े फ्रकतना बुगतान (₹ भ)ें फ्रकमा?",
+        "options": [
+            "7,000",
+            "5,520",
+            "8,000",
+            "4,560"
+        ],
+        "answer": "5,520",
+        "explanation": "Based on the Answer Key, the correct option is [B]."
+    },
+    {
+        "id": 11,
+        "question": "The cost price of an article is ₹700, and its marked price is ₹1,120. If the seller offers a\ndiscount of 35% on the marked price, what will be his profit percentage?\nफ्रकऴी ऱस्त ु का क्रम भूल्य ₹700 वै औय उऴका अंफ्रकत भूल्य ₹1,120 वै। मदद फ्रऱक्रे ता अंफ्रकत भूल्य ऩय 35% की छू ट\nदेता वै, तॉ उऴका राब प्रततलत फ्रकतना वॉगा?",
+        "options": [
+            "2%",
+            "1%",
+            "4%",
+            "7%"
+        ],
+        "answer": "4%",
+        "explanation": "Based on the Answer Key, the correct option is [C]."
+    },
+    {
+        "id": 12,
+        "question": "A trader buys an article at 72% of its marked price and sells it at 14% discount on its\nmarked price. His percentage profit is:\nएक व्याऩायी एक ऱस्तु कॉ इऴके अंफ्रकत भूल्य के 72% ऩय खयीदता वै औय अंफ्रकत भूल्य ऩय 14% की छू ट देने के\nफाद फेच देता वै। उऴका राब प्रततलत भ ें फ्रकतना वै?",
+        "options": [
+            "",
+            "22",
+            "18",
+            ""
+        ],
+        "answer": "",
+        "explanation": "Based on the Answer Key, the correct option is [D]."
+    },
+    {
+        "id": 13,
+        "question": "The cost price of an article is 64% of the marked price. Calculate the gain percentage\nafter allowing a discount of 12%.\nफ्रकऴी ऱस्तु का क्रम भूल्य ,अंफ्रकत भूल्य का 64% वै। 12% की छू ट देने के फाद राब प्रततलत की गणना कय ें?\nGroup D 24/08/2022 (Afternoon)",
+        "options": [
+            "32.5%",
+            "47.2%",
+            "37.5%",
+            "45.7%"
+        ],
+        "answer": "37.5%",
+        "explanation": "Based on the Answer Key, the correct option is [C]."
+    },
+    {
+        "id": 14,
+        "question": "A tradesman marks his goods at 24% above the cost price. He allows his customer a\ndiscount of 13% on the marked price. Find his profit percentage.\nएक व्याऩायी अऩने भार ऩय उऴके क्रम भूल्य ऴ े 24% अतधक भूल्य अंफ्रकत कयता वै। ऱव ग्रावक कॉ अंफ्रकत भूल्य\nऩय 13% की छू ट देता वै। उऴका राब प्रततलत ज्ञात कीजजए।\n(RRB NTPC 12th LEVEL 2025) `",
+        "options": [
+            "6.48%",
+            "8.55%",
+            "7.88%",
+            "5.76%"
+        ],
+        "answer": "7.88%",
+        "explanation": "Based on the Answer Key, the correct option is [C]."
+    },
+    {
+        "id": 15,
+        "question": "If a shopkeeper hikes the purchasing value of an item by 46% and gives it a discount of\n46% on the face value for selling it, then what the total percentage gain or loss will it have\n?\nमदद एक दकु ानदाय फ्रकऴी ऱस्तु के क्रम भूल्य भ ें 46% की ऱृद्धि कयके भूल्य अंफ्रकत कयता वै औय अंफ्रकत भल्यू ऩय\n46% की छू ट देता वै, तॉ उऴ े कु र फ्रकतन े प्रततलत राब मा वाजन वॉगी?\nRPF S.I. 05/01/2019 (Morning)",
+        "options": [
+            "21.16% profit/21.16% राब",
+            "20.04% Loss/20.04% वाजन",
+            "20.04% Profit/20.04% राब",
+            "21.16% Loss/21.16% वाजन"
+        ],
+        "answer": "21.16% Loss/21.16% वाजन",
+        "explanation": "Based on the Answer Key, the correct option is [D]."
+    },
+    {
+        "id": 16,
+        "question": "Sujata marks an article 36% above the cost price and allows a 40% discount on the\nmarked price. The loss percentage is:\nऴुजाता रागत भूल्य ऴ े 36% ऊऩय एक ऱस्तु कॉ तचह्नित कयती वै औय तचह्नित भूल्य ऩय 40% की छू ट देती वै।\nनुकऴान प्रततलत वै:",
+        "options": [
+            "15",
+            "16.8",
+            "4",
+            "18.4"
+        ],
+        "answer": "18.4",
+        "explanation": "Based on the Answer Key, the correct option is [D]."
+    },
+    {
+        "id": 17,
+        "question": "Ravi marks his goods 35% above CP but allows 22.22% discount for Cash. Find out his\ngain/loss%?\nयफ्रऱ फ्रकऴी ऱस्त ु का अंफ्रकत भूल्य उऴके क्रम भूल्य ऴ े 35% फढा कय अंफ्रकत कयता वै औय उऴके ऴाथ 22.22% का\nछू ट प्रदान कयता वै। उऴका राब/वाजन % ज्ञात कय।ें",
+        "options": [
+            "6 % Gain",
+            "5% Gain",
+            "6% Gain",
+            "6 % Loss"
+        ],
+        "answer": "5% Gain",
+        "explanation": "Based on the Answer Key, the correct option is [B]."
+    },
+    {
+        "id": 18,
+        "question": "A retailer buys 75 pencils at the marked price of 60 pencils from a wholesaler. If he sells\nthese pencils by giving a discount of 6%. What is his profit percentage?\nएक खुदया फ्रऱक्रे ता एक थॉक व्याऩायी ऴ े 60 ऩेंजऴर के अंफ्रकत भूल्य ऩय 75 ऩेंजऴर खयीदता वै। मदद ऱव इन ऩेंजऴरों\nकॉ 6% की छू ट देकय फेचता वै। उऴका राब प्रततलत क्या वै?",
+        "options": [
+            "17.5%",
+            "15.9%",
+            "18.2%",
+            "16.8%"
+        ],
+        "answer": "17.5%",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 19,
+        "question": "A wholesaler increases the cost price of an item by 90% while marking it. He then offers a\n60% discount on this marked price but finds that he incurs a loss. If the wholesaler wants\nto achieve no profit and no loss, by what percentage should he change the selling price of\nthe item? (Rounded to one decimal place.)A\nएक थॉक व्याऩायी फ्रकऴी ऱस्त ु का अंफ्रकत भूर्म जनधाारयत कयत े ऴभम उऴके क्रम भूल्य भ ें 90% की ऱृद्धि कयता\nवै। फ्रपय ऱव इऴ अंफ्रकत भूल्य ऩय 60% की छू ट देता वै रेफ्रकन ऱव ऩाता वै फ्रक उऴ े घाटा वॉ यवा वै। मदद थॉक व्याऩायी\nन तॉ राब प्राप्त कयना औय न वी वाजन चावता वै, तॉ उऴे ऱस्तु के फ्रऱक्रम भल्यू भ ें फ्रकतने प्रततलत का ऩरयऱतान\nकयना चारवए? (एक दलभरऱ स्थान तक ऩूणाांफ्रकत कय।ें )\n(RRB NTPC 12th LEVEL 2025)",
+        "options": [
+            "31.6% increase",
+            "32.1% decrease",
+            "35.7% decrease",
+            "34.5% increase"
+        ],
+        "answer": "31.6% increase",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 20,
+        "question": "A piece of furniture is marked at 35% above its cost price. The shopkeeper gives a\ndiscount of 18% on the marked price and still earns ₹1,498 profit. What is the cost price of\nthe furniture?\nएक पनीचय का भूल्य उऴके क्रम भूल्य ऴ े 35% अतधक अंफ्रकत वै। दकु ानदाय अंफ्रकत भूल्य ऩय 18% की छू ट देता वै\nऔय फ्रपय बी ₹1,498 का राब अजजित कयता वै। पनीचय का क्रम भूल्य फ्रकतना वै?\n(RRB NTPC 12th LEVEL 2025)",
+        "options": [
+            "₹14,000",
+            "₹15,000",
+            "₹16,000",
+            "₹12,000"
+        ],
+        "answer": "₹14,000",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 21,
+        "question": "A shopkeeper lists the price of a fan at 36% above its cost price and offers a 25% discount\non its list price. If he earns a profit of ₹171, then what is the list price (in ₹) of the fan?\nएक दकु ानदाय एक ऩंख े का भूल्य उऴके क्रम भूल्य ऴ े 36% अतधक अंफ्रकत कयता वै तथा इऴके अंफ्रकत भल्यू ऩय\n25% की छू ट देता वै। मदद ऱव ₹171 का राब अजजित कयता वै, तॉ ऩंख े का अंफ्रकत भल्यू (₹ भ)ें ज्ञात कीजजए।\n(RRB NTPC 12th LEVEL 2025)",
+        "options": [
+            "11,406",
+            "11,598",
+            "11,628",
+            "11,547"
+        ],
+        "answer": "11,628",
+        "explanation": "Based on the Answer Key, the correct option is [C]."
+    },
+    {
+        "id": 22,
+        "question": "A pair of shoes is sold by a retailer at a 20% discount on the marked price, but the retailer\nstill makes a 28% profit on the cost price. What is the ratio of the marked price to the cost\nprice of the shoes?\nएक जॉडी जूत े कॉ एक खुदया फ्रऱक्रे ता द्वाया अंफ्रकत भल्यू ऩय 20% की छू ट ऩय फेचा जाता वै, रेफ्रकन खुदया फ्रऱक्रे ता\nअबी बी रागत भूल्य ऩय 28% राब अजजित कयता वै। जूत े के अंफ्रकत भूल्य औय रागत भूल्य का अनुऩात क्या वै?\n(RRB NTPC 12th LEVEL 2025)",
+        "options": [
+            "7 : 4",
+            "8 : 5",
+            "3 : 5",
+            "9 : 7"
+        ],
+        "answer": "8 : 5",
+        "explanation": "Based on the Answer Key, the correct option is [B]."
+    },
+    {
+        "id": 23,
+        "question": "By how much above cost price should an article be marked so as to gain 17% even after\nallowing a 22% discount?\n22% छू ट देन े के फाद बी 17% राब प्राप्त कयन े के जरए फ्रकऴी ऱस्तु का अंफ्रकत भूल्य, उऴके क्रम भूल्य ऴ े फ्रकतना\nअतधक वॉना चारवए ?\nRRB JE 23/05/2019 (Evening)",
+        "options": [
+            "45%",
+            "28%",
+            "35%",
+            "50%"
+        ],
+        "answer": "50%",
+        "explanation": "Based on the Answer Key, the correct option is [D]."
+    },
+    {
+        "id": 24,
+        "question": "A trader offers a discount of 10% on an article if a customer makes the payment in cash.\nHow much percentage above the cost price should he mark the article to make a profit of\n10%? [Give your answer correct to 2 decimal places.]\nग्रावक द्वाया नकद बुगतान फ्रकए जाने की ह्नस्थतत भ,ें एक व्याऩायी फ्रकऴी ऱस्तु ऩय 10% की छू ट प्रदान कयता वै। उऴ\nऱस्तु ऩय 10% का राब प्राप्त कयन े के जरए, उऴ े ऱस्त ु ऩय क्रम भूल्य ऴ े फ्रकतन े प्रततलत अतधक भूल्य अंफ्रकत कयना\nचारवए? [अऩना उत्तय दॉ दलभरफ स्थान तक ऩूणाांफ्रकत कीजजए । ]\nGroup D 17/09/2022 (Evening)",
+        "options": [
+            "15.22%",
+            "11.22%",
+            "20.22%",
+            "22.22%"
+        ],
+        "answer": "22.22%",
+        "explanation": "Based on the Answer Key, the correct option is [D]."
+    },
+    {
+        "id": 25,
+        "question": "A shopkeeper marked his goods at X% above their cost price and sold them at a discount\nof 16%. If he gained 68% profit, then find the value of X.\nएक दकु ानदाय न े अऩने ऴाभान ऩय रागत भूल्य ऴ े X% अतधक भूल्य अंफ्रकत फ्रकमा तथा उऴ े 16% की छू ट ऩय\nफेचा। मदद उऴ े 68% का राब रृआ, तॉ X का भान ज्ञात कीजजए।",
+        "options": [
+            "101",
+            "100",
+            "99",
+            "102"
+        ],
+        "answer": "100",
+        "explanation": "Based on the Answer Key, the correct option is [B]."
+    },
+    {
+        "id": 26,
+        "question": "A shopkeeper marks an article x% above the cost price and sells it by allowing 30%\ndiscount on the marked price. If there is a loss of 4.8%, then what is the value of x?\nएक दकु ानदाय एक ऱस्त ु ऩय क्रम भूल्य ऴ े x% अतधक भूल्य अंफ्रकत कयता वै औय अंफ्रकत भूल्य ऩय 30% की छू ट\nदेकय उऴ े फेचता वै। मदद उऴ े 4.8% की वाजन वॉती वै, तॉ x का भान क्या वै?",
+        "options": [
+            "30",
+            "40",
+            "36",
+            "35"
+        ],
+        "answer": "36",
+        "explanation": "Based on the Answer Key, the correct option is [C]."
+    },
+    {
+        "id": 27,
+        "question": "An article is marked x% (0<x<40) above its cost price. It is sold by giving discount on its\nmarked price. If there is a profit of 10 , then what is the value of x?\nएक ऱस्तु ऩय उऴके रागत भूल्य ऴ े x% (0<x<40) अतधक अंफ्रकत वै। इऴ े इऴके अंफ्रकत भूल्य ऩय छू ट देकय\nफेचा जाता वै। मदद का राब वॉ तॉ x का भान क्या वै?\n(RRB NTPC 12th LEVEL 2025)",
+        "options": [
+            "35",
+            "25",
+            "30",
+            "20"
+        ],
+        "answer": "30",
+        "explanation": "Based on the Answer Key, the correct option is [C]."
+    },
+    {
+        "id": 28,
+        "question": "The marked price of a radio is Rs 5480. The shopkeeper allows a discount of 11% and still\ngains 22 %. If no discount is allowed, then find his gain%.\nफ्रकऴी यरे िमॉ का अंफ्रकत भल्यू 5480 रुऩम े वै। दकु नदाय इऴ ऩय 11% की छू ट देन े के फाऱजूद 22 % का भनु ापा\nकभाता वै। मदद कॉई छू ट नवीं दी जाम े तॉ फ्रकतन े % का भुनापा वॉगा।",
+        "options": [
+            "37.5%",
+            "30.75%",
+            "40%",
+            "31.25%"
+        ],
+        "answer": "37.5%",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 29,
+        "question": "A shopkeeper marks the price of an article at ₹5,180. Find the cost price if after allowing a\ndiscount of 31% he still gains 5% on the cost price.\nएक दकु ानदाय फ्रकऴी ऱस्तु का भूल्य ₹5,180 अंफ्रकत कयता वै। मदद 31% की छू ट देने के फाद बी उऴ े क्रम भूल्य ऩय\n5% का राब प्राप्त वॉता वै, तॉ क्रम भूल्य ज्ञात कीजजए।",
+        "options": [
+            "₹3,387",
+            "₹3,470",
+            "₹3,404",
+            "₹3,376"
+        ],
+        "answer": "₹3,404",
+        "explanation": "Based on the Answer Key, the correct option is [C]."
+    },
+    {
+        "id": 30,
+        "question": "A shopkeeper allows his customers 8% off on the marked price of goods and still gets a\nprofit of 19.6%. What is the actual cost of an article marked ₹5,200?\nएक दकु ानदाय ग्रावकों कॉ ऱस्तुओ ंके अंफ्रकत भूल्य ऩय 8% की छू ट देता वै औय फ्रपय बी उऴ े 19.6% का राब प्राप्त\nवॉता वै। ₹5,200 अंफ्रकत भल्यू ऱारी ऱस्तु का ऱास्तफ्रऱक/क्रम भूल्य फ्रकतना वै?",
+        "options": [
+            "₹4,500",
+            "₹4,350",
+            "₹4,000",
+            "₹4,150"
+        ],
+        "answer": "₹4,000",
+        "explanation": "Based on the Answer Key, the correct option is [C]."
+    },
+    {
+        "id": 31,
+        "question": "A dealer purchased a water cooler for ₹56,000. He allows a discount of 81% on its marked\nprice and still gains 71%. Find the marked price of the water cooler.\nएक व्याऩायी न े ₹56,000 भ ें एक ऱाटय कू रय खयीदा। ऱव इऴके अंफ्रकत भूल्य ऩय 81% की छू ट देता वै औय फ्रपय बी\n71% का राब अजजित कयता वै। ऱाटय कू रय का अंफ्रकत भूल्य ज्ञात कीजजए।",
+        "options": [
+            "₹5,03,937",
+            "₹5,03,908",
+            "₹5,04,030",
+            "₹5,04,000"
+        ],
+        "answer": "₹5,04,000",
+        "explanation": "Based on the Answer Key, the correct option is [D]."
+    },
+    {
+        "id": 32,
+        "question": "Harish, a dealer, purchases a microwave oven for ₹11,400. He allows a discount of 32% on\nits marked price and still gains 15%. What is the marked price (in ₹) of the microwave\noven? (Round off to the nearest ₹)\nवयील नाभक एक िीरय ₹11,400 भ ें एक भाइक्रॉऱेऱ ओऱन खयीदता वै। ऱव इऴके अंफ्रकत भूल्य ऩय 32% की छू ट\nदेता वै औय फ्रपय बी 15% का राब अजजित कयता वै। भाइक्रॉऱेऱ ओऱन का अंफ्रकत भूल्य (₹ भ,ें जनकटतभ ₹ तक\nऩूणाांफ्रकत) फ्रकतना वै?",
+        "options": [
+            "19,279",
+            "18,479",
+            "19,499",
+            "17,299"
+        ],
+        "answer": "19,279",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 33,
+        "question": "A shopkeeper allows 18% discount on the marked price of an article and still makes a\nprofit of 23%. If he gains Rs18.40 on the sale of the article, then what is the marked price of\nthe article?\nएक दकु ानदाय फ्रकऴी ऱस्तु के अंफ्रकत भूल्य ऩय 18% की छू ट देता वै, ऩयतं ु फ्रपय बी 23% का राब अजजित कयता वै।\nमदद ऱव ऱस्तु की फ्रफक्री ऩय Rs.18.40 राब प्राप्त कयता वै, तॉ ऱस्तु का अंफ्रकत भूल्य क्या वै?",
+        "options": [
+            "Rs 120",
+            "Rs 140",
+            "Rs 146",
+            "Rs 125"
+        ],
+        "answer": "Rs 120",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 34,
+        "question": "After allowing a 16 % discount on the market price of an article, a dealer makes a profit of\n40%. marked price of article is how much rupees more than its cost price , if the cost\nprice of the article is Rs. 8000?\nएक दकु ानदाय एक ऱस्तु के अंफ्रकत भूल्य ऩय % की छू ट देने के ऩलचात बी 40 % का राब अजजित कयता वै।\nमदद ऱस्तु का कम भूल्य 8000 रूऩम े वै, तॉ उऴका अंफ्रकत भूल्य ऱस्त ु के क्रम भूल्य ऴ े फ्रकतन े रुऩम े अतधक वै?",
+        "options": [
+            "5890",
+            "4250",
+            "5100",
+            "5440"
+        ],
+        "answer": "5440",
+        "explanation": "Based on the Answer Key, the correct option is [D]."
+    },
+    {
+        "id": 35,
+        "question": "A shopkeeper fixes the marked price of an item 90% above its cost price. What\npercentage of discount on marked price should be allowed to gain 71%?\nएक दकु ानदाय फ्रकऴी ऱस्तु का अंफ्रकत भूल्य उऴके क्रम भूल्य ऴ े 90% अतधक जनधाारयत कयता वै। 71% का राब\nप्राप्त कयन े के जरए अंफ्रकत भूल्य ऩय फ्रकतन े प्रततलत की छू ट दी जानी चारवए?\n(RRB NTPC 12TH LEVEL CBT-2 2025)",
+        "options": [
+            "8%",
+            "13%",
+            "11%",
+            "10%"
+        ],
+        "answer": "10%",
+        "explanation": "Based on the Answer Key, the correct option is [D]."
+    },
+    {
+        "id": 36,
+        "question": "The marked price of a bed is ₹744, which is 31% above the cost price. If the profit\npercentage is 9%. Find the discount percentage. (rounded off to two decimal places)\nएक फेि का अंफ्रकत भूल्य ₹744 वै, जॉ रागत भूल्य ऴ े 31% अतधक वै। मदद राब प्रततलत 9% वै। छू ट प्रततलत\n(दलभरऱ के दॉ स्थानों तक ऩूणाांफ्रकत) ज्ञात कीजजए।\n(RRB NTPC GRADUATE LEVEL 2025 CBT-1)",
+        "options": [
+            "15.52%",
+            "18.65%",
+            "14.59%",
+            "16.79%"
+        ],
+        "answer": "16.79%",
+        "explanation": "Based on the Answer Key, the correct option is [D]."
+    },
+    {
+        "id": 37,
+        "question": "A shopkeeper lists the price of a fan at 22% above its cost price and offers a 15% discount\non its list price. What is the cost price (in ₹) of the fan if he sells it at ₹5,185?\nएक दकु ानदाय एक ऩंख े का भूल्य उऴके क्रम भूल्य ऴ े 22% अतधक अंफ्रकत कयता वै औय उऴके अंफ्रकत भूल्य ऩय\n15% की छू ट देता वै। मदद ऱव ऩंख े कॉ ₹5,185 भ ें फेचता वै, तॉ उऴका क्रम भूल्य (₹ भ)ें फ्रकतना वै?\n(RRB TECHNICIAN GRADE-3 2024)",
+        "options": [
+            "4,800",
+            "5,000",
+            "4,500",
+            "5,680"
+        ],
+        "answer": "5,000",
+        "explanation": "Based on the Answer Key, the correct option is [B]."
+    },
+    {
+        "id": 38,
+        "question": "A trader sells an item for Rs 805 after offering a discount of 12.5% on its marked price. Had\nhe not offered the discount, he would have earned a profit of 15%. What is the cost price (in\nRs) of the item?\nएक व्याऩायी एक ऱस्तु कॉ उऴके अंफ्रकत भूल्य ऩय 12.5% की छू ट देन े के फाद 805 रुऩम े भ ें फेचता वै। मदद उऴने\nछू ट की ऩेलकल नवीं की वॉती, तॉ उऴ े 15% का राब वॉता। ऱस्तु का रागत भूल्य (रुऩम े भ)ें क्या वै?\n(SSC GD 2021)",
+        "options": [
+            "750",
+            "780",
+            "700",
+            "800"
+        ],
+        "answer": "800",
+        "explanation": "Based on the Answer Key, the correct option is [D]."
+    },
+    {
+        "id": 39,
+        "question": "After giving a discount of Rs108 on an article a shopkeeper gains 14%. If this discount is not\nallowed then what will be profit % .if CP of article is 450?\n108 रुऩम े की छू ट देन े के फाद एक दकु ानदाय 14% का राब कभाता वै मदद इऴ छू ट की अनभु तत नवी वै तॉ राब %\nफ्रकतना वॉगा मदद क्रम भल्यू 450रु वॉ।",
+        "options": [
+            "27%",
+            "30%",
+            "38%",
+            "21%"
+        ],
+        "answer": "38%",
+        "explanation": "Based on the Answer Key, the correct option is [C]."
+    },
+    {
+        "id": 40,
+        "question": "When an article is sold at 5 percent discount, then there is a profit of 14 percent. If the\ndisocount is 11 percent, then what will be the profit?\nजफ एक ऱस्त ु कॉ 5 प्रततलत की छू ट ऩय फेचा जाता वै, तॉ 14 प्रततलत का राब वॉता वै। मदद छू ट 11 प्रततलत वै, तॉ\nराब क्या वॉगा?",
+        "options": [
+            "7.6 percent",
+            "8.4 percent",
+            "6.8 percent",
+            "7.2 percent"
+        ],
+        "answer": "6.8 percent",
+        "explanation": "Based on the Answer Key, the correct option is [C]."
+    },
+    {
+        "id": 41,
+        "question": "A merchant offers a discount of 25% on the list price, due to which she makes a loss of 13%.\nWhat percent profit or percent loss will she make if she sells at a discount of 10% of the list\nprice?\nएक भरवरा व्याऩायी अंफ्रकत भूल्य ऩय 25% की छू ट देती वै, जजऴके कायण उऴ े 13% की वाजन वॉती वै। मदद ऱव\nअंफ्रकत भूल्य ऩय 10% की छू ट ऩय फेचती वै, तॉ उऴ े फ्रकतन े प्रततलत राब मा फ्रकतन े प्रततलत वाजन वॉगी?",
+        "options": [
+            "4.8% Loss",
+            "4.8% Profit",
+            "4.4% Profit",
+            "4.4% Loss"
+        ],
+        "answer": "4.4% Profit",
+        "explanation": "Based on the Answer Key, the correct option is [C]."
+    },
+    {
+        "id": 42,
+        "question": "When a shopkeeper allows 36% discount on the retail price of his product, he earns a\nprofit of 8.8%. Find the discount percentage given by shopkeeper if he intended to earn\n34.3% profit by selling same product?\nजफ कॉई दकु ानदाय अऩने उत्पाद के खुदया भूल्य ऩय 36% की छू ट देता वै, तॉ ऱव 8.8% का राब अजजित कयता वै।\nमदद ऱव उऴी उत्पाद कॉ फेचकय ऱव 34.3% राब अजजित कयना चावता वै, तॉ दकु ानदाय द्वाया ददमा गमा छू ट\nप्रततलत क्या वॉगा?",
+        "options": [
+            "24%",
+            "22%",
+            "21%",
+            "19%"
+        ],
+        "answer": "21%",
+        "explanation": "Based on the Answer Key, the correct option is [C]."
+    },
+    {
+        "id": 43,
+        "question": "A shopkeeper gains 20% by selling an article when he gives 30% discount on its marked\nprice. If the cost price of the article is increased by 20% and he still wants to earn a profit of\n12%, then how much discount percent should he give now on the same marked price?\nएक दकु ानदाय एक ऱस्तु कॉ उऴके अंफ्रकत भूल्य ऩय 30% की छू ट देने ऩय 20% का राब प्राप्त कयता वै। मदद ऱस्तु के\nक्रम भूल्य भ ें 20% की ऱृद्धि की जाती वै औय ऱव फ्रपय बी 12% का राब अजजित कयना चावता वै, तॉ उऴ े उऴी अंफ्रकत\nभूल्य ऩय अफ फ्रकतना छू ट प्रततलत देना चारवए?",
+        "options": [
+            "20.5%",
+            "19.5%",
+            "21.6%",
+            "19.8%"
+        ],
+        "answer": "21.6%",
+        "explanation": "Based on the Answer Key, the correct option is [C]."
+    },
+    {
+        "id": 44,
+        "question": "A dealer marks his goods at 40% above the cost price. He sells 60% of the goods at the\nmarked price giving 10% discount and the rest by giving 50% discount on the marked\nprice. What is his overall profit/loss per cent?\nकॉई फ्रऱक्रे ता अऩनी ऱस्त ु ऩय क्रम भूल्य ऴ े 40% अतधक अंफ्रकत कयता वै। ऱव 60% ऱस्तु कॉ अंफ्रकत भूल्य ऩय 10%\nछू ट देकय फेचता वै औय लळे ऱस्त ु कॉ अंफ्रकत भूल्य ऩय 50% छू ट देकय फेचता वै। उऴका कु र राब/वाजन प्रततलत\nज्ञात कीजजए।",
+        "options": [
+            "Profit 3.6%",
+            "Loss 2.8%",
+            "Loss 3.6%",
+            "Profit 2.8%"
+        ],
+        "answer": "Profit 3.6%",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 45,
+        "question": "A man sold an article for ₹360 by first giving a d% discount on its marked price, and then\nanother discount having the same nominal value (in ₹). If the marked price of the article\nis ₹2250, then what is the value of d?\nएक ऱ्मक्ति न े एक ऱस्तु कॉ इऴके अंफ्रकत भूल्य ऩय ऩवरे d% की छू ट औय फ्रपय उतन े वी ऴभभूल्य (₹ भ)ें की एक\nऔय छू ट देकय ₹360 भ ें फेचा। मदद ऱस्तु का अंफ्रकत भल्यू ₹2250 वै, तॉ d का भान क्या वै?\n[RRB JE 2024]",
+        "options": [
+            "41",
+            "38",
+            "42",
+            "45"
+        ],
+        "answer": "42",
+        "explanation": "Based on the Answer Key, the correct option is [C]."
+    },
+    {
+        "id": 46,
+        "question": "Successive discounts of 15% and 7% is equivalent to a single discount of:\n15% औय 7% की क्रजभक छू ट, __________ की एकर छू ट के फयाफय वै।\nRPF CONSTABLE 2024)",
+        "options": [
+            "20.95%",
+            "11%",
+            "23.05%",
+            "22%"
+        ],
+        "answer": "20.95%",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 47,
+        "question": "Two successive discounts of 65% and 24% are equivalent to a single discount of _____.\n65% औय 24% की दॉ क्रजभक छू टें, _______ की एकर छू ट के फयाफय वोंगी।\n(RRB NTPC 12th LEVEL 2025)",
+        "options": [
+            "74.5%",
+            "73.4%",
+            "77%",
+            "76.6%"
+        ],
+        "answer": "73.4%",
+        "explanation": "Based on the Answer Key, the correct option is [B]."
+    },
+    {
+        "id": 48,
+        "question": "A store offers a discount of 14% on a television marked at ₹78,000. During a sale, an\nadditional 8% discount is offered on the already discounted price. What is the total\ndiscount percentage?\nएक स्टॉय ₹78,000 की कीभत ऱारे टेरीफ्रऱज़न ऩय 14% की छू ट दे यवा वै। ऴेर के दॊयान, ऩवरे ऴ े छू ट ऱारी\nकीभत ऩय 8% की अततरयि छू ट दी जाती वै। कु र छू ट प्रततलत ज्ञात कीजजए।\n(RRB NTPC 12th LEVEL 2025)",
+        "options": [
+            "22.48%",
+            "18.23%",
+            "21.62%",
+            "20.88%"
+        ],
+        "answer": "20.88%",
+        "explanation": "Based on the Answer Key, the correct option is [D]."
+    },
+    {
+        "id": 49,
+        "question": "Two successive discounts of 15% and X% on the sale of an item is equivalent to a single\ndiscount of 23.5%. What is the value of X% ?\nफ्रकऴी ऱस्तु की फ्रफक्री ऩय 15% औय X% की दॉ क्रजभक छू ट 23.5% की एकर छू ट के फयाफय वै। X% का भूल्य ज्ञात\nकीजजए।\nGroup D 22/09/2022 (Morning)",
+        "options": [
+            "11%",
+            "12%",
+            "10%",
+            "9%"
+        ],
+        "answer": "10%",
+        "explanation": "Based on the Answer Key, the correct option is [C]."
+    },
+    {
+        "id": 50,
+        "question": "Three successive discounts of 25% each on the marked price of an item are together\nequivalent to a single discount (correct up to 2 decimal places) of :\nफ्रकऴी ऱस्तु के अंफ्रकत भूल्य ऩय 25% प्रत्येक की तीन क्रजभक छू टें, फ्रकऴ एकर छू ट (2 दलभरऱ स्थानों तक ऴवी)\nके फयाफय वोंगी?\nSSC CGL 2023 PRE",
+        "options": [
+            "62.35%",
+            "60.25%",
+            "56.45%",
+            "57.81%"
+        ],
+        "answer": "57.81%",
+        "explanation": "Based on the Answer Key, the correct option is [D]."
+    },
+    {
+        "id": 51,
+        "question": "A shop offers three successive discounts of 10%, 15% and 20% on a product. Find the single\nequivalent discount percentage that would result in the same final price.\nएक दकु ान फ्रकऴी उत्पाद ऩय 10%, 15% औय 20% की तीन क्रभागत छू ट देती वै। ऱव एकर ऴभतुल्य छू ट प्रततलत\nज्ञात कय ेंजजऴऴ े अंततभ भूल्य ऴभान यवे।",
+        "options": [
+            "40.8%",
+            "45%",
+            "38.8%",
+            "42.8%"
+        ],
+        "answer": "38.8%",
+        "explanation": "Based on the Answer Key, the correct option is [C]."
+    },
+    {
+        "id": 52,
+        "question": "Find a single discount (rounded up to two decimal places) equal to three consecutive\ndiscounts of 26%, 29% and 2%.\n26%, 29% औय 2% की तीन क्रजभक छू टों के फयाफय एकर छू ट (दलभरऱ के दॉ स्थानों तक ऩूणाांफ्रकत) ज्ञात\nकीजजए।\n(RRB NTPC GRADUATE LEVEL 2025 CBT-1)",
+        "options": [
+            "47.56%",
+            "47.12%",
+            "48.51%",
+            "48.86%"
+        ],
+        "answer": "48.51%",
+        "explanation": "Based on the Answer Key, the correct option is [C]."
+    },
+    {
+        "id": 53,
+        "question": "The successive discounts of 24%, 18% and 20% are equivalent to a single discount of:\n(Rounded up to two decimal places.)\n24%, 18% औय 20% की क्रजभक छू ट, फ्रकऴ एकर छू ट के फयाफय वै? (दलभरऱ के दॉ स्थानों तक ऩूणाांफ्रकत)",
+        "options": [
+            "51.51%",
+            "52.84%",
+            "49.27%",
+            "50.14%"
+        ],
+        "answer": "50.14%",
+        "explanation": "Based on the Answer Key, the correct option is [D]."
+    },
+    {
+        "id": 54,
+        "question": "Three successive discounts on the marked price of an article turns out to be equivalent to\na single discount of 19%. If the rates of the first and second discount are 10% and 4%\nrespectively, what is the rate of 3rd discount?\nफ्रकऴी ऱस्त ु के अंफ्रकत भूल्य ऩय क्रभागत 3 छू ट, 19% की फ्रकऴी एकर छू ट के ऴभतुल्य वै| मदद ऩवरी औय दऴू यी\nछू ट की दय ेंक्रभलः 10% औय 4% वै, तॉ तीऴयी छू ट की दय क्या वै?",
+        "options": [
+            "7.50%",
+            "5.25%",
+            "6.25%",
+            "6.00%"
+        ],
+        "answer": "6.25%",
+        "explanation": "Based on the Answer Key, the correct option is [C]."
+    },
+    {
+        "id": 55,
+        "question": "A company offers a scheme discount of 'buy 5 get 3 free' offer on shirts. Find the discount\npercentage.\nएक कं ऩनी लटा ऩय '5 खयीदें 3 भुफ़्त ऩाएं' की छू ट स्कीभ ऑपय कयती वै। छू ट प्रततलत ज्ञात कीजजए।\n(RRB NTPC 12th LEVEL 2025)",
+        "options": [
+            "37.5%",
+            "30%",
+            "39.3%",
+            "36.3%"
+        ],
+        "answer": "37.5%",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 56,
+        "question": "During festivals, a banner on a shop displays, 'Pay for 8 and get 11'. The discount\npercentage offered is:\nत्यॉवाय के दॊयान, फ्रकऴी दकु ान ऩय रग े फैनय ऩय जरखा था, '8 के जरए बुगतान कय ें औय 11 ऩाएं।' छू ट प्रततलत\nज्ञात कय।ें\n(RRB ALP 2024)",
+        "options": [
+            "",
+            "37.5%",
+            "27.27%",
+            ""
+        ],
+        "answer": "27.27%",
+        "explanation": "Based on the Answer Key, the correct option is [C]."
+    },
+    {
+        "id": 57,
+        "question": "A shopkeeper offers a scheme discount of 'Buy goods worth ₹6000 and get ₹1000 worth of\ngoods free'. What is the effective discount percentage (rounded off to two decimals)?\nएक दकु ानदाय '₹6000 का ऴाभान खयीदें औय ₹1000 का ऴाभान भुफ़्त ऩाएं' की स्कीभ छू ट देता वै। प्रबाऱी छू ट\nप्रततलत (दॉ दलभरऱ स्थानों तक ऩूणाांफ्रकत) फ्रकतना वॉगा?",
+        "options": [
+            "20%",
+            "14.29%",
+            "12%",
+            "16.67%"
+        ],
+        "answer": "14.29%",
+        "explanation": "Based on the Answer Key, the correct option is [B]."
+    },
+    {
+        "id": 58,
+        "question": "Aman offers a discount scheme, such that on buying 12 rough copies, get x rough copies\nfor free. If the equivalent percentage discount is 25%, then what is the value of x?\nअभन, '12 यप कॉऩी खयीदन े ऩय, x यप कॉऩी भुफ्त प्राप्त कय'ें की एक छू ट स्कीभ प्रदान कयता वै। मदद ऴभतुल्य\nप्रततलत छू ट 25% वै, तॉ x का भान ज्ञात कीजजए।",
+        "options": [
+            "3",
+            "6",
+            "4",
+            "5"
+        ],
+        "answer": "4",
+        "explanation": "Based on the Answer Key, the correct option is [C]."
+    },
+    {
+        "id": 59,
+        "question": "A shop offers 'Buy three for ₹6,000, get one free' for Dasara celebration, and also offers\n₹600 cash back if a person pays in cash. What is the total percentage of discount offered\nfor a customer who pays in cash?\nएक दकु ान भ ें दलवया उत्सऱ के दॊयान '₹6,000 भ ें तीन खयीदें, एक भुफ्त ऩाएं' का ऑपय चर यवा वै, औय मदद\nकॉई व्यक्ति नकद भ ें बुगतान कयता वै, तॉ उऴ े ₹600 का कै ल-फैक बी ददमा जाता वै। नकद भ ें बुगतान कयन े\nऱारे ग्रावक कॉ ददमा जाने ऱारा कु र छू ट प्रततलत फ्रकतना वै?\n(RRB NTPC 12th LEVEL 2025)",
+        "options": [
+            "67.5%",
+            "33.33%",
+            "32.5%",
+            "25.5%"
+        ],
+        "answer": "32.5%",
+        "explanation": "Based on the Answer Key, the correct option is [C]."
+    },
+    {
+        "id": 60,
+        "question": "A shopkeeper offers the following three schemes:\nएक दकु ानदाय जनम्नजरखखत तीन मॉजनाएँ ऩेल कयता वै:\nI. Buy 9 get 1 free/9 खयीदें 1 भुफ्त ऩाएं\nII. Buy 7 get 8/7 खयीदॉ 8 ऩाओ\nIII. Two successive discounts of 20% and 15%/20% औय 15% की दॉ क्रजभक छू ट\nWhich scheme has the lowest discount percentage (all articles have the same marked\nprice)\nफ्रकऴ मॉजना भ ें ऴफऴ े कभ छू ट प्रततलत वै (ऴबी ऱस्तओु ंका अंफ्रकत भूल्य ऴभान वै)\n(SSC SELECTION POST XII GRADUATE LEVEL)",
+        "options": [
+            "Sceme II",
+            "Scheme I",
+            "All are equal",
+            "Scheme III"
+        ],
+        "answer": "Scheme I",
+        "explanation": "Based on the Answer Key, the correct option is [B]."
+    },
+    {
+        "id": 61,
+        "question": "A retailer offers the following discount schemes for buyers on an article.\nएक खुदया फ्रऱक्रे ता ऱस्तु ऩय खयीदायों के जरए जनम्नजरखखत छू ट स्कीभ ें प्रदान कयता वै।\nI. Two successive discounts of 27%./27% की दॉ क्रजभक छू टें।\nII. A discount of 36% followed by a discount of 45%./36% की छू ट के फाद 45% की एक छू ट।\nIII. Successive discounts of 19% and 32%./19% औय 32% की क्रजभक छू टें।\nIV. A discount of 34% followed by a discount of 7%./34% की छू ट के फाद 7% की एक छू ट।\nWhich scheme will fetch the maximum selling price?\nफ्रकऴ स्कीभ का फ्रऱक्रम भूल्य अतधकतभ वॉगा?\n(RRB NTPC GRADUATE LEVEL 2025 CBT-1)",
+        "options": [
+            "III",
+            "I",
+            "IV",
+            "II"
+        ],
+        "answer": "IV",
+        "explanation": "Based on the Answer Key, the correct option is [C]."
+    },
+    {
+        "id": 62,
+        "question": "The difference between a discount of 30% on ₹2,200 and two successive discounts of 25%\nand 5% on the same amount is:\n₹2,200 ऩय 30% की छू ट तथा उऴी धनयाजल ऩय 25% औय 5% की दॉ क्रभागत छू टों के फीच का अंतय फ्रकतना वै?\n(RRB CONSTABLE 2024)",
+        "options": [
+            "₹28.5",
+            "₹26.5",
+            "₹25.5",
+            "₹27.5"
+        ],
+        "answer": "₹27.5",
+        "explanation": "Based on the Answer Key, the correct option is [D]."
+    },
+    {
+        "id": 63,
+        "question": "An item marked for ₹38,800 is available on a discount of 25% or two successive discounts\nof 10% and 15%. What is the difference between the selling prices in the discount\nschemes?\n₹38,800 अंफ्रकत भूल्य ऱारी एक ऱस्तु 25% की एकर छू ट ऩय मा 10% औय 15% की दॉ क्रजभक छू टों ऩय उऩरब्ध\nवै। इन छू ट मॉजनाओ ंभ ें फ्रऱक्रम भूल्यों के फीच फ्रकतना अंतय वॉगा ?\n(RRB NTPC 12th LEVEL 2025)",
+        "options": [
+            "₹800",
+            "₹628",
+            "₹582",
+            "₹825"
+        ],
+        "answer": "₹582",
+        "explanation": "Based on the Answer Key, the correct option is [C]."
+    },
+    {
+        "id": 64,
+        "question": "On a marked price, the difference between the selling prices with a single discount of 40%\nand two successive discounts of 15% and 20% is ₹400, then find the marked price (in ₹).\nमदद अंफ्रकत भूल्य ऩय, 40% की एकर छू ट तथा 15% औय 20% की दॉ क्रजभक छू टों के फ्रऱक्रम भूल्यों का अंतय\n₹400 वै, तॉ अंफ्रकत भूल्य (₹ भ)ें ज्ञात कीजजए।\n(RRB NTPC 12th LEVEL 2025)",
+        "options": [
+            "₹4,950",
+            "₹5,150",
+            "₹5,000",
+            "₹4,900"
+        ],
+        "answer": "₹5,000",
+        "explanation": "Based on the Answer Key, the correct option is [C]."
+    },
+    {
+        "id": 65,
+        "question": "A shopkeeper marks up the price of an article by 60%. He offers two successive discounts\nof 10% and 15% on it. He earns X% profit. What is the value of X?\nएक दकु ानदाय एक ऱस्तु का भूल्य 60% अतधक अंफ्रकत कयता वै। ऱव इऴ ऩय 10% औय 15% की दॉ क्रजभक छू ट\nप्रदान कयता वै। ऱव X% राब कभाता वै। X का भूल्य क्या वै?",
+        "options": [
+            "20.4",
+            "22.4",
+            "23.60",
+            "25.60"
+        ],
+        "answer": "22.4",
+        "explanation": "Based on the Answer Key, the correct option is [B]."
+    },
+    {
+        "id": 66,
+        "question": "A dealer marks an article 40% above its cost price, and sells it by giving two successive\ndiscounts of 15% and 25% on the marked price. If he suffers a loss of Rs. 344, then the cost\nprice (in Rs.) of the article is:\nएक िीरय एक ऱस्तु का अंफ्रकत भूल्य क्रम भूल्य ऴ े 40% अतधक यखता वै, औय इऴ े अंफ्रकत भूल्य ऩय दॉ क्रभागत\nछू टों 15% औय 25% के ऴाथ फेचता वै। मदद उऴ े ₹344 की वाजन वॉती वै, तॉ ऱस्त ु का क्रम भूल्य (₹ भ)ें क्या वै?",
+        "options": [
+            "3200",
+            "2800",
+            "3000",
+            "4800"
+        ],
+        "answer": "3200",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 67,
+        "question": "A shopkeeper sells an item for ₹583.2 after giving two successive discounts of 25% and\n40% on its marked price. Had he not given any discount, he would have earned a profit of\n62%. What is the cost price (in ₹) of the item?\nएक दकु ानदाय एक ऱस्तु कॉ उऴके अंफ्रकत भूल्य ऩय 25% औय 40% की दॉ क्रजभक छू ट देने के फाद ₹583.2 भ ें\nफेचता वै। मदद उऴन े कॉई छू ट नवीं दी वॉती तॉ उऴ े 62% का राब वॉता। ऱस्त ु का रागत भूल्य (₹ भ)ें क्या वै?\n(RRB RPF SI 2024)",
+        "options": [
+            "838",
+            "831",
+            "800",
+            "824"
+        ],
+        "answer": "800",
+        "explanation": "Based on the Answer Key, the correct option is [C]."
+    },
+    {
+        "id": 68,
+        "question": "A product is marked at ₹7,500. Two successive discounts of 8% and 5% are offered. What\nis the final selling price?\nएक उत्पाद का अंफ्रकत भूल्य ₹7,500 वै। इऴऩय 8% औय 5% की दॉ क्रजभक छू टें दी जाती वैं। अंततभ फ्रऱक्रम भूल्य\nज्ञात कीजजए।\n(RRB NTPC 12th LEVEL 2025)",
+        "options": [
+            "Rs. 6,555",
+            "Rs. 4,525",
+            "Rs. 5,655",
+            "Rs. 5,125"
+        ],
+        "answer": "Rs. 6,555",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 69,
+        "question": "The marked price of a fancy toy is ₹30,000. It is to be sold allowing two successive\ndiscounts of 20% and 24%, respectively. On cash payment, an additional 10% discount on\nthe net price is also given. The selling price (in ₹) of the toy is:\nएक पैं ऴी खखरॊने का अंफ्रकत भूल्य ₹30,000 वै। इऴ े क्रभलः 20% औय 24% की दॉ क्रजभक छू ट देत े रृए फेचा\nजाना वै। नकद बुगतान ऩय लुि भूल्य ऩय 10% की अततरयि छू ट बी दी जाती वै। खखरॊन े का फ्रऱक्रम भल्यू (₹\nभ)ें वै:\n(SSC SELECTION POST XII MATRICULATION LEVEL)",
+        "options": [
+            "16416",
+            "16520",
+            "18350",
+            "17280"
+        ],
+        "answer": "16416",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 70,
+        "question": "A television is marked at ₹50,000. The store offers a 25% discount and an additional 10%\ndiscount on the discounted price. After these discounts, the buyer has to pay 5% GST on\nthe final price. What is the final amount paid by the buyer?\nएक टेरीफ्रऱज़न का अंफ्रकत भूल्य ₹50,000 वै। स्टॉय 25% की छू ट औय उऴ रयमामती भूल्य (discounted\nprice) ऩय 10% की अततरयि छू ट देता वै। इन छू टों के फाद, खयीदाय कॉ अंततभ भल्यू ऩय 5% GST देना ऩडता वै।\nखयीदाय द्वाया बुगतान की गई अंततभ याजल फ्रकतनी वै?",
+        "options": [
+            "₹36,400",
+            "₹35,437.50",
+            "₹35,000",
+            "₹37,600.50"
+        ],
+        "answer": "₹35,437.50",
+        "explanation": "Based on the Answer Key, the correct option is [B]."
+    },
+    {
+        "id": 71,
+        "question": "The marked price of a vehicle is ₹6,48,200. It is sold after allowing three successive\ndiscounts of 6%, 5% and 4%. Find its selling price. (Rounded off to nearest rupee)\nएक ऱावन का अंफ्रकत भूल्य ₹6,48,200 वै। इऴ े 6%, 5% औय 4% की तीन क्रजभक छू टें देन े के फाद फेचा जाता वै।\nइऴका फ्रऱक्रम भूल्य (जनकटतभ रुऩए भ ें ऩूणाांफ्रकत) ज्ञात कीजजए।\n(RRB NTPC 12th LEVEL 2025)",
+        "options": [
+            "₹5,70,650",
+            "₹5,48,600",
+            "₹5,60,789",
+            "₹5,55,689"
+        ],
+        "answer": "₹5,55,689",
+        "explanation": "Based on the Answer Key, the correct option is [D]."
+    },
+    {
+        "id": 72,
+        "question": "An article sold for ₹688.16 after two successive discounts of 12% and 8% respectively.\nWhat is its marked price?\n12% औय 8% की दॉ क्रजभक छू ट के फाद फ्रकऴी ऱस्त ु कॉ ₹688.16 भ ें फेचा जाता वै। इऴका अंफ्रकत भूल्य क्या वै?",
+        "options": [
+            "₹800",
+            "₹900",
+            "₹820",
+            "₹850"
+        ],
+        "answer": "₹850",
+        "explanation": "Based on the Answer Key, the correct option is [D]."
+    },
+    {
+        "id": 73,
+        "question": "A chair was sold for ₹4,600 after giving two successive discounts of 12% and 9%. What is\nthe marked price? (Rounded up to two decimal places.)\nएक कु ऴी कॉ 12% औय 9% की दॉ क्रजभक छू ट देने के फाद ₹4,600 भ ें फेचा गमा। अंफ्रकत भूल्य फ्रकतना वै? (दॉ\nदलभरऱ स्थान तक ऩूणाांफ्रकत)\n(RRB NTPC 12th LEVEL 2025)",
+        "options": [
+            "₹7,820.12",
+            "₹8,008.39",
+            "₹7,948.74",
+            "₹5,744.26"
+        ],
+        "answer": "₹5,744.26",
+        "explanation": "Based on the Answer Key, the correct option is [D]."
+    },
+    {
+        "id": 74,
+        "question": "If after three successive discounts of 20%, 25% and 35%, an item is sold for ₹33,150, what is\nits marked price (in ₹)?\nमदद 20%, 25% औय 35% की तीन क्रजभक छू ट के फाद, कॉई ऱस्तु ₹33,150 भ ें फेची जाती वै, तॉ उऴका अंफ्रकत\nभूल्य (₹ भ)ें ज्ञात कीजजए?",
+        "options": [
+            "90,000",
+            "87,000",
+            "85,000",
+            "82,000"
+        ],
+        "answer": "85,000",
+        "explanation": "Based on the Answer Key, the correct option is [C]."
+    },
+    {
+        "id": 75,
+        "question": "A discount of 20% is given for the purchase of two books by a bookseller and a discount of\n25% is offered if a customer buys more than two books. A 10% discount is being offered to all\nthe customers on purchase of one book. An additional 5% discount will be given to students.\nSohan, a student of M.Com in college, bought a book for Rs 513. What was the marked price\nof the book?\nएक ऩुस्तक फ्रऱक्रे ता द्वाया दॉ ऩुस्तकों की खयीद ऩय 20% की छू ट दी जाती वै औय मदद ग्रावक दॉ ऴ े अतधक ऩुस्तकें\nखयीदता वै तॉ 25% की छू ट दी जाती वै। ऴबी ग्रावकों कॉ एक ऩुस्तक की खयीद ऩय 10 प्रततलत की छू ट दी जा यवी वै।\nछात्रों कॉ अततरयि 5% की छू ट दी जाएगी। कॉरेज भ ें एभकॉभ के छात्र ऴॉवन न े 513 रुऩम े भ ें एक फ्रकताफ खयीदी।\nफ्रकताफ का अंफ्रकत भूल्य क्या था?",
+        "options": [
+            "Rs 650",
+            "Rs 540",
+            "Rs 600",
+            "Rs 605"
+        ],
+        "answer": "Rs 600",
+        "explanation": "Based on the Answer Key, the correct option is [C]."
+    },
+    {
+        "id": 76,
+        "question": "A store sells a product with an original price of ₹45,520. Calculate the total amount of\ndiscount provided if 10% trade discount and 5% scheme discount is applied on the\ntransaction.\nफ्रकऴी उत्पाद कॉ एक स्टॉय ऩय ₹45,520 की भूर कीभत ऩय फेचा जाता वै। मदद ऴॊदे ऩय 10% व्याऩाय छू ट औय 5%\nस्कीभ छू ट दी जाती वै, तॉ दी गई छू ट की कु र धनयाजल की गणना कीजजए।",
+        "options": [
+            "₹3,300.40",
+            "₹4,400.40",
+            "₹5,500.40",
+            "₹6,600.40"
+        ],
+        "answer": "₹6,600.40",
+        "explanation": "Based on the Answer Key, the correct option is [D]."
+    },
+    {
+        "id": 77,
+        "question": "A computer is marked at ₹70,000 and a discount of 16% is offered on it. An additional\ndiscount is offered to students. If a student pays ₹57,036 for the computer, then how\nmuch additional discount percentage did the student receive?\nएक कं प्यूटय का अंफ्रकत भूल्य ₹70,000 वै औय इऴ ऩय 16% की छू ट दी जाती वै। छात्रों कॉ एक अततरयि छू ट दी\nजाती वै। मदद एक छात्र कं प्यूटय के जरए ₹57,036 का बुगतान कयता वै, तॉ छात्र कॉ फ्रकतन े प्रततलत अततरयि\nछू ट जभरी?\n(RRB NTPC 12th LEVEL 2025)",
+        "options": [
+            "3%",
+            "7%",
+            "5%",
+            "2%"
+        ],
+        "answer": "3%",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 78,
+        "question": "The marked price of a mobile phone was ₹18,500. A man bought the same for ₹13,000 after\ngetting two successive discounts, the first at 24%. What was the second discount rate\n(correct to two places of decimals)?\nएक भॉफाइर णॉन का अंफ्रकत भूल्य ₹18,500 था। एक व्यक्ति न े दॉ क्रजभक छू ट प्राप्त कयन े के फाद उऴी णॉन कॉ\n₹13,000 भ ें खयीदा, जजऴभें ऩवरी छू ट 24% थी। दऴू यी छू ट की दय (दलभरऱ के दॉ स्थानों तक ऴवी) फ्रकतनी थी?",
+        "options": [
+            "9.25%",
+            "6.25%",
+            "7.54%",
+            "8.36%"
+        ],
+        "answer": "7.54%",
+        "explanation": "Based on the Answer Key, the correct option is [C]."
+    },
+    {
+        "id": 79,
+        "question": "An article is listed at `15,000 and the discount is 12%. What additional discount must be\ngiven to bring the net selling price to `12,078?\nफ्रकऴी ऱस्तु का ऴूची भूल्य ₹15,000 वै, जजऴ ऩय 12% छू ट दी जाती वै। लुि फ्रऱक्रम भूल्य\n₹12,078 कयने के जरए फ्रकतनी अततरयि छू ट दी जानी चारवए?",
+        "options": [
+            "7.5%",
+            "8.5%",
+            "9%",
+            "8%"
+        ],
+        "answer": "8.5%",
+        "explanation": "Based on the Answer Key, the correct option is [B]."
+    },
+    {
+        "id": 80,
+        "question": "After giving two successive discounts, each of x% on the marked price of an article, the\ntotal discount is ₹18,000. If the marked price of the article is ₹50,000, find the value of x.\nएक ऱस्तु के अंफ्रकत भूल्य ऩय प्रत्येक x% की दॉ क्रजभक छू टें देने के फाद, कु र छू ट ₹18,000 वै। मदद ऱस्त ु का\nअंफ्रकत भूल्य ₹50,000 वै, तॉ x का भान ज्ञात कीजजए।",
+        "options": [
+            "40",
+            "10",
+            "20",
+            "30"
+        ],
+        "answer": "20",
+        "explanation": "Based on the Answer Key, the correct option is [C]."
+    },
+    {
+        "id": 81,
+        "question": "After giving two successive discounts, each of x%, on the marked price of an article, total\ndiscount is Rs 453.60. If the marked price of the article is Rs 1260, then the value of x is:\nफ्रकऴी ऱस्तु के अंफ्रकत भल्यू ऩय कजभक दॉ छू ट, प्रत्येक x% देन े के फाद कु र छू ट 453.60 रुऩम े वै। मदद ऱस्तु का\nअंफ्रकत भूल्य 1260 रुऩम े वै। तॉ X का भान वॉगा?",
+        "options": [
+            "18",
+            "24",
+            "20",
+            "25"
+        ],
+        "answer": "20",
+        "explanation": "Based on the Answer Key, the correct option is [C]."
+    },
+    {
+        "id": 82,
+        "question": "A trader sells an item by giving two successive discounts of 5% and 20% on its marked\nprice and still gains 33%. By how much percentage above the cost price does he mark the\nitem?\nएक व्याऩायी एक ऱस्तु कॉ उऴके अंफ्रकत भूल्य ऩय 5% औय 20% की दॉ क्रजभक छू ट देकय फेचता वै औय फ्रपय बी\n33% का राब प्राप्त कयता वै। ऱव ऱस्त ु ऩय रागत भल्यू ऴे फ्रकतने प्रततलत अतधक भूल्य अंफ्रकत कयता वै?",
+        "options": [
+            "72%",
+            "60%",
+            "75%",
+            "80%"
+        ],
+        "answer": "75%",
+        "explanation": "Based on the Answer Key, the correct option is [C]."
+    },
+    {
+        "id": 83,
+        "question": "A book seller gives a 4% discount on the marked price and gives one book free during\nvacation for buying every pack of 15 books of the same cost, and thus gains 35%. By what\npercentage is the marked price higher than the cost price?\nएक ऩुस्तक फ्रऱक्रे ता अंफ्रकत भूल्य ऩय 4% की छू ट देता वै औय छु रिमों के दॊयान ऴभान क्रम भूल्य की 15 ऩुस्तकों\nके प्रत्येक ऩैक कॉ खयीदन े ऩय एक ऩुस्तक भुफ्त देता वै, औय इऴ प्रकाय 35% का राब अजजित कयता वै। अंफ्रकत\nभूल्य, क्रम भूल्य ऴ े फ्रकतन े प्रततलत अतधक वै?\n(RRB NTPC 12th LEVEL 2025)",
+        "options": [
+            "25%",
+            "40%",
+            "35%",
+            "50%"
+        ],
+        "answer": "50%",
+        "explanation": "Based on the Answer Key, the correct option is [D]."
+    },
+    {
+        "id": 84,
+        "question": "A trader gives 15% discount on the marked price of an article and gives 2 articles free for\nbuying 16 articles and gains 36% in the entire transaction. Assuming a customer pays for\n16 articles, the marked price of an article is what percentage more than its cost price?\nएक व्याऩायी फ्रकऴी ऱस्तु के अंफ्रकत भूल्य ऩय 15% की छू ट देता वै औय 16 ऱस्तुएँ खयीदने ऩय 2 ऱस्तुएँ िी देता वै\nतथा ऩूय े रेन-देन ऩय 36% का राब अजजित कयता वै। भान रीजजए फ्रक एक ग्रावक 16 ऱस्तओु ंके जरए बुगतान\nकयता वै, तॉ ऱस्तु का अंफ्रकत भूल्य उऴके क्रम भूल्य ऴ े फ्रकतन े प्रततलत अतधक वै?",
+        "options": [
+            "75%",
+            "80%",
+            "70%",
+            "73%"
+        ],
+        "answer": "80%",
+        "explanation": "Based on the Answer Key, the correct option is [B]."
+    },
+    {
+        "id": 85,
+        "question": "What price should Kunal mark on a pair of pants which costs him ₹3,300, so as to gain 33%\nafter allowing a successive discount of 25% and 30%?\nकु णार कॉ ₹3,300 क्रम भूल्य ऱारे ऩैंट ऩय फ्रकतना भूल्य अंफ्रकत कयना चारवए, ताफ्रक 25% औय 30% की\nक्रजभक छू ट देन े के फाद बी उऴे 33% का राब प्राप्त वॉ?\n(RRB NTPC GRADUATE LEVEL 2025 CBT-1)",
+        "options": [
+            "₹8,310",
+            "₹8,360",
+            "₹8,256",
+            "₹8,290"
+        ],
+        "answer": "₹8,360",
+        "explanation": "Based on the Answer Key, the correct option is [B]."
+    },
+    {
+        "id": 86,
+        "question": "A table has a marked price of Rs. 8,000. A shopkeeper purchased it at two successive\ndiscounts of 20% and 25%. He sold the table for Rs. 8,000 after spending Rs. 300 on\ntransportation. Find his profit Percentage.\nएक भेज का अंफ्रकत भूर्म Rs. 8,000 वै। एक दकु ानदाय इऴ े 20%औय 25% की दॉ क्रजभक छू टों ऩय खयीदता वै।\nऱव ऩरयऱवन ऩय Rs. 300 खचा कयन े के फाद भेज कॉ Rs. 8,000 भ ें फेच देता वै। उऴका राब प्रततलत ज्ञात कीजजए।\n(RRB NTPC 12th LEVEL 2025)",
+        "options": [
+            "",
+            "",
+            "",
+            ""
+        ],
+        "answer": "",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 87,
+        "question": "The list price of a washing machine is ₹13,200. It is sold to a retailer after two successive\ndiscounts of 25% and 15%. The retailer wants to earn a profit of 20% on his cost after\nallowing a 25% discount (on its new list price) to the customer. At what price should he list\nthe washing machine?\nएक ऱॉजलिंग भलीन का ऴूची भूल्य ₹13,200 वै। इऴ े एक खुदया फ्रऱक्रे ता कॉ 25% औय 15% की दॉ क्रजभक छू ट देकय\nफेचा जाता वै। खुदया फ्रऱक्रे ता ग्रावक कॉ (इऴके नए ऴूची भूल्य ऩय) 25% की छू ट देन े के फाद अऩन े क्रम भूल्य ऩय\n20% का राब अजजित कयना चावता वै। उऴ े ऱॉजलिंग भलीन का ऴूची भूल्य फ्रकतना यखना चारवए?\nGroup D 05/09/2022 (Morning)",
+        "options": [
+            "13,466",
+            "13,464",
+            "13,644",
+            "13,664"
+        ],
+        "answer": "13,464",
+        "explanation": "Based on the Answer Key, the correct option is [B]."
+    },
+    {
+        "id": 88,
+        "question": "A store offers a 'Buy 2 Get 1 Free' scheme on the sale of shirts. Each shirt is priced at ₹1,600.\nAdditionally, the store gives a 10% cash discount on the total bill amount. If Tamanna\nwants to buy 6 shirts, how much will she actually pay (in ₹) after the discounts?\nएक स्टॉय, लटा की फ्रफक्री ऩय '2 खयीदें 1 भुफ़्त ऩाएँ' स्कीभ दे यवा वै। प्रत्येक लटा की कीभत ₹1,600 वै। इऴके\nअततरयि, स्टॉय कु र फ्रफर याजल ऩय 10% नकद छू ट बी देता वै। मदद तभन्ना 6 लटा खयीदना चावती वै, तॉ छू ट के\nफाद उऴ े ऱास्तऱ भ ें फ्रकतनी याजल (₹ भ)ें का बुगतान कयना वॉगा?\n(RRB NTPC 12th LEVEL 2025)",
+        "options": [
+            "5,500",
+            "8,640",
+            "5,760",
+            "6,400"
+        ],
+        "answer": "5,760",
+        "explanation": "Based on the Answer Key, the correct option is [C]."
+    },
+    {
+        "id": 89,
+        "question": "The cost price of 12 oranges is equal to the selling price of 9 oranges and the discount on\n10 oranges is equal to the profit on 5 oranges. What is the percentage of discount (correct\nup to 2 decimal places)?\n12 ऴंतय ेका क्रम भूल्य 9 ऴंतय े के फ्रऱक्रम भूल्य के फयाफय वै औय 10 ऴंतय ेऩय छू ट 5 ऴंतय ेऩय राब के फयाफय वै. छू ट\nका प्रततलत क्या वै (2 दलभरऱ स्थानों तक ऴवी)?\nRRB NTPC 23/07/2021 (Evening)",
+        "options": [
+            "44.44",
+            "11.11",
+            "16.67",
+            "33.33"
+        ],
+        "answer": "11.11",
+        "explanation": "Based on the Answer Key, the correct option is [B]."
+    },
+    {
+        "id": 90,
+        "question": "A dealer buys two articles X and Y for ₹4,000 each. He marks each of them at the same\nprice. He sells X by giving two successive discounts of 63% and 34% and still earns ₹810 as\nprofit. If he sells Y at a single discount of 67%, then what is the profit percentage on Y?\nएक िीरय दॉ ऱस्तुएं X औय Y भ ें ऴ े प्रत्येक ऱस्तु ₹4,000 दय ऴ े खयीदता वै। ऱव उनभ ें ऴ े प्रत्येक ऩय ऴभान भूल्य\nअंफ्रकत कयता वै। ऱव X कॉ 63% औय 34% की दॉ क्रभागत छू ट देकय फेचता वै औय फ्रपय बी ₹810 का राब अजजित\nकयता वै। मदद ऱव Y कॉ 67% की एकर छू ट ऩय फेचता वै, तॉ Y ऩय राब प्रततलत फ्रकतना वै?",
+        "options": [
+            "62.5%",
+            "62%",
+            "61.5%",
+            "61%"
+        ],
+        "answer": "62.5%",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 91,
+        "question": "The cost price (including making charges) of a necklace is ₹2,50,000, and Amit wants to\nmake 15% profit by selling it. At the time of the sale, he declares a discount of 5% on the\nmaking charges of the necklace. If making charges are ₹20,000, what is the marked price\nof the necklace?\nएक वाय का क्रम भूल्य (जनभााण लुल्क ऴरवत) ₹2,50,000 वै, औय अजभत इऴ े फेचकय 15% राब कभाना चावता\nवै। फ्रफक्री के ऴभम, ऱव वाय के जनभााण लुल्क ऩय 5% छू ट की घॉळणा कयता वै। मदद जनभााण लुल्क ₹20,000 वै, तॉ\nवाय का अंफ्रकत भूल्य ज्ञात कीजजए।",
+        "options": [
+            "₹2,77,500",
+            "₹2,87,500",
+            "₹2,97,500",
+            "₹2,88,500\n["
+        ],
+        "answer": "₹2,88,500\n[",
+        "explanation": "Based on the Answer Key, the correct option is [D]."
+    }
+]
