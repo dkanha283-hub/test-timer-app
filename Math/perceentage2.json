@@ -1,0 +1,902 @@
+[
+    {
+        "id": 1,
+        "question": "25% of the 66.67% of 75% of the 80% of a number is 4617. So what would be 40% of\nthat number?\nकिऴी ऴंख्या िे 80% िे 75% िे 66.67% िा 25% , 4617 वै। तॉ उऴ ऴंख्या िा 40% क्या वॉगा?\nRPF Constable 17/01/2019 (Morning)",
+        "options": [
+            "18468",
+            "18668",
+            "18568",
+            "18768"
+        ],
+        "answer": "18468",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 2,
+        "question": "If 25% of a = b, then b% of 160 is equal to:\nमदद a िा 25% = b वै, तॉ 160 िा b% फयाफय वॉगा:\nALP Tier II 21/01/2019 (Afternoon)",
+        "options": [
+            "60% of a",
+            "50% of a",
+            "80% of a",
+            "40% of a"
+        ],
+        "answer": "40% of a",
+        "explanation": "Based on the Answer Key, the correct option is [D]."
+    },
+    {
+        "id": 3,
+        "question": "The difference between two numbers is 35% of the larger number. If the smaller\nnumber is 195, then the larger number is :\nदॉ ऴंख्याऑ ंिे फीच िा अंतय फडी ऴंख्या िा 35% वै। मदद छॉटी ऴंख्या 195 वै, तॉ फडी ऴंख्या वै ?\nRRB NTPC 27/02/2021 (Evening)",
+        "options": [
+            "320",
+            "330",
+            "350",
+            "300"
+        ],
+        "answer": "300",
+        "explanation": "Based on the Answer Key, the correct option is [D]."
+    },
+    {
+        "id": 4,
+        "question": "What percentage of 1 day is 18 minutes?\n1 ददन िा कितना प्रततलत 18 मभनट वै?\nRRB ALP 31/08/2018 (Afternoon)",
+        "options": [
+            "1.8%",
+            "1.25%",
+            "12.5%",
+            "7.5%"
+        ],
+        "answer": "1.25%",
+        "explanation": "Based on the Answer Key, the correct option is [B]."
+    },
+    {
+        "id": 5,
+        "question": "3/20 is what percentage of 12/25?\n3/20 िा कितना प्रततलत 12/25 वै?\n(RRB TECHNICIAN GRADE-3 2024)",
+        "options": [
+            "31.25%",
+            "35.50%",
+            "40.50%",
+            "42.75%"
+        ],
+        "answer": "31.25%",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 6,
+        "question": "If the numerator of a fraction is decreased by 10% and the denominator is\nincreased by 15%, the value of the new fraction becomes 2/5. What is the original\nfraction?\nमदद किऴी मबन्न िे अंल भ ें 10% िी िभी िी जाती वै ऒय वय भें 15% िी ऱृद्धि िी जाती वै, तॉ नए\nमबन्न िा भान 2/5 वॉ जाता वै। भूर मबन्न ज्ञात िीमजए।\n(RPF CONSTABLE 2025)",
+        "options": [
+            "21/41",
+            "23/45",
+            "17/27",
+            "32/55\nBY Gagan Pratap"
+        ],
+        "answer": "23/45",
+        "explanation": "Based on the Answer Key, the correct option is [B]."
+    },
+    {
+        "id": 7,
+        "question": "Fresh fruits contain 58% water and dry fruits contains 30% water. How much dry\nfruits can be obtained from 200kg of fresh fruits?\nताजे परों भें 58% ऩानी वै ऒय ऴूखे भेऱों भें 30% ऩानी वॉता वै। 200 किरॉग्राभ ताज े परों ऴ े कितने\nऴूखे पर प्राप्त किए जा ऴित े वैं?\n(SSC CGL 2017 PRE)",
+        "options": [
+            "120",
+            "150",
+            "160",
+            "140"
+        ],
+        "answer": "120",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 8,
+        "question": "Kalpana and Sudha got 621 and 522 marks, respectively, in the same\nexamination. If Kalpana scored 69% marks, then what is the percentage of\nmarks scored by Sudha?\nिल्पना ऒय ऴुधा िॉ एि वी ऩयीक्षा भें क्रभलः 621 ऒय 522 अंि मभरे। मदद िल्पना ने 69% अंि\nप्राप्त किए, तॉ ऴुधा द्वाया प्राप्त अंिों िा प्रततलत कितना वै?\n(RRB NTPC GRADUATE LEVEL 2025)",
+        "options": [
+            "58%",
+            "59%",
+            "60%",
+            "55%"
+        ],
+        "answer": "58%",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 9,
+        "question": "48% of the total marks is required to pass an examination and 80% to get a First\nclass with distinction. A student scored 817 marks and failed by 47 marks. How\nmany marks should he secure to get First Class with distinction?\nएि ऩयीक्षा उत्तीर् ण ियने िे मरए िु र अंिों भें ऴे 48% ऒय कऱलेळ मॉग्यता िे ऴाथ प्रथभ श्रेर्ी प्राप्त\nियने िे मरए 80% आऱश्यि वै। एि कऱद्याथी ने 817 अंि प्राप्त किए ऒय 47 अंिों ऴे अनुत्तीर्ण वॉ\nगमा। कऱलेळ मॉग्यता िे ऴाथ प्रथभ श्रेर्ी प्राप्त ियने िे मरए उऴ े कितन े अंि प्राप्त ियन े चाहवए?",
+        "options": [
+            "1500",
+            "1440",
+            "1600",
+            "1550"
+        ],
+        "answer": "1440",
+        "explanation": "Based on the Answer Key, the correct option is [B]."
+    },
+    {
+        "id": 10,
+        "question": "If a student score 43% marks then he is failed by 72 marks, but when he scores\n57% marks he is passed by 40 marks. Find passing %\nमदद िॉई छात्र 43% अंि प्राप्त ियता वै तॉ ऱव 72 अंिों ऴे पे र वॉ जाता वै, रेकिन जफ ऱव 57% अंि\nप्राप्त ियता वै तॉ ऱव 40 अंिों ऴ े उत्तीर् ण वॉता वै। प्राप्तांि % ज्ञात िय ें",
+        "options": [
+            "53%",
+            "55%",
+            "52%",
+            "50%"
+        ],
+        "answer": "52%",
+        "explanation": "Based on the Answer Key, the correct option is [C]."
+    },
+    {
+        "id": 11,
+        "question": "A person who spends 33% of his monthly income is able to save ₹6,298 per\nmonth. His monthly expenses (in ₹) are:\nएि व्यक्ति अऩनी भामऴि आम िा 33% खचण ियता वै, ऱव प्रतत भाव ₹6,298 फचाता वै। उऴिा\nभामऴि व्यम (₹ भें) कितना वै?\n(RRB NTPC GRADUATE LEVEL 2025)",
+        "options": [
+            "3,195",
+            "3,083",
+            "3,102",
+            "3,024\nBY Gagan Pratap"
+        ],
+        "answer": "3,102",
+        "explanation": "Based on the Answer Key, the correct option is [C]."
+    },
+    {
+        "id": 12,
+        "question": "X has planned his expenditure as follows: 30% of salary for house rent; 25% for\nfood; 15% for medical expenditure and 16% for others. If he can save ₹42,000\nevery month, then his monthly salary (in ₹) is:\nX अऩने व्यम िी मॉजना फनाता वै मजऴभें ऱेतन िा 30% घय िे कियाए िे मरए; 25% बॉजन िे मरए;\n15% तचकित्सा व्यम िे मरए ऒय 16% अन्य िे मरए मनधाणहयत ियता वै। मदद ऱव वय भवीन े ₹42,000\nिी फचत िय ऴिता वै, तॉ उऴिा भामऴि ऱेतन (₹ भें) ज्ञात िीमजए।\n(RRB NTPC GRADUATE LEVEL 2025)",
+        "options": [
+            "3,30,000",
+            "3,00,000",
+            "3,50,000",
+            "4,20,000"
+        ],
+        "answer": "3,00,000",
+        "explanation": "Based on the Answer Key, the correct option is [B]."
+    },
+    {
+        "id": 13,
+        "question": "A man spends 28% of his monthly salary on house rent. If every month, he also\nspends ₹687 on conveyance and ₹7,483 on grocery and saves the remaining\n₹218, his monthly salary is:\nएि आदभी अऩने भामऴि ऱेतन िा 28% घय िे कियाए ऩय खचण ियता वै। मदद वय भवीन े ऱव ₹687\nऩहयऱवन ऩय ऒय ₹7,483 कियाने ऩय खचण ियता वै ऒय लेळ ₹218 फचाता वै, तॉ उऴिा भामऴि ऱते न\nकितना वै?\n(RRB NTPC GRADUATE LEVEL 2025)",
+        "options": [
+            "₹11,738",
+            "₹11,650",
+            "₹11,594",
+            "₹11,743"
+        ],
+        "answer": "₹11,650",
+        "explanation": "Based on the Answer Key, the correct option is [B]."
+    },
+    {
+        "id": 14,
+        "question": "The salaries of P and Q together amount to Rs 2000. P spends 95% of his salary and Q\nspends 85% of his salary. If now their savings are the same, then P’s salary is?\nP ऒय Q िा ऱेतन मभरािय 2000 रुऩमे वै। P अऩने ऱेतन िा 95% खचण ियता वै ऒय Q अऩने ऱते न\nिा 85% खचण ियता वै। मदद अफ उनिी फचत ऴभान वै, तॉ P िा ऱेतन कितना वै?\n(RRB ALP 2024)",
+        "options": [
+            "Rs 1500",
+            "Rs 500",
+            "Rs 1250",
+            "Rs 750"
+        ],
+        "answer": "Rs 1500",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 15,
+        "question": "Arvind spends 75% of his income. His income is increased by 20% and he\nincreased his expenditure by 10%. His savings are increased by:\nअयकऱन्द अऩनी आम िा 75% खचण ियता वै। उऴिी आम भें 20% िी ऱृद्धि वॉ जाती वै ऒय ऱव अऩने\nव्यम भें 10% िी ऱृद्धि िय रेता वै। उऴिी फचत भें रृई ऱृद्धि कितनी वै?\n(RRB TECHNICIAN GRADE-3 2024)",
+        "options": [
+            "50%",
+            "10%",
+            "25%",
+            "37.5%"
+        ],
+        "answer": "50%",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 16,
+        "question": "Bhavani spends 68% of her income. Her income increases by 15% and her\nexpenditure increases by 10%. How much is the increase in the percentage of\nsaving? (Use decimal up to 2 digits)\nबऱानी अऩनी आम िा 68% खचण ियती वै। उऴिी आम 15% फढ़ जाती वै ऒय उऴिा व्यम 10% फढ़\nजाता वै। फचत िे प्रततलत भ ें कितनी रृई ऱृद्धि? (दॉ अंिों ति दलभरऱ िा प्रमॉग िय)ें\nSSC CPO 2024\nBY Gagan Pratap",
+        "options": [
+            "20.57%",
+            "25.62%",
+            "28.42%",
+            "24.80%"
+        ],
+        "answer": "25.62%",
+        "explanation": "Based on the Answer Key, the correct option is [B]."
+    },
+    {
+        "id": 17,
+        "question": "Raghav spends 80% of his income. If his income increases by 12% and the savings\ndecrease by 10%, then what will be the percentage increase in his expenditure?\nयाघऱ अऩनी आम िा 80% खचण ियता वै। मदद उऴिी आम भें 12% िी ऱृद्धि वॉती वै ऒय फचत भे 10%\nिी िभी वॉती वै, तॉ उऴिे खचण भें ऱृद्धि प्रततलत क्या वॉगी?",
+        "options": [
+            "17.5",
+            "22",
+            "16",
+            "20.5"
+        ],
+        "answer": "17.5",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 18,
+        "question": "The total salary of Gaurav and Azam in a company is Rs.47520. If the salary of\nGaurav increases by 23% and Azam increases by 30% then their total salary\nwould increase to Rs.59928. Find the original salary of Gaurav?\nएि िं ऩनी भें गॊयऱ ऒय आजभ िा िु र ऱेतन रु47520 वै। अगय गॊयऱ िा ऱेतन 23% ऒय आजभ\nिा 30% फढ़ता वै तॉ उनिा िु र ऱेतन फढ़िय 59928 रुऩमे वॉ जाएगा। गॊयऱ िा आयमं बि ऱेतन\nज्ञात िीमजम?े",
+        "options": [
+            "Rs.25200",
+            "Rs.26400",
+            "Rs.26290",
+            "Rs.24600"
+        ],
+        "answer": "Rs.26400",
+        "explanation": "Based on the Answer Key, the correct option is [B]."
+    },
+    {
+        "id": 19,
+        "question": "The population of a district is 373000, out of which 227000 are males. 69% of the\npopulation is literate. If 69% males are literate, then what percentage of females\nare literate?\nएि मजरे िी जनऴंख्या 373000 वै, मजऴभें ऴे 227000 ऩुरुळ वैं। 69% जनऴंख्या ऴाक्षय वै। मदद 69%\nऩुरुळ ऴाक्षय वैं, तॉ कितने प्रततलत भहवराएँ ऴाक्षय वैं?\n(RRB NTPC 12TH LEVEL 2025)",
+        "options": [
+            "69%",
+            "67%",
+            "70%",
+            "68%"
+        ],
+        "answer": "69%",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 20,
+        "question": "35% of the students in a college are girls and the rest are boys. The total number\nof students in the college is 2800. 75% of the boys and 85% of the girls passed the\nfinal examination. The percentage of total students who passed the final\nexamination is:\nकिऴी िॉरेज भ ें 35% छात्राएं वैं ऒय लेळ छात्र वैं। िॉरेज भें कऱद्याक्तथिमों िी िु र ऴंख्या 2800 वै। 75%\nछात्र ऒय 85% छात्राएं, अंततभ ऩयीक्षा भें उत्तीर्ण वॉते वैं। अंततभ ऩयीक्षा भें उत्तीर्ण रृए िु र कऱद्याक्तथिमों िा\nप्रततलत ज्ञात िय।ें",
+        "options": [
+            "80%",
+            "82%",
+            "78%",
+            "78.5%"
+        ],
+        "answer": "78.5%",
+        "explanation": "Based on the Answer Key, the correct option is [D]."
+    },
+    {
+        "id": 21,
+        "question": "The ratio of the number of boys and girls in a school is 7: 5. If 65% of the boys and\n81% of the girls are scholarship holders, then the percentage of students, who do\nnot get scholarship, is\nBY Gagan Pratap\nएि स्कू र भें रडिे ऒय रडकिमों िी ऴंख्या िा अनुऩात 7: 5 वै। मदद 65% रडिे ऒय 81% रडकिमा ँ\nछात्रऱृक्तत्त धायि वैं, तॉ उन छात्रों िा प्रततलत, मजन्हें छात्रऱृक्तत्त नवीं मभरती वै,",
+        "options": [
+            "28 %",
+            "25%",
+            "30 %",
+            "27 %"
+        ],
+        "answer": "28 %",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 22,
+        "question": "A and B are numbers such that A is 40% larger than B. If A is decreased by 20%\nand B is increased by 38% then what is the percentage increase in the total value\nof A and B ?\nA ऒय B ऐऴी ऴंख्याएँ वैं कि A, B ऴे 40% अतधि वै। मदद A िॉ 20% घटामा जाता वै ऒय B िॉ 38%\nफढ़ामा जाता वै, तॉ A ऒय B िे िु र भूल्य भें कितने प्रततलत िी ऱृद्धि वॉती वै ?\nNTPC CBT II Level 2 (13/06/2022) Shift 1",
+        "options": [
+            "5%",
+            "4 %",
+            "8 %",
+            "10%"
+        ],
+        "answer": "4 %",
+        "explanation": "Based on the Answer Key, the correct option is [B]."
+    },
+    {
+        "id": 23,
+        "question": "The population of a district is 362000, out of which 181000 are males. 47% of the\npopulation is literate. If 35% males are literate, then what percentage of females\nare literate?\nएि मजरे िी जनऴंख्या 362000 वै, मजऴभें ऴ े 181000 ऩुरुळ वैं। 47% जनऴंख्या ऴाक्षय वै। मदद 35%\nऩुरुळ ऴाक्षय वैं, तॉ कितने प्रततलत भहवराएँ ऴाक्षय वैं?\n(RRB NTPC 12TH LEVEL 2025)",
+        "options": [
+            "58%",
+            "61%",
+            "59%",
+            "62%"
+        ],
+        "answer": "59%",
+        "explanation": "Based on the Answer Key, the correct option is [C]."
+    },
+    {
+        "id": 24,
+        "question": "The population of a district is 374000, out of which 170000 are males. 78% of the\npopulation is literate. If 66% males are literate, then what percentage of females\nare literate?\nएि मजरे िी जनऴंख्या 374000 वै, मजऴभें ऴे 170000 ऩुरुळ वैं। 78% जनऴंख्या ऴाक्षय वै। मदद 66%\nऩुरुळ ऴाक्षय वैं, तॉ कितने प्रततलत भहवराएँ ऴाक्षय वैं?\n(RRB NTPC 12TH LEVEL 2025)",
+        "options": [
+            "81%",
+            "85%",
+            "83%",
+            "88%"
+        ],
+        "answer": "88%",
+        "explanation": "Based on the Answer Key, the correct option is [D]."
+    },
+    {
+        "id": 25,
+        "question": "A certain number of students from school X appeared in an examination and\n30% students failed. 150% more students than those from school X, appeared in\nthe same examination from school Y. If 80% of the total number of students who\nappeared from X and Y passed, then what is the percentage of students who\nfailed from Y?\nकिऴी ऩयीक्षा भें कऱद्यारम X िे िु छ छात्र लामभर रृए ऒय 30% छात्र अनुत्तीर् ण रृए। उऴी ऩयीक्षा भें\nकऱद्यारम X िे छात्रों िी तुरना भें 150% अतधि छात्र, कऱद्यारम Y ऴ े लामभर रृए। मदद X ऒय Y ऴे\nलामभर रृए छात्रों िी िु र ऴंख्या िे 80% उत्तीर् ण रृए वैं, तॉ Y ऴ े अनुत्तीर्ण रृए छात्रों िा प्रततलत ज्ञात\nिीमजए।\nBY Gagan Pratap",
+        "options": [
+            "18",
+            "20",
+            "16",
+            "24"
+        ],
+        "answer": "16",
+        "explanation": "Based on the Answer Key, the correct option is [C]."
+    },
+    {
+        "id": 26,
+        "question": "55% of men and 35% of women are married in a village. It is supposed that no\nperson married more than one. How much percentage of population is married?\nएि गाँऱ भें 55% ऩुरुळ ऒय 35% भहवराएँ कऱऱाहवत वैं। ऐऴा भाना जाता वै कि किऴी बी व्यक्ति ने एि\nऴे अतधि कऱऱाव नवीं किमा वै। तॉ जनऴंख्या िा कितना प्रततलत कऱऱाहवत वै?",
+        "options": [
+            "42.78%",
+            "44.55%",
+            "39.33%",
+            "40.66%"
+        ],
+        "answer": "42.78%",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 27,
+        "question": "Sudha's expenditure is 125% more than her savings. If her expenditure decreases\nby 6%, and savings increase by 26.5%, then by what percentage does her income\nincrease?\nऴुधा िा व्यम, उऴिी फचत ऴ े 125% अतधि वै। मदद उऴिे व्यम भें 6% िी िभी वॉती वै, ऒय फचत भें\n26.5% िी ऱृद्धि वॉती वै, तॉ उऴिी आम भें कितने प्रततलत िी ऱृद्धि वॉती वै।\n[RRB Group-D 2022]",
+        "options": [
+            "18.5%",
+            "4%",
+            "8%",
+            "20.5%"
+        ],
+        "answer": "4%",
+        "explanation": "Based on the Answer Key, the correct option is [B]."
+    },
+    {
+        "id": 28,
+        "question": "The monthly income of Ramesh was Rs.16,500 and his monthly expenditure was\nRs.10,500. Next year his income increased by 25% and his expenditure increased\nby 19%. Find the percentage increase in his saving.\nयभेल िी भामऴि आम Rs.16,500 थी ऒय उऴिा भामऴि खचण Rs.10,500 था। अगरे ऱळ ण उऴिी\nआम भ ें 25% िी ऱृद्धि रृई ऒय उऴिे व्यम भें 19% िी ऱृद्धि रृई। उऴिी फचत भें प्रततलत ऱृद्धि ज्ञात\nिीमजए।\nDelhi Police S.I. 09/11/2022 (Afternoon)",
+        "options": [
+            "33.5%",
+            "34.5%",
+            "32.5%",
+            "35.5%"
+        ],
+        "answer": "35.5%",
+        "explanation": "Based on the Answer Key, the correct option is [D]."
+    },
+    {
+        "id": 29,
+        "question": "The income of Raman is ₹44,000. He saves 18.5% of his income. If his income\nincreases by 17% and expenditure increases by 40%, then his savings will:\nयभन िी आम ₹44,000 वै। ऱव अऩनी आम िे 18.5% िी फचत ियता वै। मदद उऴिी आम भें 17% िी\nऱृद्धि वॉती वै ऒय खचण भें 40% िी ऱृद्धि वॉती वै, तॉ उऴिी फचत भें _______ वॉगी।\n(RRB NTPC 12TH LEVEL 2025)",
+        "options": [
+            "decrease by ₹6,864",
+            "decrease by ₹6,860",
+            "increase by ₹6,859",
+            "increase by ₹6,862"
+        ],
+        "answer": "decrease by ₹6,864",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 30,
+        "question": "The price of a bottle is first increased by 15% and later the price was decreased\nby 24% due to a reduction in sales. Find the net percentage change in the final\nprice of the bottle.\nBY Gagan Pratap\nएि फॉतर िे भूल्य भें ऩवरे 15% िी ऱृद्धि िी जाती वै ऒय फाद भें कफक्री भें िभी िे िायर् इऴिे\nभूल्य भ ें 24% िी िभी िी जाती वै। फॉतर िे अंततभ भूल्य भें मनऱर प्रततलत ऩहयऱतणन ज्ञात िीमजए।\n(SSC MTS 2023)",
+        "options": [
+            "Decrease of 13.9%/13.9% िी िभी",
+            "Decrease of 12.6%/12.6% िी िभी",
+            "Increase of 13.9%/13.9% िी ऱृद्धि",
+            "Increase of 12.6%/12.6% िी ऱृद्धि"
+        ],
+        "answer": "Decrease of 12.6%/12.6% िी िभी",
+        "explanation": "Based on the Answer Key, the correct option is [B]."
+    },
+    {
+        "id": 31,
+        "question": "Vijay’s salary was first reduced by 16% and subsequently raised by 11%. What\npercentage was his final salary lower compared to his initial salary?\nकऱजम िा ऱेतन ऩवरे 16% घटामा गमा ऒय फाद भें 11% फढ़ा ददमा गमा। उऴिा अंततभ ऱेतन उऴिे\nआयमं बि ऱेतन िी तुरना भें कितन े प्रततलत िभ था?\n(RRB NTPC GRADUATE LEVEL 2025)",
+        "options": [
+            "6.76%",
+            "16%",
+            "1.76%",
+            "11%"
+        ],
+        "answer": "6.76%",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 32,
+        "question": "The salary of Neeta is first increased by 13% and then it is decreased by 13%. What\nis the change in her salary?\nनीता िे ऱेतन भें ऩवरे 13% िी ऱृद्धि िी जाती वै ऒय ऩुनः 13% िभ िय दी जाती वै।\nउऴिे ऱेतन भें कितना ऩहयऱतणन रृआ वै?\n(SSC GD 2023)",
+        "options": [
+            "Increase of 1.69%/1.69% िी ऱृद्धि",
+            "Increase of 16.9%/16.9% िी ऱृद्धि",
+            "Decrease of 16.9%/16.9% िी िभी",
+            "Decrease of 1.69%/1.69 िी िभी"
+        ],
+        "answer": "Decrease of 1.69%/1.69 िी िभी",
+        "explanation": "Based on the Answer Key, the correct option is [D]."
+    },
+    {
+        "id": 33,
+        "question": "The price of a shirt is first increased by 15% and then decreased by 12%, and again\nincreased by 8%. Find the net increase or decrease percentage (correct to one\ndecimal place) in the price of the shirt.\nएि लटण िी िीभत भ ें ऩवरे 15% िी ऱृद्धि रृई ऒय कपय 12% िी िभी रृई, ऒय एि फाय कपय 8% िी\nऱृद्धि रृई। लटण िी िीभत भ ें मनऱर ऱृद्धि मा िभी प्रततलत (दलभरऱ िे एि स्थान ति ऴवी) ज्ञात\nिीमजए।",
+        "options": [
+            "Increase of 10.6%",
+            "Increase of 9.3%",
+            "Decrease of 10.6%",
+            "Decrease of 9.3%"
+        ],
+        "answer": "Increase of 9.3%",
+        "explanation": "Based on the Answer Key, the correct option is [B]."
+    },
+    {
+        "id": 34,
+        "question": "The price of fuel decreases by 15%, 25% and 35% in three successive months, but\nincreases by 40% in the fourth month. What is the percentage\nincrease/decrease in the price of fuel in the fourth month as compared to its\noriginal price?\nBY Gagan Pratap\nईंधन िी िीभत क्रभागत तीन भवीनों भें 15%, 25% ऒय 35% िभ िी गई वै, रेकिन चॊथे भवीने भें\n40% ऱृद्धि िी गई वै। चॊथे भवीन े भ ें ईंधन िी िीभत भें उऴिी भूर िीभत िी तुरना भें कितने\nप्रततलत िी ऱृद्धि/िभी रृई वै?\n(RPF CONSTABLE 2025)",
+        "options": [
+            "Decreases by 41.98%",
+            "Decreases by 40.3%",
+            "Increases by 39.36%",
+            "Increases by 45.33%"
+        ],
+        "answer": "Decreases by 41.98%",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 35,
+        "question": "The population of a village was 1,10,000. It increased by 5% in the first year and\nincreased by 30% in the second year. Its population after two years is _______.\nएि गाँऱ िी जनऴंख्या 1,10,000 थी। ऩवरे ऱळण भें इऴभें 5% िी ऱृद्धि रृई तथा दऴू य े ऱळण भें 30% िी\nऱृद्धि रृई। दॉ ऱळ ण फाद इऴिी जनऴंख्या _______ वॉगी।\n(RRB NTPC GRADUATE LEVEL 2025)",
+        "options": [
+            "1,50,150",
+            "1,15,500",
+            "1,48,500",
+            "1,43,000"
+        ],
+        "answer": "1,50,150",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 36,
+        "question": "The current population of a town is 10,630. It increases by 25% and 50% in two\nsuccessive years but decreases by 68% in the third year. What is the population\nof the town at the end of the third year?\nकिऴी िस्ब े िी ऱतणभान जनऴंख्या 10,630 वै। इऴभें दॉ क्रमभि ऱळों भें 25% ऒय 50% िी ऱृद्धि वॉती\nवै, रेकिन तीऴय े ऱळण भ ें 68% िी िभी वॉ जाती वै। तीऴय े ऱळ ण िे अंत भें िस्बे िी जनऴंख्या कितनी वै?\n(RRB NTPC 12TH LEVEL 2025)",
+        "options": [
+            "6378",
+            "6376",
+            "6380",
+            "6374"
+        ],
+        "answer": "6378",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 37,
+        "question": "The current population of a town is 12,500. It increases by 52% and 30% in two\nsuccessive years but decreases by 15% in the third year. What is the population\nof the town at the end of the third year?\nकिऴी िस्ब े िी ऱतणभान जनऴंख्या 12,500 वै। मव दॉ क्रमभि ऱळों भें 52% ऒय 30% फढ़ जाती वै,\nरेकिन तीऴय े ऱळण भें 15% घट जाती वै। तीऴय े ऱळ ण िे अंत भें िस्ब े िी जनऴंख्या कितनी वै?\n(RRB NTPC 12TH LEVEL 2025)",
+        "options": [
+            "20,990",
+            "20,998",
+            "20,995",
+            "20,991"
+        ],
+        "answer": "20,995",
+        "explanation": "Based on the Answer Key, the correct option is [C]."
+    },
+    {
+        "id": 38,
+        "question": "In a laboratory, the count of bacteria in a certain experiment was increasing at\nthe rate of 4.4% per hour. Find the count of bacteria at the end of 2 hours if the\ncount was initially 8,05,00,000.\nएि प्रमॉगलारा भें, किऴी प्रमॉग भ ें फैक्टीहयमा िी ऴंख्या 4.4% प्रतत घंटे िी दय ऴे फढ़ यवी थी। मदद\nप्रायबं भ ें ऴंख्या 8,05,00,000 थी, तॉ 2 घंटे फाद फैक्टीहयमा िी ऴंख्या कितनी वॉगी?\n(RPF CONSTABLE 2025)",
+        "options": [
+            "8,44,39,855",
+            "8,77,39,884",
+            "8,77,39,848",
+            "8,78,39,878\nBY Gagan Pratap"
+        ],
+        "answer": "8,77,39,848",
+        "explanation": "Based on the Answer Key, the correct option is [C]."
+    },
+    {
+        "id": 39,
+        "question": "The income of a person increases by 15% annually. If the initial income is ₹70,000,\ncalculate the income after 2 years.\nएि व्यक्ति िी आम भ ें प्रततऱळण 15% िी ऱृद्धि वॉती वै। मदद प्रायमं बि आम ₹70,000 वै, तॉ 2 ऱळण फाद िी\nआम िी गर्ना िीमजए।\n(RRB NTPC GRADUATE LEVEL 2025)",
+        "options": [
+            "₹91,875",
+            "₹91,575",
+            "₹92,575",
+            "₹92,175"
+        ],
+        "answer": "₹92,575",
+        "explanation": "Based on the Answer Key, the correct option is [C]."
+    },
+    {
+        "id": 40,
+        "question": "The population of a town was 1,20,000 at the end of 2017. It increases at a rate of\n7% per annum. What will the population be at the end of 2019?\n2017 िे अंत भें किऴी लवय िी जनऴंख्या 1,20,000 थी। मव प्रततऱळ ण 7% िी दय ऴे फढ़ यवी वै। 2019 िे\nअंत भें जनऴंख्या कितनी वॉगी?\n( RPF CONSTABLE 2025)",
+        "options": [
+            "1,37,570",
+            "1,37,388",
+            "1,37,680",
+            "1,37,285"
+        ],
+        "answer": "1,37,388",
+        "explanation": "Based on the Answer Key, the correct option is [B]."
+    },
+    {
+        "id": 41,
+        "question": "A town had 1,60,000 inhabitants in 2021. Its population declines at a rate of 5% per\nannum. What will be its population in 2024?\n2021 भ ें एि लवय भें 1,60,000 मनऱाऴी थे। लवय िी जनऴंख्या 5% ऱाकळिि िी दय ऴे घट जाती वै।\n2024 भ ें इऴिी जनऴंख्या कितनी वॉगी?\n(RPF CONSTABLE 2025)",
+        "options": [
+            "99,000",
+            "1,16,640",
+            "1,00,000",
+            "1,37,180"
+        ],
+        "answer": "1,37,180",
+        "explanation": "Based on the Answer Key, the correct option is [D]."
+    },
+    {
+        "id": 42,
+        "question": "The population of a town in 1968 was 4,85,000. If its population increased in two\nsuccessive decades by 20% in each decade, the population of the town in 1988\nwas:\n1968 भें एि िस्ब े िी जनऴंख्या 4,85,000 थी। मदद दॉ रगाताय दलिों भें इऴिी जनऴंख्या भें 20%\nप्रतत दलि िी दय ऴे ऱृद्धि रृई, तॉ 1988 भें िस्ब े िी जनऴंख्या कितनी थी?\n(RRB NTPC GRADUATE LEVEL 2025)",
+        "options": [
+            "6,98,405",
+            "6,98,395",
+            "6,98,400",
+            "6,98,397"
+        ],
+        "answer": "6,98,400",
+        "explanation": "Based on the Answer Key, the correct option is [C]."
+    },
+    {
+        "id": 43,
+        "question": "Two years ago, the population of the city was 5,00,000. If the annual birth rate\nand the annual death rate are 7% and 4%, respectively, what is the present\npopulation of the city?\nदॉ ऱल ण ऩवरे, एि बावय िी जनऴंख्या 5,00,000 थी। मदद ऱामलिि जन्म दय ऒय ऱामलिि भृत्य ु दय\nक्रभलः 7% ऒय 4% वै, तॉ बावय िी ऱतणभान जनऴंख्या कितनी वै?",
+        "options": [
+            "536440",
+            "580440",
+            "530450",
+            "540550\nBY Gagan Pratap"
+        ],
+        "answer": "530450",
+        "explanation": "Based on the Answer Key, the correct option is [C]."
+    },
+    {
+        "id": 44,
+        "question": "Due to water crisis, 12% of the initial population left the town, and 25% of the\nremaining population left the town for pursuing jobs. If presently 660 people\ninhabit the town, what is the ratio of initial population to present population?\nजर ऴंिट िे िायर्, प्रायमं बि जनऴंख्या िा 12% हवस्सा लवय छॉडिय चरा गमा, ऒय लेळ\nजनऴंख्या िे 25% रॉगों ने नॊियी िी तराल भें लवय छॉड ददमा। मदद ऱतणभान भें लवय भें 660 रॉग\nयवत े वैं, तॉ प्रायमं बि जनऴंख्या ऒय ऱतणभान जनऴंख्या िा अनुऩात ज्ञात िीमजए।",
+        "options": [
+            "53 : 36",
+            "57 : 40",
+            "55 : 32",
+            "50 : 33"
+        ],
+        "answer": "50 : 33",
+        "explanation": "Based on the Answer Key, the correct option is [D]."
+    },
+    {
+        "id": 45,
+        "question": "Salil got an increase of 4% in his sales amount in the first year and 24% in the\nsecond year; also with this, his current sales are ₹1,61,200, what was his sales (in\n₹) two years ago?\nऴमरर िॉ उऴिी कफक्री यामल भें ऩवरे ऱळण भें 4% िी ऱृद्धि ऒय दऴू य े ऱळण भें 24% िी ऱृद्धि प्राप्त रृई;\nइऴिे ऴाथ वी, उऴिी ऱतणभान कफक्री ₹1,61,200 वै, दॉ ऱळण ऩूऱण उऴिी कफक्री (₹ भें) कितनी थी?\n(RRB NTPC 12TH LEVEL 2025)",
+        "options": [
+            "₹1,25,000",
+            "₹1,30,000",
+            "₹1,55,000",
+            "₹1,05,000"
+        ],
+        "answer": "₹1,25,000",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 46,
+        "question": "Chetan gets a 2% increase in his sale amount in the first year and a 20% increase\nin the second year; with that his present sale is ₹1,76,800. What was his sale (in ₹)\ntwo years ago? (Correct to two decimal places.)\nचेतन िॉ ऩवरे ऱळण भें अऩनी कफक्री यामल भें 2% िी ऱृद्धि ऒय दऴू य े ऱळण भें 20% िी ऱृद्धि प्राप्त वॉती वै;\nइऴिे ऴाथ उऴिी ऱतणभान कफक्री ₹1,76,800 वै। दॉ ऱळण ऩवरे उऴिी कफक्री (₹ भें) क्या थी? (दॉ\nदलभरऱ स्थानों ति ऴवी उत्तय दें।)\n(RRB NTPC GRADUATE LEVEL 2025)",
+        "options": [
+            "1,24,444.44",
+            "1,73,333.33",
+            "1,47,333.33",
+            "1,44,444.44"
+        ],
+        "answer": "1,44,444.44",
+        "explanation": "Based on the Answer Key, the correct option is [D]."
+    },
+    {
+        "id": 47,
+        "question": "When 10% of the inhabitants of a village died of cholera, a panic set in, during\nwhich 25% of the remaining inhabitants left the village. The population then\nreduced to 4050. Find the number of original inhabitants?\nजफ एि गाँऱ िी 10% आफादी वैजा ऴे भय गई, तॉ दवलत पै र गई, इऴ दॊयान फची रृई 25% आफादी ने\nगाँऱ छॉड ददमा। तफ जनऴंख्या घटिय 4050 यव गई। भूर मनऱामऴमों िी ऴंख्या ज्ञात िीमजए?\n(RRB ALP 2024)",
+        "options": [
+            "7000",
+            "5000",
+            "8000",
+            "6000"
+        ],
+        "answer": "6000",
+        "explanation": "Based on the Answer Key, the correct option is [D]."
+    },
+    {
+        "id": 48,
+        "question": "The value of a machine decreases every year at the rate of 5%. If its present\nvalue is Rs411540, what was its value before 3 years ago?\nकिऴी भलीन िे भूल्य भें प्रततऱळ ण 5% िा वाऴ वॉता वै। मदद इऴिा ऱतणभान भूल्य 411540 वै । तॉ 3 ऱळण\nऩवरे इऴिा भूल्य क्या था\nBY Gagan Pratap",
+        "options": [
+            "450000",
+            "460000",
+            "475000",
+            "480000"
+        ],
+        "answer": "480000",
+        "explanation": "Based on the Answer Key, the correct option is [D]."
+    },
+    {
+        "id": 49,
+        "question": "A number is first decreased by 20% and then increased by 15%. The number so\nobtained is 64 less than the original number. The original number is :\nएि ऴंख्या भें ऩवरे 20% िी िभी िी जाती वै ऒय कपय 15% िी ऱृद्धि िी जाती वै। इऴ प्रिाय प्राप्त\nऴंख्या ऱास्तकऱि ऴंख्या ऴे 64 िभ वै। ऱास्तकऱि ऴंख्या क्या वै?\nRRB NTPC 04/01/2021 (Evening)",
+        "options": [
+            "800",
+            "850",
+            "600",
+            "700"
+        ],
+        "answer": "800",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 50,
+        "question": "The price of edible oil is increased by 30%. To maintain the budget, Reena\nreduces the consumption of this oil by 18%. Find the increased percentage in\nexpenditure due to this edible oil.\nखाद्य तेर िी िीभत भें 30% िी ऱृद्धि रृई वै। फजट भेंटेन ियने िे मरए, यीना इऴ तेर िी खऩत भें\n18% िी िभी ियती वै। इऴ खाद्य तेर िे िायर् व्यम भें ऱृद्धि प्रततलत ज्ञात िीमजए।\n(RPF CONSTABLE 2025)",
+        "options": [
+            "6.9%",
+            "6.6%",
+            "6.3%",
+            "6.1%"
+        ],
+        "answer": "6.6%",
+        "explanation": "Based on the Answer Key, the correct option is [B]."
+    },
+    {
+        "id": 51,
+        "question": "In measuring the sides of a rectangle error of 10% and 8% in excess are made.\nFind the error percent in its area.\nएि आमत िी बुजाऑ ंिे भाऩन िे दॊयान त्रुहटऱल उनिा भाऩ 10% ऒय 8% अतधि प्राप्त वॉता वै।\nइऴिे क्षेत्रपर भें वॉने ऱारी त्रुहट िा प्रततलत ज्ञात िीमजए ।\nNTPC CBT II Level 2 (16/06/2022) Shift 2",
+        "options": [
+            "1.88%",
+            "188%",
+            "18.8%",
+            "0.188%"
+        ],
+        "answer": "18.8%",
+        "explanation": "Based on the Answer Key, the correct option is [C]."
+    },
+    {
+        "id": 52,
+        "question": "The base of a parallelogram is increased by 8% and height is increased by 4%.\nFind the net increase percentage in its area.\nएि ऴभांतय चतुबुणज िे आधाय भ ें 8% िी ऱृद्धि िी जाती वै ऒय ऊं चाई भे 4% िी ऱृद्धि िी जाती वै।\nइऴिे क्षेत्रपर भें लुि ऱृद्धि प्रततलत ज्ञात िीमजए।\n(RPF CONSTABLE 2025)",
+        "options": [
+            "12.22%",
+            "12.48%",
+            "12.05%",
+            "12.32%"
+        ],
+        "answer": "12.32%",
+        "explanation": "Based on the Answer Key, the correct option is [D]."
+    },
+    {
+        "id": 53,
+        "question": "Sultan bought a new plot which need to be fenced immediately, due to this the\nlength as well as the breadth of the rectangular working place is reduced by 9%.\nFind the % decrease in the area.\nऴुल्तान न े एि नमा प्लॉट खयीदा वै मजऴिी तुयतं फाड रगान े िी जरूयत वै। इऴ ऱजव ऴे आमतािाय\nिामणस्थर िी रंफाई ऒय चॊडाई दॉनों भें 9% िी िभी वॉ गई वै। क्षेत्रपर भें रृई % िभी ज्ञात िीमजए।",
+        "options": [
+            "16.66%",
+            "17.19%\nBY Gagan Pratap",
+            "18.00%",
+            "13.56%"
+        ],
+        "answer": "17.19%\nBY Gagan Pratap",
+        "explanation": "Based on the Answer Key, the correct option is [B]."
+    },
+    {
+        "id": 54,
+        "question": "The length, breadth and height of a room in the shape of a cuboid are increased\nby 15%, 20% and 30% respectively. Find the percentage change in the volume of\nthe cuboid.\nएि घनाब िे आिाय िे िभय े िी रंफाई, चॊडाई ऒय ऊँ चाई भें क्रभलः 15%, 20% ऒय 30% िी ऱृद्धि\nिी जाती वै। घनाब िे आमतन भें प्रततलत ऩहयऱतनण ज्ञात िीमजए।\nUP S.I. 24/11/ 2021 (Afternoon)",
+        "options": [
+            "79.4% increase",
+            "79.4% decrease",
+            "83.4% increase",
+            "83.4% decrease"
+        ],
+        "answer": "79.4% increase",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 55,
+        "question": "The radius of a sphere is increased by 12%. The surface area increases by:\nएि गॉरे िी तत्रज्या 12% िी ऱृद्धि जाती वै। ऩृष्ठीम क्षेत्रपर भें कितनी ऱृद्धि वॉगी:\n(ICAR Technician 2023)",
+        "options": [
+            "26.44%",
+            "24.44%",
+            "25.44%",
+            "27.44%"
+        ],
+        "answer": "25.44%",
+        "explanation": "Based on the Answer Key, the correct option is [C]."
+    },
+    {
+        "id": 56,
+        "question": "If the radius of a sphere is increased by 20%, then the new volume will become\n______ of the original volume.\nमदद किऴी गॉरे िी तत्रज्या भें 20% िी ऱृद्धि िय दी जाए, तॉ इऴिा नमा आमतन भूर आमतन िा\n____ वॉ जाएगा।\n(RRB TECHNICIAN GRADE-3 2024)",
+        "options": [
+            "172.8%",
+            "20%",
+            "120%",
+            "72.8%"
+        ],
+        "answer": "172.8%",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 57,
+        "question": "If the radius of the base of a right circular cylinder is decreased by 18% and its\nheight is increased by 141%, then what is the percentage increase (closest\ninteger) in its volume?\nमदद एि रम्ब ऱृत्तीम फेरन िे आधाय िी तत्रज्या 18% िभ िय दी जाए तथा इऴिी ऊं चाई 141% फढ़ा\nदी जाए, तॉ इऴिे आमतन भें प्रततलत ऱृद्धि (मनिटतभ ऩूर्ािां ति) ज्ञात िीमजए।\n(RRB NTPC 12TH LEVEL 2025)",
+        "options": [
+            "43%",
+            "62%",
+            "92%",
+            "74%"
+        ],
+        "answer": "62%",
+        "explanation": "Based on the Answer Key, the correct option is [B]."
+    },
+    {
+        "id": 58,
+        "question": "Sandeep spends 32% of his annual income on food, 20% of the remaining income\non travelling, and 35% of the remaining income on clothes, and still saves Rs.\n70,720 per year. What is the annual income (in Rs.) of Sandeep?\nऴंदीऩ अऩनी ऱाकळिि आम िा 32% बॉजन ऩय, लेळ आम िा 20% मात्रा ऩय ऒय लेळ आम िा 35%\nिऩडों ऩय खचण ियता वै ऒय अबी बी प्रतत ऱळ ण ₹70,720 फचाता वै। ऴंदीऩ िी ऱाकळिि आम (₹ भें) ज्ञात\nिय।ें\n[SSC Selection Post (Phase-XII)]",
+        "options": [
+            "5,44,000",
+            "3,75,000\nBY Gagan Pratap",
+            "2,00,000",
+            "4,50,000"
+        ],
+        "answer": "2,00,000",
+        "explanation": "Based on the Answer Key, the correct option is [C]."
+    },
+    {
+        "id": 59,
+        "question": "A person spends 12.5% of his income on food, 18 % of remaining part on travelling\nand 20% of the remaining part on education. Finally his total expenditure is Rs.",
+        "options": [
+            "Option A",
+            "Option B",
+            "Option C",
+            "Option D"
+        ],
+        "answer": "Option B",
+        "explanation": "Based on the Answer Key, the correct option is [B]."
+    },
+    {
+        "id": 3450,
+        "question": "Find his total income.\nएि व्यक्ति बॉजन ऩय अऩनी आम िा 12.5%, मात्रा ऩय लेळ बाग िा 18 % ऒय लेळ 20% हवस्सा मलक्षा\nऩय खच ण ियता वै। उऴिा िु र खचण रु3450 वै। उऴिी िु र आम ज्ञात िीमजए।",
+        "options": [
+            "5000",
+            "8000",
+            "10000",
+            "12000"
+        ],
+        "answer": "5000",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 60,
+        "question": "The price of an article is increased by r%. The new price was decreased by r%\nlater. Now the latest price is Rs. 1, What was the original price of the article?\nएि ऱस्त ु िे भूल्य भें r% िी ऱृद्धि िी जाती वै। फाद भें इऴ नए भूल्य भें r% िी िभी िय दी जाती वै।\nअफ नऱीनतभ भूल्य Rs.1 वै। उऴ ऱास्त ु िा प्रायमं बि भूल्य कितना था?",
+        "options": [
+            "",
+            "",
+            "",
+            ""
+        ],
+        "answer": "",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 61,
+        "question": "What will be the difference in population 3 years ago and 2 years ago of a town\nwhose current population of 2,60,000 is increasing at a rate of 25% every year?\nएि िस्ब े िी ऱतणभान जनऴंख्या 2,60,000 वै, जॉ प्रतत ऱळण 25% िी दय ऴे फढ़ यवी वै। 3 ऱळ ण ऩूऱ ण िी\nजनऴंख्या तथा 2 ऱळण ऩूऱ ण िी जनऴंख्या िा अंतय ज्ञात िीमजए।\n(RRB NTPC GRADUATE LEVEL 2025)",
+        "options": [
+            "33,280",
+            "32,530",
+            "33,630",
+            "32,730"
+        ],
+        "answer": "33,280",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 62,
+        "question": "Lata buys a second-hand scooty for ₹30,000. The value of the scooty\ndepreciates at the rate of x% yearly. If the scooty was sold at a price of ₹20,667\nafter 2 years, then what is the value of x?\nरता न े ₹30,000 भ ें एि ऴेिं ड-वैंड स्कू टी खयीदी। स्कू टी िा भूल्य, x% ऱाकळिि दय ऴे िभ वॉता वै।\nमदद 2 ऱळ ण फाद स्कू टी ₹20,667 िे भूल्य ऩय फेची जाती वै, तॉ x िा भान ज्ञात िीमजए।\n(RPF CONSTABLE 2025)",
+        "options": [
+            "19",
+            "16",
+            "17",
+            "18"
+        ],
+        "answer": "17",
+        "explanation": "Based on the Answer Key, the correct option is [C]."
+    },
+    {
+        "id": 63,
+        "question": "In an election, there were two candidates. One of the candidates secured 48% of\nthe votes and was defeated by the other candidate by 756 votes. Find the total\nnumber of votes polled.\nएि चुनाऱ भें दॉ उम्मीदऱाय थे। एि उम्मीदऱाय िॉ 48% ऱॉट मभरे ऒय ऱव दऴू य े उम्मीदऱाय ऴे 756\nऱॉटों ऴ े वाय गमा। डारे गए िु र ऱॉटों िी ऴंख्या ज्ञात िीमजए।\n(RRB NTPC GRADUATE LEVEL 2025)",
+        "options": [
+            "17,800",
+            "19,500",
+            "15,600",
+            "18900\nBY Gagan Pratap"
+        ],
+        "answer": "18900\nBY Gagan Pratap",
+        "explanation": "Based on the Answer Key, the correct option is [D]."
+    },
+    {
+        "id": 64,
+        "question": "In an election between two candidates, one got 55% of the total valid votes and\n20% of the votes were invalid. If the total number of votes was 7500, then the\nwinner won the election by a majority of _______ votes?\nदॉ उम्मीदऱायों िे फीच रृए चुनाऱ भ ें एि िॉ िु र ऱैध ऱॉटों भें ऴे 55% ऱॉट मभरे ऒय 20% ऱॉट अऱैध\nथे। मदद िु र भतों िी ऴंख्या 7500 थी, तॉ कऱजेता ने _______ भतों िे फरृभत ऴे चुनाऱ जीता?\n(RRB ALP 2024)",
+        "options": [
+            "750",
+            "800",
+            "600",
+            "700"
+        ],
+        "answer": "600",
+        "explanation": "Based on the Answer Key, the correct option is [C]."
+    },
+    {
+        "id": 65,
+        "question": "A, B and C contested an election. All the votes polled were valid. A got 38% of the\ntotal votes. For every 45 votes polled, B got 18 votes. The winner got 5,760 more\nvotes than the person who received the least number of votes. The total number\nof votes polled was:\nA, B ऒय C ने चुनाऱ रडा। डारे गए ऴबी ऱॉट ऱैध थे। A िॉ िु र भतों िा 38% भत प्राप्त रृए। प्रत्येि\n45 भतों िे मरए, B िॉ 18 भत प्राप्त रृए। कऱजेता िॉ ऴफऴ े िभ भत प्राप्त ियने ऱारे व्यक्ति ऴे 5,760\nअतधि भत प्राप्त रृए। डारे गए भतों िी िु र ऴख्यं ा थी:\n(ICAR Assistant 2022)",
+        "options": [
+            "37,200",
+            "38,400",
+            "36,000",
+            "32,000"
+        ],
+        "answer": "32,000",
+        "explanation": "Based on the Answer Key, the correct option is [D]."
+    },
+    {
+        "id": 66,
+        "question": "In a constituency, 90% of the total number of people on the electoral roll cast\ntheir votes during an election, 15% of the votes cast were declared invalid. Jeeta\nsecured 60% of the valid votes. If jeeta secured 91,800 valid votes, what was the\ntotal number of people on the electoral roll?\nएि मनऱाणचन क्षेत्र िी भतदाता ऴूची भें लामभर िु र रॉगों भें ऴे 90% रॉगों ने चुनाऱ िे दॊयान भत\nडारे, डारे गए भतों भें ऴ े 15% भत अऱैध घॉकळत िय ददए गए। जीता ने ऱैध भतों िे 60% भत प्रराप्त\nकिमे। मदद जीता िॉ 91,800 ऱैध ऱॉट मभरे, तॉ भतदाता ऴूची भें िु र कितने रॉग लामभर थे?\nSSC CGL 2023 PRE",
+        "options": [
+            "2,16,000",
+            "2,25,000",
+            "1,80,000",
+            "2,00,000"
+        ],
+        "answer": "2,00,000",
+        "explanation": "Based on the Answer Key, the correct option is [D]."
+    },
+    {
+        "id": 67,
+        "question": "In an election between two candidates, 82% of the registered voters cast their\nvote and 4% of the votes polled were found invalid. The winning candidate got\n60% of the valid votes and won the election by a margin of 1968 votes. How many\nvoters were registered?\nदॉ उम्मीदऱायों िे फीच रृए एि चुनाऱ भें, 82% ऩंजीिृ त भतदाताऑ ंने भतदान किमा ऒय डारे गए\nभतों भें ऴे 4% अऱैध ऩाए गए। कऱजमी उम्मीदऱाय िॉ ऱैध भतों िे 60% भत प्राप्त रृए ऒय उऴने 1968\nभतों िे अंतय ऴ े चुनाऱ जीत मरमा। ऩंजीिृ त भतदाताऑ ंिी ऴंख्या कितनी थी?\n(RRB NTPC 12TH LEVEL 2025)",
+        "options": [
+            "12497",
+            "12500\nBY Gagan Pratap",
+            "12502",
+            "12501"
+        ],
+        "answer": "12500\nBY Gagan Pratap",
+        "explanation": "Based on the Answer Key, the correct option is [B]."
+    },
+    {
+        "id": 68,
+        "question": "In an election, 12% of the voters in the voter list did not cast their votes, whereas\n84 voters cast their ballot papers blank. There were only two candidates:\nRamagya and Shravan. The winner, Ramagya, was supported by 54% of all the\nvoters in the list. He got 1456 more votes than his rival, Shravan. Find the total\nnumber of voters in the list.\nएि चुनाऱ भें भतदाता ऴूची भें लामभर 12% भतदाताऑ ं ने अऩना ऱॉट नवीं डारा , जफकि 84\nभतदाताऑ ंने अऩने भतऩत्र खारी डारे। िे ऱर दॉ उम्मीदऱाय याभाज्ञा ऒय श्रऱर् थे। कऱजेता याभाज्ञा\nिॉ ऴूची िे ऴबी भतदाताऑ ंभ ें ऴे 54% िा ऴभथणन प्राप्त रृआ। उऴ े अऩने प्रततद्वंदी श्रऱर् ऴे 1456 ऱॉट\nअतधि मभरे। ऴूची भें भतदाताऑ ंिी िु र ऴंख्या ज्ञात िीमजए।\nSSC CPO 2024",
+        "options": [
+            "5690",
+            "6670",
+            "7860",
+            "6860"
+        ],
+        "answer": "6860",
+        "explanation": "Based on the Answer Key, the correct option is [D]."
+    },
+    {
+        "id": 69,
+        "question": "In an examination, 52% candidates failed in English and 42% failed in\nMathematics. If 17% failed in both the subjects, then what percent passed in both\nthe subjects?\nएि ऩयीक्षा भें, 52% ऩयीक्षाथी अंग्रेजी भें पे र रृए ऒय 42% गद्धर्त भें पे र रृए। मदद 17% दॉनों कऱळमों\nभें पे र रृए, तॉ दॉनों कऱळमों भें कितन े प्रततलत ऩयीक्षाथी ऩाऴ रृए?",
+        "options": [
+            "77",
+            "58",
+            "48",
+            "23"
+        ],
+        "answer": "23",
+        "explanation": "Based on the Answer Key, the correct option is [D]."
+    },
+    {
+        "id": 70,
+        "question": "In an examination, 73% of the candidates passed the quantitative aptitude test,\n70% passed the general knowledge test, and 64% passed both subjects. If 6300\ncandidates failed in both subjects, what was the total number of candidates?\nकिऴी ऩयीक्षा भें 73% उम्मीदऱाय भात्रात्मि अमबक्षभता ऩयीक्षर् भें उतीर्ण रृए,70% ऴाभान्य ज्ञान भें\nऒय 64% दॉनों कऱळमों भें उतीर् ण रृए। मदद 6300 उम्मीदऱाय दॉनों कऱळमों भें पे र रृए तॉ फताइए िु र\nकितने ऩयीक्षाथी थे?",
+        "options": [
+            "60000",
+            "50000",
+            "30000",
+            "25000"
+        ],
+        "answer": "30000",
+        "explanation": "Based on the Answer Key, the correct option is [C]."
+    },
+    {
+        "id": 71,
+        "question": "In an examination, 35% students failed in one subject and 42% failed in the other\nsubject. Among these 30% failed in both subjects. If the total number of students\nis 2500 then how many students failed only in one subject?\nएि ऩयीक्षा भें, 35% छात्र एि कऱळम भें अनुत्तीर्ण रृए ऒय 42% दऴू य े कऱळम भें अनुत्तीर्ण रृए। इनभें ऴे\n30% दॉनों कऱळमों भें अनुत्तीर् ण रृए। मदद कऱद्याक्तथिमों िी िु र ऴंख्या 2500 वै तॉ िे ऱर एि कऱळम भें\nकितने कऱद्याथी अनुत्तीर् ण रृए?\nRRB NTPC 12/01/2021 (Morning)",
+        "options": [
+            "750",
+            "425",
+            "1050",
+            "1750\nBY Gagan Pratap"
+        ],
+        "answer": "425",
+        "explanation": "Based on the Answer Key, the correct option is [B]."
+    },
+    {
+        "id": 72,
+        "question": "In a survey conducted in a locality, It was found that 50% read newspaper A, 40%\nread newspaper B, and 20 % read neither A nor B. If the number of persons who\nread both A and B is 500, then how many persons were surveyed?\nएि इरािे भें किए गए ऴऱेक्षर् भें, मव ऩामा गमा कि 50% रॉग ऴभाचाय ऩत्र A ऩढ़त े वैं, 40% रॉग\nऴभाचाय ऩत्र B ऩढ़त े वैं, ऒय 20% न तॉ ऴभाचाय ऩत्र A ऩढ़त े वैं ऒय न वी ऴभाचाय ऩत्र B ऩढ़त े वैं। मदद\nA ऒय B दॉनों ऴभाचाय ऩत्र ऩढ़ने ऱारे व्यक्तिमों िी ऴंख्या 500 वै, तॉ कितने रॉगों िा ऴऱेक्षर् किमा\nगमा था?\nRRB JE 24/05/2019 (Evening)",
+        "options": [
+            "7000",
+            "3000",
+            "5000",
+            "4500"
+        ],
+        "answer": "5000",
+        "explanation": "Based on the Answer Key, the correct option is [C]."
+    },
+    {
+        "id": 73,
+        "question": "In a given population, 20% of the population is affected with asthma out of which\n90% of asthma patients used to work in flour mills. If 30% of the total population\nwas working in flour mills, then what will be the percentage of the people\nworking in flour mills who are suffering from asthma?\nकिऴी दी गई आफादी भें, 20% आफादी अस्थभा ऴे प्रबाकऱत वै, मजऴभें ऴे 90% अस्थभा िे यॉगी आटा\nमभरों भ ें िाभ ियत े थे। मदद िु र जनऴंख्या िा 30% आटा मभरों भें िाभ िय यवा था, तॉ आटा मभरों\nभें िाभ ियने ऱारे रॉगों िा प्रततलत क्या वॉगा जॉ अस्थभा ऴे ऩीहडत वैं?\nRRB NTPC 02/02/2021 (Evening)",
+        "options": [
+            "60%",
+            "30%",
+            "40%",
+            "50%"
+        ],
+        "answer": "60%",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 74,
+        "question": "The number of boys and girls who appeared in an exam were in the ratio of 9:7.\nThe number of boys & girls passing exam were in the ratio 3:2. If 60% of girls\npassed in exam, find the percentage of boys passed in exam.\nएि ऩयीक्षा भें फैठन े ऱारे रडिों ऒय रडकिमों िी ऴंख्या 9: 7 िे अनुऩात भें थी। ऩयीक्षा ऩाऴ ियने\nऱारे रडिों ऒय रडकिमों िी ऴंख्या 3: 2 िे अनुऩात भें थी। 60% रडकिमां ऩयीक्षा भें उत्तीर् ण रृईं,\nऩयीक्षा भ ें उत्तीर् ण रडिों िा प्रततलत ज्ञात िय?ें",
+        "options": [
+            "64%",
+            "72%",
+            "70%",
+            "80%\nBY Gagan Pratap"
+        ],
+        "answer": "70%",
+        "explanation": "Based on the Answer Key, the correct option is [C]."
+    }
+]
