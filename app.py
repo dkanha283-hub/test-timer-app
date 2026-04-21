@@ -5,20 +5,53 @@ import time
 import os
 import random
 import json
+import shutil
 
-# --- 1. PAGE CONFIGURATION & THEME-AWARE CSS ---
+# --- 1. PAGE CONFIGURATION & MODERN UI/UX CSS ---
 st.set_page_config(page_title="Pro CBT Hub", layout="wide", initial_sidebar_state="collapsed")
 
 def inject_custom_css():
-    # We now use Streamlit's native CSS variables so it flawlessly adapts to Light/Dark Mode
     st.markdown("""
         <style>
-        .question-box { background-color: var(--secondary-background-color); color: var(--text-color); padding: 25px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); margin-bottom: 20px; font-size: 18px; white-space: pre-wrap; line-height: 1.6; border: 1px solid var(--faded-text-color);}
-        .top-bar { background-color: var(--primary-color); color: white; padding: 15px; border-radius: 5px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;}
+        /* Modern App Background */
+        .stApp { font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        
+        /* Gorgeous Gradient Top Bar */
+        .top-bar { 
+            background: linear-gradient(135deg, var(--primary-color), #4338ca); 
+            color: white; 
+            padding: 20px; 
+            border-radius: 12px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        /* Modern Question Box */
+        .question-box { 
+            background-color: var(--secondary-background-color); 
+            color: var(--text-color); 
+            padding: 30px; 
+            border-radius: 16px; 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05); 
+            margin-bottom: 20px; 
+            font-size: 18px; 
+            white-space: pre-wrap; 
+            line-height: 1.7; 
+            border: 1px solid var(--faded-text-color);
+        }
+        
+        /* Improved Tabs for Folders */
+        button[data-baseweb="tab"] { font-size: 16px; font-weight: 600; }
+        
+        /* Hide default Streamlit elements to look more like an app */
+        header {visibility: hidden;}
         </style>
     """, unsafe_allow_html=True)
 
-# --- 2. GITHUB CLOUD SYNC ENGINE (NOW SUPPORTS DELETE & MOVE) ---
+# --- 2. GITHUB CLOUD SYNC ENGINE ---
 def get_github_repo():
     if "GITHUB_TOKEN" not in st.secrets or "GITHUB_REPO" not in st.secrets: return None
     from github import Github
@@ -26,19 +59,14 @@ def get_github_repo():
 
 def github_save(file_path, json_data):
     repo = get_github_repo()
-    if not repo: 
-        st.toast("⚠️ Saved locally, but GitHub secrets missing.")
-        return False
-    # Normalize path for GitHub API
+    if not repo: return False
     git_path = file_path.replace("\\", "/")
     json_str = json.dumps(json_data, indent=4, ensure_ascii=False)
     try:
         contents = repo.get_contents(git_path)
         repo.update_file(contents.path, f"Update {git_path}", json_str, contents.sha)
-        st.toast("☁️ Synced to GitHub!")
     except:
         repo.create_file(git_path, f"Create {git_path}", json_str)
-        st.toast("☁️ Created in GitHub!")
     return True
 
 def github_delete(file_path):
@@ -48,35 +76,26 @@ def github_delete(file_path):
     try:
         contents = repo.get_contents(git_path)
         repo.delete_file(contents.path, f"Delete {git_path}", contents.sha)
-        st.toast("🗑️ Deleted from GitHub!")
         return True
-    except Exception as e:
+    except:
         return False
 
-# --- 3. DYNAMIC LIBRARY SCANNER (FOLDERS & FILES) ---
+# --- 3. DYNAMIC LIBRARY SCANNER ---
 def get_library():
-    """Scans the repository and builds a dictionary of folders and their JSON files."""
     library = {}
     ignore_dirs = {'.git', '.streamlit', 'venv', '__pycache__'}
-    
     for root, dirs, files in os.walk('.'):
-        # Skip hidden/system directories
         dirs[:] = [d for d in dirs if d not in ignore_dirs and not d.startswith('.')]
-        
         folder = os.path.basename(root)
         if root == '.': folder = "Uncategorized"
-        
         for f in files:
             if f.endswith('.json'):
                 if folder not in library: library[folder] = {}
                 topic_name = f.replace('.json', '').replace('_', ' ')
                 library[folder][topic_name] = os.path.join(root, f)
                 
-    # Sort folders alphabetically, but put 'Uncategorized' last
     sorted_library = {k: library[k] for k in sorted(library.keys()) if k != "Uncategorized"}
-    if "Uncategorized" in library:
-        sorted_library["Uncategorized"] = library["Uncategorized"]
-        
+    if "Uncategorized" in library: sorted_library["Uncategorized"] = library["Uncategorized"]
     return sorted_library
 
 # --- 4. CLOUD SESSION STORE ---
@@ -110,11 +129,15 @@ def initialize_state():
     if 'max_questions' not in st.session_state: st.session_state.max_questions = 10
     if 'app_lang' not in st.session_state: st.session_state.app_lang = "Bilingual"
     if 'resume_pin' not in st.session_state: st.session_state.resume_pin = str(random.randint(1000, 9999))
+    # NEW: Clipboard feature for Copy & Paste
+    if 'clipboard' not in st.session_state: st.session_state.clipboard = None 
 
 # --- 6. PDF TO JSON ENGINE ---
 def parse_pdf_to_raw_data(pdf_source):
     extracted_text = ""
     try:
+        if isinstance(pdf_source, str):
+            if not os.path.exists(pdf_source): return []
         with pdfplumber.open(pdf_source) as pdf:
             for page in pdf.pages:
                 text = page.extract_text(x_tolerance=2, y_tolerance=3)
@@ -179,8 +202,38 @@ def parse_pdf_to_raw_data(pdf_source):
                 })
         return quiz_data
     except Exception as e:
-        st.error(f"Parsing error: {e}")
         return []
+
+def load_and_auto_save_quiz_data(filename):
+    if filename.endswith('.json'):
+        json_filename = filename
+        pdf_filename = filename.replace('.json', '.pdf')
+    else:
+        json_filename = filename.replace('.pdf', '.json')
+        pdf_filename = filename
+    
+    if os.path.exists(json_filename):
+        with open(json_filename, 'r', encoding='utf-8') as f: data = json.load(f)
+        return data, True
+        
+    data = parse_pdf_to_raw_data(pdf_filename)
+    if data:
+        with open(json_filename, 'w', encoding='utf-8') as f: json.dump(data, f, indent=4, ensure_ascii=False)
+        github_save(json_filename, data)
+    return data, False
+
+def update_question_in_database(file_name, updated_q):
+    json_filename = file_name.replace('.pdf', '.json')
+    try:
+        with open(json_filename, 'r', encoding='utf-8') as f: all_data = json.load(f)
+        for i, q in enumerate(all_data):
+            if q['id'] == updated_q['id']:
+                all_data[i] = updated_q
+                break
+        with open(json_filename, 'w', encoding='utf-8') as f: json.dump(all_data, f, indent=4, ensure_ascii=False)
+        github_save(json_filename, all_data)
+        return True
+    except: return False
 
 # --- 7. SURGICAL LANGUAGE FILTER ---
 def filter_text(text, lang, is_option=False):
@@ -280,107 +333,43 @@ def setup_dialog(file_path):
         st.session_state.page = "quiz"
         st.rerun()
 
-# --- 10. RENDER VIEWS (WITH FULL CMS ADMIN) ---
+# --- 10. RENDER VIEWS (WITH FULL CMS ADMIN & CLIPBOARD) ---
 def render_home():
-    st.markdown('<div class="top-bar"><h2>📚 CBT Topic Hub</h2></div>', unsafe_allow_html=True)
+    st.markdown('<div class="top-bar"><h2 style="margin:0;">📚 Pro CBT Hub</h2></div>', unsafe_allow_html=True)
     library = get_library()
     
-    # --- FULL CMS ADMIN PANEL ---
-    with st.expander("🛠️ Admin Dashboard (Upload, Move, Rename, Delete)", expanded=False):
-        admin_tab1, admin_tab2 = st.tabs(["📤 Upload PDF", "📁 Manage Library"])
-        
-        with admin_tab1:
-            st.write("Upload a PDF. It will be converted to a database and saved in the selected folder.")
-            c1, c2 = st.columns(2)
-            with c1:
-                folder_options = list(library.keys()) if library else []
-                if "Uncategorized" in folder_options: folder_options.remove("Uncategorized")
-                folder_options.append("+ Create New Folder")
-                selected_folder = st.selectbox("Select Target Folder", folder_options)
-                
-                if selected_folder == "+ Create New Folder":
-                    selected_folder = st.text_input("Enter New Folder Name").strip()
-            with c2:
-                new_topic_name = st.text_input("Enter Topic Name (e.g., Geometry Part 2)").strip()
-                
-            new_pdf = st.file_uploader("Upload PDF Sheet", type="pdf")
+    # --- ADMIN UPLOAD PANEL ---
+    with st.expander("📤 Upload New PDF to Hub", expanded=False):
+        c1, c2 = st.columns(2)
+        with c1:
+            folder_options = list(library.keys()) if library else []
+            if "Uncategorized" in folder_options: folder_options.remove("Uncategorized")
+            folder_options.append("+ Create New Folder")
+            selected_folder = st.selectbox("Select Target Folder", folder_options)
+            if selected_folder == "+ Create New Folder":
+                selected_folder = st.text_input("Enter New Folder Name").strip()
+        with c2:
+            new_topic_name = st.text_input("Enter Topic Name (e.g., Geometry Part 2)").strip()
             
-            if st.button("Convert & Save to Folder", type="primary"):
-                if new_pdf and new_topic_name and selected_folder:
-                    with st.spinner("Generating database..."):
-                        raw_data = parse_pdf_to_raw_data(new_pdf)
-                        if raw_data:
-                            # Create local folder if needed
-                            os.makedirs(selected_folder, exist_ok=True)
-                            filename = new_topic_name.replace(" ", "_") + ".json"
-                            file_path = os.path.join(selected_folder, filename)
-                            
-                            with open(file_path, 'w', encoding='utf-8') as f:
-                                json.dump(raw_data, f, indent=4, ensure_ascii=False)
-                            github_save(file_path, raw_data)
-                            st.success(f"✅ Saved to {selected_folder}/{filename}!")
-                            time.sleep(1)
-                            st.rerun()
-                        else:
-                            st.error("Failed to parse PDF.")
-                else:
-                    st.warning("Please complete all fields and upload a PDF.")
-
-        with admin_tab2:
-            if not library:
-                st.info("Your library is empty.")
-            else:
-                c1, c2, c3 = st.columns(3)
-                with c1:
-                    edit_folder = st.selectbox("1. Select Folder", list(library.keys()), key="edit_f")
-                with c2:
-                    topics_in_folder = list(library[edit_folder].keys()) if edit_folder in library else []
-                    edit_topic = st.selectbox("2. Select Topic", topics_in_folder, key="edit_t")
-                
-                if edit_topic:
-                    old_path = library[edit_folder][edit_topic]
-                    st.write(f"**Managing:** `{old_path}`")
-                    
-                    with st.container(border=True):
-                        st.write("##### Rename or Move Topic")
-                        new_f_options = list(library.keys())
-                        if "Uncategorized" in new_f_options: new_f_options.remove("Uncategorized")
-                        new_f_options.append("+ Create New Folder")
-                        
-                        nc1, nc2 = st.columns(2)
-                        with nc1:
-                            new_folder = st.selectbox("Move to Folder:", new_f_options, index=new_f_options.index(edit_folder) if edit_folder in new_f_options else 0)
-                            if new_folder == "+ Create New Folder":
-                                new_folder = st.text_input("New Folder Name", key="new_fn").strip()
-                        with nc2:
-                            new_name = st.text_input("Rename Topic To:", value=edit_topic).strip()
-                            
-                        if st.button("Apply Changes", type="primary"):
-                            if new_folder and new_name:
-                                # Ensure we handle 'Uncategorized' as root locally
-                                save_dir = "." if new_folder == "Uncategorized" else new_folder
-                                os.makedirs(save_dir, exist_ok=True)
-                                new_path = os.path.join(save_dir, new_name.replace(" ", "_") + ".json")
-                                
-                                if old_path != new_path:
-                                    with open(old_path, 'r', encoding='utf-8') as f: data = json.load(f)
-                                    with open(new_path, 'w', encoding='utf-8') as f: json.dump(data, f, indent=4, ensure_ascii=False)
-                                    os.remove(old_path)
-                                    
-                                    github_save(new_path, data)
-                                    github_delete(old_path)
-                                    st.success("✅ Moved/Renamed successfully!")
-                                    time.sleep(1)
-                                    st.rerun()
-
-                    if st.button("🚨 Delete Topic", type="primary"):
-                        os.remove(old_path)
-                        github_delete(old_path)
-                        st.success("✅ Topic Deleted!")
+        new_pdf = st.file_uploader("Upload PDF Sheet", type="pdf")
+        if st.button("Convert & Save", type="primary"):
+            if new_pdf and new_topic_name and selected_folder:
+                with st.spinner("Generating database..."):
+                    raw_data = parse_pdf_to_raw_data(new_pdf)
+                    if raw_data:
+                        os.makedirs(selected_folder, exist_ok=True)
+                        filename = new_topic_name.replace(" ", "_") + ".json"
+                        file_path = os.path.join(selected_folder, filename)
+                        with open(file_path, 'w', encoding='utf-8') as f: json.dump(raw_data, f, indent=4, ensure_ascii=False)
+                        github_save(file_path, raw_data)
+                        st.success(f"✅ Success! PDF deleted from memory.")
                         time.sleep(1)
                         st.rerun()
+                    else: st.error("Failed to parse PDF.")
+            else: st.warning("Please complete all fields.")
 
-    with st.expander("🔄 Resume Quiz Here", expanded=False):
+    # --- RESUME PIN ---
+    with st.expander("🔄 Resume Active Quiz", expanded=False):
         col1, col2 = st.columns([1, 2])
         with col1:
             entered_pin = st.text_input("Enter 4-Digit PIN", max_chars=4)
@@ -397,25 +386,81 @@ def render_home():
                     st.session_state.resume_pin = entered_pin
                     st.session_state.page = "quiz"
                     st.rerun()
-                else:
-                    st.error("PIN not found or expired.")
+                else: st.error("PIN not found or expired.")
 
     st.write("---")
     
-    # --- LIBRARY DISPLAY (TABS FOR FOLDERS) ---
+    # --- DYNAMIC FOLDERS & FILE MANAGER (Three Dots UX) ---
     if not library:
-        st.info("Welcome to your Hub! Open the Admin Dashboard above to upload your first PDF.")
+        st.info("Welcome to your Hub! Upload your first PDF above.")
     else:
-        # Create Streamlit tabs for each folder
         tabs = st.tabs(list(library.keys()))
         for idx, folder_name in enumerate(library.keys()):
             with tabs[idx]:
-                st.write(f"**{folder_name} Topics**")
-                cols = st.columns(3) # 3 columns for better grid
-                for c_idx, (topic_name, file_path) in enumerate(library[folder_name].items()):
-                    with cols[c_idx % 3]:
-                        if st.button(topic_name, key=f"btn_{file_path}", use_container_width=True, icon="⚡"):
+                st.write(f"### 📂 {folder_name}")
+                
+                # --- PASTE FUNCTIONALITY ---
+                if st.session_state.clipboard:
+                    cb_path = st.session_state.clipboard
+                    cb_name = os.path.basename(cb_path).replace('.json', '').replace('_', ' ')
+                    st.info(f"📋 **Clipboard contains:** {cb_name}")
+                    if st.button(f"📥 Paste '{cb_name}' into {folder_name}", key=f"paste_{folder_name}"):
+                        save_dir = "." if folder_name == "Uncategorized" else folder_name
+                        new_path = os.path.join(save_dir, os.path.basename(cb_path))
+                        if cb_path != new_path:
+                            # Read old, save new
+                            with open(cb_path, 'r', encoding='utf-8') as f: data = json.load(f)
+                            with open(new_path, 'w', encoding='utf-8') as f: json.dump(data, f, indent=4, ensure_ascii=False)
+                            github_save(new_path, data)
+                            st.session_state.clipboard = None # Clear clipboard
+                            st.toast(f"✅ Pasted into {folder_name}!")
+                            time.sleep(1)
+                            st.rerun()
+                
+                st.markdown("<br>", unsafe_allow_html=True)
+                
+                # --- GRID LAYOUT FOR FILES ---
+                for topic_name, file_path in library[folder_name].items():
+                    # Align the Start button and the Options Popover perfectly
+                    col1, col2 = st.columns([10, 1], vertical_alignment="center")
+                    with col1:
+                        if st.button(f"⚡ {topic_name}", key=f"start_{file_path}", use_container_width=True):
                             setup_dialog(file_path)
+                    
+                    with col2:
+                        # POP-OVER: The Modern Mobile Standard for Right-Click/Long-Press
+                        with st.popover("⋮"):
+                            st.markdown(f"**Options for {topic_name}**")
+                            
+                            # COPY
+                            if st.button("📋 Copy", key=f"copy_{file_path}", use_container_width=True):
+                                st.session_state.clipboard = file_path
+                                st.toast("Copied to clipboard!")
+                                st.rerun()
+                                
+                            # RENAME
+                            rn_val = st.text_input("Rename:", value=topic_name, key=f"rn_in_{file_path}")
+                            if st.button("💾 Apply Rename", key=f"rn_btn_{file_path}", use_container_width=True):
+                                save_dir = "." if folder_name == "Uncategorized" else folder_name
+                                new_path = os.path.join(save_dir, rn_val.replace(" ", "_") + ".json")
+                                if file_path != new_path:
+                                    with open(file_path, 'r', encoding='utf-8') as f: data = json.load(f)
+                                    with open(new_path, 'w', encoding='utf-8') as f: json.dump(data, f, indent=4, ensure_ascii=False)
+                                    os.remove(file_path)
+                                    github_save(new_path, data)
+                                    github_delete(file_path)
+                                    st.toast("✅ Renamed successfully!")
+                                    time.sleep(1)
+                                    st.rerun()
+                                    
+                            # DELETE
+                            if st.button("🗑️ Delete", type="primary", key=f"del_{file_path}", use_container_width=True):
+                                os.remove(file_path)
+                                github_delete(file_path)
+                                st.toast("✅ File Deleted!")
+                                time.sleep(1)
+                                st.rerun()
+                st.markdown("<hr style='border: 1px dashed var(--faded-text-color);'>", unsafe_allow_html=True)
 
 def render_quiz():
     save_state_to_cloud()
@@ -492,7 +537,6 @@ def render_quiz():
                 "answer": new_ans, "explanation": new_exp
             }
             st.session_state.quiz_data[q_index] = updated_q
-            # Update local and sync
             with open(st.session_state.selected_topic_file, 'r', encoding='utf-8') as f: all_data = json.load(f)
             for i, q in enumerate(all_data):
                 if q['id'] == updated_q['id']:
