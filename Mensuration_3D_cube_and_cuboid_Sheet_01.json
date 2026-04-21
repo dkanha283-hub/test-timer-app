@@ -1,0 +1,1238 @@
+[
+    {
+        "id": 1,
+        "question": "Two cubes have their volumes in the ratio 27:64. Find the ratio of their Surface areas?\nदॉ घनों के आमतन का अनुऩात 27:64 वै। उनके ऩृष्ठीम क्षेत्रपरों का अनऩु ात ज्ञात कीजजमे?\nDSSSB HEAD CLERK 2022",
+        "options": [
+            "16:7",
+            "9:16",
+            "16:9",
+            "9:15"
+        ],
+        "answer": "16:7",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 2,
+        "question": "Find the lateral surface area of the cube, whose side is 68 cm. (in cm2)\nउऴ घन का ऩार्श्व ऩृष्ठीम क्षेत्रपर ज्ञात कीजजए जजऴकी बुजा 68 ऴेभी वै। (ऴेभी² भें)\nUP A.S.I. 05/12/2021 (Shift-1)",
+        "options": [
+            "18493",
+            "18495",
+            "18496",
+            "18490"
+        ],
+        "answer": "18493",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 3,
+        "question": "Find the area of four walls of cube, the length of whose edge is (3x + 8y + 5) m.\nउऴ घन की चाय दीऱायों का क्षेत्रपर ज्ञात कीजजए, जजऴकी कॉय की रंफाई (3x + 8y + 5) m वै।\n)EER 5R0B LE EL RR GRARG 2025 BRR-1(",
+        "options": [
+            "(36x2 + 124y2 + 100 + 82xy + 160y + 80x) m2",
+            "(36x2 + 256y2 + 100 + 192xy + 160y + 120x) m2",
+            "(36x2 + 256y2 + 100 + 192xy + 320y + 120x) m2",
+            "(36x2 + 184y2 + 100 + 192xy + 160y + 80x) m2"
+        ],
+        "answer": "(36x2 + 124y2 + 100 + 82xy + 160y + 80x) m2",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 4,
+        "question": "If the total surface area of a cube is 3456 cm2, then its lateral surface area is:\nमदद एक घन का कु र ऩृष्ठीम क्षेत्रपर 3456 cm2 वै, तॉ इऴका ऩार्श्व ऩष्ठृ ीम क्षेत्रपर ककतना वै?",
+        "options": [
+            "1152 cm²",
+            "2525 cm²",
+            "2304 cm²",
+            "2012 cm²"
+        ],
+        "answer": "1152 cm²",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 5,
+        "question": "The total surface area (in m2) of a cube, each of whose edges measures 285 m, is:\nएक घन, जजऴके प्रत्यके ककनाय े की भाऩ 285 m वै, का कु र ऩृष्ठीम क्षेत्रपर )m2 भें(, _____ वॉगा।\n)EER JR 2025(",
+        "options": [
+            "487350",
+            "487344",
+            "487308",
+            "487362"
+        ],
+        "answer": "487350",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 6,
+        "question": "The volume (in m3) of a cube with edges of 41 m, is:\n41 m कॉय ऱारे घन का आमतन )m3 भें( ज्ञात कीजजए।\n)EER LEOL0-E 2025(",
+        "options": [
+            "69087",
+            "68753",
+            "68987",
+            "68921"
+        ],
+        "answer": "69087",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 7,
+        "question": "If the sum of all the edges of a cube is 48 cm, then the volume (in cm3) of that cube is:\nमदद एक घन की ऴबी कॉयों का मॉग 48 ऴेभी. वै, तॉ उऴ घन का आमतन (cm3 भें) ज्ञात कीजजए।",
+        "options": [
+            "216",
+            "64",
+            "27",
+            "125"
+        ],
+        "answer": "216",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 8,
+        "question": "If the surface area of a cube is 5046 cm2, then the volume of the cube is?\nमदद ककऴी घन का ऩृष्ठीम क्षेत्रपर 5046 cm2 वै, तॉ घन का आमतन वै?",
+        "options": [
+            "26189𝒄𝒎𝟑",
+            "25145𝒄𝒎𝟑",
+            "22812𝒄𝒎𝟑",
+            "24389𝒄𝒎𝟑\nBY Gagan Pratap"
+        ],
+        "answer": "26189𝒄𝒎𝟑",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 9,
+        "question": "The surface area of a cube is 1728 square cm. Find its volume?\nएक घन का ऩृष्ठीम क्षेत्रपर 1728 ऱगव ऴेभी वै। इऴका आमतन ज्ञात कीजजमे?\n(SSC CHSL MAINS 2024)",
+        "options": [
+            "3456√𝟐𝒄𝒎𝟑",
+            "4356√𝟐𝒄𝒎𝟑",
+            "5436√𝟐𝒄𝒎𝟑",
+            "6453√𝟐𝒄𝒎𝟑"
+        ],
+        "answer": "3456√𝟐𝒄𝒎𝟑",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 10,
+        "question": "The volume of a cube is 658503 cubic cm. What is twice the length of its side (in cm)?\nएक घन का आमतन 658503 घन ऴेभी वै। इऴकी बुजा की रंफाई )ऴेभी भें( का दॉगुना क्या वै?",
+        "options": [
+            "174",
+            "176",
+            "164",
+            "166"
+        ],
+        "answer": "174",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 11,
+        "question": "If the volume of a cube is 13,824 m3, then find the lateral surface area of the cube in m2.\nमदद ककऴी घन का आमतन 13,824 m3 वै, तॉ घन का ऩार्श्व ऩृष्ठीम क्षेत्रपर m2 भें ज्ञात कीजजए।",
+        "options": [
+            "2302",
+            "2313",
+            "3456",
+            "2304"
+        ],
+        "answer": "2302",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 12,
+        "question": "If the numerical value of total surface area is equal to the volume of the cube,\nthen find the diagonal of cube?\nमदद ककऴी घन का ऴम्पूणव ऩृष्ठ क्षेत्रपर ऒय आमतन का ऴंख्यात्मक भान फयाफय वै तॉ घन के\nकऱकणव की रंफाई क्या वॉगी?",
+        "options": [
+            "𝟔√𝟑 cm",
+            "𝟏𝟐√𝟑 cm",
+            "𝟗√𝟑 cm",
+            "𝟖√𝟑 cm"
+        ],
+        "answer": "𝟔√𝟑 cm",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 13,
+        "question": "The length of the longest stick that can be fitted in a cubical vessel having an\nedge of length 20 cm, is _____.\n20 ऴेभी. कॉय ऱारे एक घनाकाय ऩात्र भ ें कपट की जा ऴकन े ऱारी ऴफऴ े रंफी डंडी की रंफाई क्या वॉगी?",
+        "options": [
+            "20 cm",
+            "𝟐𝟎 √𝟐 cm",
+            "𝟏𝟎 √𝟑 cm",
+            "𝟐𝟎 √𝟑 cm"
+        ],
+        "answer": "20 cm",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 14,
+        "question": "What is the side of a cube (in metres) in which an iron rod of maximum length 10\nmetres can be put?\nएक घन की ऱव बुजा क्या वै जजऴभें अैधकतभ )भीटय भें(10 भीटय रंफाई की रॉवे की छड़ यखी जा ऴकती वै?\n(SSC SELECTION POST XI 2023)",
+        "options": [
+            "5.77",
+            "7.57",
+            "5.57",
+            "7.75"
+        ],
+        "answer": "5.77",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 15,
+        "question": "Find the length of diagonal (in cm) of a cube if the volume of the cube is 1331 cm³.\nमदद घन का आमतन 1331 cm3 वै, तॉ उऴके कऱकणव की रंफाई (ऴेभी. भें) क्या वॉगी?",
+        "options": [
+            "331√𝟑",
+            "2𝟏√𝟑",
+            "11√𝟑",
+            "𝟏𝟏𝟏√𝟑"
+        ],
+        "answer": "331√𝟑",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 16,
+        "question": "If the diagonal of a cube is of length ‘l’, then the total surface area of the cube is?\nमदद घन का कऱकणव की रम्बाई ‘l’, तॉ घन का ऴम्पूणव ऩृष्ठ क्षेत्रपर क्या वै?\n(NTPC RRB LEVEL 12th 2025)",
+        "options": [
+            "𝟑 𝒍𝟐",
+            "√𝟑 𝒍𝟐",
+            "√𝟐 𝒍𝟐",
+            "𝟐𝒍𝟐\nBY Gagan Pratap"
+        ],
+        "answer": "𝟑 𝒍𝟐",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 17,
+        "question": "The diagonal of a cubical block of wood is 192 cm. Find its volume.\nरकड़ी के एक घनीम ब्लॉक का कऱकण व 192 cm वै। इऴका आमतन ज्ञात कीजजए।\nSSC Selection Post (Phase-XII)",
+        "options": [
+            "776432√𝟑 cm3",
+            "766432√𝟑 cm3",
+            "786432√𝟑 cm3",
+            "796432√𝟑 cm3"
+        ],
+        "answer": "776432√𝟑 cm3",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 18,
+        "question": "Three solid iron cubes of edges 8 cm, 10 cm and 12 cm are melted together to make a\nnew cube. It is observed that 496 cm3 of the melted material is lost due to improper\nhandling. The area (in cm2) of the whole surface of the newly formed cube is:\n8 cm, 10 cm ऒय 12 cm ककनायों ऱारे रॉवे के तीन ठॉऴ घनों कॉ एक ऴाथ कऩघराकय एक नमा\nघन फनामा जाता वै। मव देखा गमा वै कक अनुैचत ऴंचारन के कायण कऩघरी रृई ऴाभग्री का 496\ncm3 नष्ट वॉ जाता वै। नए फन े घन के ऴंऩूण व ऩृष्ठ का क्षेत्रपर ककतना (cm2 भें) वै?\nSSC Selection Post (Phase-XII)",
+        "options": [
+            "3375",
+            "1176",
+            "2197",
+            "1331"
+        ],
+        "answer": "3375",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 19,
+        "question": "Three solid metallic cubes of sides 2 cm, 12 cm and 16 cm are melted to form a\nnew cube. Find the surface area of the cube so formed.\n2 cm, 12 cm ऒय 16 cm बुजाऑ ंऱारे धातु के तीन ठॉऴ घनों कॉ कऩघराकय एक नमा घन फनामा\nजाता वै। इऴ प्रकाय फने घन का ऩृष्ठीम क्षेत्रपर ज्ञात कीजजए।\n(DELHI POLICE CONSTABLE Executive 2025) (RRB GROUP -D 2025)",
+        "options": [
+            "1744 cm2",
+            "1644 cm2",
+            "1944 cm2",
+            "944 cm2"
+        ],
+        "answer": "1744 cm2",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 20,
+        "question": "A metallic cube has each of its side of length 12 cm. It is melted and recast into\nthree small cubes. Out of these cubes, two have their sides as 6 cm and 8 cm,\nrespectively. The length of each side of the third cube is:\nधातु के एक घन की प्रत्येक बुजा की रंफाई 12 cm वै। इऴे कऩघराकय तीन छॉटे घन फनाए जाते वैं। इन\nधनों भें ऴे दॉ की बुजाएं क्रभलः 6 cm ऒय 8 cm वैं। तीऴय े घन की प्रत्यके बुजा की रंफाई क्या वॉगी?\nSSC CGL 2023 PRE",
+        "options": [
+            "8.5cm",
+            "9 cm",
+            "10 cm",
+            "5 cm"
+        ],
+        "answer": "8.5cm",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 21,
+        "question": "Three cubes with sides in the ratio of 3:4:5 are melted to form a single cube\nwhose diagonal is 𝟏𝟖√𝟑 cm. The sides of the three cubes are:\n3:4:5 के अनुऩात भें बुजाऑ ं ऱारे तीन घनों कॉ कऩघराकय एक ऐऴा घन फनामा जाता वै जजऴका\nकऱकणव 18√3 cm वै। तीन घनों की बुजाएं_______ वैं।\nSSC CGL 2023 PRE",
+        "options": [
+            "21 cm, 28 cm and 35 cm",
+            "9 cm, 12 cm and 15 cm",
+            "18 cm, 24 cm and 30 cm",
+            "12 cm, 16 cm and 20 cm\nBY Gagan Pratap"
+        ],
+        "answer": "21 cm, 28 cm and 35 cm",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 22,
+        "question": "A solid cube, whose each edge is of length 48 cm, is melted. Identical solid cubes,\neach of volume 64 cm3, are made out of this molten cube, without any wastage.\nHow many such small cubes are obtained?\nएक ठॉऴ घन, जजऴके प्रत्येक कॉय की रंफाई 48 cm वै, कॉ कऩघरामा जाता वै। इऴ कऩघरे रृए घन ऴे\nकफना ककऴी अऩव्यम के एक ऴभान ठॉऴ घन, जजनभें ऴे प्रत्येक का आमतन 64 cm3 वै, फनाए जाते वैं।\nऐऴे ककतने छॉटे घन प्राप्त वोंगे वोंग?े\n)3 05 2023 BLG B(",
+        "options": [
+            "1738",
+            "1728",
+            "1718",
+            "1748"
+        ],
+        "answer": "1738",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 23,
+        "question": "A cube is having surface area of 5400 square units. Its volume would increase\napproximately _____ if the side is increased by 5 units.\nएक घन का ऩृष्ठीम क्षेत्रपर 5400 ऱग व इकाई वै। मदद इऴकी बुजा कॉ 5 इकाई फढा ददमा जाए तॉ\nइऴका आमतन रगबग _____फढ जाएगा।\nSSC Selection Post (Phase-XII)",
+        "options": [
+            "45%",
+            "59%",
+            "55%",
+            "50%"
+        ],
+        "answer": "45%",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 24,
+        "question": "uboca rlaerbu rbaa eaadl nt aa rln eent 64 lcbuuao, edaenerbu rlaerbu earal.\n?ddbn el nda ceeeclc elcaao tb lnobecdn rlnl oaileoad\nएक फड़े घनाकाय के क कॉ एक जैऴ े ,छॉटे 64 घनाकाय टुकड़ों भें काटना वै। ऴीधे कटों की न्यनू तभ\nऴंख्या ककतनी वॉनी चाहवए?\n) B BLG 2025 0ER( (UPSC CSAT 2024)",
+        "options": [
+            "8",
+            "9",
+            "16",
+            "63"
+        ],
+        "answer": "8",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 25,
+        "question": "A solid cube is cut into 125 identical cubes. What is the percentage increase in\nthe total surface area?\nएक ठॉऴ घन कॉ 125 ऴभरूऩ घनों भें काटा जाता वै। कु र ऩृष्ठीम क्षेत्रपर भें ककतने प्रैतलत की ऱृद्धि रृई वै ?",
+        "options": [
+            "400",
+            "500",
+            "300",
+            "250"
+        ],
+        "answer": "400",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 26,
+        "question": "A solid cube of volume 13824 cm3 is cut into 8 cubes of equal volumes. The ratio\nof the surface area of the original cube to the sum of the surface areas of three of\nthe smaller cubes is :\n13824 ऴेभी3 आमतन का एक ठॉऴ घन फयाफय आमतनों के 8 छॉटे घनॉ भें काटा जाता वै। भूर घन के\nऴतव क्षेत्र का तीन छॉटे घनॉ के ऴतव क्षेत्रों के मॉग ऴे क्या अनुऩात वै?\n(SSC CGL MAINS 2020)",
+        "options": [
+            "2 : 3",
+            "4 : 3",
+            "8 : 3",
+            "2 : 1"
+        ],
+        "answer": "2 : 3",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 27,
+        "question": "A string when wound on the exterior four walls of a cube of side a cm starting at\npoint C. and ending at point d. Find the length of string in cm.\nBY Gagan Pratap\nएक घन के फावयी चाय दीऱायों ऩय एक धागा रऩेटा जाता वै। जवााँ घन की बजु ा a ऴेभी वै। मदद धागा के\nप्रायजं बक जऴया कफिंद ु C ऩय ऒय अंैतभ जऴया D ऩय वै तफ धागे की रंफाई क्या वॉगी?",
+        "options": [
+            "√19a",
+            "√26 a",
+            "√17 a",
+            "√13 a"
+        ],
+        "answer": "√19a",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 28,
+        "question": "A cube of side 5 cm is made using 125 cubes, each of side 1 cm. One cube is\nremoved from the middle of each of the faces of the cube. What will be the\nsurface area (in cm2) of the remaining solid?\n5 cm बुजा ऱारे एक घन कॉ 125 घनों का प्रमॉग कयके फनामा गमा वै, जजनभें ऴे प्रत्येक की बजु ा।\ncm वै। घन के प्रत्येक परकों के फीच ऴे एक घन वटा ददमा जाता वै। लेळ ठॉऴ का ऩृष्ठीम क्षेत्रपर\n(cm2 भें)क्या वॉगा ?\n(SSC CHSL MAINS 2023)",
+        "options": [
+            "150",
+            "174",
+            "155",
+            "144"
+        ],
+        "answer": "150",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 29,
+        "question": "The total surface area of a one-side open cubical box of outer side of length 5 cm\nand thickness 0.5 cm is.\n5 ऴेभी फावयी बुजा ऒय 0.5 ऴेंटीभीटय भॉटाई के एक तयप खुरे घनाकाय फॉक्स का कु र ऴतव\nक्षेत्रपर वै ?",
+        "options": [
+            "213𝒄𝒎𝟐",
+            "214𝒄𝒎𝟐",
+            "225𝒄𝒎𝟐",
+            "222𝒄𝒎𝟐"
+        ],
+        "answer": "213𝒄𝒎𝟐",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 30,
+        "question": "A cubical tank with side 50 cm is full of water. If 61 liters of water is taken out of it,\nthe level of water in the tank will drop by?\n50 ऴेभी बुजा ऱारा एक घनाकाय टैंक ऩानी ऴे बया वै। मदद इऴभें ऴे 61 रीटय ऩानी जनकार ददमा\nजाए, तॉ टैंक भें ऩानी का स्तय ककतना कभ वॉ जाएगा?",
+        "options": [
+            "25.6 cm",
+            "30 cm",
+            "24.4 cm",
+            "30.5 cm"
+        ],
+        "answer": "25.6 cm",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 31,
+        "question": "What is the minimum number of cuts required to divide a cuboid into 12 equal cuboids?\nएक घनाब कॉ 12 फयाफय घनाबों भें कऱबाजजत कयने के जरए न्यूनतभ ककतने कट रगाने वोंग?े\n(SSC CPO 2025)",
+        "options": [
+            "3",
+            "4",
+            "5",
+            "6"
+        ],
+        "answer": "3",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 32,
+        "question": "A pond has dimensions of 𝟐𝟓𝒎 in length, 𝟏𝟖𝒎 in breadth, and 𝟒𝒎 in depth. What is\nthe capacity of the pond?\nBY Gagan Pratap\nएक ताराफ के आमाभ 25 भीटय रंफाई भें वैं, 18 भीटय चॊड़ाई भें, ऒय 4 भीटय गवयाई ऴे. ताराफ की\nक्षभता ककतनी वै?\n(DELHI POLICE CONSTABLE Executive 2025)",
+        "options": [
+            "𝟏𝟎𝟎𝟎 𝐦𝟑",
+            "𝟏𝟔𝟎𝟎 𝐦𝟑",
+            "𝟏𝟖𝟎𝟎 𝐦𝟑",
+            "𝟏𝟓𝟎𝟎 𝐦𝟑"
+        ],
+        "answer": "𝟏𝟎𝟎𝟎 𝐦𝟑",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 33,
+        "question": "Volume of a cuboid is 4800 cm3. If the height of this cuboid is 20 cm, then what\nwill be the area of the base of cuboid?\nएक घनाब का आमतन 4800 cm3 वै। मदद इऴ घनाब की ऊाँ चाई 20 cm वॉ, तॉ घनाब के आधाय का\nक्षेत्रपर ककतना वॉगा ?",
+        "options": [
+            "120 cm2",
+            "150 cm2",
+            "240 cm2",
+            "480 cm2"
+        ],
+        "answer": "120 cm2",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 34,
+        "question": "During a rainy day, 4 cm of rain falls. The volume (in cube m) of water falls on 1.5\nhectares of ground is?\nएक फयऴात के ददन भें 4 ऴेभी ऱळाव वॉती वै। 1.5 वेक्टेमय जभीन ऩय गगयने ऱारे ऩानी की भात्रा )घन भीटय भें( वै?\n[DELHI POLICE CONSTABLE 2025]",
+        "options": [
+            "450",
+            "600",
+            "500",
+            "750"
+        ],
+        "answer": "450",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 35,
+        "question": "If the length of a cuboid is 33 cm, breadth is 4 cm and volume is 7524 cm3, then\nfind the height (in cm) of the cuboid.\nमदद एक घनाब की रंफाई 33 cm, चॊड़ाई 4 cm ऒय आमतन 7524 cm3 वै, तॉ घनाब की ऊं चा )cm भें( ज्ञात\nकीजजए।\n)EER 5R0B LE EL RR GRARG 2025(",
+        "options": [
+            "60",
+            "57",
+            "54",
+            "67"
+        ],
+        "answer": "60",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 36,
+        "question": "The capacity of a cuboid tank of water is 70,000 litres. Find the breadth of the\ntank, if its length and depth are 4 m and 10 m, respectively.\nऩानी के एक घनाबाकाय टैंक की धाहयता 70,000 रीटय वै। मदद टैंक की रंफाई ऒय गवयाई क्रभलः 4\nm ऒय 10 m वै, तॉ इऴकी चॊड़ाई ज्ञात कीजजए।\n(RRB NTPC GRADUATE LEVEL 2025)",
+        "options": [
+            "1.75 m",
+            "1.85 m",
+            "1.95 m",
+            "1.65 m"
+        ],
+        "answer": "1.75 m",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 37,
+        "question": "To pack a set of books, Gautam got cartons of a certain height that were 48\ninches long and 27 inches wide. If the volume of such a carton was 22.5 cubic\nfeet, what was the height of each carton? [Use 1 to foot = 12 inches].\nऩुस्तकों के एक ऴेट कॉ ऩैक कयने के जरए, गॊतभ एक जनजित ऊाँ चाई के काटवन रामा जॉ 48 इंच रंफ े\nऒय 27 इंच चॊड़े थे। मदद ऐऴ े काटवन का आमतन 22.5 घन पीट (क्यूकफक पीट) था, तॉ प्रत्येक काटवन\nकी ऊाँ चाई क्या थी? (1 पु ट = 12 इंच रें)\n(RRB NTPC GRADUATE LEVEL 2025)",
+        "options": [
+            "36 inches",
+            "32.5 inches\nBY Gagan Pratap",
+            "30 inches",
+            "32 inches"
+        ],
+        "answer": "36 inches",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 38,
+        "question": "If the volume of a cuboid is 3x2 – 27, then its possible dimensions are:\nमदद ककऴी घनाब का आमतन 3x2-27 वै,तॉ इऴके ऴंबाकऱत आमाभ क्या वैं?\n(RRB TECHNICIAN GRADE-3 2024)",
+        "options": [
+            "3, x2,– 27x",
+            "3, 3, 3",
+            "3, x – 3, x + 3",
+            "3,x2, 27x"
+        ],
+        "answer": "3, x2,– 27x",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 39,
+        "question": "Consecutive integers. If the volume of the cuboid is 336 cubic units, then what is\nthe total surface area of the cuboid?\nएक घनाब की रंफाई, चॊड़ाई ऒय ऊाँ चाई क्रभागत ऩूणाांक वैं। मदद घनाब का आमतन 336 घन इकाई\nवै, तॉ घनाब का कु र ऩष्ठृ ीम क्षेत्रपर क्या वै?\n(UPSC CDS -II 2025)",
+        "options": [
+            "288 square units",
+            "292 square units",
+            "296 square units",
+            "Cannot be determined due to insufficient"
+        ],
+        "answer": "288 square units",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 40,
+        "question": "Find the cost (in ₹) of digging a cuboidal pit that is 6 m long, 64 m broad and 10 m\ndeep at the rate of ₹15 per m3.\n₹15 प्रैत m3 की दय ऴे 6 m रंफा, 64 m चॊड़ा ऒय 10 m गवया एक घनाबाकाय गड्ढा खॉदने की\nरागत )₹ भें( ज्ञात कीजजए।\n)EER 5R0B LE EL RR GRARG 2025(",
+        "options": [
+            "57,600",
+            "57,598",
+            "57,602",
+            "57,591"
+        ],
+        "answer": "57,600",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 41,
+        "question": "The length, breadth, and height of a cuboid are in the ratio 1 : 2 : 3. If the length,\nbreadth, and height are increased by 100%, 50%, and 80%, respectively, find the\npercentage increase in the volume of the cuboid.\nएक घनाब की रंफाई, चॊड़ाई ऒय ऊं चाई 1 : 2 : 3 के अनुऩात भें वै। मदद रंफाई, चॊड़ाई ऒय ऊं चाई भें\nक्रभलः 100%, 50% ऒय 80% की ऱृद्धि की जाती वै, तॉ घनाब के आमतन भें वॉने ऱारी प्रैतलत ऱद्धृ ि\nज्ञात कीजजए।\n)EER LEOL0-E 2025(",
+        "options": [
+            "450%",
+            "404%",
+            "440%",
+            "402%"
+        ],
+        "answer": "450%",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 42,
+        "question": "Find the surface area of a cuboid 17 m long, 8 m broad and 3 m high.\n17 भीटय रंफे, 8 भीटय चॊड़े ऒय 3 भीटय ऊाँ चे घनाब का ऩृष्ठीम क्षेत्रपर ज्ञात कीजजए।",
+        "options": [
+            "420 m²",
+            "417 m²",
+            "402 m²",
+            "422 m²"
+        ],
+        "answer": "420 m²",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 43,
+        "question": "What is the height of a cuboid whose total surface area is 650 cm2? The cuboid is\n10cm long and 7 cm wide.\n10 cm रंफे ऒय 7 cm चॊड़े घनाब की ऊाँ चाई क्म ा वॉगी जजऴका ऴंऩणू व ऩृष्ठीम क्षेत्रपर 650 cm2 वै?",
+        "options": [
+            "14 cm",
+            "12 cm",
+            "18 cm",
+            "15 cm\nBY Gagan Pratap"
+        ],
+        "answer": "14 cm",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 44,
+        "question": "The length, the breadth and the height of a closed cuboidal box are 2.5 m, 2 m\nand 90 cm, respectively. What would be the cost of a canvas needed to cover\nthis box completely, if the cost of the value of the canvas is Rs 70 per sq m?\nएक फंद घनाकाय फक्से की रंफाई, चॊड़ाई ऒय ऊं चाई क्रभलः 2.5 भीटय, 2 भीटय ऒय 90 ऴेभी वै। इऴ\nफॉक्स कॉ ऩूयी तयव ऴे ढकने के जरए आऱश्यक कै नऱाऴ की रागत क्या वॉगी, मदद कै नऱाऴ का\nभूल्य 70 रुऩमे प्रैत ऱगव भीटय वै?\n(RRB ALP 2024)",
+        "options": [
+            "Rs1507",
+            "Rs 1267",
+            "Rs 1448",
+            "Rs 1348"
+        ],
+        "answer": "Rs1507",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 45,
+        "question": "The dimensions of the floor of an office are 5m × 3m. The cost of painting its walls\nand ceiling at the rate of ₹60/m2 is ₹7,440. Find the height of the room (in m).\n(Round off to one decimal place.)\nएक कामावरम के पलव की कऱभाएाँ 5m x 3m वैं। ₹60/m2 की दय ऴे इऴकी दीऱायों ऒय छत कॉ ऩेंट\nकयने की रागत ₹7,440 वै। कभय े की ऊाँ चाई (m भें) एक ज्ञात कीजजए। )दंलभरऱ स्थान तक\nऩूणाांककत कीजजए।)\n[RRB Group D - 2022]",
+        "options": [
+            "6.8",
+            "5.6",
+            "3.5",
+            "4.5"
+        ],
+        "answer": "6.8",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 46,
+        "question": "The internal surface area (in m2) of an open cuboidal tank whose internal length,\ninternal breadth and internal height are given as 3 m, 11 m, and 9 m, respectively, is:\nएक खुरे घनाबाकाय )cuboidal) टैंक, जजऴकी आंतहयक रंफाई, आंतहयक चॊड़ाई ऒय आंतहय ऊं चाई\nक्रभलः 3 m, 11 m, ऒय 9 m वै, का आंतहयक ऩृष्ठीम क्षेत्रपर )m2 भें( ज्ञात कीजजए।",
+        "options": [
+            "295",
+            "285",
+            "303",
+            "314"
+        ],
+        "answer": "295",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 47,
+        "question": "A cistern 6m long and 4 m wide contains water up to a depth of 1 m 25 cm. The\ntotal area of the wet surface is:\n6 m रंफी ऒय 4 m चॊड़ी एक टंकी भें 1 m 25 cm की गवयाई तक ऩानी बया वै। गीरे ऩृष्ठ का कु र\nक्षेत्रपर ककतना वै?\n(RRB TECHNICIAN GRADE-3 2024)",
+        "options": [
+            "50 m2",
+            "53.5 m2",
+            "55 m2",
+            "49 m2"
+        ],
+        "answer": "50 m2",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 48,
+        "question": "Find the length of diagonal of a cuboid 13 m long, 7 m broad and 3 m high.\n13 भीटय रंफे, 7 भीटय चॊड़े ऒय 3 भीटय ऊाँ चे घनाब के कऱकण व की रंफाई ज्ञात कीजजए।",
+        "options": [
+            "√𝟐𝟎𝟕𝒎",
+            "√𝟐𝟑𝟐 𝒎",
+            "√𝟑𝟐𝟕 𝒎",
+            "√𝟐𝟐𝟕 𝒎"
+        ],
+        "answer": "√𝟐𝟎𝟕𝒎",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 49,
+        "question": "Find the length of longest pole that can be placed in a room 16m long, 8m broad,\n11m high?\n16m रम्बे, 8m चॊड़े ऒय 11m ऊं चे कभय े भें यखे जाने ऱारे ऩॉर की अैधकतभ रम्बाई क्या वॉगी?",
+        "options": [
+            "20",
+            "21\nBY Gagan Pratap",
+            "18",
+            "19"
+        ],
+        "answer": "20",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 50,
+        "question": "The length and breath of a room are 21 cm and 16 m respectively. If the length of\nthe longest rod that can be placed in the room is 29 m, then what is the height of\nthe room?\nएक कभय े की रंफाई ऒय चॊड़ाई क्रभलः 21 ऴेभी ऒय 16 भीटय वै। मदद कभय े भें यखी जा ऴकने ऱारी\nऴफऴे रंफी छड़ की रंफाई 29 भीटय वै, तॉ कभय े की ऊं चाई क्या वै?",
+        "options": [
+            "10 m",
+            "11 m",
+            "12 m",
+            "13 m"
+        ],
+        "answer": "10 m",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 51,
+        "question": "If the areas of three adjacent faces of a cuboid are 5 cm2, 15 cm2, 27 cm2,\nrespectively, the surface area of the cuboid is:\nमदद एक घनाब के तीन आऴन्न परकों का क्षेत्रपर क्रभलः 5 cm , 15 cm , 27 cm वै, तॉ घनाब\nका ऩृष्ठीम क्षेत्रपर क्या वॉगा?\nSSC CHSL PRE 2024",
+        "options": [
+            "45 cm2",
+            "75 cm2",
+            "47 cm2",
+            "94 cm2"
+        ],
+        "answer": "45 cm2",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 52,
+        "question": "If the areas of three adjacent faces of a cuboid are x, y, z square units,\nrespectively, then the volume of the cuboid is:\nमदद ककऴी घनाब की तीन आऴन्न परकों का क्षेत्रपर क्रभलः x, y ऒय z ऱगव इकाई वै, तॉ घनाब\nका आमतन ककतना वॉगा?\n)EER LEOL0-E 2025(",
+        "options": [
+            "√ cubic units",
+            "𝟑√ cubic units",
+            "xyz cubic units",
+            "√ cubic units\n𝟐"
+        ],
+        "answer": "√ cubic units",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 53,
+        "question": "The areas of three adjacent faces of a cuboidal tank are 3m2, 12m2 and 16m2. The\ncapacity of the tank, in litres, is:\nककऴी घनाब आक्राय की टंकी के तीन आऴआन परकों का क्षेत्रपर )आमतपरकी(3m2, 12m2 ऒय\n16m2 वै। टंकी की क्षभता रीटय भें ज्ञात कीजजए।",
+        "options": [
+            "48000",
+            "24000",
+            "72000",
+            "36000"
+        ],
+        "answer": "48000",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 54,
+        "question": "The areas of three adjacent faces of a solid cuboid are 66 cm2, 192 cm2 and 198\ncm2. What is the volume (in cm3) of the cuboid?\nएक ठॉऴ घनाब के तीन आऴन्न परकों के क्षेत्रपर 66 cm2, 192 cm2 ऒय 198 cm2 वैं। घनाब का\nआमतन (cm3 भें) ज्ञात कीजजए।\n(RRB TECHNICIAN GRADE-3 2024)",
+        "options": [
+            "1782",
+            "1792",
+            "1584",
+            "1594"
+        ],
+        "answer": "1782",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 55,
+        "question": "The volume of a cuboid is 3600 cubic cm. the areas of two adjacent faces are 225\nsquare cm and 144 cm square cm. what is the area of the other adjacent face?\nBY Gagan Pratap\nएक घनाब का आमतन 3600 घन ऴेभी वै। दॉ आऴन्न परकों का क्षेत्रपर 225 ऱगव ऴेभी ऒय 144\nऴेभी ऱगव ऴेभी वै। दऴू य े आऴन्न परक का क्षेत्रपर क्या वै?",
+        "options": [
+            "400 square cm",
+            "360 square cm",
+            "320 square cm",
+            "300 square cm"
+        ],
+        "answer": "400 square cm",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 56,
+        "question": "The edges of a rectangular box are in the ratio of 3:5:8, and its surface area is\n1422 sq cm. what will be the volume of the box?\nएक आमताकाय फक्से के ककनायों का अनुऩात 3:5:8 वै ऒय इऴका ऴतव क्षेत्रपर 1422 ऱगव ऴभे ी वै।\nहडब्बे का आमतन क्या वॉगा?\n(CGL 2023 MAINS)",
+        "options": [
+            "4320\n𝒄𝒎𝟑",
+            "3240\n𝒄𝒎𝟑",
+            "3600\n𝒄𝒎𝟑",
+            "2880\n𝒄𝒎𝟑"
+        ],
+        "answer": "4320\n𝒄𝒎𝟑",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 57,
+        "question": "The length, breadth and height of a cuboid are in the ratio of 6:4:3. If the total\nsurface area of the cuboid is 972\n𝒄𝒎𝟐\n, what is the length (in cm) of the diagonal of\nthe cuboid?\nएक घनाब की रंफाई, चॊड़ाई ऒय ऊं चाई का अनुऩात 6:4:3 वै। मदद घनाब का कु र ऴतव क्षेत्रपर\n972\n𝒄𝒎𝟐\nवै, तॉ घनाब के कऱकणव की रंफाई )ऴेभी भें( क्या वै?\n(MTS 2023)",
+        "options": [
+            "5√𝟔𝟓",
+            "3√𝟔𝟏",
+            "3√𝟔𝟓",
+            "5√𝟔𝟏"
+        ],
+        "answer": "5√𝟔𝟓",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 58,
+        "question": "The length, breadth and height of a cuboid are in ratio of 3 : 4 : 5. If the volume of\nthe cuboid is 1620 m, find the total surface area of the cuboid.\nएक घनाब की रंफाई, चॊड़ाई ऒय ऊं चाई 3 : 4 : 5 के अनुऩात भें वै। मदद घनाब का आमतन 1620\nभीटय वै, तॉ घनाब का कु र ऴतव क्षेत्रपर ज्ञात कय।ें",
+        "options": [
+            "646\n𝒎𝟐",
+            "846𝒎𝟐",
+            "423\n𝒎𝟐",
+            "712\n𝒎𝟐"
+        ],
+        "answer": "646\n𝒎𝟐",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 59,
+        "question": "The length breadth and height of a rectangular box are in the ratio 3 : 2 : 4,\nrespectively, and the cost of covering it with a sheet of paper at the rate of ₹1.50\nper square metre is ₹1,950. Find 50% of the volume of the box (in m³).\nएक आमताकाय फॉक्स की रंफाई, चॊड़ाई ऒय ऊाँ चाई क्रभलः 3 : 2 : 4 के अनुऩात भें वै, ऒय इऴे ₹1.50\nप्रैत ऱग व भीटय की दय ऴ े कागज की एक लीट ऴे ढकन े की रागत ₹1,950 वै। फॉक्स के आमतन का\n50% (in m3) ज्ञात कय।ें",
+        "options": [
+            "1600",
+            "1750",
+            "1800",
+            "1500"
+        ],
+        "answer": "1600",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 60,
+        "question": "The proportions of the dimensions of a rectangular parallelepiped are 𝟐:𝟑:𝟒. If its\nvolume is\n𝐜𝐦𝟑\n, what is its smallest dimension?\nएक आमताकाय ऴभांतय चतुबुवज की कऱभाऑ ं का अनुऩात 𝟐:𝟑:𝟒 वै। मदद इऴका आमतन वै\n(𝟕𝟔𝟖 ऴेभी 𝟑) तॉ इऴका ऴफऴ े छॉटा कऱभा क्या वै?\n(SSC CPO 2025)",
+        "options": [
+            "6.34 cm",
+            "8.45 cm\nBY Gagan Pratap",
+            "12.25 cm",
+            "16.89 cm"
+        ],
+        "answer": "6.34 cm",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 61,
+        "question": "The volume of rectangular block is 12288 m3. Its dimension are in the ratio of 4 : 3 : 2. If\nthe entire surface is polished at the rate 2 paise per m2, then find the total cost of\npolishing\nएक आमताकाय खडं का आमतन 12288m3 वै। इऴके आमाभ 4 : 3 : 2 के अनुऩात भ ें वै। मदद ऴऩं ूण व\nऩृष्ठ कॉ 2 ऩैऴे/m की दय ऴे ऩॉजरल ककमा जाए, तॉ ऩॉजरल कयने की कु र रागत ज्ञात कीजजए।\nSSC CHSL Pre 2024",
+        "options": [
+            "Rs.33.28",
+            "Rs.44.42",
+            "Rs.66.56",
+            "Rs.11.14"
+        ],
+        "answer": "Rs.33.28",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 62,
+        "question": "The length, breadth and height of a cuboid are in the ratio of 8 : 5 : 3. If its\ndiagonal length is 21√𝟐 m, then find the total surface area of the cuboid.\nएक घनाब की रंफाई, चॊड़ाई ऒय ऊाँ चाई 8 : 5 : 3 के अनुऩात भें वै। मदद इऴके कऱकण व की\nरंफाई 21√𝟐 c वै, तॉ घनाब का ऴंऩूणव ऩृष्ठीम क्षेत्रपर ज्ञात कीजजए।\n[RRB GROUP - D 2025]",
+        "options": [
+            "1,622 c2",
+            "1,388 c2",
+            "1,250 c2",
+            "1,422 c2"
+        ],
+        "answer": "1,622 c2",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 63,
+        "question": "The length, breadth and height of a hall are 10 m, 20 m and 15m respectively. Find\nthe cost of whitewashing the walls of the inside of the hall and ceiling at the rate\nof ₹10.20/m2\nएक वॉर की रंफाई, चॊड़ाई ऒय ऊं चाई क्रभल :10m 20m ऒय 15m वै। वॉर के अंदय की दीऱायों ऒय\nबीतयी छत कॉ ₹10.20/m2 की दय ऴे ऴपे दी कयने का खचव ज्ञात कीजजए ।\nSSC CGL 2023 PRE",
+        "options": [
+            "₹13,394",
+            "₹11,220",
+            "₹15,320",
+            "₹16,542"
+        ],
+        "answer": "₹13,394",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 64,
+        "question": "A room has length 15 feet, width 12 feet and height 10 feet. It has one door of\ndimensions 8 ft and 3.5 ft, and 2 windows of size 5 ft × 3 ft. Find the cost of painting\nthe four walls and the ceiling at `50 per ft.².\nककऴी कभय े की रंफाई 15 पीट, चॊड़ाई 12 पीट ऒय ऊं चाई 10 पीट वे। इऴभें 8 पीट ऒय 3.5 पीट\nबुजाऑ ंऱारा एक दयऱाजा वै ऒय 5 पीट x 3 पीट आकाय की दॉ खखड़ककमां वैं। ₹50 प्रैत ft2 की दय ऴे\nचायों दीऱायों ऒय छत कॉ ऩेंट कयने की रागत ज्ञात कय।ें",
+        "options": [
+            "₹19,600",
+            "₹21,200",
+            "₹24,100",
+            "₹33,100"
+        ],
+        "answer": "₹19,600",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 65,
+        "question": "A large wooden box, open at the top, needs to be lined with fabric on its inner\nfloor and inner four side walls. The inner dimensions of the box are 2.5 m length,\n1.8 m wide, and 1.2 m high. If the fabric comes in square pieces of side 50 cm, and\n15% extra fabric is needed for cuts and overlaps, how many approximate fabric\npieces should be purchased?\nएक फड़े रकड़ी के फक्से कॉ, जॉ ऊऩय ऴे खुरा वै, उऴके बीतयी पलव ऒय चायों ऑय की दीऱायों ऩय कऩड़े\nकी ऩयत चढानी वै। फक्से की आंतहयक भाऩ रंफाई 2.5 भीटय, चॊड़ाई 1.8 भीटय ऒय ऊं चाई 1.2 भीटय वै।\nBY Gagan Pratap\nमदद कऩड़ा 50 ऴेंटीभीटय बुजा ऱारे ऱगावकाय टुकड़ों भें आता वै, ऒय कटाई ऒय ऑऱयरैऩ के जरए\n15% अैतहयक्त कऩड़े की आऱश्यकता वॉती वै, तॉ रगबग ककतने कऩड़े के टुकड़े खयीदे जान े चाहवए?\n) B BLG 2025 0ER(",
+        "options": [
+            "59",
+            "62",
+            "69",
+            "72"
+        ],
+        "answer": "59",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 66,
+        "question": "brabceec rtc bey oaileoal rbodatbod bto nwt lezal tb oarnbeclubo atxal.\nRda ubocao atx cablloal 30 rc × 25 rc × 10 rc, bed nda lcbuuao tea cablloal 18\nrc × 12 rc × 10 rc. e bddenetebu 6% tb nda ntnbu llobbra boab el eaadad bto\ntvaoub l. 0b rbodatbod rtlnl ₹45 ao 10,000 rc², rburlubna nda ntnbu rtln )ee ₹,\notledad tbb nt nda eaboaln dledoadl( tb rbodatbod eaadad nt otdlra 400 aec\natxal bed 500 lcbuu atxal.\nएक ऩैके जजिंग कं ऩनी कॉ दॉ आकाय के आमताकाय फक्सों के जरए काडवफॉडव की आऱश्यकता वै। फड़े\nफक्से का भाऩ 30 rc × 25 rc × 10 rc ऒय छॉटे फक्से का भाऩ 18 rc × 12 rc × 10 rc वै।\nऑऱटरैऩ के जरए कु र ऩृष्ठीम क्षेत्रपर का 6% अैतहयक्त आऱश्यक वै। मदद काडवफॉडव की रागत ₹45\nप्रैत 10,000 rc2 वै, तॉ 400 फड़े फक्से ऒय 500 छॉटे फक्से फनाने के जरए आऱश्यक काडवफॉडव की\nकु र रागत (₹ भें, जनकटतभ ऴैकड़े तक ऩूणाांककतकी गणना कीजजए।)\n[RRB GROUP - D 2025]",
+        "options": [
+            "7,500",
+            "7,400",
+            "7,200",
+            "7,600"
+        ],
+        "answer": "7,500",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 67,
+        "question": "The length of a diagonal of a cuboid is 11 cm and the total surface area is 240\nsquare cm. what is the sum of its length, breadth and height?\nएक घनाब के कऱकणव की रंफाई 11 ऴेभी वै। कु र ऴतव का क्षेत्रपर 240 ऱगव ऴेभी वै। इऴकी रंफाई,\nचॊड़ाई ऒय ऊं चाई का मॉग ककतना वै?",
+        "options": [
+            "16 cm",
+            "17 cm",
+            "18 cm",
+            "19 cm"
+        ],
+        "answer": "16 cm",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 68,
+        "question": "The sum of the length, the breadth and the height of a cuboid is 38 cm and the\nlength diagonal is 22 cm. find the total surface area of the cuboid?\nएक घनाब की रंफाई, चॊड़ाई ऒय ऊं चाई का मॉग 38 ऴेभी वै ऒय रंफाई कऱकणव 22 ऴेभी वै। घनाब का\nकु र ऩृष्ठीम क्षेत्रपर ज्ञात कीजजए?\n(RRB ALP 2024)",
+        "options": [
+            "480\n𝒄𝒎𝟐",
+            "432\n𝒄𝒎𝟐",
+            "960\n𝒄𝒎𝟐",
+            "864\n𝒄𝒎𝟐"
+        ],
+        "answer": "480\n𝒄𝒎𝟐",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 69,
+        "question": "The internal surface area of a cuboid is 76\n𝒄𝒎𝟐\nand the sum of the lengths of all its\nedges is 44 cm. The length (in cm) of a diagonal of the cuboid is :\nककऴी घनाब का आंतहयक ऩृष्ठीम क्षेत्रपर 76\n𝒄𝒎𝟐\nवै ऒय इऴके ऴबी कॉयों की रंफाइमों का मॉग 44\ncm वै। घनाब के एक कऱकण व की रंफाई (cm भें) वै :\n(RRB NTPC GRADUATE LEVEL 2025)",
+        "options": [
+            "𝟒√𝟓",
+            "𝟑√𝟓",
+            "𝟓√𝟑",
+            "𝟑√𝟑\nBY Gagan Pratap"
+        ],
+        "answer": "𝟒√𝟓",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 70,
+        "question": "The sum of the length, breadth and height of a cuboid box is 20 cm and the total\nsurface area of cuboid is 256 sq. cm. What is the maximum length (in\napproximate) of a stick that can be placed inside the cuboid box?\nएक घनाकाय फक्से की रंफाई, चॊड़ाई ऒय ऊं चाई का मॉग 20 ऴेभी. वै ऒय घनाब का कु र ऩृष्ठीम\nक्षेत्रपर 256 sq. cm वै। घनाकाय फक्स के अंदय यखी जा ऴकने ऱारी छड़ी की अैधकतभ रंफाई\n(अनुभाजनत) ककतनी वॉ ऴकती वै?\nSSC CHSL TIER – I 2022",
+        "options": [
+            "16 cm",
+            "14 cm",
+            "10 cm",
+            "12 cm"
+        ],
+        "answer": "16 cm",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 71,
+        "question": "A cuboid has side lengths a, b, and c, such that the sum of the sides is 15 and the\nsum of their squares is 81. Determine the ratio (Square of sum of sides) : (Total\nSurface Area) : (Square of Diagonal).\nएक घनाब की बुजाऑ ंकी रंफाई a, b ऒय c इऴ प्रकाय वै कक बुजाऑ ंका मॉग 15 वै ऒय उनके ऱगों\nका मॉग 81 वै। )बुजाऑ ंके मॉग का ऱगव( : )कु र ऩृष्ठीम क्षेत्रपर( : )कऱकणव का ऱगव( का अनुऩात ज्ञात\nकीजजए।",
+        "options": [
+            "25 : 24 : 1",
+            "25 : 16 : 9",
+            "225 : 24 : 1",
+            "225 : 216 : 15"
+        ],
+        "answer": "25 : 24 : 1",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 72,
+        "question": "The diagonals of three faces of a rectangular parallelpiped that meet at a single corner\nmeasure √𝟓 cm, √𝟏𝟎 cm, and √𝟏𝟑 cm. What is the volume of this parallelpiped?\nएक आमताकाय ऴभांतय चतुबुवज के तीन परकों के कऱकणव, जॉ एक कॉने ऩय जभरते वैं, क्रभलः √𝟓\nऴेभी, √𝟏𝟎 ऴेभी ऒय √𝟏𝟑 ऴेभी भाऩते वैं। इऴ आमताकाय ऴभांतय चतुबुवज का आमतन क्या वै?\n(SSC CGL MAINS 2025)",
+        "options": [
+            "24 cm3",
+            "18 cm3",
+            "6 cm3",
+            "12 cm3"
+        ],
+        "answer": "24 cm3",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 73,
+        "question": "The diagonals of three faces of a cuboid are 13, √𝟐𝟖𝟏 and 20 linear units. Then the\ntotal surface area of the cuboid is\nएक घनाब के तीन ऴतवों के कऱकणव 13, √𝟐𝟖𝟏 ऒय 20 मूजनट वैं। तॉ घनाब का कु र ऴतव क्षेत्रपर वै-",
+        "options": [
+            "650 square units",
+            "658 square units",
+            "664 square units",
+            "672 square units"
+        ],
+        "answer": "650 square units",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 74,
+        "question": "If the areas of the adjacent faces of a rectangular block are in the ratio 2:3:4 and\nits volume is 9000cm3 then the length of the shortest side is:\nमदद आमताकाय ब्लॉक के जनकटऱती ऴतवों के क्षेत्रपर 2 : 3: 4 के अनऩु ात भें वैं ऒय इऴकी आमतन\n9000cm3 वै तॉ ऴफऴे छॉटी बुजा की रंफाई वै?",
+        "options": [
+            "30 cm",
+            "20 cm",
+            "15 cm",
+            "10 cm"
+        ],
+        "answer": "30 cm",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 75,
+        "question": "6 cubes, each of edge 4 cm, are7 joined end to end. What is the total surface area\nof the resulting cuboid?\n6 घन जजऴके , प्रत्येक ककनाय े4 ऴेभी, अंत ऴे अंत तक जॉड़े जाते वैं। ऩहयणाभी घनाब का कु र क्षेत्रपर क्या वै?",
+        "options": [
+            "416 cm2",
+            "496 cm2\nBY Gagan Pratap",
+            "576 cm2",
+            "208 cm2"
+        ],
+        "answer": "416 cm2",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 76,
+        "question": "Five solid cubes, each of volume 1,09,41,048 cm3, are joined end to end to form a\ncuboid. What is the lateral surface area (in cm2) of the cuboid?\nऩांच ठॉऴ घन, जजनभें ऴे प्रत्येक का आमतन 1,09,41,048 cm3 वै, के जऴटों कॉ जॉड़कय एक घनाब\nफनामा गमा वै। घनाब का ऩार्श्व ऩृष्ठीम क्षेत्रपर (cm2 भें) ज्ञात कीजजए।\n(RRB NTPC 12th LEVEL 2025)",
+        "options": [
+            "5,91,408",
+            "5,91,310",
+            "5,91,663",
+            "5,91,312"
+        ],
+        "answer": "5,91,408",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 77,
+        "question": "125 identical cubes are cut from a big cube and all the smaller cubes are\narranged in a row to form a long cuboid. What is the percentage increase in the\ntotal surface area of the cuboid over the total surface area of the cube?\nएक फड़े घन ऴे 125 छॉटे एक ऴभान घन काटे गए वै। इन घनॉ कॉ जभराकय यखने ऩय एक घनाब\nफनता वै। ज्ञात कय े फड़े घन के भुकाफरे घनाब के ऴम्पूणव ऩृष्ठ क्षेत्रपर भें ककतने % की ऱृद्धि रृई?\n𝟐 𝟏",
+        "options": [
+            "234 %",
+            "235 %\n𝟑 𝟑\n𝟐",
+            "134 %",
+            "NOT\n𝟑"
+        ],
+        "answer": "234 %",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 78,
+        "question": "A right rectangular box’s measurement are 1.6 m long, 90 cm wide, 60 cm in\nheight. Soap cakes of measurement 6 cm × 5 cm × 40 mm are to be packed in the\nbox, so that no space is left. How many cakes can be packed in the box?\nएक रंफ आमताकाय हडब्बे की भाऩ, रंफाई -1.6 m, चॊड़ाई -90 cm, ऊं चाई -60 cm वै। 6 cm × 5\ncm × 40 mm आमाभों ऱारे ऴाफुन के के कों कॉ हडब्बे भें इऴ प्रकाय ऩैक ककमा जाना कक हडब्बे भें कॉई\nखारी जगव न फचे। हडब्बे भें ककतने के क ऩकै ककए जा ऴकते वैं?\n(SSC CHSL MAINS 2023)",
+        "options": [
+            "6000",
+            "5600",
+            "6500",
+            "7200"
+        ],
+        "answer": "6000",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 79,
+        "question": "The ice compartment in a refrigerator is 36 cm deep, 16 cm high and 12 cm wide.\nHow many ice cubes will it hold, if each cube is 4 cm as its edge?\nएक यके िजयटे य भें आइऴ कं ऩाटवभटें 36 cm गवया, 16 cm ऊं चा ऒय 12 cm चॊड़ा वै। मदद प्रत्येक\nआइऴ क्यूफ का कॉय 4 cm वै, तॉ इऴभें ककतने आइऴ क्म ूफ ऴभाहवत वॉ ऴकें ग?े\n(SSC GD 2025)",
+        "options": [
+            "216",
+            "54",
+            "108",
+            "27"
+        ],
+        "answer": "216",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 80,
+        "question": "Feed nda elcaao tb aoeral oaileoad nt aleud b wbuu 20 c utec, 9.9 c decd bed 30\nrc ndera, lleec aoeral tb leza 25 rc × 11 rc × 8 rc, eb 10% tb nda wbuu vtulca el beuuad\nwend racaen.\nमदद दीऱाय के आमतन का 10% ऴीभेंट ऴे बया वै तॉ 25 rc × 11 rc × 8 rc आकाय की ईंटों का\nउऩमॉग कयके , 20 c रंफी, 9.9 c ऊं ची ऒय 30 rc भॉटी दीऱाय फनान े के जरए आऱश्यक ईंटों की\nऴंख्या ज्ञात कीजजए।\n[RRB GROUP - D 2025]\nBY Gagan Pratap",
+        "options": [
+            "24,300",
+            "30,200",
+            "26,500",
+            "25,800"
+        ],
+        "answer": "24,300",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 81,
+        "question": "A cuboid of length 36 m, breadth 18 m and height 9 m is melted and recast into a\ncube. Find the length of the diagonal of the cube.\n36 m रंफाई, 18 m चॊड़ाई ऒय 9 m ऊं चाई ऱारे एक घनाब कॉ कऩघराकय एक घन भें फदर ददमा\nजाता वै। घन के कऱकण व की रंफाई ज्ञात कीजजए।",
+        "options": [
+            "𝟏𝟖 √𝟑 𝒎",
+            "𝟏𝟓 √𝟑 𝒎",
+            "𝟏𝟐 √𝟑 𝒎",
+            "𝟏𝟕 √𝟑 𝒎"
+        ],
+        "answer": "𝟏𝟖 √𝟑 𝒎",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 82,
+        "question": "A cuboid of dimensions 50 cm, 150 cm, 175 cm can be divided into how many\nidentical largest cubes?\n50 cm, 150 cm, 175 cm कऱभाऑ ं ऱारे एक घनाब कॉ एक जैऴे ककतने कऱलारतभ घनों भें\nकऱबाजजत ककमा जा ऴकता वै?\n(SSC CGL PRE 2024)",
+        "options": [
+            "75",
+            "84",
+            "85",
+            "90"
+        ],
+        "answer": "75",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 83,
+        "question": "A rectangular block of length 20 cm, breadth 15 cm and height 10 cm is cut up\ninto exact number of equal cubes. The least possible number of cubes will be\nरंफाई 20 ऴेभी, चॊड़ाई 15 ऴेभी ऒय ऊं चाई 10 ऴेभी के आमताकाय ब्लॉक कॉ फयाफय क्यूब्स की ऴटीक\nऴंख्या भें काट ददमा जाता वै। क्यूब्स की कभ ऴे कभ ऴंबऱ ऴंख्या वॉगी\n(CDS 2018)",
+        "options": [
+            "12",
+            "16",
+            "20",
+            "24"
+        ],
+        "answer": "12",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 84,
+        "question": "A cuboid has dimensions 8cm×10cm×12cm. It is cut into small cubes of side 2cm.\nWhat is the percentage increase in the total surface area?\nएक घनाब की आमाभ 8cm×10cm×12cm वै। इऴकॉ 2 cm बुजा ऱारे छॉटे घनॉ भें काटा गमा वै।\nतफ ऴम्पूणव ऩृष्ठ क्षेत्रपर भें ऱृद्धि % ज्ञात कये?",
+        "options": [
+            "286.2",
+            "314.32",
+            "250.64",
+            "386.5"
+        ],
+        "answer": "286.2",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 85,
+        "question": "If a cuboid of dimensions 32 cm × 12 cm × 9 cm is melted into two cubes of same\nsize, what will be the ratio of the surface area of the cuboid to the total surface\narea of the two cubes?\nमदद एक घनाब 32 ऴेभी × 12 ऴेभी × 9 ऴेभी कॉ एक वी आकाय के दॉ घन भें कऩघराकय फदर ददमा\nजाता वै, तॉ घनाब के ऴतव क्षेत्रपर ऒय दॉ घन के कु र ऴतव क्षेत्रपर का अनुऩात क्या वॉगा?",
+        "options": [
+            "32 : 39",
+            "37 : 48",
+            "24 : 35",
+            "65 : 72"
+        ],
+        "answer": "32 : 39",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 86,
+        "question": "A solid metallic cuboid of dimensions 12 cm x 54 cm x 72 cm is melted and\nconverted into 8 cubes of the same size. What is the sum of the lateral surface\nareas (in cm2) of 2 such cubes?\nBY Gagan Pratap\n12 cm x 54 cm x 72 cm आमाभों ऱारे धातु के एक ठॉऴ घनाब कॉ कऩघरामा जाता वै ऒय इऴऴे\nऴभान आकाय के 8 घन जनजभित ककए जाते वैं। ऐऴे 2 घनों के ऩार्श्व ऩृष्ठीम क्षेत्रपरों )cm2 भें( का मॉग\nककतना वॉगा?",
+        "options": [
+            "1944",
+            "2592",
+            "2268",
+            "3888"
+        ],
+        "answer": "1944",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 87,
+        "question": "A solid cube is cut into three cuboids of same volumes. What is the ratio of the\nsurface area of the cube to the sum of the surface areas of any two of the\ncuboids so formed?\nएक ठॉऴ घन कॉ ऴभान आमतन के तीन घनाब भें काट ददमा जाता वै। घन का क्षेत्रपर ऒय ककऴी\nबी दॉ घनाब के बाग के ऴतव क्षेत्रों के मॉग के अनुऩात का ककतना वै?",
+        "options": [
+            "27:16",
+            "9:8",
+            "9:10",
+            "27:10"
+        ],
+        "answer": "27:16",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 88,
+        "question": "A cuboid of size 50cm×40cm×30cm is cut into 8 identical parts by 3 cut. What is\nthe total surface area of 8 parts?\nएक 50cm×40cm×30cm भाऩ ऱारे घनाब कॉ 3 फाय काटकय 8 फयाफय बागॉ भें फांट ददमा गमा वै।\nअफ इऴ प्रकाय कु र 8 बागॉ का ऴम्पणू व ऩृष्ठ क्षेत्रपर क्या वॉगा?",
+        "options": [
+            "18800cm2",
+            "24400cm2",
+            "36600cm2",
+            "12640 cm2"
+        ],
+        "answer": "18800cm2",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 89,
+        "question": "A tank is in the form of a cuboid with length 12m. If 18kilolitre of water is removed\nfrom it, the water level goes down by 30cm. What is the width (in m) of the tank?\nघनाब के आकाय ऱारे एक टैंक की रंफाई 12 भीटय वै। मदद इऴऴे 18 ककरॉरीटय ऩानी जनकार जरमा\nजाता वै तॉ इऴका जर स्तय 30 ऴेभी नीच े चरा जाता वै। टैंक की चॊड़ाई (भीटय भें) ककतनी वै?",
+        "options": [
+            "4.5",
+            "4",
+            "5",
+            "5.5"
+        ],
+        "answer": "4.5",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 90,
+        "question": "50 men took a dip in a water tank 40 m long and 20 m broad on a religious day. If\nthe average displacement of water by a man is 4 m3, then the rise in the water\nlevel in the tank will be:\nएक धाजभिक ददन ऩय 50 ऩुरुळों ने 40 m रंफी ऒय 20 m चॊड़ी ऩानी की टंकी भें डुफकी रगाई। मदद\nएक ऩुरुळ द्वाया ऩानी का ऑऴत कऱस्थाऩन 4 m3 वै, तॉ टकी भें ऩानी के स्तय भें ककतनी ऱृद्धि वॉगी?\n(RRB TECHNICIAN GRADE-3 2024)",
+        "options": [
+            "25 cm",
+            "20 cm",
+            "35 cm",
+            "50 cm"
+        ],
+        "answer": "25 cm",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 91,
+        "question": "oarnbeclubo bilboelc wend decaeletel 60 rc × 45 rc × 40 rc el beuuad wend\nwbnao nt 80% tb enl daecdn. 0b b ltued canbuuer rlaa tb adca 20 rc el rtc uanauy\neccaolad ee en, ay dtw clrd dtal nda wbnao uavau oela )otledad tbb nt nwt\ndarecbu ubral(?\n60 rc × 45 rc × 40 rc के आकाय ऱारे एक आमताकाय अक्ऱ ेहयमभ भें उऴकी ऊाँ चाई का 80%\nऩानी बया वै। मदद 20 rc के कॉय ऱारा एक ठॉऴ धातु का घन ऩूयी तयव ऴे उऴभें डूफामा जाता वै, तॉ\nऩानी का स्तय ककतना ऊऩय उठ जाएगा )दॉ दलभरऱ स्थानों तक ऩूणाांककत(?\nBY Gagan Pratap\n[RRB GROUP - D 2025]",
+        "options": [
+            "4.56 rc",
+            "6.76 rc",
+            "5.36 rc",
+            "2.96 rc"
+        ],
+        "answer": "4.56 rc",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 92,
+        "question": "A field is 119 m × 18 m in dimension. A tank 17 m × 6 m × 3m is dug out in the middle\nand the soil removed is evenly spread over the remaining part of the field. The\nincrease in level on the remaining part of the field is :\nएक खेत आमाभ भें 119 भीटय × 18 भीटय वै। एक टैंक 17 m × 6 m × 3 m कॉ खेत के फीच भें खॉदा\nगमा वै ऒय वटा दी गई जभट्टी कॉ ऴभान रूऩ ऴे खेत के लेळ बाग भें पै रामा गमा वै। खेत के लेळ बाग\nभें स्तय भें ऱृद्धि वै:",
+        "options": [
+            "14 cm",
+            "13 cm",
+            "15 cm",
+            "12 cm"
+        ],
+        "answer": "14 cm",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 93,
+        "question": "eara tb ubed ee nda btoc tb b oarnbecua dbl decaeletel 240 c × 180 c. ebootw\nlnoe 10 c weda el dlc buu botled en )tlnleda( bed nda abond dlc tln el avaeuy\nl oabd tvao nda ubed, eeroableec enl llobbra uavau ay 25 rc. Feed nda da nd tb nda\nlnoe , otledad tbb nt nwt darecbu ubral.\nएक आमत के आकाय के बूखंड की कऱभाएाँ 240 c × 180 c वैं। इऴके चाटों ऑय )फावय( 10 c चॊड़ी एक ऴंकयी\nऩट्टी खॉदी जाती वै ऒय खॉदी गई जभट्टी कॉ बूजभ ऩय ऴभान रुऩ ऴे पै रा ददमा जाता वै, जजऴऴे इऴकी ऴतव का\nस्तय 25 rc फढ जाता वै। ऩट्टी की गवयाई दॉ दलभरऱ अंकों तक ज्ञात कीजजए।\n[RRB GROUP - D 2025]",
+        "options": [
+            "2.11 c",
+            "4.43 c",
+            "3.34 c",
+            "1.23 c"
+        ],
+        "answer": "2.11 c",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 94,
+        "question": "A river 20 m deep and 36 m wide is flowing at the rate of 2.7 km/hr. The amount of\nwater (in m3) that runs into the sea per minute is _____.\n20 m गवयी ऒय 36 m चॊड़ी एक नदी 2.7 km/hr की दय ऴे प्रऱाहवत वॉ यवी वै। प्रैत जभनट ऴभुद्र भें\nप्रऱाहवत वॉनी ऱारी जर की भात्रा (m3 भें) ज्ञात कीजजए।",
+        "options": [
+            "30,024",
+            "32,400",
+            "30,240",
+            "34,200"
+        ],
+        "answer": "30,024",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 95,
+        "question": "Water flows into a tank 180 m × 140 m through a rectangular pipe of 1.2 m × 0.75 m\nat a rate of 15 km/h. In what time will the water rise by 4 m?\n1.2 m × 0.75 m के आमताकाय ऩाइऩ ऴे ऩानी 15km / h की दय ऴे 180m × 140m के एक टैंक भ ें\nप्रऱाहवत वॉता वै। ककतने ऴभम भें ऩानी 4m की ऊं चाई तक बय जाएगा?",
+        "options": [
+            "6 hours 42 minutes",
+            "7 hours 28 minutes",
+            "5 hours 46 minutes",
+            "8 hours 12 minutes"
+        ],
+        "answer": "6 hours 42 minutes",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 96,
+        "question": "A rectangular water reservoir is 15 m by 12 m at the base. Water flows into it\nthrough a pipe whose cross-section is 5 cm by 3 cm at the rate of 16 m/sec. Find\nthe height to which the water will rise in the reservoir in 25 minutes:",
+        "options": [
+            "0.2 m",
+            "2 m\nBY Gagan Pratap",
+            "0.5 m",
+            ".02 m"
+        ],
+        "answer": "0.2 m",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 97,
+        "question": "An iron box with external dimensions 60 cm, 40 cm, and 20 cm is made of 1 cm\nthick sheet. If 1 cm3 of iron weighs 50 gm, the weight of the empty box is:\n60 cm, 40 cm ऒय 20cm फावयी आमाभों ऱारा एक रॉवे का फक्सा 1cm भॉटी चादय ऴे फना वै।\nमदद 1cm3 रॉवे का बाय 50gm वै, तॉ खारी फक्से का बाय ककतना वॉगा?\nSSC CHSL Pre 2024",
+        "options": [
+            "214.05 kg",
+            "240 kg",
+            "400 kg",
+            "416.40 kg"
+        ],
+        "answer": "214.05 kg",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 98,
+        "question": "A closed box is built of wood of uniform thickness. Its external dimensions are 12\ncm, 10 cm and 8 cm. if the inner surface area is 376 square cm, then what is the\nthickness of the wood?\nएक फंद फॉक्स एकऴभान भॉटाई की रकड़ी ऴे फना वै। इऴके फावयी आमाभ 12 ऴेभी, 10 ऴेभी ऒय 8\nऴेभी वैं। मदद फॉक्स की कु र आंतहयक ऴतव क्षेत्रपर 376 ऱगव ऴेभी वै, तॉ रकड़ी की भॉटाई क्या वै?",
+        "options": [
+            "0.5 cm",
+            "1 cm",
+            "1.5 cm",
+            "2 cm"
+        ],
+        "answer": "0.5 cm",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 99,
+        "question": "An open water tank has 8360 litres of capacity. It is made up of a material and\nthe thickness of material for all four walls is5 cm. Find the thickness of material\nin the bottom of that tank. The dimension of water tank is 3.3m ×2.6m× 1.1m.\nएक खुरे ऩानी के टैंक की क्षभता 8360 ltr वै, मव ऐऴ े धातु ऴ े फना वै जजऴकी चायॉ दीऱायों की भॉटाई\n5 cm वै, तफ इऴ टैंक के पलव की भॉटाई क्या वॉगी, मदद टैंक की भाऩ 3.3m ×2.6m× 1.1m.वै।",
+        "options": [
+            "4.5 cm",
+            "5.5cm",
+            "6.5 cm",
+            "7.5 cm"
+        ],
+        "answer": "4.5 cm",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 100,
+        "question": "A rectangular sheet of metal is 40cm by 15cm. Equal squares of side 4cm are cut off at\nthe corners and the remainder is folded up to form an open rectangular box. The\nvolume of the box is:\nएक आमताकाय धातु की लीट का आमाभ 40 cm ×15 cm वै, इऴ लीट के प्रत्येक ककनाय े ऴे 4 cm\nबुजा के ऱगव काटे गए वै, फचे बाग कॉ भॉड़कय एक आमताकाय फॉक्स फनामा गमा वै, इऴ फॉक्स का\nआमतन क्या वॉगा?",
+        "options": [
+            "896 cm3",
+            "986 cm3",
+            "600 cm3",
+            "916cm3"
+        ],
+        "answer": "896 cm3",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 101,
+        "question": "A rectangular metal sheet is of length 24 cm and breadth 18 cm. from each of its\ncorners a square of side x cm is cut off and an open box is made of the remaining\nsheet. If the volume of the box is 640 cubic cm, then what is the value of x?\nएक आमताकाय धातु की लीट की रंफाई 24 ऴेभी ऒय चॊड़ाई 18 ऴेभी वै। इऴके प्रत्येक कॉने ऴे x ऴेभी\nबुजा का एक ऱगव काट ददमा जाता वै ऒय लेळ लीट ऴे एक खुरा फॉक्स फना ददमा जाता वै। मदद हडब्बे\nका आमतन 640 घन ऴेभी वै, तॉ x का भान क्या वै?",
+        "options": [
+            "2",
+            "3",
+            "4",
+            "6\nBY Gagan Pratap"
+        ],
+        "answer": "2",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 102,
+        "question": "Let x, y, z be the length, breadth, height of a cuboid. If its volume is 400 cubic cm\nand total surface area is 340 square cm, then what is −𝟏 + −𝟏 + −𝟏 equal to?\nभाना x, y, z एक घनाब की रंफाई, चॊड़ाई, ऊं चाई वै। मदद इऴका आमतन 400 घन ऴेभी वै ऒय कु र\nऴतव क्षेत्र 340 ऱगव ऴेभी वै, तॉ −𝟏 + −𝟏 + −𝟏 ककऴके फयाफय वै?",
+        "options": [
+            "17/20",
+            "17/40",
+            "7/10",
+            "9/10"
+        ],
+        "answer": "17/20",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 103,
+        "question": "A cuboid has dimensions 10 cm, 8 cm and 6 cm. If the largest possible cube is cut\nfrom one of the corners of the cuboid, what is the total surface area of the\nremaining portion?\nककऴी घनाब की कऱभाएं 10 cm, 8 cm ऒय 6 cm वैं। मदद घनाब के ककऴी एक कॉने ऴे ऴफऴे फड़ा\nऴंबाकऱत घन काटा जाता वै, तॉ लेळ बाग का ऴऩं णू व ऩृष्ठीम क्षेत्रपर ककतना वै?\n(RRB NTPC LEVEL 12th 2025)",
+        "options": [
+            "488 cm2",
+            "376 cm2",
+            "160 cm2",
+            "312 cm2"
+        ],
+        "answer": "488 cm2",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    }
+]
