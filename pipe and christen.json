@@ -1,0 +1,614 @@
+[
+    {
+        "id": 1,
+        "question": "A booster pump can be used for filling as well as for emptying a tank. The capacity of\nthe tank is 1800 m3. The emptying capacity of the tank is 10 m3/min higher than its\nfilling capacity, and the pump needs 6 minutes lesser to empty the tank than it needs\nto fill it. What is the filling capacity of the pump in m3/min?\nफूस्टय ऩंऩ का उऩमॉग टैंक कॉ बयने के ऴाथ-ऴाथ खारी कयने के लरए बी ककमा जा ऴकता वै।\nटैंक की धारयता 1800 m3 वै। टैंक की खारी कयने की क्षभता, इऴकी बयने की क्षभता ऴ े 10\nm3/min अधधक वै, औय ऩंऩ कॉ टैंक कॉ खारी कयने भें लजतना ऴभम रगता वै, उऴ े बयन े भ ें उऴऴे\n6 लभनट कभ ऴभम रगता वै। ऩंऩ की बयने की क्षभता m3/min भें ककतनी वै?\n(RRB NTPC GRADUATE LEVEL 2025 CBT-1)",
+        "options": [
+            "65",
+            "27",
+            "50",
+            "18"
+        ],
+        "answer": "65",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 2,
+        "question": "A water tank can be filled in 19 minutes by using 39 pipes of the same\ncapacity. In how many minutes (rounded off to two decimal places) will the\nwater tank be filled if we use 23 pipes of the same capacity as above?\nएक ऩानी की टंकी कॉ ऴभान क्षभता के 39 ऩाइऩों का उऩमॉग कयके 19 लभनट भें बया जा ऴकता\nवै। मदद उऩयॉक्त के ऴभान क्षभता के 23 ऩाइऩों का उऩमॉग कयते वैं, तॉ ऩानी की टंकी ककतने लभनट\n(दलभरऱ के दॉ स्थानों तक ऩूणाांककत) भें बय जाएगी?\n(RRB NTPC GRADUATE LEVEL 2025 CBT-1)",
+        "options": [
+            "24.73",
+            "32.22",
+            "27.49",
+            "37.03"
+        ],
+        "answer": "24.73",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 3,
+        "question": "There are two pipes used to fill a tank and when operated together, they can\nfill the tank in 20 minutes. If one pipe can fill the tank two and a half times as\nquickly as the other, then the faster pipe alone can fill the tank in:\nएक टैंक कॉ बयने के लरए दॉ ऩाइऩों का उऩमॉग ककमा जाता वै औय जफ उन्हें एक ऴाथ चरामा\nजाता वै, तॉ ऱे टैंक कॉ 20 लभनट भें बय ऴकते वैं। मदद एक ऩाइऩ दऴू य े की तुरना भें ढाई गुना तेजी\nऴे टैंक बय ऴकता वै, तॉ तेज ऩाइऩ अके रे टैंक कॉ ककतने ऴभम भें बय ऴकता वै:\n[RRB Group-D 2025]",
+        "options": [
+            "30 min",
+            "32 min",
+            "34 min",
+            "28 min"
+        ],
+        "answer": "30 min",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 4,
+        "question": "Pipe A can fill an empty tank in 18 hours and pipe B can fill the same empty\ntank in 24 hours. If both the pipes are opened simultaneously, how much time\n(in hours) will they take to fill the empty tank?\nऩाइऩ A एक खारी टैंक कॉ 18 घंटे भें बय ऴकता वै औय ऩाइऩ B उऴी खारी टैंक कॉ 24 घंटे भें बय\nऴकता वै। मदद दॉनों ऩाइऩों कॉ एक ऴाथ खॉर ददमा जाए, तॉ खारी टैंक कॉ बयने भें उन्हें ककतना\nऴभम (घंटों भें) रगेगा?\n[SSC CGL 2023 PRE]",
+        "options": [
+            "11",
+            "10\nGagan Pratap Sir",
+            "10",
+            "11"
+        ],
+        "answer": "11",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 5,
+        "question": "Two pipes, A and B, can fill a tank of 7800 litres in 12 hours and 10 hours,\nrespectively. If they are opened together, how many hours will they take to fill\nan empty tank of 8800 litres?\nदॉ ऩाइऩ A औय B 7800 रीटय की एक टंकी कॉ क्रभलः 12 घंटे औय 10 घंटे भें बय ऴकत े वैं। मदद\nउन्हें एक ऴाथ खॉर ददमा जाए, तॉ 8800 रीटय की एक खारी टंकी कॉ बयने भें उन्हें ककतने घंटे\nरगेंग?े (RRB NTPC GRADUATE LEVEL 2025 CBT-1)",
+        "options": [
+            "hours",
+            "hours",
+            "hours",
+            "hours"
+        ],
+        "answer": "hours",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 6,
+        "question": "An inlet pipe can fill an empty tank in 3.6 hours, while an outlet pipe can drain\na completely-filled tank in 6.3 hours. If both the pipes are opened\nsimultaneously when the tank is empty, in how many hours will the tank get\ncompletely filled?\nएक इनरेट ऩाइऩ एक खारी टैंक कॉ 3.6 घंटे भें बय ऴकता वै, जफकक एक आउटरेट ऩाइऩ ऩयू ी\nतयव ऴ े बय े टैंक कॉ 6.3 घंटे भें खारी कय ऴकता वै। मदद टैंक खारी वॉने ऩय दॉनों ऩाइऩ एक ऴाथ\nखॉरे जात े वैं, तॉ टैंक ककतने घंटे भें ऩूयी तयव ऴे बय जाएगा?",
+        "options": [
+            "8.7",
+            "8.1",
+            "9.0",
+            "8.4"
+        ],
+        "answer": "8.7",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 7,
+        "question": "Three pipes X, Y and Z release three different chemicals A, B and C in a tank. These\npipes can fill the tank in 20, 25 and 40 minutes respectively. If all the pipes are left\nopen for 10 minutes, what will be the ratio of chemical B in the tank.\nतीन ऩाइऩ X, Y औय Z एक टैंक भें तीन लबन्न-लबन्न यऴामन A, B औय C छॉड़ते वैं| मव ऩाइऩ\nक्रभलः 20, 25 औय 40 लभनट भें टैंक कॉ बय ऴकत े वैं| मदद ऴबी ऩाइऩों कॉ 10 लभनट के लरए\nखुरा छॉड़ ददमा जाता वै तॉ टैंक भें यऴामन B का अनुऩात क्या वॉगा ?\n[RRB Group-D 2022]",
+        "options": [
+            "4/7",
+            "13/23",
+            "8/23",
+            "11/15"
+        ],
+        "answer": "4/7",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 8,
+        "question": "Three pipes A, B and C can fill a cistern in 12, 18 and 24 minutes, respectively. If\nall the pipes are opened together for 7 minutes, what will be the volume of the\nwater that overflows as the percentage of the total volume of the cistern?\nतीन ऩाइऩ A, B औय C एक जरालम कॉ क्रभलः 12, 18 औय 24 लभनट भें बय ऴकत े वै। मदद ऴबी\nऩाइऩ 7 लभनट के लरए एक ऴाथ खॉर ददमे जाते वै, तॉ जरालम के कु र आमतन का ककतन े\nप्रधतलत जर अधतप्रऱाव के रूऩ भें फव जाएगा?",
+        "options": [
+            "",
+            "",
+            "",
+            "Gagan Pratap Sir 9. Pipe A can fill a tank in 17 hours, pipe B can fill the same tank in 21 hours and\npipe C can fill the same tank in 19 hours. The time taken by them to fill the\nsame tank if they operate together is.\nऩाइऩ A ककऴी टैंक कॉ 17 घंटे भें बय ऴकता वै, ऩाइऩ B उऴी टैंक कॉ 21 घंटे भें बय ऴकता वै औय\nऩाइऩ C उऴी टैंक कॉ 19 घंटे भें बय ऴकता वै। मदद ऱे ऴबी एक-ऴाथ चारू कय ददए जाएं, तॉ उऴी\nटैंक कॉ बयने भें ककतना ऴभम रगेगा?\n(RRB NTPC 12th LEVEL 2025)"
+        ],
+        "answer": "",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 10,
+        "question": "Pipe A can fill a tank in 18 hours, pipe B can fill the same tank in 28 hours and\npipe C can fill the same tank in 11 hours. The time taken by them to fill the\nsame tank if they operate together is:\nऩाइऩ A ककऴी टैंक कॉ 18 घंटे भें बय ऴकता वै, ऩाइऩ B उऴी टैंक कॉ 28 घंटे भें बय ऴकता वै औय\nऩाइऩ C उऴी टैंक कॉ 11 घंटे भें बय ऴकता वै। मदद ऱ े एक-ऴाथ चारू कय ददए जाएं, तॉ उऴी टैंक कॉ\nबयने भ ें उन्हें ककतना ऴभम रगेगा?",
+        "options": [
+            "5 hours",
+            "7 hours",
+            "10 hours",
+            "11 hours"
+        ],
+        "answer": "5 hours",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 11,
+        "question": "Two pipes fill a tank when working individually in 25 and 40 hours,\nrespectively while a third pipe can drain the filled tank in 16 hours. If all the\nthree pipes are turned on at the same time when the tank is empty, how long\nwill it take to fill the tank completely?\nदॉ ऩाइऩ ककऴी खारी टैंक कॉ अके रे क्रभलः 25 औय 40 घंटों भें बय देते वैं जफकक एक तीऴया\nऩाइऩ बये रृए टैंक कॉ 16 घंटों भ ें खारी कय देता वै। जफ टैंक ऩूयी तयव ऴे खारी वॉ औय तीनों ऩाइऩों\nकॉ एक ऴाथ चरा ददमा जामे तॉ टैंक ककतने ऴभम भें बय जामेगा ?\nRRB ALP 17/08/2018 (Afternoon)",
+        "options": [
+            "15 days 18 hours/15 ददन 18 घंटे",
+            "2 days 1 hours/2 ददन 1 घंटे",
+            "16 days 16 hours/16 ददन 16 घंटे",
+            "1 day 7 hours/1 ददन 7 घंटे"
+        ],
+        "answer": "15 days 18 hours/15 ददन 18 घंटे",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 12,
+        "question": "If pipe A can fill a cistern in X hours, pipe B can fill the same cistern in Y hours,\nand pipe C can empty the full cistern in Z hours, then find the time taken to\ncompletely fill the cistern, if Pipes A, B and C are opened together.\nमदद ऩाइऩ A एक टंकी कॉ X घंटे भ ें बय ऴकता वै, ऩाइऩ B उऴी टंकी कॉ Y घंटे भें बय ऴकता वै, औय\nऩाइऩ C ऩूयी बयी टंकी कॉ Z घंटे भ ें खारी कय ऴकता वै, तॉ ऩाइऩ A, B औय C ऴबी कॉ एक ऴाथ\nखॉर ददए जान े ऩय, टंकी कॉ ऩूया बयने भें रगने ऱारा ऴभम ज्ञात कीलजए।\n[Group D 29/09/2022 Afternoon]\nGagan Pratap Sir",
+        "options": [
+            "",
+            "",
+            "",
+            ""
+        ],
+        "answer": "",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 13,
+        "question": "A pipe can fill a tank in 10 hours. Due to a leak in the bottom, it fills the tank in\n22.5 hours. If the tank is full, then how much time will the leak take to empty it?\nएक ऩाइऩ एक टैंक कॉ 10 घंटे भें बय ऴकता वै। तर भें रयऴाऱ के कायण, मव टैंक कॉ 22.5 घंटे भें\nबयता वै। मदद टैंक ऩूया बया रृआ वै, तॉ रयऴाऱ टंकी कॉ ककतन े ऴभम भें खारी कय ऴकता वै?\n(RPF CONSTABLE 2024)",
+        "options": [
+            "17 hours",
+            "18 hours",
+            "19 hours",
+            "16 hours"
+        ],
+        "answer": "17 hours",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 14,
+        "question": "An electric pump can fill a tank in 8 hours. Due to a leakage in the tank, it takes\nhours to fill the tank. How much time will this leak take to empty the full tank if water\ndoes not get in or out of the tank through any other point during this period?\nएक इरेक्ट्रिक ऩंऩ एक टैंक कॉ 8 घंटे भें बय ऴकता वै। टैंक भें रयऴाऱ के कायण, टैंक कॉ बयने\nभें घंटे रगत े वैं। मदद इऴ अऱधध के दॊयान ककऴी अन्य कफिंद ु ऴे ऩानी टैंक भें न तॉ आता वै औय न\nवी फावय जाता वै, तॉ इऴ रयऴाऱ ऴे ऩूया टैंक ककतन े ऴभम भें खारी वॉ जाएगा?\n(RRB NTPC GRADUATE LEVEL 2025 CBT-1)",
+        "options": [
+            "50 hours",
+            "56 hours",
+            "52 hours",
+            "39 hours"
+        ],
+        "answer": "50 hours",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 15,
+        "question": "A tank is normally filled in 20 hours by a pipe, but it takes 8 hours more to fill\nthe tank due to a leakage at its bottom. The leakage point can empty the tank\nwhen it is 60 % full in ________ hours.\nएक टंकी ऴाभान्यतः एक ऩाइऩ द्वाया 20 घंटे भें बय जाती वै, रेककन तरी भें रयऴाऱ के कायण टंकी\nकॉ बयने भ ें 8 घंटे अधधक रगते वैं। रयऴाऱ धछद्र टैंक कॉ ________ घंटों भें 60% बया वॉन े ऩय\nखारी कय ऴकता वै।",
+        "options": [
+            "42",
+            "35",
+            "56",
+            "49"
+        ],
+        "answer": "42",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 16,
+        "question": "Two pipes can fill a cistern, individually, in 99 min and 90 min, respectively.\nThere is a pipe located at the bottom of the cistern to empty it. If all the three\npipes are opened simultaneously, then the empty cistern gets filled in 50 min.\nHow long will the pipe at the bottom of the tank take to empty the completely\nfilled cistern if no other pipe is then open?\nदॉ ऩाइऩ एक टंकी कॉ अरग-अरग क्रभलः 99 min औय 90 min भें बय ऴकत े वैं। टंकी कॉ खारी\nकयने के लरए उऴके तर भें एक ऩाइऩ रगा वै। मदद तीनों ऩाइऩ एक ऴाथ खॉर ददए जाएं, तॉ खारी\nटंकी 50 min भें बय जाएगी। मदद कॉई अन्य ऩाइऩ खुरा नवीं वै, तॉ टंकी के तर ऩय रगा ऩाइऩ,\nऩूयी तयव बयी रृई टंकी कॉ खारी कयने भें ककतना ऴभम रेगा?\n(RRB NTPC 12TH LEVEL CBT-2 2025)",
+        "options": [
+            "841 min",
+            "825 min\nGagan Pratap Sir",
+            "822 min",
+            "815 min"
+        ],
+        "answer": "841 min",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 17,
+        "question": "Two pipes can fill a cistern, individually, in 98 min and 28 min, respectively.\nThere is a pipe located at the bottom of the cistern to empty it. If all the three\npipes are opened simultaneously, then the empty cistern gets filled in 21 min.\nHow long will the pipe at the bottom of the cistern take to empty the\ncompletely filled cistern if no other pipe is then open?\nदॉ ऩाइऩ एक टंकी कॉ अरग-अरग क्रभलः 98 min औय 28 min भें बय ऴकत े वैं। टंकी कॉ खारी\nकयने के लरए टंकी के तर ऩय एक ऩाइऩ रगा वै। मदद तीनों ऩाइऩ एक ऴाथ खॉर ददए जाएँ, तॉ\nखारी टंकी 21 min भ ें बय जाती वै। मदद कॉई अन्य ऩाइऩ खुरा न वॉ, तॉ टंकी के तर ऩय रगा\nऩाइऩ ऩूयी तयव ऴे बयी रृई टंकी कॉ खारी कयने भें ककतना ऴभम रेगा?\n(RRB NTPC GRADUATE LEVEL 2025 CBT-1)",
+        "options": [
+            "583 min",
+            "606 min",
+            "588 min",
+            "577 min"
+        ],
+        "answer": "583 min",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 18,
+        "question": "Pipes A and B can fill a tank in 20 hours and 25 hours, respectively. Pipe C is an\nemptying pipe. When all the three pipes are opened for 15 hours, then part of\nthe tank filled. How much time (in hours) will pipe C take to empty one-third\npart of the tank?\nऩाइऩ A औय B एक टैंक कॉ क्रभलः 20 घंटे औय 25 घंटे भें बय ऴकते वैं। ऩाइऩ C एक लनकाऴ ऩाइऩ\nवै। तीनों ऩाइऩों कॉ 15 घंटे तक एक ऴाथ खॉरने ऩय टंकी का बाग बया जा ऴकता वै। ऩाइऩ C,\nटैंक के एक-धतवाई बाग कॉ खारी कयने भें ककतना ऴभम (घंटॉ भें) रेगा?\n(ICAR Technician 2023)",
+        "options": [
+            "5",
+            "4",
+            "5",
+            "5"
+        ],
+        "answer": "5",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 19,
+        "question": "Pipe X can fill a tank in 60 hours while pipe Y can fill the tank in 72 hours. Both\npipes are opened together for 20 hours. How much of the tank is left empty ?\nऩाइऩ X एक टैंक कॉ 60 घंटे भें बय ऴकता वै जफकक ऩाइऩ Y एक टैंक कॉ 72 घंटे भें बय ऴकता वै।\nदॉनों ऩाइऩों कॉ एक ऴाथ 20 घंटे के लरए खॉरा जाता वै। टंकी का ककतना बाग खारी फचा वै?",
+        "options": [
+            "1/8",
+            "243/360",
+            "7/18",
+            "3/8"
+        ],
+        "answer": "1/8",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 20,
+        "question": "If two pipes A and B are opened simultaneously an empty tank will be filled in\n20 hours. Only when pipe A opens, it fills the empty tank 9 hours earlier than\nthe time it takes for pipe B to fill it alone, so how much time will it take pipe B to\nfill this empty tank alone?\nमदद दॉ ऩाइऩ A औय B एक ऴाथ खॉरे जात े वैं तॉ एक खारी टंकी 20 घंटे भ ें बय जाएगी। के ऱर ऩाइऩ A\nखॉरे जाने ऩय, मव खारी टंकी कॉ ऩाइऩ B द्वाया इऴ े अके रे बयन े भ ें लरए जाने ऱारे ऴभम की तुरना भ ें 9\nघंटे ऩवरे बय देता वै, तॉ ऩाइऩ B कॉ अके रे मव खारी टंकी बयने भ ें ककतना ऴभम रगेगा?\n[RRB Group-D 2022]\nGagan Pratap Sir",
+        "options": [
+            "39 hours.",
+            "45 hours.",
+            "36 hours.",
+            "42 hours."
+        ],
+        "answer": "39 hours.",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 21,
+        "question": "Pipes A and B together can fill an empty tank in minutes. If A takes 3\nminutes more than B to fill the tank, then the time in which A alone would fill\none third part of the tank is:\nऩाइऩ A औय B लभरकय एक खारी टैंक कॉ लभनट भ ें बय ऴकत े वै। मदद A टैंक कॉ बयने भ ें B ऴ े 3 लभनट\nका अधधक ऴभम रेता वै, तॉ A अके रे उऴी टैंक कॉ एक धतवाई बाग ककतन े ऴभम भ ें बय देगा?\n[RRB Group-D 2022]",
+        "options": [
+            "4.5",
+            "6",
+            "5.5",
+            "5"
+        ],
+        "answer": "4.5",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 22,
+        "question": "Pipes A, B and C together can fill a cistern in 12 hours. All the three pipes are opened\ntogether for 4 hours and then C is closed. A and B together take 10 hours to fill the\nremaining part of the cistern. C alone will fill two thirds of the cistern in:\nऩाइऩ A, B औय C टैंक कॉ लभरकय 12 घंटें भें बय ऴकते वै। तीनों ऩाइऩों कॉ एक ऴाथ 4 घंटें के लरए\nखॉरा जाता वै औय C कॉ फंद कय ददमा जाता वै। A औय B कॉ लभरकय टैंक के लेळ बाग कॉ बयने\nभें 10 घंटें रगत े वै। C अके रे टैंक के दॉ धतवाई बाग कॉ ककतन े ऴभम भें बय देगा? टैंक कॉ बयने भें\nलरमा गमा ऴभम ज्ञात कीलजए।\n(RPF CONSTABLE 2024)",
+        "options": [
+            "50 hr",
+            "60 hr",
+            "40 hr",
+            "48 hr"
+        ],
+        "answer": "50 hr",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 23,
+        "question": "Pipes P and Q can fill a tank in 18 and 27 minutes, respectively, whereas pipe R\ncan empty the full tank in 54 minutes. P and Q were opened together for 6\nminutes and then closed and R was opened. The tank was emptied by R alone\nin how many minutes:\nऩाइऩ P औय Q एक टैंक कॉ क्रभलः 18 लभनट औय 27 लभनट भें बय ऴकत े वै, जफ कक ऩाइऩ ऩूया\nटैंक 54 लभनट भें खारी कय ऴकता वै। ऩाइऩ P औय Q कॉ 6 लभनट के लरए एक ऴाथ खॉरा गमा\nऔय कपय फंद कय ददमा गमा, औय ऩाइऩ R कॉ खॉर ददमा गमा। ऩाइऩ R अके रा उऴ टैंक कॉ ककतने\nलभनट भें खारी कय देगा?",
+        "options": [
+            "30",
+            "40",
+            "35",
+            "45"
+        ],
+        "answer": "30",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 24,
+        "question": "Pipe P can fill part of a tank in 18 hours, and pie Q can fill part of the same\ntank in 25 hours. Both P and Q were kept open for 3 hours, then both were\nclosed. Pipe R alone was then opened and it emptied the water in the tank in 8\nhours. Pipes P, Q and R together can fill the empty tank in:\nऩाइऩ P, ककऴी टैंक के बाग कॉ 18 घंटे भें बय ऴकता वै, औय ऩाइऩ Q उऴी टैंक के बाग कॉ 25\nघंटे भें बय ऴकता वै। P औय Q दॉनों कॉ 3 घंटे के लरए चारू यखा जाता वै, औय कपय दॉनों कॉ फंद कय\nGagan Pratap Sir ददमा जाता वै। कपय ऩाइऩ R कॉ अके रे चारू ककमा जाता वै जॉ टैंक के ऩानी कॉ 8 घंटे भें खारी कय\nदेता वै। ऩाइऩ P, Q औय R लभरकय खारी टैंक कॉ ककतने ऴभम भें बय ऴकते वैं?\n(RRB NTPC 12th LEVEL 2025)",
+        "options": [
+            "25 hours",
+            "53 hours",
+            "38 hours",
+            "42 hours"
+        ],
+        "answer": "25 hours",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 25,
+        "question": "Pipe P can fill 3/4 part of a tank in 18 hours and pipe Q can fill 3/5 part of its\ntank in 12 hours. Both P and Q were kept open for 4 hours, then both were\nclosed. Then pipe R alone was opened, and it emptied out the water from the\ntank in 5 hour. In how much time can the pipe P, Q and R together fill the\nempty tank?\nऩाइऩ P एक टैंक के 3/4 बाग कॉ 18 घंटे भें बय ऴकता वै औय ऩाइऩ Q अऩने टैंक के 3/5 बाग कॉ\n12 घंटे भें बय ऴकता वै। P औय Q दॉनों कॉ 4 घंटे के लरए खुरा यखा गमा कपय दॉनों कॉ फंद कय\nददमा गमा। कपय अके रे ऩाइऩ R कॉ खॉरा गमा, औय इऴने 5 घंटे भें टैंक ऴ े ऩानी कॉ खारी कय\nददमा। ऩाइऩ P, Q औय R लभरकय खारी टैंक कॉ ककतने ऴभम भें बय ऴकते वैं?\n(RPF CONSTABLE 2024)",
+        "options": [
+            "36 hours",
+            "35 hours",
+            "40 hours",
+            "30 hours"
+        ],
+        "answer": "36 hours",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 26,
+        "question": "Pipe P can fill a tank in 28 minutes and pipe Q can fill the same tank in 35\nminutes. If pipes P and Q are opened simultaneously when the tank is empty\nand pipe P is closed after 12 minutes, how long will it take pipe Q to fill the rest\nof the tank?\nऩाइऩ P एक टंकी कॉ 28 लभनट भ ें बय ऴकता वै औय ऩाइऩ Q इऴी टंकी कॉ 35 लभनट भें बय\nऴकता वै। टंकी खारी वॉने ऩय मदद ऩाइऩ P औय Q कॉ एक ऴाथ खॉरा जाता वै औय 12 लभनट के\nफाद ऩाइऩ P कॉ फंद कय ददमा जाता वै, तॉ लेळ टंकी कॉ बयने भें ऩाइऩ Q कॉ ककतने ऴभम रगेगा?\n[RRB Group-D 2022]",
+        "options": [
+            "12 minutes.",
+            "8 minutes.",
+            "14 minutes.",
+            "16 minutes."
+        ],
+        "answer": "12 minutes.",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 27,
+        "question": "Two pipes A and B can fill a tank in 24 minutes and 32 minutes, respectively.\nBoth the pipes are opened together, but after 8 minutes pipe A is turned off.\nWhat is the total time required to fill the tank?\nदॉ ऩाइऩ A औय B एक टैंक कॉ क्रभलः 24 लभनट औय 32 लभनट भें बय ऴकत े वैं। दॉनों ऩाइऩ एक\nऴाथ खॉरे जाते वैं, रेककन 8 लभनट के फाद ऩाइऩ A कॉ फंद कय ददमा जाता वै। टैंक बयने भ ें कु र\nककतना ऴभम रगेगा?\n(RPF CONSTABLE 2024)",
+        "options": [
+            "24 min 36 sec",
+            "29 min 20 sec",
+            "20 min 29 sec",
+            "21 min 20 sec\nGagan Pratap Sir 28. A pipe can fill an empty tank in 12.5 hours. At the bottom of the tank there was\na leakage point which can drain the completely filled tank in 17.5 hours. The\nleakage point could be closed after 14 hours of opening the pipe to fill the tank.\nWhat was the total time taken (in hours) to fill the tank ?\nएक ऩाइऩ ककऴी खारी टंकी कॉ 12.5 घंटे भें बय ऴकता वै। टंकी के तरी भें रयऴाऱ था, लजऴऴे ऩूयी\nबयी रृई टंकी 17.5 घंटे भें खारी वॉ ऴकती वै। टंकी कॉ बयने के लरए ऩाइऩ कॉ खॉरने के 14 घंटे\nफाद रयऴाऱ कॉ फंद ककमा जा ऴका। टंकी कॉ बयने भें रगने ऱारा कु र ऴभम (घंटे भें) ककतना था ?\n[Level 5 (15/06/2022) Shift 2]"
+        ],
+        "answer": "24 min 36 sec",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 29,
+        "question": "Pipes A and B can fill a tank in 30 hours and 45 hours, respectively while pipe C\nalone can empty the full tank in 20 hours. When the tank is full, C alone is\nopened for 8 hours and then closed and pipes A and B are opened together at\nthe same time. Now, how much time will pipe A and B together take to fill the\ntank completely?\nऩाइऩ A औय B एक टंकी कॉ क्रभलः 30 घंटे औय 45 घंटे भें बय ऴकत े वैं, जफकक अके रे ऩाइऩ C\nऩूयी बयी टंकी कॉ 20 घंटे भ ें खारी कय ऴकता वै। जफ टंकी ऩूयी बय जाती वै, तॉ अके रे C कॉ 8 घंटे\nके लरए खॉरा जाता वै, औय कपय फंद कय ददमा जाता वै, औय कपय एक वी ऴभम ऩय ऩाइऩ A औय B\nकॉ एक ऴाथ खॉरा जाता वै। अफ, ऩाइऩ A औय B कॉ एक ऴाथ टंकी कॉ ऩूयी तयव ऴे बयने भें\nककतना ऴभम रगेगा?\n[Level 3 (17/06/2022) Shift 2]",
+        "options": [
+            "7.5 hours / 7.5 घंटे",
+            "8 hours / 8 घंटे",
+            "7.8 hours / 7.8 घंटे",
+            "7.2 hours / 7.2 घंटे"
+        ],
+        "answer": "7.5 hours / 7.5 घंटे",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 30,
+        "question": "Pipes A and B can fill an empty cistern in 78 minutes and 24 minutes,\nrespectively. Both Pipe A and Pipe B are opened together. After how much time\nshould Pipe A be turned off so that the empty cistern is completely filled in a\ntotal of 20 minutes?\nऩाइऩ A औय B एक खारी टंकी कॉ क्रभलः 78 लभनट औय 24 लभनट भें बय ऴकत े वैं। ऩाइऩ A औय\nऩाइऩ B दॉनों कॉ एक ऴाथ खॉरा जाता वै। ककतन े ऴभम फाद ऩाइऩ A कॉ फंद कय देना चारवए ताकक\nखारी टंकी कु र 20 लभनट भें ऩूयी बय जाए?\n(RRB NTPC GRADUATE LEVEL 2025 CBT-1)",
+        "options": [
+            "25 min",
+            "13 min",
+            "10 min",
+            "16 min"
+        ],
+        "answer": "25 min",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 31,
+        "question": "Pipes A and B can fill an empty cistern in 72 minutes and 51 minutes,\nrespectively. Both Pipe A and Pipe B are opened together. After how much time\nshould Pipe A be turned off so that the empty cistern is completely filled in a\ntotal of 34 minutes?\nGagan Pratap Sir ऩाइऩ A औय B एक खारी टंकी कॉ क्रभलः 72 लभनट औय 51 लभनट भें बय ऴकत े वैं। ऩाइऩ A औय\nऩाइऩ B दॉनों कॉ एक ऴाथ खॉरा जाता वै। ककतन े ऴभम फाद ऩाइऩ A कॉ फंद कय देना चारवए ताकक\nखारी टंकी कु र 34 लभनट भें ऩूयी बय जाए ?\n(RPF CONSTABLE 2025)",
+        "options": [
+            "35 min",
+            "30 min",
+            "20 min",
+            "24 min"
+        ],
+        "answer": "35 min",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 32,
+        "question": "Two valves P and B can fill a sump in 37 minutes and 45 minutes respectively.\nBoth valves are opened. The sump will be filled in just 30 minutes, if valve B is\nturned off after :\nदॉ ऩाइऩ P औय B एक टंकी कॉ क्रभल: 37 लभनट औय 45 लभनट भें बय ऴकत े वैं। दॉनों ऩाइऩ खुरे\nवैं। टंकी 30 लभनट भें बय जामेगी, मदद ऩाइऩ B कॉ ......फाद फंद कय ददमा जाता वैं।\nRRB ALP 13/08/2018 (Afternoon)",
+        "options": [
+            "9 min / 9 लभनट",
+            "6 min / 6 लभनट",
+            "10 min / 10 लभनट",
+            "5 min / 5 लभनट"
+        ],
+        "answer": "9 min / 9 लभनट",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 33,
+        "question": "Pipe A can fill a tank in 16 minutes and pipe B empties it in 24 minutes. If both\nthe pipes are opened simultaneously, after how many minutes should B be\nclosed so that the tank is filled in 30 minutes?\nऩाइऩ A एक टैंक कॉ 16 लभनट भें बय ऴकता वै औय ऩाइऩ B इऴे 24 लभनट भें खारी कयता वै| मदद\nदॉनों ऩाइऩों कॉ एक ऴाथ खॉर ददमा जाए तॉ ककतने लभनट फाद B कॉ फंद कय ददमा जाना चारवए\nलजऴऴे कक टैंक 30 लभनट भें बय जाए?\n[SSC CPO 2019]",
+        "options": [
+            "21 लभनट",
+            "20 लभनट",
+            "15 लभनट",
+            "18 लभनट"
+        ],
+        "answer": "21 लभनट",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 34,
+        "question": "An empty cistern has three pipes A, B and C, A and B can fill it in 45hrs and 36\nhours respectively and C can empty it in 37 hr. After how much time draining\npipe should be closed so that cistern is filled in 32 hrs.\nएक खारी टैंक भें तीन ऩाइऩ A, B औय C रगे रृए वै, A औय B इऴे क्रभलः 45 घंटे औय 36 घंटे भें\nबय ऴकत े वैं औय C इऴ े 37 घंटे भें खारी कय ऴकता वैं। ककतन े ऴभम फाद रयऴाऱ ऩाइऩ कॉ फंद\nककमा जाना चारवए ताकक टैंक 32 घंटे भें बय जाए।",
+        "options": [
+            "20.5hrs",
+            "21hrs",
+            "22.5hrs",
+            "16hrs"
+        ],
+        "answer": "20.5hrs",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 35,
+        "question": "Two pipes A and B can fill a tank in 12 minutes and 24 minutes, respectively,\nwhile a third pipe C can empty the full tank in 32 minutes. All the three pipes\nare opened simultaneously. However, pipe C is closed 2 minutes before the\ntank is filled. In how much time (in minutes) will the tank be full?\nGagan Pratap Sir दॉ ऩाइऩ A औय B एक टंकी कॉ क्रभल: 12 लभनट औय 24 लभनट भें बय ऴकत े वैं, ऱवीं ऩाइऩ C ऩूयी\nबयी रृई टंकी कॉ 32 लभनट भें खारी कय ऴकती वै। तीनों ऩाइऩों कॉ एक ऴाथ खॉर ददमा गमा।\nवारांकक ऩाइऩ C कॉ टंकी के बयने 2 लभनट ऩवरे फंद कय ददमा गमा। टंकी ककतने ऴभम (लभनट\nभें)भें ऩूयी तयव बय जाएगी?\n(CGL MAINS 2021)",
+        "options": [
+            "9",
+            "10",
+            "12",
+            "8"
+        ],
+        "answer": "9",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 36,
+        "question": "A leak in the bottom of a tank can empty the full tank in 9 hours. An inlet pipe\nfills water at the rate of 5 liters per minute. When the tank is full, the inlet is\nopened and due to the leak the tank gets empty in 12 hours. The capacity of\nthe tank (in liters) is?\nएक टैंक के तर भें एक रयऴाऱ 9 घंटे भें ऩूया टैंक खारी कय ऴकता वै। एक इनरेट ऩाइऩ 5 रीटय\nप्रधत लभनट की दय ऴे ऩानी बयता वै। जफ टंकी बय जाती वै तॉ इनरेट खॉरा जाता वै औय रयऴाऱ के\nकायण टंकी 12 घंटे भ ें खारी वॉ जाती वै। टैंक की क्षभता (रीटय भें) वै?\n(ICAR Technician 2022)",
+        "options": [
+            "18000",
+            "10008",
+            "10800",
+            "10080"
+        ],
+        "answer": "18000",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 37,
+        "question": "Two pipes can fill a cistern separately in 36 minutes and 45 minutes,\nrespectively. A waste pipe can drain off 40 litres per minute. If all the three\npipes are opened, the cistern fills in one hour. The capacity (in litres of the\ncistern) is\nदॉ ऩाइऩ एक टंकी कॉ अरग-अरग तॊय ऩय क्रभलः 36 लभनट औय 45 लभनट भें बय ऴकत े वैं।\nटंकी भ ें रगा एक लनकाऴ ऩाइऩ प्रधत लभनट 40 रीटय ऩानी लनकार ऴकता वै। मदद तीनों ऩाइऩ\nएक ऴाथ खॉर ददए जाएं तॉ टंकी एक घंटे भें बय जाती वै। टंकी की क्षभता/धारयता (रीटय भें) ज्ञात\nकीलजए।",
+        "options": [
+            "600",
+            "1200",
+            "900",
+            "1800"
+        ],
+        "answer": "600",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 38,
+        "question": "Pipes A, B and C can fill a tank in 30 h, 40 h and 60 h respectively. Pipes A, B\nand C are opened at 7 a.m., 8 a.m., and 10 a.m., respectively on the same day.\nWhen will the tank be full?\nऩाइऩ A, B औय C क्रभलः 30 h, 40 h औय 60 h भें एक टैंक बय ऴकत े वैं। ऩाइऩ A, B औय C उऴी\nददन क्रभलः 7 फजे, 8 फजे औय 10 फजे खॉरे जाते वैं। टंकी कफ बयी जाएगी?",
+        "options": [
+            "10.20 p.m.",
+            "10.00 p.m.",
+            "9.40 p.m.",
+            "9.20 p.m."
+        ],
+        "answer": "10.20 p.m.",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 39,
+        "question": "Pipes A and B can fill a tank in 16 hours and 24 hours, respectively, and pipe C\nalone can empty the full tank in x hours. All the pipes were opened together at\nGagan Pratap Sir 10:30 a.m., but C was closed at 2:30 p.m. If the tank was full at 8:30 p.m. on the\nsame day, then what is the value of x?\nऩाइऩ A औय B क्रभलः 16 घंटे औय 24 घंटे भें एक टैंक बय ऴकत े वैं, औय अके रे ऩाइऩ C, x घंटे भें\nऩूया टैंक खारी कय ऴकता वैं। ऴबी ऩाइऩ एक ऴाथ ऴुफव 10:30 फजे खॉरे गए, रेककन C कॉ 2:30\nफजे फंद कय ददमा गमा। अगय उऴी ददन ऴाढे आठ फजे टंकी बय जाती वै, तॉ x का भान क्या वै?\n[SSC CGL MAINS 2021]",
+        "options": [
+            "45",
+            "96",
+            "64",
+            "48"
+        ],
+        "answer": "45",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 40,
+        "question": "An empty cistern has three pipes A, B and C. A and B can fill it in 24hrs and 30\nhours respectively and C can empty it in 8hr 20 minutes. If these pipes are\nopened in order at 1PM, 4PM and 6 PM, when will the cistern be empty again?\nदॉ ऩाइऩ ककऴी खारी टंकी कॉ क्रभलः 24 घंटे औय 30 घंटे भें ऩानी ऴे बय ऴकत े वै औय एक तीऴया\nऩाइऩ इऴ टंकी कॉ 8 घंटे 20 लभनट भें खारी कय ऴकता वै मदद इन ऩाइऩों कॉ क्रभलः दॉऩवय 1PM,\n4 PM औय 6 PM फजे खॉरा जाए, तॉ टंकी ऩुनः ककतने फजे खारी वॉगी?",
+        "options": [
+            "12:06:40 AM",
+            "11:40:06 PM",
+            "01:15:12 AM",
+            "12:40:06 AM"
+        ],
+        "answer": "12:06:40 AM",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 41,
+        "question": "One fill pipe A takes 21 minutes more to fill the cistern than two fill pipes A and\nB opened together to fill it. Second fill pipe B takes 27 minutes more to fill the\ncistern than two fill pipes A and B opened together to fill it. When will the\ncistern be full if both the pipes are opened simultaneously?\nऩाइऩ A द्वाया टैंक बयने भें ऩाइऩ A औय B द्वाया एक ऴाथ बयने की तुरना भें 21 लभनट अधधक\nरगते वैं दऴु य े ऩाइऩ B कॉ टैंक बयने भें ऩाइऩ A औय B द्वाया एक ऴाथ बयने की तुरना भ ें 27\nलभनट अधधक रगते वैं वैं। मदद दॉनों ऩाइऩों कॉ एक ऴाथ खॉरा जाता वै तॉ कफ बयी जाएगी?",
+        "options": [
+            "18 min",
+            "24 min",
+            "32 min",
+            "27 min"
+        ],
+        "answer": "18 min",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 42,
+        "question": "A tank is filled by three tankers with uniform flow. The first two tankers\noperating simultaneously fill the sump in the same time during which the\nsump is filled by the third tanker alone. The second tanker fills the sump 7\nhours faster than the first tanker and 9 hours slower than the third tanker. The\ntime required by the first tanker is :\nएक टैंक कॉ तीन टैंकयों के भाध्यभ ऴे एक ऴभान प्रऱाव ऴे बया जाता वै। मदद ऩवरे दॉ टैंकय एक\nऴाथ चरामे जाते वैं तॉ टैंक कॉ बयने भें उतना वी ऴभम रगता वै, लजतना अके रे तीऴय े टैंकय कॉ\nचराकय टैंक बयने भें रगता वै। दऴू या टैंकय ऩवरे टैंकय की अऩेक्षा 7 घंटे तेजी ऴ े औय तीऴय े टैंकय\nकी अऩेक्षा 9 घंटे धीभी गधत ऴ े टैंक कॉ बयता वै। ऩवरी टैंकय के लरए आऱश्यक ऴभम वै:\nRRB ALP 21/08/2018 (Evening)",
+        "options": [
+            "28 hours",
+            "21 hours",
+            "25 hours",
+            "30 hours\nGagan Pratap Sir 43. Two pipes A and B can fill an empty cistern in 18 and 27 hours, respectively. Pipe C can\ndrain the entire cistern in 45 hours when no other pipe is in operation. Initially, when\nthe cistern was empty Pipe A and Pipe C were turned on. After a few hours Pipe A was\nturned off and Pipe B was turned on instantly. In all, it took 55 hours to fill the cistern.\nFor how many hours was pipe B turned on ?\nदॉ ऩाइऩ A औय B ककऴी खारी टंकी कॉ क्रभलः 18 औय 27 घंटे भ ें बय देत े वैं। ऩाइऩ C ऩूय े बयी टंकी कॉ 45\nघंटे भ ें खारी कय देता वै जफ कॉई अन्य ऩाइऩ नवीं चर यवा वॉ। लुरुआत भ ें जफ टंकी खारी थी, ऩाइऩ A औय\nC कॉ चारू ककमा गमा। कु छ घंटों के फाद ऩाइऩ A कॉ फंद कय ददमा गमा औय ऩाइऩ B कॉ चारू ककमा गमा।\nइऴ प्रकाय टंकी बयन े भ ें कु र 55 घंटे रगे। ऩाइऩ B कॉ ककतन े घंटे चरामा गमा ?\nRRB ALP 17/08/2018 (Morning)"
+        ],
+        "answer": "28 hours",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 44,
+        "question": "Two pipes X and Y can fill a tank in 21 hours and 24 hours respectively. Both\npipes are opened simultaneously and it is found that due to a leakage in the\ntank it takes 48 min more to fill the tank. When the tank is completely full, in\nhow much time will the tank be completely emptied by leakage alone, if all\npipes are closed?\nदॉ ऩाइऩ X औय Y एक टंकी कॉ क्रभलः 21 घंटे औय 24 घंटे भें बय ऴकते वैं। दॉनों ऩाइऩों कॉ एक\nऴाथ खॉर ददमा जाता वै औय मव ऩामा गमा कक टंकी भें एक रयऴाऱ के कायण टंकी कॉ बयने भें 48\nलभनट अधधक ऴभम रगता वै। टंकी के ऩूयी तयव ऴे बयी वॉने ऩय, मदद ऴबी ऩाइऩों कॉ फंद कय ददमा\nजाए, तॉ के ऱर रयऴाऱ के द्वाया टंकी ककतन े ऴभम भें ऩूयी तयव ऴे खारी वॉ जाएगी?\n(RRB NTPC GRADUATE LEVEL 2025 CBT-1)",
+        "options": [
+            "168 hours.",
+            "144 hours.",
+            "130 hours.",
+            "120 hours."
+        ],
+        "answer": "168 hours.",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 45,
+        "question": "Two pipes A and B can fill a cistern in 24hr and 27hr respectively. Both taps are\nopened and after 2 hrs16minutes, it is noticed that there was a leakage. leakage is\nrepaired immediately. it takes 96 min extra for cistern to fill than normal. if cistern is\nfull how much time leakage would take to empty the cistern?\nदॉ ऩाइऩ A औय B क्रभलः 24 घंटे औय 27 घंटे भें एक टैंक बय ऴकत े वैं। दॉनों नर खॉरे जाते वैं औय\n2 घंटे 16 लभनट के फाद, मव देखा जाता वै कक टैंक भें एक रयऴाऱ वै। रयऴाऱ की तुयतं भयम्मत की\nजाती वै लजऴ कायण टैंक कॉ बयने भ ें ऴाभान्य ऴे 96 लभनट अधधक रगता वै। मदद टैंक बया वै तॉ\nअके रे रयऴाऱ कॉ टैंक खारी कयने भ ें ककतना ऴभम रगेगा?",
+        "options": [
+            "16hr",
+            "27hr",
+            "18hr",
+            "24hr"
+        ],
+        "answer": "16hr",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 46,
+        "question": "Three taps A, B and C can fill a tank in 24, 30 and 40 hours respectively. If A is\nopen all the time and B and C are open for one hour each alternately, then the\ntank will be full in:\nGagan Pratap Sir तीन नर A, B औय C एक टंकी कॉ क्रभलः 24, 30 औय 40 घंटे भें बय ऴकत े वैं। मदद A वय ऴभम\nखुरा यवता वै औय B औय C फायी-फायी ऴे एक-एक घंटे के लरए खुरे यवत े वैं, तॉ टंकी ककतन े ऴभम\nभें बय जाएगी?",
+        "options": [
+            "13",
+            "14",
+            "15",
+            "16"
+        ],
+        "answer": "13",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 47,
+        "question": "Pipe A could fill an empty cistern in 18 hours while Pipe B can drain a filled\ncistern in 30 hours. When the cistern is empty, Pipe A is turned on for an hour\nand then turned off. Now Pipe B is allowed to drain out water from the cistern\nfor an hour and then turned off. The pipes were alternatively left open for an\nhour each time till the cistern was full. How much time did it take for the\ncistern to be full?\nऩाइऩ A 18 घंटे भें एक खारी टंकी बय ऴकता वै जफकक ऩाइऩ B 30 घंटे भें एक बया रृआ टंकी\nखारी कयता वै। जफ टंकी खारी वॉता वै, तॉ ऩाइऩ A कॉ एक घंटे के लरए चारू ककमा जाता वै औय\nकपय फंद कय ददमा जाता वै। अफ ऩाइऩ B कॉ एक घंटे के लरए खॉर ददमा गमा औय कपय फंद कय\nददमा गमा। प्रत्येक ऩाइऩ कॉ फायी फायी ऴ े एक घंटे के लरए तफ तक खॉरा गमा जफ तक कक टंकी\nऩूया न बय जाए। टंकी के ऩूयी तयव ऴ े बयने भें ककतना ऴभम रगा?\n(RRB NTPC 2021)",
+        "options": [
+            "86 hours 40 minutes",
+            "86 hours 48 minutes",
+            "90 hours",
+            "86 hours"
+        ],
+        "answer": "86 hours 40 minutes",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 48,
+        "question": "An inlet pipe can fill an empty tank in hours while an outlet pipe drains a\ncompletely filled tank in hours. The tank is initially empty, and the two\npipes are alternately opened for an hour each, till the tank is completely filled,\nstarting with the inlet pipe. In how many hours will the tank be completely\nfilled?\nएक इनरेट ऩाइऩ एक खारी टैंक कॉ 4 घंटे भें बय ऴकता वै, जफकक एक आउटरेट ऩाइऩ ऩूयी तयव\nऴे बय े टैंक कॉ 7 घंटे भें खारी कय देता वै। टैंक लुरू भैं खारी वै औय इनरेट ऩाइऩ ऴे लुरू वॉत े रृए\nदॉनों ऩाइऩ फायी-फायी ऴे एक एक घंटे के लरए खॉरे जात े वैं, जफ तक कक टैंक ऩूयी तयव ऴे बय न\nजाए। टैंक ककतने घंटे भें ऩूयी बय जाएगी?\n[SSC CGL 2023 PRE]",
+        "options": [
+            "24",
+            "20",
+            "20",
+            "22"
+        ],
+        "answer": "24",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 49,
+        "question": "A, B and C are pipes attached into a cistern. A and B can fill it in 20 and 30\nminutes respectively, while C can empty it in 15 minutes. If A, B and C be kept\nopen successively for 1 minute each, how soon will the cistern be filled?\nGagan Pratap Sir ऩाइऩ A, B औय C एक टैंक भें रगे वैं। A औय B इऴ े क्रभलः 20 औय 30 लभनट भें बय ऴकत े वैं,\nजफकक C इऴे 15 लभनट भें खारी कय ऴकता वैं। मदद A, B औय C कॉ फायी फायी ऴे एक लभनट के\nलरए खुरा यखा जाए, तॉ ककतने ऴभम भें टैंक बया जाएगा?\n(RRB NTPC 2021)",
+        "options": [
+            "2hr 44 min",
+            "2hr 47min",
+            "2hr 37min",
+            "2hr 40min"
+        ],
+        "answer": "2hr 44 min",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 50,
+        "question": "Pipe A can empty a filled tank in 28 hours while B can fill the same tank when\nempty in 35 hours. If alternatively, pipe A and B are turned on for an hour each\ntime, starting when the tank is full, how long will it take to empty the tank?\nऩाइऩ A बय े रृए टैंक कॉ 28 घंटे भें खारी कय ऴकता वै जफकक B, 35 घंटे भें खारी वॉन े ऩय उऴी टैंक\nकॉ बय ऴकता वै। मदद ऱैकल्पिक रूऩ ऴे ऩाइऩ A औय B कॉ वय फाय एक घंटे के लरए चारू ककमा\nजाता वै, जफ टैंक बया रृआ वॉता वै, तॉ टैंक कॉ खारी कयने भें ककतना ऴभम रगेगा?",
+        "options": [
+            "280",
+            "271",
+            "270",
+            "275"
+        ],
+        "answer": "280",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 51,
+        "question": "A cistern can be filled by two pipes in 8 minutes and 10 minutes, separately.\nBoth the pipes are opened together for a certain time, but due to an\nobstruction, only 5/8 of the full quantity of water flowed through the former\npipe and 3/5 through the latter pipe. However, the obstruction was suddenly\nremoved, and the cistern was filled in 3 minutes from that moment. How long\ndid it take before the full flow began?\nएक टंकी कॉ दॉ ऩाइऩों द्वाया अरग-अरग 8 लभनट औय 10 लभनट भें बया जा ऴकता वै। दॉनों\nऩाइऩों कॉ एक लनलित ऴभम के लरए एक ऴाथ खॉरा जाता वै, रेककन एक रुकाऱट के कायण,\nऩानी की ऩूयी भात्रा का के ऱर 5/8 ऩवरे ऱारे ऩाइऩ ऴे औय 3/5 दऴू ये ऩाइऩ ऴे प्रऱारवत वॉता वै।\nवाराँकक, रुकाऱट अचानक वटा दी गई, औय उऴ क्षण ऴे 3 लभनट भें टंकी बय गई। ऩूण ण प्रऱाव लुरू\nवॉने भ ें ककतना ऴभम रगा?\n(SSC CGL 2024 Pre)",
+        "options": [
+            "3 minutes",
+            "2 minutes",
+            "9 minutes",
+            "2 minutes"
+        ],
+        "answer": "3 minutes",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 52,
+        "question": "Two taps A and B can fill a tank in 30 min and 36 min respectively. Both taps\nare opened together but due to some problem they work 5/6 and 9/10 of their\nefficiency, after some time the problem was removed and the whole tank will\nfill in 16 minutes. then after how much time the problem is removed?\nदॉ नर A औय B क्रभलः 30 लभनट औय 36 लभनट भें एक टैंक बय ऴकते वैं। दॉनों नर एक ऴाथ\nखॉरे जात े वैं रेककन कु छ ऴभस्या के कायण ऱ े अऩनी दक्षता के 5/6 औय 9/10 काम ण कयते वैं, कु छ\nऴभम फाद ऴभस्या कॉ वटा ददमा गमा औय ऩूया टैंक 16 लभनट भें बय जाएगा। कपय ककतन े ऴभम\nके फाद ऴभस्या कॉ दयू ककमा जाता वै?\nGagan Pratap Sir",
+        "options": [
+            "1 min",
+            "1 min",
+            "2min",
+            "45sec"
+        ],
+        "answer": "1 min",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 53,
+        "question": "1cm,1 cm, 2cm, running together, when the largest alone fill it in 122 minutes,\nthe amount of water flowing in by each pipe being proportional to the square\nof its diameter?\nज्ञात कीलजम े ककतने ऴभम भ ें एक टैंक कॉ एक ऴाथ तीन ऩाइऩों ऴे बया जाएगा लजऴका व्याऴ 1\nऴेभी, 1 ऴेभी, 2 ऴेभी वै, जवा ऴफऴ े फड़ा ऩाइऩ अके रे टैंक कॉ 122 लभनट भें बयता वै, प्रत्येक ऩाइऩ\nद्वाया फवने ऱारे ऩानी की भात्रा इऴके व्याऴ के ऱगण के ऴभानुऩाती वै ?",
+        "options": [
+            "52 min",
+            "64 min",
+            "72 min",
+            "108 min"
+        ],
+        "answer": "52 min",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    },
+    {
+        "id": 54,
+        "question": "28 pipes are connected to a tank. Some of them pour water into the tank,\nwhereas the rest drain water out of it. Each of the pipes that fill water can fill\nthe empty tank in 14 hours, whereas any of the drainpipes can empty the filled\ntank in 35 hours, If all the pipes are opened simultaneously when the tank is\nempty and the tank is filled in 2.5 hours, how many of pipes were drain pipes ?\n28 ऩाइऩ एक टैंक ऴे जुड़े वैं। उनभें ऴे कु छ टैंक भें ऩानी डारते वैं, जफकक फाकी उऴभें ऴ े ऩानी\nलनकार देते वैं। ऩानी बयने ऱारा प्रत्येक ऩाइऩ 14 घंटे भें खारी टैंक कॉ बय ऴकता वै, जफकक कॉई\nबी लनकाऴी 35 घंटे भें बय े रृए टैंक कॉ खारी कय ऴकता वै, मदद टैंक खारी वॉन े ऩय ऴबी ऩाइऩ\nएक ऴाथ खॉरे जाते वैं औय टैंक 2.5 घंटे भें बय जाता वै , ककतने ऩाइऩ लनकाऴी के ऩाइऩ थ े ?\n[NTPC CBT - I 19/03/2021 (Morning)]",
+        "options": [
+            "16",
+            "18",
+            "17",
+            "15\nGagan Pratap Sir 1."
+        ],
+        "answer": "16",
+        "explanation": "Based on the Answer Key, the correct option is [A]."
+    }
+]
