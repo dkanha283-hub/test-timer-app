@@ -30,8 +30,6 @@ def inject_custom_css():
 
         /* Hide default Streamlit elements */
         header {visibility: hidden;}
-        div[data-testid="stTextInput"] { display: none; } /* Hide the JS Bridge */
-        .stTextInput { display: block !important; } /* Keep normal text inputs visible */
 
         /* Modern Question Box */
         .question-box { 
@@ -54,23 +52,39 @@ def inject_long_press_bridge():
     """Listens for Desktop Right-Click OR Mobile Long-Press and triggers the Popup."""
     js_code = """
     <script>
+        // 1. SURGICALLY HIDE THE INVISIBLE BRIDGE INPUT
         const inputs = window.parent.document.querySelectorAll('input');
         let actionBridge;
-        inputs.forEach(i => { if(i.getAttribute('aria-label') === 'JS_ACTION_BRIDGE') actionBridge = i; });
+        inputs.forEach(i => { 
+            if(i.getAttribute('aria-label') === 'JS_ACTION_BRIDGE') {
+                actionBridge = i;
+                const container = i.closest('div[data-testid="stElementContainer"]');
+                if(container) container.style.display = 'none'; // Hides it perfectly
+            }
+        });
 
+        // 2. TRIGGER MENU FUNCTION
         function triggerMenu(fileName) {
             if(actionBridge) {
                 if(navigator.vibrate) navigator.vibrate(50); // Haptic Pop
                 let nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
                 nativeInputValueSetter.call(actionBridge, "MENU:" + fileName);
                 actionBridge.dispatchEvent(new Event('input', { bubbles: true }));
+                
+                // Clear JS side immediately so it never gets stuck
+                setTimeout(() => {
+                    nativeInputValueSetter.call(actionBridge, "");
+                    actionBridge.dispatchEvent(new Event('input', { bubbles: true }));
+                }, 500);
             }
         }
 
+        // 3. ATTACH LISTENERS TO BUTTONS
         const buttons = window.parent.document.querySelectorAll('button');
         buttons.forEach(btn => {
             if(btn.innerText.includes('📄') || btn.innerText.includes('⚡')) {
-                // Prevent default browser right-click menu
+                
+                // Desktop Right-Click
                 btn.addEventListener('contextmenu', (e) => {
                     e.preventDefault();
                     triggerMenu(btn.innerText);
@@ -79,9 +93,11 @@ def inject_long_press_bridge():
                 // Mobile Long Press Logic
                 let timer;
                 let isLongPress = false;
+                let startY = 0;
                 
                 btn.addEventListener('touchstart', (e) => {
                     isLongPress = false;
+                    startY = e.touches[0].clientY;
                     timer = setTimeout(() => {
                         isLongPress = true;
                         triggerMenu(btn.innerText);
@@ -91,11 +107,18 @@ def inject_long_press_bridge():
                 btn.addEventListener('touchend', (e) => {
                     clearTimeout(timer);
                     if(isLongPress) {
-                        e.preventDefault(); // Stop it from opening the quiz
+                        e.preventDefault(); // Stop it from opening the quiz if long pressed
                         e.stopPropagation();
                     }
                 });
-                btn.addEventListener('touchmove', () => clearTimeout(timer));
+                
+                // CANCEL LONG PRESS IF USER IS JUST SCROLLING
+                btn.addEventListener('touchmove', (e) => {
+                    let moveY = e.touches[0].clientY;
+                    if (Math.abs(moveY - startY) > 10) {
+                        clearTimeout(timer);
+                    }
+                }, {passive: true});
             }
         });
     </script>
@@ -381,7 +404,7 @@ def file_options_dialog(file_path, library):
                 os.remove(file_path); github_delete(file_path)
                 st.session_state.active_menu_file = None
                 st.session_state.confirm_delete = False
-                play_feedback('pop'); st.rerun()
+                play_feedback('success'); st.rerun()
 
 @st.dialog("🚀 Quiz Setup")
 def setup_dialog(file_path):
@@ -408,19 +431,26 @@ def render_home():
     # --- CATCH JAVASCRIPT RIGHT-CLICK / LONG-PRESS EVENT ---
     action = st.text_input("JS_ACTION_BRIDGE", key="js_action_bridge", label_visibility="hidden")
     if action.startswith("MENU:"):
-        topic_clean = re.sub(r'^[⚡📄]\s*', '', action.replace("MENU:", "")).strip()
-        # Find path
+        # INSTANTLY CLEAR THE BRIDGE SO IT NEVER GETS STUCK AGAIN
+        st.session_state.js_action_bridge = "" 
+        
+        # AGGRESSIVE ALPHANUMERIC MATCHER (Ignores Emojis & Spaces)
+        raw_text = action.replace("MENU:", "")
+        clean_action = re.sub(r'[^a-zA-Z0-9]', '', raw_text).lower()
+        
         target_path = None
         for folder, files in library.items():
             for name, path in files.items():
-                if name == topic_clean: target_path = path
+                clean_name = re.sub(r'[^a-zA-Z0-9]', '', name).lower()
+                if clean_name == clean_action: 
+                    target_path = path
+                    break
+            if target_path: break
         
         if target_path:
             st.session_state.active_menu_file = target_path
-            st.session_state.confirm_delete = False # Reset delete warning
-            # Clear the input so it doesn't loop
-            st.components.v1.html("<script>window.parent.document.querySelector('input[aria-label=\"JS_ACTION_BRIDGE\"]').value = '';</script>", height=0)
-            st.rerun()
+            st.session_state.confirm_delete = False
+        st.rerun()
 
     # Render the Context Menu Dialog if a file was held/right-clicked
     if st.session_state.get('active_menu_file'):
@@ -479,7 +509,7 @@ def render_home():
     if not library:
         st.info("Welcome to your Hub! Upload your first PDF above.")
     else:
-        st.info("💡 **Pro Tip:** Right-Click (or Press and Hold) any topic to Rename, Copy, Move, or Delete it!")
+        st.info("💡 **Pro Tip:** Press and Hold (or Right-Click) any topic to Rename, Copy, Move, or Delete it!")
         tabs = st.tabs(list(library.keys()))
         for idx, folder_name in enumerate(library.keys()):
             with tabs[idx]:
