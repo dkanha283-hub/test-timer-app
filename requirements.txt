@@ -1,5 +1,5 @@
 streamlit
 pdfplumber
-pytesseract
 Pillow
 PyPDF2
+PyGithub
