@@ -123,12 +123,12 @@
         "id": 11,
         "question": "If 85% of (x − y) = 25% of (x + y), Then y is what percentage of x?\nमदद (x-y) का 85% = (x + y) का 25% वै, तॉ y, x का ककतना प्रधतलत वै?\n(SSC GD 2023)",
         "options": [
-            "",
-            "",
-            "",
-            ""
+            "51 + 4/11",
+            "54 + 6/11",
+            "55 + 1/11",
+            "58 + 3/11"
         ],
-        "answer": "",
+        "answer": "54 + 6/11",
         "explanation": "Based on the Answer Key, the correct option is [B]."
     },
     {
