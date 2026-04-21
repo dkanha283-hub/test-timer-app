@@ -4,31 +4,26 @@ import os
 import random
 import json
 import backend as bk 
+import session_manager as sm # Imports your new 24-hour code system
 
 # --- 1. SETUP & SESSION STATE ---
 st.set_page_config(page_title="Pro CBT Hub", layout="wide", initial_sidebar_state="collapsed")
 bk.inject_custom_css()
 
-@st.cache_resource
-def get_global_sessions(): return {}
-
-def save_state_to_cloud():
-    sessions = get_global_sessions()
-    now = time.time()
-    expired = [pin for pin, data in sessions.items() if (now - data['timestamp']) > 18000]
-    for pin in expired: del sessions[pin]
-    if 'resume_pin' in st.session_state:
-        sessions[st.session_state.resume_pin] = {
+# Sync current progress with the 24-hour session manager
+def update_24h_session():
+    if 'resume_pin' in st.session_state and st.session_state.get('page') == 'quiz':
+        state_data = {
             "file": st.session_state.selected_topic_file, "q_index": st.session_state.current_q_index,
             "answers": st.session_state.user_answers.copy(), "time": st.session_state.time_per_question,
-            "max_qs": st.session_state.max_questions, "quiz_data": st.session_state.quiz_data, "timestamp": now
+            "max_qs": st.session_state.max_questions, "quiz_data": st.session_state.quiz_data
         }
+        sm.save_session(st.session_state.resume_pin, state_data)
 
 defaults = {
     'page': "home", 'selected_topic_file': None, 'quiz_data': [], 
     'current_q_index': 0, 'user_answers': {}, 'time_per_question': 60, 
     'max_questions': 10, 'app_lang': "Bilingual",
-    'resume_pin': str(random.randint(1000, 9999)),
     'clipboard': None, 'active_menu_file': None, 'confirm_delete': False
 }
 for k, v in defaults.items():
@@ -56,7 +51,7 @@ def file_options_dialog(file_path, library):
     if st.button("📋 Copy to Clipboard", use_container_width=True):
         st.session_state.clipboard = file_path
         st.session_state.active_menu_file = None
-        bk.play_feedback('success'); st.toast("Copied!"); st.rerun()
+        bk.play_feedback('success'); st.toast(f"Copied!"); st.rerun()
 
     with st.expander("📁 Move to Folder", expanded=False):
         folders = list(library.keys())
@@ -114,8 +109,8 @@ def setup_dialog(file_path):
         st.session_state.quiz_data = random.sample(raw_data, selected_qs) if order_choice == "Shuffled" else raw_data[:selected_qs]
         st.session_state.selected_topic_file = file_path
         
-        # Ensure a fresh PIN is generated every time a new quiz starts
-        st.session_state.resume_pin = str(random.randint(1000, 9999))
+        # Generate and save a new PIN to the 24-hour physical file
+        st.session_state.resume_pin = sm.generate_pin()
         st.session_state.page = "quiz"
         st.rerun()
 
@@ -172,23 +167,23 @@ def render_home():
                     else: st.error("Failed to parse PDF.")
             else: st.warning("Please complete all fields.")
     
-    with st.expander("🔄 Resume Active Quiz", expanded=False):
+    with st.expander("🔄 Resume Active Quiz (Valid 24h)", expanded=False):
         col1, col2 = st.columns([1, 2])
         with col1:
             entered_pin = st.text_input("Enter 4-Digit PIN", max_chars=4)
             if st.button("Resume My Quiz"):
-                sessions = get_global_sessions()
-                if entered_pin in sessions:
-                    saved = sessions[entered_pin]
-                    st.session_state.selected_topic_file = saved['file']
-                    st.session_state.current_q_index = saved['q_index']
-                    st.session_state.user_answers = saved['answers']
-                    st.session_state.time_per_question = saved['time']
-                    st.session_state.max_questions = saved['max_qs']
-                    st.session_state.quiz_data = saved['quiz_data'] 
+                saved_session = sm.load_session(entered_pin)
+                if saved_session:
+                    st.session_state.selected_topic_file = saved_session['file']
+                    st.session_state.current_q_index = saved_session['q_index']
+                    # Convert string keys back to int for user_answers
+                    st.session_state.user_answers = {int(k): v for k, v in saved_session['answers'].items()}
+                    st.session_state.time_per_question = saved_session['time']
+                    st.session_state.max_questions = saved_session['max_qs']
+                    st.session_state.quiz_data = saved_session['quiz_data'] 
                     st.session_state.resume_pin = entered_pin
                     st.session_state.page = "quiz"; st.rerun()
-                else: st.error("PIN not found or expired.")
+                else: st.error("PIN not found or expired (over 24 hours).")
 
     st.write("---")
     
@@ -225,17 +220,20 @@ def render_home():
     bk.inject_long_press_bridge()
 
 def render_quiz():
-    save_state_to_cloud()
+    # Save the current state to the 24-hour file!
+    update_24h_session()
+    
     q_index = st.session_state.current_q_index
     q_data = st.session_state.quiz_data[q_index]
     total_qs = len(st.session_state.quiz_data)
     edit_mode = st.session_state.get('edit_toggle', False)
 
+    # VERY OBVIOUS 4-DIGIT PIN DISPLAY AT THE TOP!
+    st.success(f"🔑 **YOUR RESUME PIN IS:** `{st.session_state.resume_pin}` (Valid for 24 Hours)")
+
     col_sect, col_lang, col_qnum = st.columns([2, 1, 1], vertical_alignment="center")
     with col_sect: 
         st.markdown(f"##### {os.path.basename(st.session_state.selected_topic_file).replace('.json', '').replace('_', ' ')}")
-        # --- THE 4-DIGIT PIN CODE IS RENDERED HERE PERFECTLY ---
-        st.markdown(f"<span style='color:#ef4444; font-weight:bold;'>🔑 Save PIN: {st.session_state.resume_pin}</span>", unsafe_allow_html=True)
     with col_lang:
         st.session_state.app_lang = st.selectbox("Language", ["Bilingual", "English", "Hindi"], label_visibility="collapsed")
     with col_qnum: 
@@ -267,8 +265,8 @@ def render_quiz():
         else:
             if st.button("Submit Test", type="primary", use_container_width=True):
                 if selected_option: st.session_state.user_answers[q_index] = selected_option
-                sessions = get_global_sessions()
-                if st.session_state.resume_pin in sessions: del sessions[st.session_state.resume_pin]
+                # Delete the PIN after completing the test
+                sm.delete_session(st.session_state.resume_pin)
                 st.session_state.page = "analysis"; bk.play_feedback('success'); st.rerun()
 
     st.divider()
@@ -316,3 +314,4 @@ def render_analysis():
 if st.session_state.page == "home": render_home()
 elif st.session_state.page == "quiz": render_quiz()
 elif st.session_state.page == "analysis": render_analysis()
+        
