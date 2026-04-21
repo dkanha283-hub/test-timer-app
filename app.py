@@ -218,6 +218,8 @@ def render_quiz():
     col_sect, col_lang, col_qnum = st.columns([2, 1, 1], vertical_alignment="center")
     with col_sect: 
         st.markdown(f"##### {os.path.basename(st.session_state.selected_topic_file).replace('.json', '').replace('_', ' ')}")
+        # --- THE FIX IS HERE: RE-ADDED THE PIN DISPLAY WITH A KEY ICON ---
+        st.markdown(f"<span style='color:#ef4444; font-weight:bold;'>🔑 Save PIN: {st.session_state.resume_pin}</span>", unsafe_allow_html=True)
     with col_lang:
         st.session_state.app_lang = st.selectbox("Language", ["Bilingual", "English", "Hindi"], label_visibility="collapsed")
     with col_qnum: 
@@ -298,3 +300,4 @@ def render_analysis():
 if st.session_state.page == "home": render_home()
 elif st.session_state.page == "quiz": render_quiz()
 elif st.session_state.page == "analysis": render_analysis()
+    
