@@ -1,0 +1,1022 @@
+[
+    {
+        "id": 1,
+        "question": "If x : y = 2 : 3 , then (4x + 3y) : (2x + 5y) = ?\nमदद x : y = 2 : 3, तॉ (4x + 3y) : (2x + 5y) = ?\nRRB NTPC 05/03/2021 (Morning)",
+        "options": [
+            "17 : 19",
+            "19 : 17",
+            "13 : 11",
+            "11 : 13"
+        ],
+        "answer": "17 : 19",
+        "explanation": "Correct option is [A]."
+    },
+    {
+        "id": 2,
+        "question": "If a : b = 7 : 9 and b : c = 15 : 7, then a : b : c is:\nमदद a : b = 7 : 9 औय b : c = 15 : 7 वै, तॉ a : b : c का भान ज्ञात कीजजए\nGroup D 02/09/2022 (Afternoon)",
+        "options": [
+            "35 : 45 : 25",
+            "35 : 45 : 21",
+            "21 : 35 : 45",
+            "45 : 35 : 21"
+        ],
+        "answer": "35 : 45 : 21",
+        "explanation": "Correct option is [B]."
+    },
+    {
+        "id": 3,
+        "question": "If A : B = 8 : 13, B : C = 5 : 8 and C : D = 4 : 5, then A : B : C : D is equal to:\nमदद A : B = 8 : 13, B : C = 5 : 8 औय C : D = 4 : 5, तॉ A : B : C : D फयाफय वै:\n(SSC SELECTION POST XII GRADUATE LEVEL)",
+        "options": [
+            "40 : 65 : 104 : 130",
+            "38 : 65 : 111 : 120",
+            "38 : 65 : 111 : 120",
+            "40 : 60 : 103 : 112"
+        ],
+        "answer": "40 : 65 : 104 : 130",
+        "explanation": "Correct option is [A]."
+    },
+    {
+        "id": 4,
+        "question": "If a : b = 2 : 5 , b : c = 5 : 8 , c : d= 8 : 11 , then a : d is :\nमदद a : b = 2 : 5, b : c = 5 : 8 , c : d = 8 : 11, तॉ a : d वै :\nRRB NTPC 06/04/2021 (Morning)",
+        "options": [
+            "3 : 5",
+            "5 : 8",
+            "2 : 11",
+            "2 : 7"
+        ],
+        "answer": "2 : 11",
+        "explanation": "Correct option is [C]."
+    },
+    {
+        "id": 5,
+        "question": "The ratio of sand to gravel in a mixture is 17 : 8 while that between gravel and\ncement is 6 : 17. What is the ratio of sand to cement in the mixture?\nजभश्रण भें यते के ऴाथ फजयी का अनुऩात 17 : 8 वै जफकक फजयी औय ऴीभेंट का अनुऩात 6 : 17 वै। जभश्रण\nभें यते के ऴाथ ऴीभेंट का क्या अनुऩात वै?\nRRB ALP 09/08/2018 (Evening)",
+        "options": [
+            "3 : 4",
+            "17 : 17",
+            "289 : 48",
+            "8 : 6"
+        ],
+        "answer": "3 : 4",
+        "explanation": "Correct option is [A]."
+    },
+    {
+        "id": 6,
+        "question": "If 5A = 6B = 9C, what is A : B : C?\nमदद 5A= 6B= 9C वै, तॉ A : B : C क्या वॉगा?",
+        "options": [
+            "10 : 18 : 15",
+            "18 : 15 : 10",
+            "15 : 10 : 18",
+            "5 : 6 : 977"
+        ],
+        "answer": "18 : 15 : 10",
+        "explanation": "Correct option is [B]."
+    },
+    {
+        "id": 7,
+        "question": "If a : (b + c) = 1 : 3 and c : (a + b) = 5 : 7, find the value of b : (c + a).\nमदद a : (b + c) = 1 : 3 औय c : (a + b) = 5 : 7 वै, तॉ b : (c + a) का भान ज्ञात कीजजए |\nRRB JE 23/05/2019 (Evening)",
+        "options": [
+            "4 : 5",
+            "3 : 5",
+            "1 : 2",
+            "3 : 4"
+        ],
+        "answer": "1 : 2",
+        "explanation": "Correct option is [C]."
+    },
+    {
+        "id": 8,
+        "question": "If (a + b) : (b + c) : (c + a) = 7 : 6 : 5 and a + b + c = 27, then what will be the value of ?\nमदद (a + b): (b + c) : (c + a) = 7: 6: 5 औय a + b + c = 27, तॉ का भान क्या वॉगा ?",
+        "options": [
+            "4 : 3 : 6",
+            "3 : 4 : 2",
+            "3 : 2 : 4",
+            "3 : 6 : 4"
+        ],
+        "answer": "4 : 3 : 6",
+        "explanation": "Correct option is [A]."
+    },
+    {
+        "id": 9,
+        "question": "If a ∶ b = c ∶ d = e ∶ f = 5 ∶ 7, then what is the ratio (3a + 5c + 11e) ∶ (3b + 5d + 11f)?\nमदद a ∶ b = c ∶ d = e ∶ f = 5 ∶ 7, तॉ अनुऩात (3a + 5c + 11e) ∶ (3b + 5d + 11f) क्या वै?\n(SSC CGL 2024 Pre)",
+        "options": [
+            "7 : 11",
+            "3 : 7",
+            "5 : 7",
+            "11 : 7"
+        ],
+        "answer": "5 : 7",
+        "explanation": "Correct option is [C]."
+    },
+    {
+        "id": 10,
+        "question": "If then find the value of (ap3 – br3 + ct3)/(aq3 – bs3 + cu3) = ?",
+        "options": [
+            "25",
+            "",
+            "",
+            "15.625"
+        ],
+        "answer": "15.625",
+        "explanation": "Correct option is [D]."
+    },
+    {
+        "id": 11,
+        "question": "If a,b,c and d are in continued proportion, then (ma3+nb3-rc3) : mb3+nc3-rd3) = ?\nमदद a, b, c औय d जनयतं य अनुऩात भें वैं, तॉ (ma3+nb3-rc3) : (mb3+nc3-rd3) = ?\nRRB NTPC 26/07/2021 (Morning)",
+        "options": [
+            "d : a",
+            "a : d",
+            "b : c",
+            "c : b"
+        ],
+        "answer": "a : d",
+        "explanation": "Correct option is [B]."
+    },
+    {
+        "id": 12,
+        "question": "If (m + n) : (m - n) = 7 : 3 , then (m³ + n³) : (m³ - n³) = ?\nमदद (m + n) : (m - n) = 7 : 3 तॉ (m³ + n³) : (m³ - n³) = ?\nRRB NTPC 16/02/2021 (Evening)",
+        "options": [
+            "117 : 133",
+            "133 : 117",
+            "17 : 133",
+            "117 : 13\n√ √"
+        ],
+        "answer": "133 : 117",
+        "explanation": "Correct option is [B]."
+    },
+    {
+        "id": 13,
+        "question": "Find the value of in the given equation:\n√ √\n√ √\nददए गए ऴभीकयण भें का भान ज्ञात कीजजए:\n√ √",
+        "options": [
+            "",
+            "",
+            "",
+            ""
+        ],
+        "answer": "",
+        "explanation": "Correct option is [A]."
+    },
+    {
+        "id": 14,
+        "question": "If 66% of a number is equal to of another number, then what is the ratio of the first\nnumber to the second number?\nमदद ककऴी ऴंख्या का 66% ककऴी अन्य ऴंख्या के ऱ ें बाग के फयाफय वै, तॉ ऩवरी ऴंख्या ऴंख्या औय\nदऴू यी ऴंख्या का अनुऩात ज्ञात कीजजए।\n(RRB NTPC GRADUATE LEVEL 2025)",
+        "options": [
+            "246 : 229",
+            "249 : 235",
+            "250 : 231",
+            "252 : 233"
+        ],
+        "answer": "250 : 231",
+        "explanation": "Correct option is [C]."
+    },
+    {
+        "id": 15,
+        "question": "In a carton containing a dozen mirrors is dropped, which of the following can be\nthe ratio of number of broken mirrors to unbroken mirrors?\nएक काटटन भ ें एक दजटन दऩटणों कॉ गगयामा जाता वै, जनम्नजरखित भें ऴे टूटे रृए दऩटणों की ऴंख्या का\nअटूट दऩटणों ऴ े अनुऩात क्या वॉ ऴकता वै?\nNTPC CBT - I 09/02/2021 (Morning)",
+        "options": [
+            "3 : 7",
+            "3 : 2",
+            "4 : 7",
+            "5 : 1"
+        ],
+        "answer": "5 : 1",
+        "explanation": "Correct option is [D]."
+    },
+    {
+        "id": 16,
+        "question": "Three positive numbers are in the ratio of 4 : 5 : 7, and the sum of their squares is\n15,210. Find the sum of the three numbers.\nतीन धनात्मक ऴंख्याएँ 4: 5:7 के अनुऩात भें वै औय उनके ऱगों का मॉग 15,210 वै। तीनों\nऴंख्याओ ंका मॉग ज्ञात कीजजए।",
+        "options": [
+            "148",
+            "156",
+            "126",
+            "208"
+        ],
+        "answer": "208",
+        "explanation": "Correct option is [D]."
+    },
+    {
+        "id": 17,
+        "question": "Which of the following ratio is smallest?\nजनम्नजरखित भें ऴ े कॊन ऴा अनुऩात ऴफऴे छॉटा वै?\n(RRB RPF SI 2024)",
+        "options": [
+            "29 : 31",
+            "21 : 52",
+            "28 : 42",
+            "24 : 59"
+        ],
+        "answer": "21 : 52",
+        "explanation": "Correct option is [B]."
+    },
+    {
+        "id": 18,
+        "question": "Which of the following ratios is the greatest?\nजनम्नजरखित भें ऴ े कॊन-ऴा अनुऩात ऴफऴ े फडा वै?\n(RRB NTPC GRADUATE LEVEL 2025)",
+        "options": [
+            "33 : 51",
+            "37 : 64",
+            "32 : 86",
+            "26 : 59"
+        ],
+        "answer": "33 : 51",
+        "explanation": "Correct option is [A]."
+    },
+    {
+        "id": 19,
+        "question": "If 4 , 31 , 92 , and y are in proportion, then the value of y is:\nमदद 4, 31, 92, औय y ऴभानुऩात भें वैं, तॉ y का भान ज्ञात कीजजए।\n(RRB constable 2025)",
+        "options": [
+            "713",
+            "715",
+            "722",
+            "718"
+        ],
+        "answer": "713",
+        "explanation": "Correct option is [A]."
+    },
+    {
+        "id": 20,
+        "question": "In a proportion, the product of the first and fourth terms is 70 and that of the\nsecond and third terms is 3.5y. The value of y is:\nककऴी अनुऩात (proportion) भें, ऩवरे औय चॊथे ऩद का गुणनपर 70 वै तथा दऴू ये औय तीऴय े ऩद का\nगुणनपर वै। 3.5y वै। y के भान की गणना कय।ें",
+        "options": [
+            "17",
+            "20",
+            "15",
+            "22"
+        ],
+        "answer": "20",
+        "explanation": "Correct option is [B]."
+    },
+    {
+        "id": 21,
+        "question": "If 7.5 : 19.5 :: 16 : x, find the value of x.\nमदद 7.5 : 19.5 :: 16 : x, तॉ x का भान ज्ञात कीजजए।\n(RRB NTPC GRADUATE LEVEL 2025)",
+        "options": [
+            "39.4",
+            "41.1",
+            "41.6",
+            "45.1"
+        ],
+        "answer": "41.6",
+        "explanation": "Correct option is [C]."
+    },
+    {
+        "id": 22,
+        "question": "If 3.2 : x :: x : 16.2, and x > 0, then find the value of x.\nमदद 3.2 : x :: x : 16.2 वै, औय x > 0 वै, तॉ x का भान ज्ञात कीजजए\nGroup D 02/09/2022 (Evening)",
+        "options": [
+            "6.3",
+            "9.7",
+            "7.2",
+            "5.4"
+        ],
+        "answer": "7.2",
+        "explanation": "Correct option is [C]."
+    },
+    {
+        "id": 23,
+        "question": "If 40 : 35 :: 35: k find the value of k – 1.\nमदद 40 : 35 :: 35 : k वै, तॉ k – 1 का भान ज्ञात कीजजए।\n(RRB TECHNICIAN GRADE-3 2024)",
+        "options": [
+            "",
+            "",
+            "",
+            ""
+        ],
+        "answer": "",
+        "explanation": "Correct option is [A]."
+    },
+    {
+        "id": 24,
+        "question": "6 : 42 :: 7.6 : x and 3 : 6 :: 6 : y. What is the ratio of x to y?\nमदद 6 : 42 :: 7.6 : x औय 3 : 6 :: 6 : y वै, तॉ x औय y का अनुऩात ज्ञात कीजजए।\n(RRB NTPC GRADUATE LEVEL 2025)",
+        "options": [
+            "133 : 30",
+            "135 : 32",
+            "134 : 28",
+            "137 : 40"
+        ],
+        "answer": "133 : 30",
+        "explanation": "Correct option is [A]."
+    },
+    {
+        "id": 25,
+        "question": "If the third proportional of 25 and 35 be x, then what is the value of x?\nमदद 25 औय 35 का तृतीमानुऩाती x वै, तॉ x का भान ककतना वै?",
+        "options": [
+            "52",
+            "50",
+            "51",
+            "49"
+        ],
+        "answer": "49",
+        "explanation": "Correct option is [D]."
+    },
+    {
+        "id": 26,
+        "question": "What is the third proportional of 6x2 and 18xy?\n6x2 औय 18xy का तृतीमानुऩाती ज्ञात कीजजए।\n(RRB NTPC GRADUATE LEVEL 2025)",
+        "options": [
+            "52y2",
+            "53y2",
+            "54y2",
+            "51y2"
+        ],
+        "answer": "54y2",
+        "explanation": "Correct option is [C]."
+    },
+    {
+        "id": 27,
+        "question": "Find the mean proportional between 169 and 121.\n169 औय 121 के फीच आनुऩाततक भाध्य ज्ञात कीजजए ।\nRRB NTPC 09/03/2021 (Morning)",
+        "options": [
+            "179",
+            "143",
+            "147",
+            "165"
+        ],
+        "answer": "143",
+        "explanation": "Correct option is [B]."
+    },
+    {
+        "id": 28,
+        "question": "The mean proportional between ( √ ) and ( √ ) is:\n( √ ) औय ( √ ) का भाध्यानुऩाती ज्ञात कीजजए।\n(RRB NTPC GRADUATE LEVEL 2025)",
+        "options": [
+            "√",
+            "√ √",
+            "√ √",
+            "√"
+        ],
+        "answer": "√ √",
+        "explanation": "Correct option is [B]."
+    },
+    {
+        "id": 29,
+        "question": "If 260 is the mean proportion between x and 338, what is the value of x?\nमदद x औय 338 के फीच भाध्मानुऩात 260 वै, तॉ x का भान ककतना वॉगा?\n(RRB NTPC GRADUATE LEVEL 2025)",
+        "options": [
+            "200",
+            "198",
+            "199",
+            "201"
+        ],
+        "answer": "200",
+        "explanation": "Correct option is [A]."
+    },
+    {
+        "id": 30,
+        "question": "What is the fourth proportional to , and ?\n, औय का चतुथाटनुऩाती क्या वै?\n(SSC GD 2023)",
+        "options": [
+            "",
+            "",
+            "",
+            ""
+        ],
+        "answer": "",
+        "explanation": "Correct option is [A]."
+    },
+    {
+        "id": 31,
+        "question": "What is the fourth proportional of √ √ √ ?\n√ √ और √ का चॊथा अनुऩात क्या वै?\n(CHSL PRE 2023)",
+        "options": [
+            "10√",
+            "40",
+            "30",
+            "20"
+        ],
+        "answer": "20",
+        "explanation": "Correct option is [D]."
+    },
+    {
+        "id": 32,
+        "question": "Find the fourth proportional of ( ) ( ) ( ), provided ?\n( ) ( ) ( ) का चॊथा आनुऩाततक ज्ञात कीजजए, मदद x ≠ y?",
+        "options": [
+            "( )",
+            "( )",
+            "( )",
+            "( )"
+        ],
+        "answer": "( )",
+        "explanation": "Correct option is [C]."
+    },
+    {
+        "id": 33,
+        "question": "The fourth proportion to 9, 3 and 27 is the same as the third proportion to A and 24.\nWhat is the value of A?\n9, 3 औय 27 का चतुथाटनुऩाती, A औय 24 के तृतीमानुऩाती के फयाफय वै। A का भान ककतना वै?\n(RRB NTPC GRADUATE LEVEL 2025)",
+        "options": [
+            "61",
+            "63",
+            "62",
+            "64"
+        ],
+        "answer": "64",
+        "explanation": "Correct option is [D]."
+    },
+    {
+        "id": 34,
+        "question": "C is the third proportional of 44 and B. If B is the sum of the first three even natural\nnumbers, then find the value of C. (Round off your answer to two decimal places)\n44 औय B का तृतीमानुऩाती C वै। मदद B, ऩवरी तीन ऴभ प्राकृ त ऴंख्याओ ंका मॉगपर वै, तॉ C का\nभान ज्ञात कीजजए। (दलभरऱ के दॉ स्थानों तक ऩूणाांककत कीजजए)\n(RRB NTPC GRADUATE LEVEL 2025)",
+        "options": [
+            "3.27",
+            "0.98",
+            "1.98",
+            "4.58"
+        ],
+        "answer": "3.27",
+        "explanation": "Correct option is [A]."
+    },
+    {
+        "id": 35,
+        "question": "When x is subtracted from each of the numbers 54, 49, 22 and 21, the numbers so\nobtained are in proportion. The ratio of (8x – 25) to (7x – 26) is:\nऴंख्याओ ं54, 49, 22 औय 21 भें ऴ े प्रत्येक ऴ े X कॉ घटान े ऩय प्राप्त ऴंख्याएं ऴभानुऩात भें वैं। (8x – 25)\nऔय (7x – 26) का अनुऩात ज्ञात कय।ें",
+        "options": [
+            "29 : 24",
+            "15 : 13",
+            "27 : 26",
+            "5 : 4"
+        ],
+        "answer": "29 : 24",
+        "explanation": "Correct option is [A]."
+    },
+    {
+        "id": 36,
+        "question": "When x is added to each of 11, 14, 31 and 38, then the numbers so obtained, in this\norder, are in proportion. Then, if 3x : y :: y : (8x - 5), and y> 0, what is the value of y?\nजफ 11, 14, 31 औय 38 भ ें ऴे प्रत्येक भें x जॉडा जाता वै, तॉ इऴ प्रकाय प्राप्त ऴंख्याएं क्रभलः ऴभानुऩात भें\nवॉती वैं। तॉ, मदद 3x : y :: y : (8x - 5) वै, औय y > 0 वै, तॉ y का भान ज्ञात कीजजए ।\nGroup D 08/09/2022 (Afternoon)",
+        "options": [
+            "12",
+            "18",
+            "15",
+            "16"
+        ],
+        "answer": "18",
+        "explanation": "Correct option is [B]."
+    },
+    {
+        "id": 37,
+        "question": "If A varies directly as B, and A = 210 when B = 51, then find A when B = 136.\nमदद A, B के अनुक्रभानुऩाती वै, तॉ B = 51 वॉने ऩय A = 210 वॉता वै। मदद B = 136 वै, तॉ A का भान\nककतना वॉगा?\n(RRB NTPC GRADUATE LEVEL 2025)",
+        "options": [
+            "563",
+            "560",
+            "558",
+            "559"
+        ],
+        "answer": "560",
+        "explanation": "Correct option is [B]."
+    },
+    {
+        "id": 38,
+        "question": "x and y are in direct proportion and y = 92.5 when x = 37 , what will be the value of y\nwhen x = 16 ?\nx औय y अनुक्रभानुऩाती वैं, जफ x = 37 वै, तॉ y = 92.5 वॉता वै। जफ x = 16 वॉ, तॉ y का भान क्या वॉगा ?\nLevel 2 (16/06/2022) Shift 3",
+        "options": [
+            "48",
+            "32",
+            "40",
+            "24"
+        ],
+        "answer": "40",
+        "explanation": "Correct option is [C]."
+    },
+    {
+        "id": 39,
+        "question": "M is inversely proportional to N. If M is 18, then N is 21. If N = 27, then what is the\nvalue of M?\nM, N के व्युत्क्रभानुऩाती वै। मदद M, 18 वै, तॉ N, 21 वै। मदद N = 27 वै, तॉ M का भान ज्ञात कीजजए।\n(RRB NTPC GRADUATE LEVEL 2025)",
+        "options": [
+            "14",
+            "12",
+            "13",
+            "16"
+        ],
+        "answer": "14",
+        "explanation": "Correct option is [A]."
+    },
+    {
+        "id": 40,
+        "question": "If x varies inversely as y3 – 1 and x is equal to 6 when y = 3, find x when y = 8.\nमदद x, y3 – 1 के ब्युत्क्रभानऩाती वै औय y = 3 वॉने ऩय x = 6 के फयाफय वै, तॉ y = 8 वॉने ऩय x ज्ञात कय।ें\n(RRB RPF SI 2024)",
+        "options": [
+            "156/512",
+            "157/512",
+            "156/511",
+            "158/511"
+        ],
+        "answer": "156/511",
+        "explanation": "Correct option is [C]."
+    },
+    {
+        "id": 41,
+        "question": "x varies directly as (3y – 2), when y = 3 and x = 14. If x = 20, find the value of 'y'.\nx ऴीध े (3y – 2) के रूऩ भें फदरता वै, जफ y = 3 औय x = 14. मदद x = 20 वै, तॉ 'y' का भान ज्ञात कय।ें\nUP POLICE ASSISTANT OPERATOR 2024",
+        "options": [
+            "4",
+            "5",
+            "2",
+            "6"
+        ],
+        "answer": "4",
+        "explanation": "Correct option is [A]."
+    },
+    {
+        "id": 42,
+        "question": "X is directly proportional to A2 and A is inversely proportional to Y. If X is 39 when Y\nis 20, find X when Y is 8.\nX, A2 के अनुक्रभानुऩाती वै औय A, Y के व्युत्क्रभानुऩाती वै। मदद Y के 20 वॉने ऩय X 39 वै, तॉ Y के 8\nवॉने ऩय X ज्ञात कीजजए।\n(RRB NTPC GRADUATE LEVEL 2025)",
+        "options": [
+            "3902",
+            "3901",
+            "3897",
+            "3900"
+        ],
+        "answer": "3900",
+        "explanation": "Correct option is [D]."
+    },
+    {
+        "id": 43,
+        "question": "The power consumption of an electrical device varies directly with the square of\nthe voltage applied. If a device consumes 150 watts when the voltage is 120 volts,\nhow much power (in watts) will it consume at 240 volts?\nककऴी कऱद्युत उऩकयण की कफजरी िऩत, अनुप्रमुक्त ऱॉल्टता के ऱग ट के अनुक्रभानुऩाती वै। मदद\nउऩकयण 120 ऱॉल्ट ऱॉल्टता वॉने ऩय 150 ऱाट की िऩत कयता वै, तॉ 240 ऱॉल्ट ऩय मव ककतनी कफजरी\n(ऱाट भें) िऩत कयगे ा?\n(SSC GD 2025)",
+        "options": [
+            "550",
+            "650",
+            "500",
+            "600"
+        ],
+        "answer": "600",
+        "explanation": "Correct option is [D]."
+    },
+    {
+        "id": 44,
+        "question": "There are 4182 students in a school and the ratio of boys to girls in the school is 23 :\n28, then find the number of boys in school.\nएक कऱद्यारम भें 4182 कऱद्याथी वैं तथा कऱद्यारम भें रडकों औय रडककमों का अनुऩात 23 : 28 वै, तॉ\nकऱद्यारम भें रडकों की ऴंख्या ज्ञात कीजजए।",
+        "options": [
+            "1867",
+            "1886",
+            "1890",
+            "1903"
+        ],
+        "answer": "1886",
+        "explanation": "Correct option is [B]."
+    },
+    {
+        "id": 45,
+        "question": "A pole is 405m long. It is painted in saffron, white and green colours one above the\nother in the ratio 8 : 9 : 10 respectively. What is the length of the white part of the\npole (in meters)?\nएक िंबा 405 m रंफा वै। इऴ े के ऴरयमा, ऴपे द औय वय े यगं भें एक के ऊऩय एक क्रभलः 8 : 9 : 10 के\nअनुऩात भें यगं ा गमा वै। िंब े के ऴपे द बाग की रंफाई (m भें) ककतनी वै?\nLevel 2 (16/06/2022) Shift 1",
+        "options": [
+            "140",
+            "130",
+            "120",
+            "135"
+        ],
+        "answer": "135",
+        "explanation": "Correct option is [D]."
+    },
+    {
+        "id": 46,
+        "question": "An amount of ₹976 is divided among three persons in the ratio of 2 : 11 : 17. The\ndifference between the largest and the smallest shares (in ₹) in the distribution is:\n₹976 की धनयाजल कॉ तीन व्यगक्तमों के फीच 2 : 11 : 17 के अनुऩात भें फांटा जाता वै। फंटन भें ऴफऴ े फडे\nरवस्स े औय ऴफऴ े छॉटे रवस्से के फीच अंतय (₹ भें) ज्ञात कीजजए।",
+        "options": [
+            "531",
+            "517",
+            "488",
+            "495"
+        ],
+        "answer": "488",
+        "explanation": "Correct option is [C]."
+    },
+    {
+        "id": 47,
+        "question": "A sum of money is to be distributed among A, B, C, and D in the ratio of 14 : 7 : 11 : 10.\nIf C gets ₹196 more than B, how much did A receive?\nकॉई धनयाजल A, B, C औय D के फीच 14 : 7 : 11 : 10 के अनुऩात भें फांटी जानी वै। मदद C कॉ B ऴ े ₹196\nअतधक जभरे, तॉ A कॉ ककतनी धनयाजल प्राप्त रृई?\n(RRB NTPC GRADUATE LEVEL 2025)",
+        "options": [
+            "₹684",
+            "₹686",
+            "₹688",
+            "₹685"
+        ],
+        "answer": "₹686",
+        "explanation": "Correct option is [B]."
+    },
+    {
+        "id": 48,
+        "question": "The average price of three items of furniture is ₹ 16860. If their prices are in the\nratio 3 : 5 : 7, the price of the costliest item (in ₹) is:\nपनीचय की तीन ऱस्तओु ंकी औऴत कीभत ₹16860 वै। मदद उनकी कीभतें 3 : 5 : 7 के अनुऩात भें वैं, तॉ\nऴफऴ े भवंगी ऱस्त ु की कीभत (₹ भें) ज्ञात कीजजए।",
+        "options": [
+            "10116",
+            "7868",
+            "5620",
+            "23604"
+        ],
+        "answer": "23604",
+        "explanation": "Correct option is [D]."
+    },
+    {
+        "id": 49,
+        "question": "If 674 bananas were distributed among three monkeys in the ratio\nrespectively, how many bananas did the third monkey get?\nमदद 674 के रे, तीन फंदयों के फीच के अनुऩात भें उल्लिखित क्रभ भें कऱतरयत ककए गए, तॉ तीऴये\nफंदय कॉ ककतन े के रे जभरे?\n(RRB NTPC GRADUATE LEVEL 2025)",
+        "options": [
+            "24",
+            "23",
+            "22",
+            "25"
+        ],
+        "answer": "24",
+        "explanation": "Correct option is [A]."
+    },
+    {
+        "id": 50,
+        "question": "₹3300 were divided among P, Q and R, such that 4 times of P = 7 times of Q = 2 times\nof R. Find the share of R.\n₹3300 कॉ P, Q औय R के फीच इऴ प्रकाय फाँटा गमा कक P का 4 गुना = Q का 7 गुना = R का 2 गुना वै।\nR का रवस्सा ज्ञात कय।ें",
+        "options": [
+            "₹2024",
+            "₹2028",
+            "₹2046",
+            "₹1848"
+        ],
+        "answer": "₹1848",
+        "explanation": "Correct option is [D]."
+    },
+    {
+        "id": 51,
+        "question": "₹2,000 is divided among A, B and C such that half of A's part, one-third of B's part\nand one-fifth of C's part are equal. What is A's part (in₹) ?\n₹2,000 की याजल कॉ A, B औय C के फीच इऴ प्रकाय फांटा जाता वै, कक A के रवस्से का 1/2 बाग, B के\nरवस्स े का 1/3 बाग, औय C के रवस्स े का1/5 बाग फयाफय वैं। A का रवस्सा (₹ भें) ज्ञात कीजजए।\nGroup D 17/09/2022 (Evening)",
+        "options": [
+            "600",
+            "400",
+            "1000",
+            "200"
+        ],
+        "answer": "400",
+        "explanation": "Correct option is [B]."
+    },
+    {
+        "id": 52,
+        "question": "A sum of Rs.8772 is divided among Anuj, Chandan and Bikram in such a way that\nthe shares of Anuj and Chandan are in the ratio 2 : 3 and those of Chandan and\nBikram are in the ratio 5 : 6. Find Chandan's share\n8772 रुऩमे की याजल कॉ अनुज, चंदन औय कऱक्रम के फीच इऴ प्रकाय कऱबाजजत ककमा गमा वै कक अनुज\nऔय चंदन के लेमय 2 : 3 के अनुऩात भें वै औय चंदन औय कऱक्रभ के लेमय 5 : 6 के अनुऩात भ ें वै। चंदन का\nरवस्सा ज्ञात कीजजए।",
+        "options": [
+            "Rs. 4312",
+            "Rs. 2341",
+            "Rs. 2041",
+            "Rs. 3060"
+        ],
+        "answer": "Rs. 3060",
+        "explanation": "Correct option is [D]."
+    },
+    {
+        "id": 53,
+        "question": "A certain sum is divided between A, B, C and D such that the ratio of the shares of\nA and B is 1 : 3, that of B and C is 2 : 5, and that of C and D is 2 : 3. If the difference\nbetween the shares of A and C is ₹ 3,510, then the share of D is:\nककऴी जनजित याजल कॉ A, B, C औय D के फीच इऴ प्रकाय कऱबाजजत ककमा जाता वै कक A औय B के रवस्स े\nका अनुऩात 1 : 3 वै, B औय C के रवस्स े का अनुऩात 2 : 5 वै औय C औय D के रवस्से का अनुऩात 2 : 3 वै।\nमदद A औय C के रवऴऴ् ों के फीच का अंतय ₹3,510 वै, तॉ D का रवस्सा ज्ञात कीजजए।",
+        "options": [
+            "₹ 6,075",
+            "₹ 4,050",
+            "₹ 4,320",
+            "₹ 3,240"
+        ],
+        "answer": "₹ 6,075",
+        "explanation": "Correct option is [A]."
+    },
+    {
+        "id": 54,
+        "question": "Amir distributed 775 gifts among 4 children. The share of the first child is twice\nthat of the second child, thrice that of the third child and four times that of the\nfourth child. Find the total number of gifts received by the first and second child.\nआजभय न े 4 फच्चॉ के फीच भें 775 उऩवाय फांटे। ऩवरे फच्चे का रवस्सा, दऴू य े फच्चे के रवस्स े का दॉगुना,\nतीऴय े फच्चे के रवस्स े का ततगुना औय चॊथे फच्च े के रवस्स े का चाय गुना वै। ऩवरे औय दऴू य े फच्च े द्वाया प्राप्त\nकु र उऩवायों की ऴंख्या फताएं।\nRPF S.I. 10/01/2019 (Morning)",
+        "options": [
+            "558",
+            "554",
+            "556",
+            "552"
+        ],
+        "answer": "558",
+        "explanation": "Correct option is [A]."
+    },
+    {
+        "id": 55,
+        "question": "A sum of ₹4,800 is divided between A, B and C such that the ratio of the share of A\nto the combined share of B and C is 3 : 5 and C receives 5/7 of what A and B\ntogether receive. The difference (in ₹) of A's share and B's share is:\n₹4800 की याजल कॉ A, B औय C के फीच इऴ प्रकाय कऱबाजजत ककमा जाता वै कक A के रवस्स,े तथा B औय\nC के ऴंमुक्त रवस्स े का अनुऩात 3 : 5 वै, तथा C कॉ प्राप्त याजल, A औय B कॉ जभराकय प्राप्त वॉन े ऱारी\nकु र याजल के 5/7 बाग के फयाफय वै। A के रवस्स े औय B के रवस्स े का अंतय (₹ भें) ज्ञात कीजजए ।\nGroup D 09/09/2022 (Morning)",
+        "options": [
+            "1,000",
+            "800",
+            "900",
+            "850"
+        ],
+        "answer": "800",
+        "explanation": "Correct option is [B]."
+    },
+    {
+        "id": 56,
+        "question": "Three friends A, B and C divide ₹5525 amongst them in such a way that if ₹50, ₹100\nand ₹75 are removed from the sums that A, B and C received respectively, then\nthe share of the sums that they get would have been in the ratio of 11 : 18 : 24. How\nmuch did C initially receive?\nतीन जभत्र A, B औय C अऩने फीच ₹5525 कॉ इऴ प्रकाय कऱबाजजत कयते वैं कक मदद A, B औय C कॉ प्राप्त\nयाजल भ ें ऴे क्रभल: ₹50, ₹100 औय ₹75 जनकार ददए जाते वैं, तॉ उन्हें जभरने ऱारी याजल का रवस्सा 11 :\n18 : 24 के अनुऩात भें वॉता। C कॉ प्रायबं भें ककतना प्राप्त रृआ?\nNTPC CBT II Level 2 (13/06/2022) Shift 2",
+        "options": [
+            "₹ 1150",
+            "₹ 2475",
+            "₹1900",
+            "₹ 2325"
+        ],
+        "answer": "₹ 2475",
+        "explanation": "Correct option is [B]."
+    },
+    {
+        "id": 57,
+        "question": "57% of Ranita’s weekly income is equal to 76% of Bhaskar’s weekly income. If\nRanita’s weekly income was reduced by Rs.400, while Bhaskar’s weekly income\ndid not change, the ratio of the weekly incomes of Ranita and Bhaskar,\nrespectively, would have been 6 : 5. What is Bhaskar’s weekly income (in Rs.)?\nयजनता की ऴाप्तारवक आम का 57% बास्कय की ऴाप्तारवक आम के 76% के फयाफय वै। मदद यजनता की\nऴाप्तारवक आम रु400 कभ कय दी जाती, जफकक बास्कय की ऴाप्तारवक आम अऩरयऱततित यवीत, तॉ\nयजनता औय बास्कय की ऴाप्तारवक आम का अनुऩात क्रभलः 6 : 5 वै। बास्कय की ऴाप्तारवक आम (रु-\nभें) क्या वै?\nSSC CPO 2024",
+        "options": [
+            "2800",
+            "4000",
+            "3000",
+            "3200"
+        ],
+        "answer": "3000",
+        "explanation": "Correct option is [C]."
+    },
+    {
+        "id": 58,
+        "question": "A sum is distributed between A, B and C in the ratio 9 : 6 : 11. If A gives 500 from his\nshare to C, the ratio of shares of A, B an ’’’’’’’’’’’’’’’ C becomes 4 : 3 : 6. What is the sum\nof shares of B and C, in the beginning?\nएक धनयाजल A, B औय C के फीच 9 : 6 : 11 के अनुऩात भें फांटी जाती वै। मदद A अऩने रवस्से ऴे 500 C कॉ\nदे देता वै तॉ A, B औय C के रवस्सों का अनुऩात 4 : 3 : 6 वॉ जाता वै। B औय C के आंयजबक रवस्सों का मॉग\nक्या वै?",
+        "options": [
+            "7,800",
+            "9,100",
+            "7,500",
+            "8,500"
+        ],
+        "answer": "8,500",
+        "explanation": "Correct option is [D]."
+    },
+    {
+        "id": 59,
+        "question": "Some amount of money has to be distributed among A, B and C in the ratio 9 : 8 : 6\nbut by mistake it is distributed in the ratio 1/9 : 1/8 : 1/6, Due to this B losses Rs1000.\nThen find the total money which has to be distributed?\nकु छ याजल कॉ A, B औय C के फीच 9 : 8 : 6 के अनुऩात भें कऱतरयत ककमा जाना वै, रेककन गरती ऴे इऴे\n1/9 : 1/8 : 1/6 के अनुऩात भ ें कऱतरयत ककमा जाता वै, इऴ के कायण B कॉ 1000 रु का नुकऴान रृआ ।\nकपय कु र धन का ऩता रगाएं जजऴका कऱतयण ककमा जाना वै?",
+        "options": [
+            "27840",
+            "21924",
+            "33350",
+            "26680"
+        ],
+        "answer": "26680",
+        "explanation": "Correct option is [D]."
+    },
+    {
+        "id": 60,
+        "question": "The ratio of the market prices of gram and pea is 2 : 5, and the ratio of the\nquantities consumed by a family is 4 : 3. Find the ratio of the expenditure on gram\nto pea.\nचना औय भटय के फाजाय भूल्य का अनुऩात 2 : 5 वै, औय एक ऩरयऱाय द्वाया उऩबॉग की गई भात्रा का\nअनुऩात 4 : 3 वै। चना औय भटय ऩय ककए गए व्यम का अनुऩात ज्ञात कीजजए।\n(RRB NTPC GRADUATE LEVEL 2025)",
+        "options": [
+            "9 : 16",
+            "3 : 4",
+            "8 : 15",
+            "17 : 10"
+        ],
+        "answer": "8 : 15",
+        "explanation": "Correct option is [C]."
+    },
+    {
+        "id": 61,
+        "question": "Seats for Mathematics, Physics and Chemistry in a school are in the ratio of 7 : 8 : 9.\nThere is a proposal to increase the seats by 30%, 40% and 50% respectively. What\nwill be the ratio of increased seats?\nएक स्कू र भें गणणत, बॊततकी औय यऴामन कऱज्ञान के जरए ऴीटें 7 : 8 : 9 के अनुऩात भें वैं। ऴीटों कॉ\nक्रभलः 30% , 40% औय 50% फढान े का प्रस्ताऱ वै। फढी रृई ऴीटों का अनुऩात ककतना वॉगा ?\nRRB NTPC 18/01/2021 (Evening)",
+        "options": [
+            "91 : 112 : 135",
+            "35 : 37 : 91",
+            "112 : 91 : 135",
+            "135 : 112 : 91"
+        ],
+        "answer": "91 : 112 : 135",
+        "explanation": "Correct option is [A]."
+    },
+    {
+        "id": 62,
+        "question": "Two numbers are in the ratio 29 : 20. On diminishing each of them by 420, the ratio\nbecomes 17 : 11. The difference between the numbers is:\nदॉ ऴंख्याएँ 29 : 20 के अनुऩात भ ें वैं। उनभें ऴे प्रत्येक कॉ 420 ऴे कभ कयने ऩय, अनुऩात 17 : 11 वॉ जाता\nवै। ऴंख्याओ ंके फीच का अंतय वै?",
+        "options": [
+            "1000",
+            "1080",
+            "960",
+            "1440"
+        ],
+        "answer": "1080",
+        "explanation": "Correct option is [B]."
+    },
+    {
+        "id": 63,
+        "question": "Two numbers are in the ratio 7 : 11. If the first number is increased by 10 and the\nsecond number is decreased by 20, then the ratio becomes 2 : 3. What is the sum\nof the original two numbers?\nदॉ ऴंख्याएँ 7 : 11 के अनुऩात भें वैं। मदद ऩवरी ऴंख्या भें 10 की ऱृणि की जाए तथा दऴू यी ऴंख्या भ ें 20 की\nकभी की जाए, तॉ अनुऩात 2 : 3 वॉ जाता वै। दॉनों भूर ऴंख्याओ ंका मॉगपर ज्ञात कीजजए।\n(RRB NTPC GRADUATE LEVEL 2025)",
+        "options": [
+            "1240",
+            "1254",
+            "1260",
+            "1268"
+        ],
+        "answer": "1260",
+        "explanation": "Correct option is [C]."
+    },
+    {
+        "id": 64,
+        "question": "In a firm, the ratio of male to female officers is in the ratio 4 : 7. If 50 male officers\nand 100 female officers are shifted to another firm, then the ratio of male to\nfemale officers becomes 7 : 12. Find the number of male officers before shifting in\nthe firms.\nएक कं ऩनी भें, ऩुरुळ ऴे भरवरा अतधकारयमों का अनुऩात 4 : 7 वै मदद 50 ऩुरुळ अतधकारयमों औय 100\nभरवरा अतधकारयमों कॉ दऴू यी कं ऩनी भें स्थानांतरयत कय ददमा जाता वै, तॉ ऩुरुळ ऴे भरवरा\nअतधकारयमों का अनुऩात 7 : 12 वॉ जाता वै। कम्पनी भें स्थानांतयण ऴे ऩवरे ऩुरुळ अतधकारयमों की\nऴंख्या ज्ञात कीजजए।\nRRB NTPC 30/12/2020 (Evening)",
+        "options": [
+            "450",
+            "300",
+            "500",
+            "400"
+        ],
+        "answer": "400",
+        "explanation": "Correct option is [D]."
+    },
+    {
+        "id": 65,
+        "question": "The students in the three sections A, B and C of Class X are in the ratio 5 : 4 : 7. If 15,\n16 and 9 new students are admitted to sections A, B and C, respectively, the ratio\nchanges to 10 : 9 : 11. What is the total number of students in Class X after the new\nadmissions?\nकक्षा X के तीन ऴेक्शन A, B औय C भें कऱद्यागथिमों का अनुऩात 5 : 4 : 7 वै। मदद ऴेक्शन A, B औय C भें\nक्रभलः 15, 16 औय 9 नए कऱद्यागथिमों कॉ प्रऱेल ददमा जाता वै, तॉ अनुऩात फदरकय 10 : 9 : 11 वॉ जाता वै।\nनए प्रऱेल के फाद कक्षा X भें कऱद्यागथिमों की कु र ऴंख्या ककतनी वै?\n(SSC GD 2025)",
+        "options": [
+            "210",
+            "120",
+            "150",
+            "180"
+        ],
+        "answer": "120",
+        "explanation": "Correct option is [B]."
+    },
+    {
+        "id": 66,
+        "question": "The monthly incomes of two friends Amit and Gopal, are in the ratio 5 : 7\nrespectively and each of them saves ₹72000 every month. If the ratio of their\nmonthly expenditure is 2 : 3, find the monthly income of Amit(in ₹).\nदॉ जभत्रों अजभत औय गॉऩार की भाजऴक आम क्रभलः 5 : 7 के अनुऩात भें वै औय इनभें ऴे प्रत्येक\n₹72000 प्रतत भाव फचाता वै। मदद इनके भाजऴक व्यम का अनुऩात 2 : 3 वै, तॉ अजभत की भाजऴक आम\n(₹ भें) ज्ञात कय।ें\n(RPF CONSTABLE 2025)",
+        "options": [
+            "360000",
+            "359000",
+            "504000",
+            "361000"
+        ],
+        "answer": "360000",
+        "explanation": "Correct option is [A]."
+    },
+    {
+        "id": 67,
+        "question": "The ratio of the income of A to that of B is 5 : 7. A and B save Rs. 4,000 and Rs. 5,000\nrespectively. If the expenditure of A is equal to of the expenditure of B, then\nthe total income of A and B is :\nA औय B की आम का अनुऩात 5: 7 वै। A औय B क्रभलः रु 4000 औय Rs.5,000 फचाते वैं। मदद A का\nव्यम B के व्यम के के फयाफय वै, तॉ A औय B की कु र आम वै:",
+        "options": [
+            "Rs. 28,800",
+            "Rs. 26,400",
+            "Rs. 25,200",
+            "Rs. 24,000"
+        ],
+        "answer": "Rs. 24,000",
+        "explanation": "Correct option is [D]."
+    },
+    {
+        "id": 68,
+        "question": "The ratio of incomes of Seema and Darshan is 7 : 8. They save ₹15,000 and ₹9,000,\nrespectively. If the ratio of their expenditures is 11 : 16, then what is the total\nexpenditure (in ₹) of Seema and Darshan?\nऴीभा औय दलटन की आम का अनुऩात 7 : 8 वै। ऱ े क्रभलः ₹15,000 औय ₹9,000 की फचत कयते वैं। मदद\nउनके व्यम का अनुऩात 11 : 16 वै, तॉ ऴीभा औय दलटन का कु र व्यम (₹ भें) ज्ञात कीजजए।\n(RRB NTPC GRADUATE LEVEL 2025)",
+        "options": [
+            "68,000",
+            "64,000",
+            "64,125",
+            "63,000"
+        ],
+        "answer": "64,125",
+        "explanation": "Correct option is [C]."
+    },
+    {
+        "id": 69,
+        "question": "The income of A is 60% less than that of B, and the expenditure of A is equal to 60%\nof B’s expenditure. If A’s income is equal to 70% of B’s expenditure, then what is the\nratio of the saving of A and B?\nA की आम B की तुरना भें 60% कभ वै, औय A का व्यम B के व्यम के 60% के फयाफय वै। मदद A की आम\nB के िच ट के 70% के फयाफय वै, तॉ A औय B की फचत का अनुऩात क्या वै?",
+        "options": [
+            "3 : 8",
+            "5 : 9",
+            "4 : 7",
+            "2 : 15"
+        ],
+        "answer": "2 : 15",
+        "explanation": "Correct option is [D]."
+    },
+    {
+        "id": 70,
+        "question": "The ratio of income of A, B, C is 7 : 9 : 12 and their expenditure ratio is 8 : 9 : 15. If the\nsaving of A is 1/4 of its income, then what will be the ratio of savings of, A, B, C?\nA, B, C की आम का अनुऩात 7 : 9 : 12 वै औय उनका व्यम अनुऩात 8 : 9 : 15 वै। मदद A की फचत इऴकी\nआम का 1/4 वै तॉ A, B, C की फचत का अनुऩात क्या वॉगा?",
+        "options": [
+            "56:99:69",
+            "99:56:69",
+            "69:56:99",
+            "99:69:56"
+        ],
+        "answer": "56:99:69",
+        "explanation": "Correct option is [A]."
+    },
+    {
+        "id": 71,
+        "question": "The ratio of the income of A to that of B is 3 : 5. The expenditure of A is 7/12 of his\nincome, and the expenditure of B is 8/15 of his income. The positive difference\nbetween their expenditures is ₹14,300. Find A's income.\nA की आम का B की आम ऴे अनुऩात 3 : 5 वै। A का व्यम उऴकी आम का 7/12 वै, औय B का व्यम उऴकी\nआम का 8/15 वै। उनके व्यम के फीच ऴकायात्मक अंतय ₹14,300 वै। A की आम ज्ञात कीजजए।\nGroup D 07/10/2022 (Morning)",
+        "options": [
+            "₹48,300",
+            "₹16,800",
+            "₹46,800",
+            "₹78,000"
+        ],
+        "answer": "₹46,800",
+        "explanation": "Correct option is [C]."
+    },
+    {
+        "id": 72,
+        "question": "A, B and C spend 80%, 85% and 75% of their incomes respectively. If their savings\nare in the ratio 8:9:20 and the difference between the incomes of A and C is Rs\n18000, then the income of B is:\nA, B औय C अऩनी आम का क्रभलः 80%, 85% औय 75% िचट कयते वैं। मदद उनकी फचत का अनुऩात 8\n: 9 : 20 वॉ तथा A औय C की आम भें रू.18,000 का अंतय वॉ, तॉ B की आम क्या वॉगी?",
+        "options": [
+            "Rs. 24000",
+            "Rs. 30000",
+            "Rs. 27000",
+            "Rs. 36000"
+        ],
+        "answer": "Rs. 27000",
+        "explanation": "Correct option is [C]."
+    },
+    {
+        "id": 73,
+        "question": "The ratio of the incomes of A and B last year was 4 : 3, respectively. The ratios of\ntheir individual incomes of the last year and the present year are 3 : 4 and 5 : 6,\nrespectively. If their total income for the present year is ₹8.04 lakh, then the\nincome of B last year was:\nकऩछरे ऱळट A औय B की आम का अनुऩात क्रभलः 4 : 3 था। कऩछरे ऱळ ट औय ऱतटभान ऱळट के उनके\nव्यगक्तगत आम के अनुऩात क्रभलः 3 : 4 औय 5 : 6 वैं। मदद ऱतटभान ऱळट के जरए उनकी कु र आम ₹8.04\nराि वै, तॉ कऩछरे ऱळट B की आम थी:",
+        "options": [
+            "₹3.6 lakh",
+            "₹2.4 lakh",
+            "₹2.7 lakh",
+            "₹2.8 lakh"
+        ],
+        "answer": "₹2.7 lakh",
+        "explanation": "Correct option is [C]."
+    },
+    {
+        "id": 74,
+        "question": "A bag contains old coins of different types in the ratio 12 : 11 : 13, whose values are ₹\n3, ₹ 4 and ₹ 5 respectively. If the total value of coins is ₹580, then what will be the\ntotal number of coins of value ₹3?\nएक थैरे भें 12 : 11 : 13 के अनुऩात भें जबन्न प्रकाय के ऩुयाने जऴक्के वैं, जजनके भूल्य क्रभलः 3₹, 4 ₹ औय\n5 ₹ वैं। मदद जऴक्कों का कु र भूल्य 580 ₹ वॉ, तॉ 3 ₹. के भूल्य ऱारे जऴक्कों की कु र ऴंख्या ककतनी\nवॉगी?\nRPF S.I. 19/12/2018 (Evening)",
+        "options": [
+            "44",
+            "50",
+            "46",
+            "48"
+        ],
+        "answer": "48",
+        "explanation": "Correct option is [D]."
+    },
+    {
+        "id": 75,
+        "question": "The number of coins of 25 paise, 50 paise, Rs 2 and Rs 5 are in the ratio 5:4:3:1\nrespectively. If the total amount of coins is Rs 285, then what will be the difference\nbetween the number of 25 paise and Rs 5 coins?\n25 ऩैऴ,े 50 ऩैऴ,े Rs 2 औय Rs 5 के जऴक्कॉ की ऴंख्याओ ंका अनुऩात क्रभलः 5:4:3:1 वै। मदद जऴक्कॉ\nकी कु र याजल Rs 285 वै, तॉ 25 ऩैऴ े औय Rs 5 के जऴक्कॉ की ऴंख्या के कफच का अंतय क्या वॉगा?",
+        "options": [
+            "60",
+            "30",
+            "80",
+            "40"
+        ],
+        "answer": "80",
+        "explanation": "Correct option is [C]."
+    },
+    {
+        "id": 76,
+        "question": "Some one rupee, 50 paisa and 25 paisa coins make up rupees 93.75 and their\nnumbers are in the proportion of 3 : 4 : 5.Find the number of each type of coins ?\nएक रुऩमे, 50 ऩैऴे औय 25 ऩैऴे के कु छ जऴक्कों का भूल्य 93.75 रुऩमे वै औय उनकी ऴंख्या का अनुऩात\n3 : 4 : 5 वै। प्रत्येक प्रकाय के जऴक्के की ऴंख्या ज्ञात कीजजए ।\nRRB ALP 17/08/2018 (Afternoon)",
+        "options": [
+            "45, 60, 75",
+            "46, 58, 75",
+            "40, 70, 75",
+            "42, 56, 70"
+        ],
+        "answer": "45, 60, 75",
+        "explanation": "Correct option is [A]."
+    },
+    {
+        "id": 77,
+        "question": "615 coins consist of one rupee, 50 paise and 25 paise coins.Their values are in the\nratio of 3 : 5 : 7, respectively. Find the number of 50 paise coins.\n615 जऴक्कों भें एक रुऩमा, 50 ऩैऴे औय 25 ऩैऴ े के जऴक्के लाजभर वैं। उनके भूल्य क्रभलः 3:5:7 के\nअनुऩात भें वैं। 50 ऩैऴ े के जऴक्कों की ऴंख्या ज्ञात कीजजए।",
+        "options": [
+            "150",
+            "180",
+            "160",
+            "170"
+        ],
+        "answer": "150",
+        "explanation": "Correct option is [A]."
+    },
+    {
+        "id": 78,
+        "question": "The train fare, bus fare and air fare between 2 places are in the ratio 5 : 8 : 12, the\nnumber of passengers travelled by them is in the ratio 3 : 4 : 5 and the total fare\ncollected on a particular day for these modes of transportation for a single trip is\nRs. 4,28,000. Find the total fare collected from the air passengers.\n2 स्थानों के फीच ट्रेन का ककयामा, फऴ का ककयामा औय वऱाई ककयामा 5 : 8 : 12 के अनुऩात भें वै, उनके\nद्वाया मात्रा ककए गए मातत्रमों की ऴंख्या 3 : 4 : 5 के अनुऩात भें वै औय ककऴी कऱलेळ ददन इन ऩरयऱवन\nऴाधनों द्वाया एक वी मात्रा के जरए कु र ककयामा 4,28,000 ऱऴूरा जाता वै। वऱाई मातत्रमों ऴे ऱऴूरा गमा\nकु र ककयामा ज्ञात कय।े\nRRB NTPC 29/12/2020 (Morning)",
+        "options": [
+            "Rs. 240000",
+            "Rs. 250000",
+            "Rs. 210000",
+            "Rs. 260000"
+        ],
+        "answer": "Rs. 240000",
+        "explanation": "Correct option is [A]."
+    },
+    {
+        "id": 79,
+        "question": "In a school there were 1554 students and the ratio of the number of the boys and\ngirls was 4 : 3. After a few days, 30 girls joined the school but a few boys left; as a\nresult the ratio of the boys and girls became 7 : 6. The number of boys who left the\nschool is :\nएक स्कू र भें 1554 छात्र थे जजऴभे रडकों औय रडककमों की ऴंख्या का अनुऩात 4 : 3. था। कु छ ददनों के\nफाद, 30 रडककमा ं स्कू र भें लाजभर वॉ गईं, रेककन कु छ रडके छॉड गए; ऩरयणाभस्वरूऩ रडकों औय\nरडककमों का अनुऩात 7 : 6 वॉ गमा. स्कू र छॉडने ऱारे रडकों की ऴंख्या वै:",
+        "options": [
+            "76",
+            "74",
+            "84",
+            "86"
+        ],
+        "answer": "76",
+        "explanation": "Correct option is [A]."
+    },
+    {
+        "id": 80,
+        "question": "A train starts from station P with ‘n’ number of passengers. At station Q, 20% of the\npassengers get down and 50 passengers get in. At station R, 40% of the\npassengers get down and 10 passengers get in. If a total of 520 passengers are left\non the train, find the value of ‘n’.\nएक ट्रेन स्टेजन P ऴ े मातत्रमों की ऴंख्या ‘n’ के ऴाथ चरना लुरू वॉती वै। स्टेलन Q ऩय, 20% मात्री उतय\nजाते वैं औय 50 मात्री चढ जाते वैं। स्टेजन R ऩय, 40% मात्री उतय जाते वैं औय 10 मात्री चढ जात े वैं। मदद\nट्रेन भ ें कु र 520 मात्री फचे वैं] तॉ ‘n’ का भान ज्ञात कय।ें\n[SSC Selection Post (Phase-XII)]",
+        "options": [
+            "1000",
+            "855",
+            "750",
+            "975"
+        ],
+        "answer": "1000",
+        "explanation": "Correct option is [A]."
+    },
+    {
+        "id": 81,
+        "question": "There are officer and Assistant in an office. If 14 Assistant went. On leave then\nevery Assistant has two officers, after that 45 officers went on leave now every\nofficer has 5 Assistants. Then find out how many Assistant were there initially.\nएक ऑकपऴ भें अस्सस्सटेंट औय ऑकपऴय वै। 14 अस्सस्सटेंट अगय चरे जाते वैं तॉ प्रत्येक अस्सस्सटेंट के जरमे 2\nऑकपऴय वॉत े वै। इऴके फाद 45 ऑकपऴय चरे जाते वै औय अफ प्रत्येक ऑकपऴय के जरमे 5 अस्सस्सटेंट वैं,\nतॉ लुरूआत भें ककतन े अस्सस्सटेंट थे ?",
+        "options": [
+            "42",
+            "39",
+            "36",
+            "40"
+        ],
+        "answer": "39",
+        "explanation": "Correct option is [B]."
+    },
+    {
+        "id": 82,
+        "question": "In a school, 58 of the number of students are girls and the rest boys, 25 of the\nnumber of the girls are below 12 years of age and 49 of the boys are 12 years of age\nor above. If the total number of students is 288, how many students are below 12\nyears of age?\nएक स्कू र भें, छात्रों की ऴंख्या भ ें 5/8 रडककमा ं वैं औय लेळ रडके , रडककमों की ऴंख्या भें ऴे 2/5, 12 ऱळ ट\nऴे कभ आमु के वैं औय 4/9 रडकों की आम ु 12 ऱळट मा उऴऴे अतधक वै। मदद कऱद्यागथिमों की कु र ऴख्यं ा\n288 वै, तॉ 12 ऱळट ऴ े कभ आम ु के ककतन े कऱद्याथी वैं?\nNTPC CBT II Level 3 (14/06/2022) Shift 1",
+        "options": [
+            "124",
+            "132",
+            "Option C",
+            "Option D"
+        ],
+        "answer": "132",
+        "explanation": "Correct option is [B]."
+    },
+    {
+        "id": 83,
+        "question": "Mr. Ankit is on tour to Siachen and he has Rs.900 for his expenditure. If he exceeds\nhis tour by 4 days, he must trim down his daily expenditure by Rs2.5. For how\nmany days is Mr. Ankit is on tour?\nजभस्टय अंककत जऴमातचन के दॊय े ऩय वैं औय उनके ऩाऴ अऩने व्यम के जरए 900 रूऩम े वैं। मदद ऱव अऩने\nदॊय े ऴ े चाय ददन अतधक रूकत े वैं, तॉ उन्हें अऩने दैजनक व्यम कॉ 2.5रू तक कभ कयना चारवए। जभस्टय\nअंककत ककतने ददनों के जरए दॊय े ऩय वैं?",
+        "options": [
+            "36",
+            "30",
+            "45",
+            "25"
+        ],
+        "answer": "36",
+        "explanation": "Correct option is [A]."
+    },
+    {
+        "id": 84,
+        "question": "13/18 of the residents of a housing society own cars and 48/65 of the car owners\nhave purchased covered parking space. If 136 of the residents parked in the open,\nhow many residents were there in the society?\nवाउजऴिंग ऴॉऴाइटी के जनऱाजऴमों भ ें ऴे 13/18 के ऩाऴ काय ें वैं औय 48/65 काय भाजरकों ने ढकी रृई\nऩाककिं ग स्थान ियीदा वै। मदद 136 जनऱाजऴमों ने िुरे भें ऩाकट ककमा, तॉ ऴॉऴाइटी भें ककतने जनऱाऴी थ े ?\nNTPC CBT - I 31/01/2021 (Morning)",
+        "options": [
+            "650",
+            "720",
+            "630",
+            "900"
+        ],
+        "answer": "720",
+        "explanation": "Correct option is [B]."
+    },
+    {
+        "id": 85,
+        "question": "One part of a farm's electricity bill remains fixed and the other part changes\ndepending on the number of new units of electricity consumed. When 480 units of\nelectricity were consumed in a month, the bill was Rs. 1620. In the second month,\nthe bill was Rs. 2250 when 690 units of electricity were consumed. If 500 units of\nelectricity is consumed in the next month, what will be the bill for that month?\nएक पाभ ट के कफजरी कफर का एक बाग जनमत यवता वै औय दऴू या बाग िऩत की नमी कफजरी की\nमुजनटॉ की ऴंख्या के आधाय ऩय ऩरयऱततित वॉता वै। ककऴी भाव भें 480 मूजनट कफजरी की िऩत वॉने ऩय\nकफर रु 1620 था। दऴू य े भाव भें 690 मूजनट कफजरी िऩत वॉने ऩय कफर रु 2250 था। मदद अगरे भाव भ ें\n500 मूजनट कफजरी की िऩत रृई वॉ, तॉ उऴ भाव का कफर ककतना वॉगा?\nRRB NTPC 2021",
+        "options": [
+            "1950",
+            "1560",
+            "1680",
+            "1840"
+        ],
+        "answer": "1680",
+        "explanation": "Correct option is [C]."
+    }
+]
