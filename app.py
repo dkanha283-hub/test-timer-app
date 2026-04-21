@@ -5,7 +5,6 @@ import time
 import os
 import random
 import json
-import shutil
 
 # --- 1. PAGE CONFIGURATION & MODERN UI/UX CSS ---
 st.set_page_config(page_title="Pro CBT Hub", layout="wide", initial_sidebar_state="collapsed")
@@ -13,22 +12,40 @@ st.set_page_config(page_title="Pro CBT Hub", layout="wide", initial_sidebar_stat
 def inject_custom_css():
     st.markdown("""
         <style>
-        /* Modern App Background */
-        .stApp { font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        /* Modern App Background & Typography */
+        .stApp { font-family: 'Inter', '-apple-system', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
         
         /* Gorgeous Gradient Top Bar */
         .top-bar { 
-            background: linear-gradient(135deg, var(--primary-color), #4338ca); 
+            background: linear-gradient(135deg, var(--primary-color), #6366f1); 
             color: white; 
             padding: 20px; 
-            border-radius: 12px; 
+            border-radius: 16px; 
             display: flex; 
             justify-content: space-between; 
             align-items: center; 
-            margin-bottom: 25px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.2);
         }
         
+        /* Floating Action Bar for Selection Mode */
+        .action-bar {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 15px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            position: sticky;
+            top: 10px;
+            z-index: 100;
+        }
+        @media (prefers-color-scheme: dark) {
+            .action-bar { background: rgba(30, 30, 30, 0.85); border: 1px solid rgba(255,255,255,0.05); }
+        }
+
         /* Modern Question Box */
         .question-box { 
             background-color: var(--secondary-background-color); 
@@ -43,15 +60,106 @@ def inject_custom_css():
             border: 1px solid var(--faded-text-color);
         }
         
-        /* Improved Tabs for Folders */
-        button[data-baseweb="tab"] { font-size: 16px; font-weight: 600; }
-        
-        /* Hide default Streamlit elements to look more like an app */
+        /* Hide default Streamlit header */
         header {visibility: hidden;}
         </style>
     """, unsafe_allow_html=True)
 
-# --- 2. GITHUB CLOUD SYNC ENGINE ---
+# --- 2. HAPTICS & SYNTHESIZER AUDIO ENGINE ---
+def play_feedback(feedback_type="pop"):
+    """Injects JS to play synthetic sounds and trigger mobile device vibrations."""
+    js_code = f"""
+    <script>
+        try {{
+            const ctx = new (window.AudioContext || window.webkitAudioContext)();
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.connect(gain); gain.connect(ctx.destination);
+            
+            if ('{feedback_type}' === 'success') {{
+                if(navigator.vibrate) navigator.vibrate([100, 50, 100]);
+                osc.frequency.setValueAtTime(400, ctx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(800, ctx.currentTime + 0.15);
+                gain.gain.setValueAtTime(0.2, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.15);
+                osc.start(); osc.stop(ctx.currentTime + 0.15);
+            }} else if ('{feedback_type}' === 'warning') {{
+                if(navigator.vibrate) navigator.vibrate([50, 100, 50, 100]);
+                osc.type = 'square';
+                osc.frequency.setValueAtTime(200, ctx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(150, ctx.currentTime + 0.2);
+                gain.gain.setValueAtTime(0.1, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.2);
+                osc.start(); osc.stop(ctx.currentTime + 0.2);
+            }} else {{ // 'pop' for long press
+                if(navigator.vibrate) navigator.vibrate(50);
+                osc.frequency.setValueAtTime(300, ctx.currentTime);
+                gain.gain.setValueAtTime(0.1, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.05);
+                osc.start(); osc.stop(ctx.currentTime + 0.05);
+            }}
+        }} catch(e) {{}}
+    </script>
+    """
+    st.components.v1.html(js_code, height=0)
+
+# --- 3. LONG-PRESS JS TOUCH BRIDGE ---
+def inject_long_press_bridge():
+    """Injects the advanced event listeners to override mobile selection and detect long-holds."""
+    js_code = """
+    <script>
+        const inputs = window.parent.document.querySelectorAll('input');
+        let actionBridge;
+        inputs.forEach(i => { if(i.getAttribute('aria-label') === 'JS_ACTION_BRIDGE') actionBridge = i; });
+
+        function sendLongPress(fileName) {
+            if(actionBridge) {
+                let nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
+                nativeInputValueSetter.call(actionBridge, "LONGPRESS:" + fileName);
+                actionBridge.dispatchEvent(new Event('input', { bubbles: true }));
+            }
+        }
+
+        const buttons = window.parent.document.querySelectorAll('button');
+        buttons.forEach(btn => {
+            if(btn.innerText.includes('📄') || btn.innerText.includes('⚡')) {
+                // Prevent mobile right-click/text selection menu
+                btn.addEventListener('contextmenu', e => e.preventDefault());
+                
+                let timer;
+                let pressFired = false;
+                
+                const startPress = (e) => {
+                    pressFired = false;
+                    timer = setTimeout(() => {
+                        pressFired = true;
+                        sendLongPress(btn.innerText);
+                    }, 600); // Hold for 0.6 seconds to select
+                };
+                
+                const endPress = (e) => {
+                    clearTimeout(timer);
+                    if(pressFired) {
+                        e.preventDefault(); // Stop the normal click if it was a long press!
+                        e.stopPropagation();
+                    }
+                };
+                
+                btn.addEventListener('touchstart', startPress, {passive: true});
+                btn.addEventListener('touchend', endPress);
+                btn.addEventListener('touchmove', () => clearTimeout(timer));
+                
+                // Desktop support
+                btn.addEventListener('mousedown', startPress);
+                btn.addEventListener('mouseup', endPress);
+                btn.addEventListener('mouseleave', () => clearTimeout(timer));
+            }
+        });
+    </script>
+    """
+    st.components.v1.html(js_code, height=0)
+
+# --- 4. GITHUB CLOUD SYNC ENGINE ---
 def get_github_repo():
     if "GITHUB_TOKEN" not in st.secrets or "GITHUB_REPO" not in st.secrets: return None
     from github import Github
@@ -77,10 +185,9 @@ def github_delete(file_path):
         contents = repo.get_contents(git_path)
         repo.delete_file(contents.path, f"Delete {git_path}", contents.sha)
         return True
-    except:
-        return False
+    except: return False
 
-# --- 3. DYNAMIC LIBRARY SCANNER ---
+# --- 5. DYNAMIC LIBRARY SCANNER ---
 def get_library():
     library = {}
     ignore_dirs = {'.git', '.streamlit', 'venv', '__pycache__'}
@@ -98,7 +205,7 @@ def get_library():
     if "Uncategorized" in library: sorted_library["Uncategorized"] = library["Uncategorized"]
     return sorted_library
 
-# --- 4. CLOUD SESSION STORE ---
+# --- 6. SESSION STATE INIT & CLOUD STORE ---
 @st.cache_resource
 def get_global_sessions(): return {}
 
@@ -118,21 +225,18 @@ def save_state_to_cloud():
             "timestamp": now
         }
 
-# --- 5. SESSION STATE INIT ---
 def initialize_state():
-    if 'page' not in st.session_state: st.session_state.page = "home"
-    if 'selected_topic_file' not in st.session_state: st.session_state.selected_topic_file = None
-    if 'quiz_data' not in st.session_state: st.session_state.quiz_data = []
-    if 'current_q_index' not in st.session_state: st.session_state.current_q_index = 0
-    if 'user_answers' not in st.session_state: st.session_state.user_answers = {}
-    if 'time_per_question' not in st.session_state: st.session_state.time_per_question = 60
-    if 'max_questions' not in st.session_state: st.session_state.max_questions = 10
-    if 'app_lang' not in st.session_state: st.session_state.app_lang = "Bilingual"
-    if 'resume_pin' not in st.session_state: st.session_state.resume_pin = str(random.randint(1000, 9999))
-    # NEW: Clipboard feature for Copy & Paste
-    if 'clipboard' not in st.session_state: st.session_state.clipboard = None 
+    defaults = {
+        'page': "home", 'selected_topic_file': None, 'quiz_data': [], 
+        'current_q_index': 0, 'user_answers': {}, 'time_per_question': 60, 
+        'max_questions': 10, 'app_lang': "Bilingual",
+        'resume_pin': str(random.randint(1000, 9999)),
+        'selection_mode': False, 'selected_files': set(), 'clipboard_files': []
+    }
+    for k, v in defaults.items():
+        if k not in st.session_state: st.session_state[k] = v
 
-# --- 6. PDF TO JSON ENGINE ---
+# --- 7. PDF TO JSON ENGINE & SURGICAL FILTER ---
 def parse_pdf_to_raw_data(pdf_source):
     extracted_text = ""
     try:
@@ -156,8 +260,7 @@ def parse_pdf_to_raw_data(pdf_source):
             main_questions_text = clean_text[:last_match.start()]
             answer_key_text = clean_text[last_match.end():]
         else:
-            main_questions_text = clean_text
-            answer_key_text = ""
+            main_questions_text = clean_text; answer_key_text = ""
         
         correct_answers_dict = {}
         if answer_key_text:
@@ -187,65 +290,30 @@ def parse_pdf_to_raw_data(pdf_source):
                 idx = q_content.find(tag)
                 if idx != -1 and idx < first_opt_idx: first_opt_idx = idx
             question_text = q_content[:first_opt_idx].strip()
-            
             correct_letter = correct_answers_dict.get(q_id, 'A') 
-            if correct_letter == 'A': correct_text = opt_a
-            elif correct_letter == 'B': correct_text = opt_b
-            elif correct_letter == 'C': correct_text = opt_c
-            elif correct_letter == 'D': correct_text = opt_d
-            else: correct_text = opt_a
+            correct_text = locals().get(f"opt_{correct_letter.lower()}", opt_a)
             
             if question_text:
-                quiz_data.append({
-                    "id": q_id, "question": question_text, "options": [opt_a, opt_b, opt_c, opt_d],
-                    "answer": correct_text, "explanation": f"Based on the Answer Key, the correct option is [{correct_letter}]."
-                })
+                quiz_data.append({"id": q_id, "question": question_text, "options": [opt_a, opt_b, opt_c, opt_d], "answer": correct_text, "explanation": f"Correct option is [{correct_letter}]."})
         return quiz_data
-    except Exception as e:
-        return []
+    except Exception as e: return []
 
 def load_and_auto_save_quiz_data(filename):
-    if filename.endswith('.json'):
-        json_filename = filename
-        pdf_filename = filename.replace('.json', '.pdf')
-    else:
-        json_filename = filename.replace('.pdf', '.json')
-        pdf_filename = filename
-    
+    json_filename = filename.replace('.pdf', '.json') if filename.endswith('.pdf') else filename
     if os.path.exists(json_filename):
-        with open(json_filename, 'r', encoding='utf-8') as f: data = json.load(f)
-        return data, True
-        
-    data = parse_pdf_to_raw_data(pdf_filename)
+        with open(json_filename, 'r', encoding='utf-8') as f: return json.load(f), True
+    data = parse_pdf_to_raw_data(filename)
     if data:
         with open(json_filename, 'w', encoding='utf-8') as f: json.dump(data, f, indent=4, ensure_ascii=False)
         github_save(json_filename, data)
     return data, False
 
-def update_question_in_database(file_name, updated_q):
-    json_filename = file_name.replace('.pdf', '.json')
-    try:
-        with open(json_filename, 'r', encoding='utf-8') as f: all_data = json.load(f)
-        for i, q in enumerate(all_data):
-            if q['id'] == updated_q['id']:
-                all_data[i] = updated_q
-                break
-        with open(json_filename, 'w', encoding='utf-8') as f: json.dump(all_data, f, indent=4, ensure_ascii=False)
-        github_save(json_filename, all_data)
-        return True
-    except: return False
-
-# --- 7. SURGICAL LANGUAGE FILTER ---
 def filter_text(text, lang, is_option=False):
     if not text or lang == "Bilingual": return text
-    lines = text.split('\n')
-    filtered_lines = []
-    seen_normalized = set()
+    lines = text.split('\n'); filtered_lines = []; seen_normalized = set()
     for l in lines:
         if not l.strip(): continue
         has_hindi = bool(re.search(r'[\u0900-\u097F]', l))
-        eng_word_count = len(re.findall(r'\b[a-zA-Z]{3,}\b', l))
-        processed_line = ""
         if lang == "English":
             if has_hindi:
                 if is_option:
@@ -255,9 +323,7 @@ def filter_text(text, lang, is_option=False):
                 else: continue
             else: filtered_lines.append(l)
         elif lang == "Hindi":
-            if has_hindi: filtered_lines.append(l)
-            else:
-                if is_option or eng_word_count < 4: filtered_lines.append(l)
+            if has_hindi or len(re.findall(r'\b[a-zA-Z]{3,}\b', l)) < 4: filtered_lines.append(l)
     return '\n'.join(filtered_lines).strip()
 
 # --- 8. SMART TIMER INJECTION ---
@@ -266,55 +332,35 @@ def inject_timer(seconds, q_index, is_paused, pin):
     html_code = f"""
     <div id="timer_display_{q_index}" style="font-size: 24px; font-weight: bold; text-align: right;"></div>
     <script>
-        var current_q = {q_index};
-        var isPaused = {paused_str};
+        var current_q = {q_index}; var isPaused = {paused_str};
         var stored_q = sessionStorage.getItem('active_q_pin_{pin}');
-        var timeLeft;
-        if (stored_q == current_q.toString()) {{
-            var savedTime = sessionStorage.getItem('timeLeft_pin_{pin}');
-            timeLeft = savedTime !== null ? parseInt(savedTime) : {seconds};
-        }} else {{
-            timeLeft = {seconds};
-            sessionStorage.setItem('active_q_pin_{pin}', current_q);
-            sessionStorage.setItem('timeLeft_pin_{pin}', timeLeft);
-        }}
+        var timeLeft = (stored_q == current_q.toString() && sessionStorage.getItem('timeLeft_pin_{pin}')) ? parseInt(sessionStorage.getItem('timeLeft_pin_{pin}')) : {seconds};
+        if(stored_q != current_q.toString()) {{ sessionStorage.setItem('active_q_pin_{pin}', current_q); sessionStorage.setItem('timeLeft_pin_{pin}', timeLeft); }}
+        
         var timerElem = document.getElementById('timer_display_{q_index}');
-        if (isPaused) {{
-            timerElem.innerHTML = "Time Left: " + timeLeft + "s ⏸️";
-            timerElem.style.color = "#f59e0b"; 
-        }} else {{
-            timerElem.innerHTML = "Time Left: " + timeLeft + "s";
-            timerElem.style.color = "#ef4444"; 
-        }}
-        var timerId = setInterval(countdown, 1000);
-        function countdown() {{
+        timerElem.innerHTML = "Time Left: " + timeLeft + "s" + (isPaused ? " ⏸️" : "");
+        timerElem.style.color = isPaused ? "#f59e0b" : "#ef4444"; 
+        
+        var timerId = setInterval(function() {{
             if (isPaused) return; 
             if (timeLeft <= 0) {{
                 clearTimeout(timerId);
-                var buttons = window.parent.document.querySelectorAll('button');
-                buttons.forEach(function(btn) {{
-                    if(btn.innerText === 'Next' || btn.innerText === 'Submit Test') btn.click();
-                }});
+                window.parent.document.querySelectorAll('button').forEach(btn => {{ if(btn.innerText === 'Next' || btn.innerText === 'Submit Test') btn.click(); }});
             }} else {{
-                timeLeft--;
-                timerElem.innerHTML = "Time Left: " + timeLeft + "s";
+                timeLeft--; timerElem.innerHTML = "Time Left: " + timeLeft + "s";
                 sessionStorage.setItem('timeLeft_pin_{pin}', timeLeft);
             }}
-        }}
+        }}, 1000);
     </script>
     """
     st.components.v1.html(html_code, height=50)
 
-# --- 9. SETUP POPUP (DIALOG) ---
+# --- 9. DIALOGS (QUIZ, RENAME, MOVE, DELETE) ---
 @st.dialog("⚙️ Quiz Setup")
 def setup_dialog(file_path):
     st.write(f"**Topic:** {os.path.basename(file_path).replace('.json', '').replace('_', ' ')}")
-    
-    with open(file_path, 'r', encoding='utf-8') as f:
-        raw_data = json.load(f)
-        
+    with open(file_path, 'r', encoding='utf-8') as f: raw_data = json.load(f)
     total_available = len(raw_data)
-    st.write(f"Total questions available: {total_available}")
     
     order_choice = st.radio("Question Order:", ["In Sequence", "Shuffled"], horizontal=True)
     selected_qs = st.slider("How many questions to attempt?", min_value=1, max_value=total_available, value=min(20, total_available))
@@ -323,21 +369,115 @@ def setup_dialog(file_path):
     if st.button("🚀 Start Quiz", type="primary", use_container_width=True):
         st.session_state.max_questions = selected_qs
         st.session_state.time_per_question = timer_sec
-        if order_choice == "Shuffled":
-            st.session_state.quiz_data = random.sample(raw_data, selected_qs)
-        else:
-            st.session_state.quiz_data = raw_data[:selected_qs]
-            
+        st.session_state.quiz_data = random.sample(raw_data, selected_qs) if order_choice == "Shuffled" else raw_data[:selected_qs]
         st.session_state.selected_topic_file = file_path
         st.session_state.resume_pin = str(random.randint(1000, 9999))
         st.session_state.page = "quiz"
         st.rerun()
 
-# --- 10. RENDER VIEWS (WITH FULL CMS ADMIN & CLIPBOARD) ---
+@st.dialog("✏️ Rename File")
+def rename_dialog(file_path):
+    old_name = os.path.basename(file_path).replace('.json', '').replace('_', ' ')
+    new_name = st.text_input("New Name:", value=old_name)
+    if st.button("Save Rename", type="primary"):
+        new_path = os.path.join(os.path.dirname(file_path), new_name.replace(" ", "_") + ".json")
+        with open(file_path, 'r', encoding='utf-8') as f: data = json.load(f)
+        with open(new_path, 'w', encoding='utf-8') as f: json.dump(data, f, indent=4, ensure_ascii=False)
+        os.remove(file_path)
+        github_save(new_path, data); github_delete(file_path)
+        st.session_state.selected_files.clear()
+        st.session_state.selection_mode = False
+        play_feedback('success')
+        st.rerun()
+
+@st.dialog("📁 Move Files")
+def move_dialog(files_to_move, library):
+    st.write(f"Moving {len(files_to_move)} file(s).")
+    folders = list(library.keys())
+    if "Uncategorized" in folders: folders.remove("Uncategorized")
+    folders.append("+ Create New Folder")
+    
+    target_folder = st.selectbox("Select Destination:", folders)
+    if target_folder == "+ Create New Folder": target_folder = st.text_input("New Folder Name").strip()
+    
+    if st.button("Confirm Move", type="primary"):
+        if target_folder:
+            save_dir = "." if target_folder == "Uncategorized" else target_folder
+            os.makedirs(save_dir, exist_ok=True)
+            for path in files_to_move:
+                new_path = os.path.join(save_dir, os.path.basename(path))
+                if path != new_path:
+                    with open(path, 'r', encoding='utf-8') as f: data = json.load(f)
+                    with open(new_path, 'w', encoding='utf-8') as f: json.dump(data, f, indent=4, ensure_ascii=False)
+                    os.remove(path)
+                    github_save(new_path, data); github_delete(path)
+            st.session_state.selected_files.clear()
+            st.session_state.selection_mode = False
+            play_feedback('success')
+            st.rerun()
+
+@st.dialog("⚠️ Warning: Delete Confirmation")
+def delete_dialog(files_to_delete):
+    st.error(f"Are you sure you want to permanently delete {len(files_to_delete)} file(s)?")
+    st.write("This action cannot be undone. Files will be deleted locally and from GitHub.")
+    if st.button("🚨 Yes, Delete Permanently"):
+        for path in files_to_delete:
+            os.remove(path)
+            github_delete(path)
+        st.session_state.selected_files.clear()
+        st.session_state.selection_mode = False
+        play_feedback('warning') # Play warning buzz
+        st.rerun()
+
+# --- 10. RENDER VIEWS ---
 def render_home():
-    st.markdown('<div class="top-bar"><h2 style="margin:0;">📚 Pro CBT Hub</h2></div>', unsafe_allow_html=True)
+    # --- JS TOUCH BRIDGE LISTENER ---
+    action = st.text_input("JS_ACTION_BRIDGE", key="js_action_bridge", label_visibility="hidden")
     library = get_library()
     
+    if action.startswith("LONGPRESS:"):
+        topic_clean = re.sub(r'^[⚡📄]\s*', '', action.replace("LONGPRESS:", "")).strip()
+        # Find exact path in library
+        target_path = None
+        for folder, files in library.items():
+            for name, path in files.items():
+                if name == topic_clean: target_path = path
+        
+        if target_path:
+            st.session_state.selection_mode = True
+            st.session_state.selected_files.add(target_path)
+            play_feedback('pop')
+            st.components.v1.html("<script>window.parent.document.querySelector('input[aria-label=\"JS_ACTION_BRIDGE\"]').value = '';</script>", height=0)
+            st.rerun()
+
+    st.markdown('<div class="top-bar"><h2 style="margin:0; font-weight:800;">📚 Pro CBT Hub</h2></div>', unsafe_allow_html=True)
+    
+    # --- MULTI-SELECT ACTION BAR ---
+    if st.session_state.selection_mode:
+        st.markdown("<div class='action-bar'>", unsafe_allow_html=True)
+        ac1, ac2, ac3, ac4, ac5, ac6 = st.columns([2, 1, 1, 1, 1, 1])
+        with ac1: st.markdown(f"**☑️ {len(st.session_state.selected_files)} Selected**")
+        with ac2: 
+            if st.button("📋 Copy"):
+                st.session_state.clipboard_files = list(st.session_state.selected_files)
+                st.session_state.selection_mode = False
+                st.session_state.selected_files.clear()
+                play_feedback('success')
+                st.rerun()
+        with ac3:
+            if st.button("📁 Move"): move_dialog(list(st.session_state.selected_files), library)
+        with ac4:
+            if len(st.session_state.selected_files) == 1:
+                if st.button("✏️ Rename"): rename_dialog(list(st.session_state.selected_files)[0])
+        with ac5:
+            if st.button("🗑️ Delete"): delete_dialog(list(st.session_state.selected_files))
+        with ac6:
+            if st.button("❌ Cancel"): 
+                st.session_state.selection_mode = False
+                st.session_state.selected_files.clear()
+                st.rerun()
+        st.markdown("</div>", unsafe_allow_html=True)
+
     # --- ADMIN UPLOAD PANEL ---
     with st.expander("📤 Upload New PDF to Hub", expanded=False):
         c1, c2 = st.columns(2)
@@ -346,8 +486,7 @@ def render_home():
             if "Uncategorized" in folder_options: folder_options.remove("Uncategorized")
             folder_options.append("+ Create New Folder")
             selected_folder = st.selectbox("Select Target Folder", folder_options)
-            if selected_folder == "+ Create New Folder":
-                selected_folder = st.text_input("Enter New Folder Name").strip()
+            if selected_folder == "+ Create New Folder": selected_folder = st.text_input("Enter New Folder Name").strip()
         with c2:
             new_topic_name = st.text_input("Enter Topic Name (e.g., Geometry Part 2)").strip()
             
@@ -358,109 +497,57 @@ def render_home():
                     raw_data = parse_pdf_to_raw_data(new_pdf)
                     if raw_data:
                         os.makedirs(selected_folder, exist_ok=True)
-                        filename = new_topic_name.replace(" ", "_") + ".json"
-                        file_path = os.path.join(selected_folder, filename)
+                        file_path = os.path.join(selected_folder, new_topic_name.replace(" ", "_") + ".json")
                         with open(file_path, 'w', encoding='utf-8') as f: json.dump(raw_data, f, indent=4, ensure_ascii=False)
                         github_save(file_path, raw_data)
+                        play_feedback('success')
                         st.success(f"✅ Success! PDF deleted from memory.")
                         time.sleep(1)
                         st.rerun()
                     else: st.error("Failed to parse PDF.")
             else: st.warning("Please complete all fields.")
-
-    # --- RESUME PIN ---
-    with st.expander("🔄 Resume Active Quiz", expanded=False):
-        col1, col2 = st.columns([1, 2])
-        with col1:
-            entered_pin = st.text_input("Enter 4-Digit PIN", max_chars=4)
-            if st.button("Resume My Quiz"):
-                sessions = get_global_sessions()
-                if entered_pin in sessions:
-                    saved = sessions[entered_pin]
-                    st.session_state.selected_topic_file = saved['file']
-                    st.session_state.current_q_index = saved['q_index']
-                    st.session_state.user_answers = saved['answers']
-                    st.session_state.time_per_question = saved['time']
-                    st.session_state.max_questions = saved['max_qs']
-                    st.session_state.quiz_data = saved['quiz_data'] 
-                    st.session_state.resume_pin = entered_pin
-                    st.session_state.page = "quiz"
-                    st.rerun()
-                else: st.error("PIN not found or expired.")
-
-    st.write("---")
     
-    # --- DYNAMIC FOLDERS & FILE MANAGER (Three Dots UX) ---
+    # --- LIBRARY DISPLAY ---
     if not library:
         st.info("Welcome to your Hub! Upload your first PDF above.")
     else:
         tabs = st.tabs(list(library.keys()))
         for idx, folder_name in enumerate(library.keys()):
             with tabs[idx]:
-                st.write(f"### 📂 {folder_name}")
-                
                 # --- PASTE FUNCTIONALITY ---
-                if st.session_state.clipboard:
-                    cb_path = st.session_state.clipboard
-                    cb_name = os.path.basename(cb_path).replace('.json', '').replace('_', ' ')
-                    st.info(f"📋 **Clipboard contains:** {cb_name}")
-                    if st.button(f"📥 Paste '{cb_name}' into {folder_name}", key=f"paste_{folder_name}"):
+                if st.session_state.clipboard_files:
+                    st.info(f"📋 **Clipboard contains {len(st.session_state.clipboard_files)} file(s).**")
+                    if st.button(f"📥 Paste Here", key=f"paste_{folder_name}"):
                         save_dir = "." if folder_name == "Uncategorized" else folder_name
-                        new_path = os.path.join(save_dir, os.path.basename(cb_path))
-                        if cb_path != new_path:
-                            # Read old, save new
-                            with open(cb_path, 'r', encoding='utf-8') as f: data = json.load(f)
-                            with open(new_path, 'w', encoding='utf-8') as f: json.dump(data, f, indent=4, ensure_ascii=False)
-                            github_save(new_path, data)
-                            st.session_state.clipboard = None # Clear clipboard
-                            st.toast(f"✅ Pasted into {folder_name}!")
-                            time.sleep(1)
-                            st.rerun()
+                        for cb_path in st.session_state.clipboard_files:
+                            new_path = os.path.join(save_dir, os.path.basename(cb_path))
+                            if cb_path != new_path:
+                                with open(cb_path, 'r', encoding='utf-8') as f: data = json.load(f)
+                                with open(new_path, 'w', encoding='utf-8') as f: json.dump(data, f, indent=4, ensure_ascii=False)
+                                github_save(new_path, data)
+                        st.session_state.clipboard_files = [] 
+                        play_feedback('success')
+                        st.rerun()
                 
                 st.markdown("<br>", unsafe_allow_html=True)
-                
-                # --- GRID LAYOUT FOR FILES ---
-                for topic_name, file_path in library[folder_name].items():
-                    # Align the Start button and the Options Popover perfectly
-                    col1, col2 = st.columns([10, 1], vertical_alignment="center")
-                    with col1:
-                        if st.button(f"⚡ {topic_name}", key=f"start_{file_path}", use_container_width=True):
-                            setup_dialog(file_path)
-                    
-                    with col2:
-                        # POP-OVER: The Modern Mobile Standard for Right-Click/Long-Press
-                        with st.popover("⋮"):
-                            st.markdown(f"**Options for {topic_name}**")
-                            
-                            # COPY
-                            if st.button("📋 Copy", key=f"copy_{file_path}", use_container_width=True):
-                                st.session_state.clipboard = file_path
-                                st.toast("Copied to clipboard!")
+                cols = st.columns(3) 
+                for c_idx, (topic_name, file_path) in enumerate(library[folder_name].items()):
+                    with cols[c_idx % 3]:
+                        # Dynamic rendering based on selection mode
+                        is_selected = file_path in st.session_state.selected_files
+                        btn_type = "primary" if is_selected else "secondary"
+                        icon = "☑️" if is_selected else ("⚡" if file_path.endswith('.json') else "📄")
+                        
+                        if st.button(f"{icon} {topic_name}", key=f"start_{file_path}", type=btn_type, use_container_width=True):
+                            if st.session_state.selection_mode:
+                                if is_selected: st.session_state.selected_files.remove(file_path)
+                                else: st.session_state.selected_files.add(file_path)
                                 st.rerun()
-                                
-                            # RENAME
-                            rn_val = st.text_input("Rename:", value=topic_name, key=f"rn_in_{file_path}")
-                            if st.button("💾 Apply Rename", key=f"rn_btn_{file_path}", use_container_width=True):
-                                save_dir = "." if folder_name == "Uncategorized" else folder_name
-                                new_path = os.path.join(save_dir, rn_val.replace(" ", "_") + ".json")
-                                if file_path != new_path:
-                                    with open(file_path, 'r', encoding='utf-8') as f: data = json.load(f)
-                                    with open(new_path, 'w', encoding='utf-8') as f: json.dump(data, f, indent=4, ensure_ascii=False)
-                                    os.remove(file_path)
-                                    github_save(new_path, data)
-                                    github_delete(file_path)
-                                    st.toast("✅ Renamed successfully!")
-                                    time.sleep(1)
-                                    st.rerun()
-                                    
-                            # DELETE
-                            if st.button("🗑️ Delete", type="primary", key=f"del_{file_path}", use_container_width=True):
-                                os.remove(file_path)
-                                github_delete(file_path)
-                                st.toast("✅ File Deleted!")
-                                time.sleep(1)
-                                st.rerun()
-                st.markdown("<hr style='border: 1px dashed var(--faded-text-color);'>", unsafe_allow_html=True)
+                            else:
+                                setup_dialog(file_path)
+    
+    # Inject JS to enable long-press after all buttons render
+    inject_long_press_bridge()
 
 def render_quiz():
     save_state_to_cloud()
@@ -471,9 +558,7 @@ def render_quiz():
 
     col_sect, col_lang, col_qnum = st.columns([2, 1, 1], vertical_alignment="center")
     with col_sect: 
-        display_title = os.path.basename(st.session_state.selected_topic_file).replace('.json', '').replace('_', ' ')
-        st.markdown(f"##### {display_title}")
-        st.markdown(f"<span style='color:#ef4444; font-weight:bold;'>Save PIN: {st.session_state.resume_pin}</span>", unsafe_allow_html=True)
+        st.markdown(f"##### {os.path.basename(st.session_state.selected_topic_file).replace('.json', '').replace('_', ' ')}")
     with col_lang:
         st.session_state.app_lang = st.selectbox("Language", ["Bilingual", "English", "Hindi"], label_visibility="collapsed")
     with col_qnum: 
@@ -482,9 +567,8 @@ def render_quiz():
 
     inject_timer(st.session_state.time_per_question, q_index, is_paused=edit_mode, pin=st.session_state.resume_pin)
 
-    filtered_question = filter_text(q_data["question"], st.session_state.app_lang, is_option=False)
-    safe_question = filtered_question.replace('<', '&lt;').replace('>', '&gt;')
-    st.info(f"**Q{q_index + 1}.** *(From Database Q{q_data['id']})*\n\n{safe_question}")
+    safe_question = filter_text(q_data["question"], st.session_state.app_lang, is_option=False).replace('<', '&lt;').replace('>', '&gt;')
+    st.info(f"**Q{q_index + 1}.** *(Database Q{q_data['id']})*\n\n{safe_question}")
     
     current_response = st.session_state.user_answers.get(q_index, None)
     selected_option = st.radio("Select an option:", q_data["options"], 
@@ -495,28 +579,23 @@ def render_quiz():
     st.markdown("<br>", unsafe_allow_html=True)
     col1, col2, col3 = st.columns([1, 1, 1])
     with col1:
-        if q_index > 0:
-            if st.button("Previous", use_container_width=True):
-                if selected_option: st.session_state.user_answers[q_index] = selected_option
-                st.session_state.current_q_index -= 1
-                st.rerun()
+        if q_index > 0 and st.button("Previous", use_container_width=True):
+            if selected_option: st.session_state.user_answers[q_index] = selected_option
+            st.session_state.current_q_index -= 1; st.rerun()
     with col3:
         if q_index < total_qs - 1:
             if st.button("Next", type="primary", use_container_width=True):
                 if selected_option: st.session_state.user_answers[q_index] = selected_option
-                st.session_state.current_q_index += 1
-                st.rerun()
+                st.session_state.current_q_index += 1; st.rerun()
         else:
             if st.button("Submit Test", type="primary", use_container_width=True):
                 if selected_option: st.session_state.user_answers[q_index] = selected_option
                 sessions = get_global_sessions()
                 if st.session_state.resume_pin in sessions: del sessions[st.session_state.resume_pin]
-                st.session_state.page = "analysis"
-                st.rerun()
+                st.session_state.page = "analysis"; play_feedback('success'); st.rerun()
 
     st.divider()
-    st.toggle("✏️ Admin: Notice a mistake? Edit this Question (PAUSES TIMER)", key="edit_toggle")
-    
+    st.toggle("✏️ Edit this Question (PAUSES TIMER)", key="edit_toggle")
     if st.session_state.edit_toggle:
         new_q = st.text_area("Question Text", value=q_data["question"], height=150)
         c_opt1, c_opt2 = st.columns(2)
@@ -529,60 +608,37 @@ def render_quiz():
             
         new_ans = st.selectbox("Correct Answer", [new_opt_a, new_opt_b, new_opt_c, new_opt_d], 
                                index=[new_opt_a, new_opt_b, new_opt_c, new_opt_d].index(q_data["answer"]) if q_data["answer"] in [new_opt_a, new_opt_b, new_opt_c, new_opt_d] else 0)
-        new_exp = st.text_area("Explanation", value=q_data["explanation"])
         
-        if st.button("💾 Save Fixes & Sync to Cloud", type="primary"):
-            updated_q = {
-                "id": q_data["id"], "question": new_q, "options": [new_opt_a, new_opt_b, new_opt_c, new_opt_d],
-                "answer": new_ans, "explanation": new_exp
-            }
+        if st.button("💾 Save Fixes & Sync", type="primary"):
+            updated_q = {"id": q_data["id"], "question": new_q, "options": [new_opt_a, new_opt_b, new_opt_c, new_opt_d], "answer": new_ans, "explanation": q_data["explanation"]}
             st.session_state.quiz_data[q_index] = updated_q
             with open(st.session_state.selected_topic_file, 'r', encoding='utf-8') as f: all_data = json.load(f)
             for i, q in enumerate(all_data):
-                if q['id'] == updated_q['id']:
-                    all_data[i] = updated_q
-                    break
+                if q['id'] == updated_q['id']: all_data[i] = updated_q; break
             with open(st.session_state.selected_topic_file, 'w', encoding='utf-8') as f: json.dump(all_data, f, indent=4, ensure_ascii=False)
             github_save(st.session_state.selected_topic_file, all_data)
-            
-            st.success("✅ Fix saved! Database permanently updated.")
-            st.session_state.edit_toggle = False
-            time.sleep(1)
-            st.rerun()
+            st.session_state.edit_toggle = False; play_feedback('success'); time.sleep(1); st.rerun()
 
 def render_analysis():
     st.title("📊 Exam Analysis")
     total_qs = len(st.session_state.quiz_data)
     correct_count = sum(1 for i, q in enumerate(st.session_state.quiz_data) if st.session_state.user_answers.get(i) == q["answer"])
-            
     accuracy = (correct_count / total_qs) * 100 if total_qs > 0 else 0
     st.metric("Total Score", f"{correct_count} / {total_qs}", f"{accuracy:.1f}% Accuracy")
-    
-    if st.button("🏠 Go to Home Page", type="primary"):
-        st.session_state.clear()
-        st.rerun()
+    if st.button("🏠 Go to Home", type="primary"): st.session_state.clear(); st.rerun()
         
-    st.write("### Detailed Review")
     st.session_state.app_lang = st.radio("Review Language", ["Bilingual", "English", "Hindi"], horizontal=True)
-    
     for i, q in enumerate(st.session_state.quiz_data):
         disp_q = filter_text(q['question'], st.session_state.app_lang, is_option=False).replace('<', '&lt;').replace('>', '&gt;')
         disp_ans = filter_text(q['answer'], st.session_state.app_lang, is_option=True).replace('<', '&lt;').replace('>', '&gt;')
         disp_user = filter_text(st.session_state.user_answers.get(i, 'Not Attempted'), st.session_state.app_lang, is_option=True).replace('<', '&lt;').replace('>', '&gt;')
-        
         with st.expander(f"Q{i+1} (Database Q{q['id']})"):
-            st.markdown(f"**Question:**\n\n {disp_q}")
-            st.write(f"**Your Answer:** {disp_user}")
-            st.write(f"**Correct Answer:** {disp_ans}")
-            st.success(q['explanation'])
+            st.markdown(f"**Question:**\n\n {disp_q}"); st.write(f"**Your Answer:** {disp_user}"); st.write(f"**Correct Answer:** {disp_ans}"); st.success(q['explanation'])
 
 def main():
-    inject_custom_css()
-    initialize_state()
-
+    inject_custom_css(); initialize_state()
     if st.session_state.page == "home": render_home()
     elif st.session_state.page == "quiz": render_quiz()
     elif st.session_state.page == "analysis": render_analysis()
 
-if __name__ == "__main__":
-    main()
+if __name__ == "__main__": main()
