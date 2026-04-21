@@ -20,7 +20,37 @@ def inject_custom_css():
         </style>
     """, unsafe_allow_html=True)
 
-# --- 2. GLOBAL CLOUD SESSION STORE ---
+# --- 2. GITHUB CLOUD SYNC ENGINE ---
+def sync_to_github(file_name, json_data):
+    """Automatically pushes the JSON database to your GitHub Repository."""
+    try:
+        # Check if secrets are set up
+        if "GITHUB_TOKEN" not in st.secrets or "GITHUB_REPO" not in st.secrets:
+            st.toast("⚠️ GitHub Secrets not found. Saved locally, but not pushed to cloud.")
+            return False
+            
+        from github import Github
+        g = Github(st.secrets["GITHUB_TOKEN"])
+        repo = g.get_repo(st.secrets["GITHUB_REPO"])
+        
+        # Convert dictionary to beautiful JSON string
+        json_str = json.dumps(json_data, indent=4, ensure_ascii=False)
+        
+        try:
+            # If file already exists in GitHub, UPDATE it
+            contents = repo.get_contents(file_name)
+            repo.update_file(contents.path, f"Auto-sync updated {file_name}", json_str, contents.sha)
+            st.toast("☁️ Successfully synced updates to GitHub!")
+        except:
+            # If file does not exist, CREATE it
+            repo.create_file(file_name, f"Auto-sync created {file_name}", json_str)
+            st.toast("☁️ New JSON Database successfully created in GitHub!")
+        return True
+    except Exception as e:
+        st.toast(f"❌ GitHub Sync Error: Ensure secrets are correct. Error: {e}")
+        return False
+
+# --- 3. GLOBAL CLOUD SESSION STORE ---
 @st.cache_resource
 def get_global_sessions():
     return {}
@@ -29,8 +59,7 @@ def save_state_to_cloud():
     sessions = get_global_sessions()
     now = time.time()
     expired = [pin for pin, data in sessions.items() if (now - data['timestamp']) > 18000]
-    for pin in expired:
-        del sessions[pin]
+    for pin in expired: del sessions[pin]
         
     if 'resume_pin' in st.session_state:
         sessions[st.session_state.resume_pin] = {
@@ -43,7 +72,7 @@ def save_state_to_cloud():
             "timestamp": now
         }
 
-# --- 3. SESSION STATE MANAGEMENT ---
+# --- 4. SESSION STATE MANAGEMENT ---
 def initialize_state():
     if 'page' not in st.session_state: st.session_state.page = "home"
     if 'selected_topic_file' not in st.session_state: st.session_state.selected_topic_file = None
@@ -55,7 +84,7 @@ def initialize_state():
     if 'app_lang' not in st.session_state: st.session_state.app_lang = "Bilingual"
     if 'resume_pin' not in st.session_state: st.session_state.resume_pin = str(random.randint(1000, 9999))
 
-# --- 4. BACKEND CONVERTER ENGINE (PDF -> DICT) ---
+# --- 5. BACKEND CONVERTER ENGINE (PDF -> DICT) ---
 def parse_pdf_to_raw_data(file_path):
     extracted_text = ""
     try:
@@ -133,47 +162,54 @@ def parse_pdf_to_raw_data(file_path):
     except Exception as e:
         return []
 
-# --- 5. AUTOMATIC JSON MANAGER ---
+# --- 6. AUTOMATIC JSON MANAGER (NOW WITH CLOUD SYNC) ---
 @st.cache_data
 def load_and_auto_save_quiz_data(pdf_filename):
-    """Automatically loads from JSON, or creates the JSON if missing."""
     json_filename = pdf_filename.replace('.pdf', '.json')
     
-    # If the JSON database already exists, load it instantly!
+    # 1. Load from local JSON if it exists
     if os.path.exists(json_filename):
         with open(json_filename, 'r', encoding='utf-8') as f:
             data = json.load(f)
         return data, True
         
-    # If JSON doesn't exist, read the PDF and CREATE the JSON automatically!
+    # 2. If no JSON, extract from PDF, save locally, AND push to GitHub automatically!
     data = parse_pdf_to_raw_data(pdf_filename)
     if data:
         with open(json_filename, 'w', encoding='utf-8') as f:
             json.dump(data, f, indent=4, ensure_ascii=False)
+        
+        # PUSH TO CLOUD FOREVER STORAGE
+        sync_to_github(json_filename, data)
+        
     return data, False
 
 def update_question_in_database(file_name, updated_q):
-    """Saves edits permanently to the JSON file on the server."""
     json_filename = file_name.replace('.pdf', '.json')
     try:
+        # Load local data
         with open(json_filename, 'r', encoding='utf-8') as f:
             all_data = json.load(f)
             
-        # Find the question by its ID and replace it
+        # Update the specific question
         for i, q in enumerate(all_data):
             if q['id'] == updated_q['id']:
                 all_data[i] = updated_q
                 break
                 
-        # Rewrite the JSON file
+        # Save locally
         with open(json_filename, 'w', encoding='utf-8') as f:
             json.dump(all_data, f, indent=4, ensure_ascii=False)
+            
+        # PUSH THE EDITS TO CLOUD FOREVER STORAGE
+        sync_to_github(json_filename, all_data)
+        
         return True
     except Exception as e:
         st.error(f"Failed to update database: {e}")
         return False
 
-# --- 6. SURGICAL LANGUAGE FILTER ---
+# --- 7. SURGICAL LANGUAGE FILTER ---
 def filter_text(text, lang, is_option=False):
     if not text or lang == "Bilingual": return text
     lines = text.split('\n')
@@ -198,7 +234,7 @@ def filter_text(text, lang, is_option=False):
                 if is_option or eng_word_count < 4: filtered_lines.append(l)
     return '\n'.join(filtered_lines).strip()
 
-# --- 7. TIMER INJECTION ---
+# --- 8. TIMER INJECTION ---
 def inject_timer(seconds, q_index):
     html_code = f"""
     <div id="timer_display_{q_index}" style="font-size: 24px; font-weight: bold; color: #ef4444; text-align: right;"></div>
@@ -222,14 +258,14 @@ def inject_timer(seconds, q_index):
     """
     st.components.v1.html(html_code, height=50)
 
-# --- 8. SETUP POPUP (DIALOG) ---
+# --- 9. SETUP POPUP (DIALOG) ---
 @st.dialog("⚙️ Quiz Setup")
 def setup_dialog(file_name, total_available, is_json):
     st.write(f"**Topic:** {file_name.replace('.pdf', '')}")
     if is_json:
-        st.success("⚡ Loaded instantly from JSON Database!")
+        st.success("⚡ Loaded instantly from Database!")
     else:
-        st.info("📄 PDF Scanned. New JSON Database automatically created!")
+        st.info("📄 PDF Scanned. New JSON Database automatically saved to your GitHub!")
 
     st.write(f"Total questions available: {total_available}")
     selected_qs = st.slider("How many questions to attempt?", min_value=1, max_value=total_available, value=min(20, total_available))
@@ -243,7 +279,7 @@ def setup_dialog(file_name, total_available, is_json):
         st.session_state.page = "quiz"
         st.rerun()
 
-# --- 9. RENDER VIEWS ---
+# --- 10. RENDER VIEWS ---
 def render_home():
     st.markdown('<div class="top-bar"><h2>📚 CBT Topic Hub</h2></div>', unsafe_allow_html=True)
     
@@ -363,9 +399,8 @@ def render_quiz():
 
     st.divider()
     
-    # --- LIVE EDITOR PANEL ---
     with st.expander("✏️ Admin: Notice a mistake? Edit this Question permanently"):
-        st.warning("Any changes made here will be permanently saved to the .json database.")
+        st.warning("Fixes made here will automatically be uploaded and saved to your GitHub repo!")
         new_q = st.text_area("Question Text", value=q_data["question"], height=150)
         
         c_opt1, c_opt2 = st.columns(2)
@@ -380,7 +415,7 @@ def render_quiz():
                                index=[new_opt_a, new_opt_b, new_opt_c, new_opt_d].index(q_data["answer"]) if q_data["answer"] in [new_opt_a, new_opt_b, new_opt_c, new_opt_d] else 0)
         new_exp = st.text_area("Explanation", value=q_data["explanation"])
         
-        if st.button("💾 Save Fixes to Database", type="primary"):
+        if st.button("💾 Save Fixes & Sync to Cloud", type="primary"):
             updated_q = {
                 "id": q_data["id"],
                 "question": new_q,
@@ -388,12 +423,10 @@ def render_quiz():
                 "answer": new_ans,
                 "explanation": new_exp
             }
-            # Update memory so it changes instantly
             st.session_state.quiz_data[q_index] = updated_q
-            # Permanently update the JSON file on the server
             if update_question_in_database(st.session_state.selected_topic_file, updated_q):
-                st.success("✅ Fix saved! The database is permanently updated.")
-                time.sleep(1)
+                st.success("✅ Fix saved! The database is permanently updated in GitHub.")
+                time.sleep(1.5)
                 st.rerun()
 
 def render_analysis():
@@ -405,4 +438,33 @@ def render_analysis():
     st.metric("Total Score", f"{correct_count} / {total_qs}", f"{accuracy:.1f}% Accuracy")
     
     if st.button("🏠 Go to Home Page", type="primary"):
-        st.session_s
+        st.session_state.clear()
+        st.rerun()
+        
+    st.write("### Detailed Review")
+    st.session_state.app_lang = st.radio("Review Language", ["Bilingual", "English", "Hindi"], horizontal=True)
+    
+    for i, q in enumerate(st.session_state.quiz_data):
+        disp_q = filter_text(q['question'], st.session_state.app_lang, is_option=False).replace('<', '&lt;').replace('>', '&gt;')
+        disp_ans = filter_text(q['answer'], st.session_state.app_lang, is_option=True).replace('<', '&lt;').replace('>', '&gt;')
+        disp_user = filter_text(st.session_state.user_answers.get(i, 'Not Attempted'), st.session_state.app_lang, is_option=True).replace('<', '&lt;').replace('>', '&gt;')
+        
+        with st.expander(f"Q{i+1} (Database Q{q['id']})"):
+            st.markdown(f"**Question:**\n\n {disp_q}")
+            st.write(f"**Your Answer:** {disp_user}")
+            st.write(f"**Correct Answer:** {disp_ans}")
+            st.success(q['explanation'])
+
+def main():
+    inject_custom_css()
+    initialize_state()
+
+    if st.session_state.page == "home":
+        render_home()
+    elif st.session_state.page == "quiz":
+        render_quiz()
+    elif st.session_state.page == "analysis":
+        render_analysis()
+
+if __name__ == "__main__":
+    main()
