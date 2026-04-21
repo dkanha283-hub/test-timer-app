@@ -24,7 +24,6 @@ def inject_custom_css():
 def sync_to_github(file_name, json_data):
     """Automatically pushes the JSON database to your GitHub Repository."""
     try:
-        # Check if secrets are set up
         if "GITHUB_TOKEN" not in st.secrets or "GITHUB_REPO" not in st.secrets:
             st.toast("⚠️ GitHub Secrets not found. Saved locally, but not pushed to cloud.")
             return False
@@ -33,16 +32,13 @@ def sync_to_github(file_name, json_data):
         g = Github(st.secrets["GITHUB_TOKEN"])
         repo = g.get_repo(st.secrets["GITHUB_REPO"])
         
-        # Convert dictionary to beautiful JSON string
         json_str = json.dumps(json_data, indent=4, ensure_ascii=False)
         
         try:
-            # If file already exists in GitHub, UPDATE it
             contents = repo.get_contents(file_name)
             repo.update_file(contents.path, f"Auto-sync updated {file_name}", json_str, contents.sha)
             st.toast("☁️ Successfully synced updates to GitHub!")
         except:
-            # If file does not exist, CREATE it
             repo.create_file(file_name, f"Auto-sync created {file_name}", json_str)
             st.toast("☁️ New JSON Database successfully created in GitHub!")
         return True
@@ -162,8 +158,7 @@ def parse_pdf_to_raw_data(file_path):
     except Exception as e:
         return []
 
-# --- 6. AUTOMATIC JSON MANAGER (NOW WITH CLOUD SYNC) ---
-@st.cache_data
+# --- 6. AUTOMATIC JSON MANAGER (CACHING REMOVED TO PREVENT CRASH) ---
 def load_and_auto_save_quiz_data(pdf_filename):
     json_filename = pdf_filename.replace('.pdf', '.json')
     
@@ -179,7 +174,6 @@ def load_and_auto_save_quiz_data(pdf_filename):
         with open(json_filename, 'w', encoding='utf-8') as f:
             json.dump(data, f, indent=4, ensure_ascii=False)
         
-        # PUSH TO CLOUD FOREVER STORAGE
         sync_to_github(json_filename, data)
         
     return data, False
@@ -187,21 +181,17 @@ def load_and_auto_save_quiz_data(pdf_filename):
 def update_question_in_database(file_name, updated_q):
     json_filename = file_name.replace('.pdf', '.json')
     try:
-        # Load local data
         with open(json_filename, 'r', encoding='utf-8') as f:
             all_data = json.load(f)
             
-        # Update the specific question
         for i, q in enumerate(all_data):
             if q['id'] == updated_q['id']:
                 all_data[i] = updated_q
                 break
                 
-        # Save locally
         with open(json_filename, 'w', encoding='utf-8') as f:
             json.dump(all_data, f, indent=4, ensure_ascii=False)
             
-        # PUSH THE EDITS TO CLOUD FOREVER STORAGE
         sync_to_github(json_filename, all_data)
         
         return True
