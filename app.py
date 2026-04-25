@@ -285,7 +285,7 @@ def render_quiz():
         new_ans = st.selectbox("Correct Answer", [new_opt_a, new_opt_b, new_opt_c, new_opt_d], 
                                index=[new_opt_a, new_opt_b, new_opt_c, new_opt_d].index(q_data["answer"]) if q_data["answer"] in [new_opt_a, new_opt_b, new_opt_c, new_opt_d] else 0)
         
-        if st.button("💾 Save Fixes & Sync", type="primary"):
+        if st.button("Save Fixes & Sync", type="primary", icon=":material/cloud_sync:"):
             updated_q = {"id": q_data["id"], "question": new_q, "options": [new_opt_a, new_opt_b, new_opt_c, new_opt_d], "answer": new_ans, "explanation": q_data["explanation"]}
             st.session_state.quiz_data[q_index] = updated_q
             with open(st.session_state.selected_topic_file, 'r', encoding='utf-8') as f: all_data = json.load(f)
@@ -293,7 +293,12 @@ def render_quiz():
                 if q['id'] == updated_q['id']: all_data[i] = updated_q; break
             with open(st.session_state.selected_topic_file, 'w', encoding='utf-8') as f: json.dump(all_data, f, indent=4, ensure_ascii=False)
             bk.github_save(st.session_state.selected_topic_file, all_data)
-            st.session_state.edit_toggle = False; bk.play_feedback('success'); time.sleep(1); st.rerun()
+            
+            # --- THE FIX: Delete the memory so the toggle naturally resets ---
+            del st.session_state['edit_toggle']
+            bk.play_feedback('success')
+            time.sleep(1)
+            st.rerun()
 
 def render_analysis():
     st.title("📊 Exam Analysis")
