@@ -135,12 +135,12 @@
         "id": 12,
         "question": "A trader buys an article at 72% of its marked price and sells it at 14% discount on its\nmarked price. His percentage profit is:\nएक व्याऩायी एक ऱस्तु कॉ इऴके अंफ्रकत भूल्य के 72% ऩय खयीदता वै औय अंफ्रकत भूल्य ऩय 14% की छू ट देने के\nफाद फेच देता वै। उऴका राब प्रततलत भ ें फ्रकतना वै?",
         "options": [
-            "",
-            "22",
+            "23+1/3",
+            "22+2/9",
             "18",
-            ""
+            "19+4/9"
         ],
-        "answer": "",
+        "answer": "19+4/9",
         "explanation": "Based on the Answer Key, the correct option is [D]."
     },
     {
