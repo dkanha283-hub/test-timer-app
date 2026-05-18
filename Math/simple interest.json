@@ -925,14 +925,14 @@
     },
     {
         "id": 9175,
-        "question": "What was the amount invested in scheme A. (in Rs.)\nएक व्यक्ति ने 32500 रुऩमे दॉ अरग-अरग मॉजनाओ ंA औय B भें 12.5% औय 15% की ऴाधायण\nब्याज दय ऩय शनऱेल ककए। मदद 2 ऱळों भें अशजित ऴाधायण ब्याज की कु र याशल 9175 रुऩमे वै, तॉ\nमॉजना A भें शनऱेल की गई याशल (रुऩमे भें) ककतनी थी?",
+        "question": " A person invested Rs. 32500 divided into two different schemes A and B at S.I. of 12.5% and 15%. If the total amount of the simple interest earned in 2 years is Rs. 9175. What was the amount invested in scheme A. (in Rs.)\nएक व्यक्ति ने 32500 रुऩमे दॉ अरग-अरग मॉजनाओ ंA औय B भें 12.5% औय 15% की ऴाधायण ब्याज दय ऩय शनऱेल ककए। मदद 2 ऱळों भें अशजित ऴाधायण ब्याज की कु र याशल 9175 रुऩमे वै, तॉ मॉजना A भें शनऱेल की गई याशल (रुऩमे भें) ककतनी थी?",
         "options": [
             "13500",
             "11500",
             "12500",
             "10500"
         ],
-        "answer": "13500",
+        "answer": "11500",
         "explanation": "Based on the Answer Key, the correct option is [A]."
     },
     {
