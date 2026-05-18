@@ -133,12 +133,12 @@
     },
     {
         "id": 12,
-        "question": "A sum at simple interest of 8% p.a. becomes of itself in how many years?\n8% की ऴाधायण ब्याज ऩय एक याशल प्रततऱळ,ष खुद का ककतने ऱळों भें फन जाता वै?",
+        "question": "A sum at simple interest of 8% p.a. becomes 5/7 of itself in how many years?\n8% की ऴाधायण ब्याज ऩय एक याशल प्रततऱळ,ष खुद का ककतने ऱळों भें फन जाता वै?",
         "options": [
             "5",
-            "",
-            "",
-            "4\nBY Gagan Pratap"
+            "2",
+            "3",
+            "4"
         ],
         "answer": "5",
         "explanation": "Based on the Answer Key, the correct option is [A]."
