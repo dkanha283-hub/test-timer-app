@@ -913,14 +913,14 @@
     },
     {
         "id": 77,
-        "question": "A person invested Rs. 32500 divided into two different schemes A and B at S.I. of\n12.5% and 15%. If the total amount of the simple interest earned in 2 years is Rs.",
+        "question": "A person invested Rs. 32500 divided into two different schemes A and B at S.I. of 12.5% and 15%. If the total amount of the simple interest earned in 2 years is Rs. 9175. What was the amount invested in scheme A. (in Rs.)",
         "options": [
-            "Option A",
-            "Option B",
-            "Option C",
-            "Option D"
+            "13500",
+            "12500",
+            "11500",
+            "10500"
         ],
-        "answer": "Option A",
+        "answer": "13500",
         "explanation": "Based on the Answer Key, the correct option is [A]."
     },
     {
